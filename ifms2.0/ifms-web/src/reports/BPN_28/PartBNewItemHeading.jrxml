@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PartBNewItemHeading" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="5bae7541-00e7-4a99-ba37-c5f8a52a0ae0">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT mbpn.BPN_NAME AS "bpnNameEng", mbpn.BPN_NAME_GUJ AS "bpnNameGuj", mfy.FY AS "fyEng", mfy.FY_GUJ AS "fyGuj",
+sum(NewItems) AS "newItem", sum(AppendixOne) AS "appendOne", sum(AppendixTwo) AS "appendTwo", sum(AnnexureA) AS "annexA"
+FROM
+(
+	SELECT count(1) NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA, BPN_ID, FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR 
+	WHERE APP_TYPE_ID IN (426,428) AND BPN_ID=$P{bpnId} AND FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY BPN_ID, FINANCIAL_YEAR_ID
+  UNION ALL
+	SELECT 0 NewItems , count(1) AppendixOne, 0 AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_DTL tpd, MASTER_V1.MS_OBJECTHEAD mo
+	WHERE tph.TBUD_PUB_HDR_ID=tpd.TBUD_PUB_HDR_ID AND tpd.OBJECT_ID = mo.OBJECT_ID
+	AND tpd.IS_RURAL=1 AND mo.OBJECT_CODE IN ('3131','3132') 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId}
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, count(1) AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_NC_HDR tpnh
+	WHERE tph.TBUD_PUB_HDR_ID=tpnh.TBUD_PUB_HDR_ID 
+	AND TPNH.SCHEME_TYPE_ID IN (624, 625)
+	AND tph.BPN_ID = $P{bpnId}
+	AND tph.IS_REVENUE_CAPITAL IN(5, 6)
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}
+	AND tph.APP_TYPE_ID IN (425, 426, 427, 428, 429)
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, count(1) AnnexureA,  tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_FY_BUDGET tpfb 
+	WHERE tpfb.FINANCIAL_YEAR_ID = tph.FINANCIAL_YEAR_ID AND tpfb.IS_MODIFIED_BUDGET=1 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA,  mbpn.BPN_ID, mfy.FINANCIAL_YEAR_ID
+	FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy
+	WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+) main_table
+JOIN MASTER_V1.MS_BPN mbpn ON mbpn.BPN_ID = main_table.BPN_ID
+JOIN MASTER_V1.MS_FINANCIAL_YEAR mfy ON mfy.FINANCIAL_YEAR_ID =main_table.FINANCIAL_YEAR_ID
+WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+GROUP BY mbpn.BPN_NAME, mbpn.BPN_NAME_GUJ, mfy.FY, mfy.FY_GUJ]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="newItem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="newItem"/>
+	</field>
+	<field name="appendOne" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendOne"/>
+	</field>
+	<field name="appendTwo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendTwo"/>
+	</field>
+	<field name="annexA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="annexA"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="360" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="120" width="802" height="1" uuid="906ba20c-de8e-4ec3-8893-ab539f5ac816">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="170" width="802" height="116" uuid="ee41a936-fca4-4d7f-b1b4-916c5c2404a8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ભાગ - ખ
+નવી બાબતો
+    
+PART B
+NEW ITEMS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="330" width="802" height="1" uuid="d65644f1-fde7-4e6d-b3f8-69251077056c">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="330" width="802" height="1" uuid="60ae5dd6-e5ef-422f-a4ee-7b0bfd7a74f6">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<subreport overflowType="Stretch">
+				<reportElement x="0" y="2" width="802" height="20" uuid="09c9538a-9180-4b2f-b47f-e47519d1df03">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/BPN_28//Section2Heading.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookIndexSub" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55fa4c08-547e-4938-9972-ee632d7235b6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT sum(NewItems) AS "newItem", sum(AppendixOne) AS "appendOne", sum(AppendixTwo) AS "appendTwo", sum(AnnexureA) AS "annexA"
+FROM
+(
+	SELECT count(1) NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA
+	FROM BUDGET.TBUD_PUB_HDR WHERE APP_TYPE_ID IN (426,428) 
+	AND BPN_ID=$P{bpnId} AND FINANCIAL_YEAR_ID =$P{fyId} 
+  UNION ALL
+	SELECT 0 NewItems , count(1) AppendixOne, 0 AppendixTwo, 0 AnnexureA
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_DTL tpd, MASTER_V1.MS_OBJECTHEAD mo 
+	WHERE tph.TBUD_PUB_HDR_ID=tpd.TBUD_PUB_HDR_ID AND tpd.OBJECT_ID = mo.OBJECT_ID 
+	AND tpd.IS_RURAL=1 AND mo.OBJECT_CODE IN ('3131','3132')
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, count(1) AppendixTwo, 0 AnnexureA
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_NC_HDR tpnh, MASTER_V1.LU_LOOKUP_INFO lli
+	WHERE tph.TBUD_PUB_HDR_ID=tpnh.TBUD_PUB_HDR_ID AND lli.LOOKUP_INFO_ID=tpnh.IS_CSS
+	AND upper(lli.LOOKUP_INFO_NAME) IN ('STATE','BOTH')
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, count(1) AnnexureA
+	FROM BUDGET.TBUD_PUB_FY_BUDGET 
+	WHERE IS_MODIFIED_BUDGET=1 AND FINANCIAL_YEAR_ID =$P{fyId}
+)]]>
+	</queryString>
+	<field name="newItem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="newItem"/>
+	</field>
+	<field name="appendOne" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendOne"/>
+	</field>
+	<field name="appendTwo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendTwo"/>
+	</field>
+	<field name="annexA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="annexA"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="172" y="24" width="100" height="30" uuid="cf1fca8a-0bbc-4d2f-b5b9-447bc6a0a7b8"/>
+				<textFieldExpression><![CDATA[$F{newItem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

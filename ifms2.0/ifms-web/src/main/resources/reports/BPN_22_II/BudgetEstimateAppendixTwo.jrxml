@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Statement2" pageWidth="802" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="af812e91-d8d9-4ddb-8826-83e46afb655c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="8"/>
+	<property name="ireport.y" value="130"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+ROW_NUMBER() OVER() AS NO ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ROW_NUMBER() OVER(),'1','૧'), '2', '૨'),'3','૩'),
+       '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS NO_GUJ,
+main_table.WORK_NAME,main_table.WORK_NAME_GUJ,main_table.PROPOSED_AMOUNT,main_table.MAJORHEAD_NAME,
+main_table.MAJORHEAD_NAME_GUJ,main_table.MAJORHEAD_CODE
+FROM 
+(
+SELECT workOlder.WORK_NAME,workOlder.WORK_NAME_GUJ,wip.PROPOSED_AMOUNT ,
+workOlder.MAJORHEAD_NAME,workOlder.MAJORHEAD_NAME_GUJ,workOlder.MAJORHEAD_CODE
+FROM 
+(SELECT  
+	tpnl.WORK_NAME,tpnl.WORK_NAME_GUJ,
+	 mm.MAJORHEAD_NAME, mm.MAJORHEAD_NAME_GUJ, mm.MAJORHEAD_CODE,
+	 tpnl.TBUD_PUB_NW_LST_ID 
+	FROM 
+ BUDGET.TBUD_PUB_HDR tph
+INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+ INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+INNER JOIN MASTER_V1.MS_MAJORHEAD mm ON tph.MAJORHEAD_ID = mm.MAJORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+WHERE
+  tph.APP_TYPE_ID IN (428)
+	 AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	 AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.FINANCIAL_YEAR_ID < $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} )workOlder
+LEFT JOIN 	
+(
+	SELECT tpwl.TOT_PRO_EXP_CUR_FY AS "1b",
+	   tpwl.PROPOSED_AMOUNT,
+	   tpwl.TBUD_PUB_NW_LST_ID
+	FROM BUDGET.TBUD_PUB_WIP_LST tpwl
+		INNER JOIN BUDGET.TBUD_PUB_HDR tph ON tpwl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	WHERE 
+		tph.APP_TYPE_ID = 429 
+		AND tph.BPN_ID = $P{bpnId}
+		AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+		AND tph.IS_REVENUE_CAPITAL IN (5,6) 
+) wip ON wip.TBUD_PUB_NW_LST_ID = workOlder.TBUD_PUB_NW_LST_ID 
+		 
+ UNION ALL  
+ 
+ SELECT  
+	tpnl.WORK_NAME,tpnl.WORK_NAME_GUJ,
+	(COALESCE(tpnl.ACTUAL_ESTABLISHMENT,0) + COALESCE(tpnl.ACTUAL_MACHINERY,0) + COALESCE(tpnl.PROVISION_NEXT_FY,0)) AS PROPOSED_AMOUNT,
+	 mm.MAJORHEAD_NAME, mm.MAJORHEAD_NAME_GUJ, mm.MAJORHEAD_CODE	
+	FROM 
+ BUDGET.TBUD_PUB_HDR tph
+INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+INNER JOIN MASTER_V1.MS_MAJORHEAD mm ON tph.MAJORHEAD_ID = mm.MAJORHEAD_ID 
+ INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+WHERE
+tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+ AND tph.MAJORHEAD_ID  = mm.MAJORHEAD_ID 
+ AND tph.APP_TYPE_ID IN (428)
+	 AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	 AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} )main_table
+ ORDER BY  main_table.MAJORHEAD_CODE]]>
+	</queryString>
+	<field name="NO" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="NO"/>
+	</field>
+	<field name="NO_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NO_GUJ"/>
+	</field>
+	<field name="WORK_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WORK_NAME"/>
+	</field>
+	<field name="WORK_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WORK_NAME_GUJ"/>
+	</field>
+	<field name="PROPOSED_AMOUNT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PROPOSED_AMOUNT"/>
+	</field>
+	<field name="MAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+	</field>
+	<variable name="totalAmt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{PROPOSED_AMOUNT}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="131" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="802" height="28" uuid="f21b8ce8-657f-48cc-8383-00741bd043aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[પરિશિષ્ટ(૧) - Appendix(1)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="802" height="32" uuid="606eb675-0c74-4fa0-84c8-364394611a79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[સ્થાનિક સંસ્થાઓ, નગરપાલિકાઓ અને મ્યુનિસિપલ કોપોરેશનોને સહાયક અનુદાન અને લોન માટેની યોજનાવાર જોગવાઇઓની વિગતો દર્શાવતુ પત્રક]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="63" width="802" height="27" uuid="2f88c1ff-f976-4d16-a05d-b77c5601bc0e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Statement Showing Details of Scheme-wise provision made for grant-in-aid and loans to Local Bodies, Municipalities and Municipal Corporations.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="727" y="101" width="74" height="30" uuid="4ec1fc8a-0f4b-4f15-8d4e-c75ff6d4b399">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)
+(₹. In Lakhs)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="72" width="30" height="20" uuid="ec87be6f-ba31-4951-9b6a-29adbac464fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="72" width="200" height="20" uuid="4d6c0ff1-cde3-49d6-92ec-21204407f4d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="72" width="201" height="20" uuid="93bc05f4-38dd-4bf2-a564-3b24ab6cea6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="72" width="130" height="20" uuid="8d3511ed-f609-4a10-b6e0-6da9aacb7cbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="561" y="72" width="130" height="20" uuid="435d8111-e74c-45f6-891c-ca1c97bf2ab9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="20" height="30" uuid="c3620a81-89eb-4034-a024-48cea0d13153"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[sr No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="10" width="200" height="50" uuid="4d790cb4-15bd-44b6-a650-83b4b8be1271"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[યોજનાની વિગત ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="10" width="201" height="50" uuid="c1e91727-0e56-4e74-a69d-a01540f4c1ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Details of Scheme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="36" width="130" height="24" uuid="57ee96fa-0a47-4c6b-b57a-8cdb0e10be2e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount provided]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="561" y="10" width="130" height="48" uuid="638f5e97-5595-45d4-b936-759e2edbf5f8">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[હિસાબ ના જેસદર હેઠળ જોગવાઇ 
+કરવામા આવી હોય તે સદર]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="802" height="1" uuid="9b13d3ef-75ac-4086-91de-b966eb01fd8f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="70" width="802" height="1" uuid="6c13095e-c9b9-4f9f-a161-b8c3cd3b2acf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="92" width="802" height="1" uuid="7120b246-e9ea-4dec-aafa-d9deeba82b92">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="691" y="10" width="110" height="50" uuid="57885b48-1d4e-407f-aa65-ec5872fa9597"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Head of account under which provision is made ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="691" y="71" width="110" height="20" uuid="eea0bef3-0d92-428a-9f8e-a0a10d5e1c39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="30" height="20" uuid="214f2903-3f37-46d8-84f6-7f808f5538c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ક્રમ નં.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="10" width="130" height="26" uuid="53aac32e-0cbe-492d-8565-e7429e3e1606"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[જોગવાઈ કરવામાં આવેલ રકમ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="432" y="58" width="129" height="1" uuid="f8bca08a-451b-4b20-87b4-23b90ab94bea"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="200" height="20" uuid="9c0faad3-f23e-4cca-be1f-90cc0fc97a58"/>
+				<box topPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WORK_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="250" y="0" width="180" height="20" uuid="de0f68f5-b434-4c39-8b0d-225039228448"/>
+				<box topPadding="3"/>
+				<textElement verticalAlignment="Top">
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WORK_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToTallestObject" x="431" y="0" width="130" height="20" uuid="acd86882-0b18-44b2-8a83-cbeddd4222c3"/>
+				<box topPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{PROPOSED_AMOUNT}==null?"--":($F{PROPOSED_AMOUNT}==0?"--":$F{PROPOSED_AMOUNT})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToTallestObject" x="561" y="0" width="130" height="20" uuid="236ad750-9668-4b35-b5d8-aa56994aab70"/>
+				<box topPadding="3"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}+" - "+$F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToTallestObject" x="691" y="0" width="110" height="21" uuid="4a5cb9e2-27fb-4632-8b0d-9e449c68cb6b"/>
+				<box topPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}+" - "+$F{MAJORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="30" height="20" uuid="173ba0f6-037b-4559-89fa-62d7922b5d1b"/>
+				<box topPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{NO_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="230" y="0" width="20" height="20" uuid="bcd0b659-4735-4b01-9f99-084000cf6026"/>
+				<box topPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{NO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="801" height="1" uuid="763c4042-1b69-451d-80d6-434d0705da9b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="24" width="801" height="1" uuid="ca3c09a5-2439-4620-8008-ca2c519a9885">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="431" y="3" width="130" height="20" uuid="1c529310-a71a-4946-ba5e-8e9143e4af00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalAmt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="250" y="3" width="110" height="20" uuid="1b0b3ac8-583b-4914-9fd4-150c221420ca"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="2" width="150" height="20" uuid="beae5f62-ef32-4c1d-ac66-f5879dfa4c64"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[સરવાળો]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

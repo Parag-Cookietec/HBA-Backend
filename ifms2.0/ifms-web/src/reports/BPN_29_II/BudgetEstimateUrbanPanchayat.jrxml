@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimateUrbanPanchayat" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f2cd7cc-d0a7-4806-9a94-75ff8f852328">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 1 FROM "SYSIBM".DUAL]]>
+	</queryString>
+	<field name="1" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="1"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="50" uuid="2bedd387-aee3-4491-894d-5cdb867c34f0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatCoverPage.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="53" width="802" height="1" uuid="84d839f3-4b5c-4014-9e5c-b94e246e537d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</break>
+		</band>
+	</title>
+	<detail>
+		<band height="73" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="0" width="802" height="1" uuid="dc2eab10-5347-4d8d-97bd-dd1d5336117c">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="29cae2db-dde1-4a43-9e61-b09bec1ed518">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchajatExplanatoryNote.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="72" width="802" height="1" uuid="92a962b5-4b6a-451c-bb14-29932bafb75d"/>
+			</break>
+		</band>
+		<band height="75">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="400ae19b-3e6e-46ff-8925-018f12a7303a"/>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement1.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="74" width="802" height="1" uuid="06afa19e-f204-48f6-8dac-b320b7e1a23e"/>
+			</break>
+		</band>
+		<band height="75">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="b8dffe68-d93b-4852-bca9-c04e980bb6cc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement2.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="74" width="802" height="1" uuid="7d43e0aa-8559-4567-ae43-0cceddaa5758"/>
+			</break>
+		</band>
+		<band height="87">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="34cff9bf-f5fa-4fac-9a18-906315b6f33e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement3A.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="91">
+			<subreport>
+				<reportElement x="0" y="7" width="802" height="70" uuid="8a22bbf9-2121-4800-9be7-6dec4f3312bd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement3B.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="83" width="800" height="1" uuid="d32bfe05-27fa-4ac5-a922-1f22093d8025"/>
+			</break>
+			<break>
+				<reportElement x="0" y="3" width="799" height="1" forecolor="#FFFFFF" uuid="307c5dc1-c901-4a1b-a8e6-b0801fb1cbe0"/>
+			</break>
+		</band>
+		<band height="75">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="84cfbdec-ca76-4eb2-bd5f-750a53f0d189">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement3C.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="74" width="802" height="1" uuid="5ad0b36f-f7da-4747-8a30-5f1d5648bf90"/>
+			</break>
+		</band>
+		<band height="74">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="1a942052-19b5-44fb-aff7-7d1562e93d09">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement1_Dist.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="df93a1cc-f183-4a20-b624-9634f22c769d"/>
+			</break>
+		</band>
+		<band height="75">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="742ba0d8-8dcf-444e-9bbc-23e502e85c7f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement2State.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="74" width="802" height="1" uuid="22ddf014-285a-4196-b1f5-a12046740dc2"/>
+			</break>
+		</band>
+		<band height="75">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="60ce50dd-cdbf-433d-afaf-0ef671d49055">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement3A_JillaP.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="74" width="802" height="1" uuid="45913d19-823f-472e-b555-11a5f83fb2e6"/>
+			</break>
+		</band>
+		<band height="73">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="ef4dd9a3-29f5-4cbb-b716-cc597dfb8694">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement3B_Taluk.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="72" width="802" height="1" uuid="668e3b5f-2dbf-428c-a20f-8474e234f821"/>
+			</break>
+		</band>
+		<band height="74">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="5a643e55-9aaa-48c6-9afe-ce3aa45f9627">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/BudgetEstimateUrbanPanchayatStatement3C_GramP.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="61fabb2e-7eec-4296-9de0-345a7eee7c6c"/>
+			</break>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="2570aee5-c102-4cd8-bad2-86f72672ea86"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="d5619655-a294-4c7b-af8d-c3b4ec8d0ac4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayarStatement2Panchayat.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="2e7967f2-f143-4650-84ca-b41703710ba3"/>
+			</break>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="7fc5dbd6-f98f-4806-a1ea-6d10de0d8dbd"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="6784cd87-0139-4fca-8b6e-5bce80398fa2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement3A_JillaP.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="bcf683de-63a7-408d-8f8b-0e31f32c2f19"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="08f933f7-29df-4252-8670-bd129f74cd6d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement3B_Taluk.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="96cdd83f-85c8-4a27-a03b-9f0842657125"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="83ec0d1b-17e8-42c2-8023-069918a9d713">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement3C_GramP.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="df2090a9-e862-47e5-b572-6f160ed953c6"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="f2c2aeb2-7011-4369-9f1d-446ba086c7f3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="03087598-ae9e-48fa-965a-de7248252c2e"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="793e8d06-e620-4db7-bee1-b211a3c81bf8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement3A.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="74">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="73" width="802" height="1" uuid="1614c816-94d6-49e0-a8e9-0d1d15553a97"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="91e195c5-da0c-440c-8c41-b426011eeb16">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement3B.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="70" uuid="cea44b28-c02e-4c43-a7d1-d7865f6e9967">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29_II/GujBudgetEstimateUrbanPanchayatStatement3C.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

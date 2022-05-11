@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 13.5px;font-size:10px;">
+	<table width="100%" text-align="center" style="border: 1px solid #000; border-bottom:0;">
+		<tr>
+			<td colspan="2" align="center">$OFFICE_NAME</td>
+		</tr>
+		<tr>
+			<td colspan="2"  align="center">$OFFICE_ADDRESS</td>
+		</tr>
+		<tr>
+			<td colspan="2"  align="center">Office order for $EVENT_NAME</td>
+		</tr>
+	</table>
+	<table style="border: 1px solid #000; " width="100%">
+		<tr>
+			<td>Transaction No.: $TRANSACION_NO</td>
+			<td align="right">Date: $TRANSACION_DATE</td>
+		</tr>
+	</table>
+	<table width="100%" style="">
+		<tr>
+			<td>Read :</td>
+		</tr>
+		<tr>
+			<td>(1) Order No.: $ORDER_NO</td>
+		</tr>
+		<tr>
+			<td>(2) $CIVIL</td>
+		</tr>
+	
+		
+		<tr>
+			<td>(3) Option Under Rules given by $EMPLOYEE_NAME, $DESIGNATION, Employee No.: $EMPLOYEE_NO, $DESIGNATION & $OFFICE_NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Sub: $CIVIL_SUB for $EVENT_NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Order: $PRA_CIVIL by $EMPLOYEE_NAME, $DESIGNATION, Employee No.: $EMPLOYEE_NO; is fixed as under with effect from $EVENT_EFFECTIVE_DATE  </td>
+		</tr>
+		
+	</table>
+    <table CELLSPACING=0 width="100%" style="">
+        <tr>
+            <th colspan="2" style="border: 1px solid; padding:5px">Existing Pay Details</th>
+            <th colspan="2" style="border: 1px solid; border-left-width: 0; padding:5px">Revised Pay Details</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:5px">Existing Pay Scale</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$CURRENT_PAYSCALE</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Revised Pay Scale	</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$PAYSCALE</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0;">Existing Pay in the Pay Scale</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$CURRENT_BASIC_PAY</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Revised Pay in the Pay Scale</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$BASIC_PAY</td>
+        </tr>
+          #if ($BASIC_INC_VALUE > 0)
+        <tr >
+            <td style="border: 1px solid; border-top-width: 0;"> Regular Increment </td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px"> $BASIC_INC_VALUE </td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Next Date of Increment</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px"> $NEXT_DATE_INC </td>
+        </tr>
+        #end
+        
+          #if ($N_BASIC_INC_VALUE > 0)
+        <tr >
+            <td style="border: 1px solid; border-top-width: 0;"> Notional Increment </td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px"> $N_BASIC_INC_VALUE </td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Next Date of Increment</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px"> $N_NEXT_DATE_INC </td>
+        </tr>
+        #end
+        
+         #if ($Total > 0)
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0;">Total</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$Total</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">&nbsp;</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px"></td>
+        </tr>
+        #end
+    </table>
+	<table width="100%" style="">
+		<tr>
+			<td>(2) $EMPLOYEE_NAME, $DESIGNATION will be entitled to draw Pay at Rs. $BASIC_PAY in the Pay Scale $BASIC_PAY with effect from $EVENT_EFFECTIVE_DATE.</td>
+		</tr>
+		<tr>
+			<td>(3) Other allowances will be paid as per Govt. orders issued from time to time.</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_NAME</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_DESIGNATION</td>
+		</tr>
+		<tr>
+			<td>Copy forwarded with compliments to: $EMPLOYEE_NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>(1) Bill Clerk (two copies)</td>
+		</tr>
+		<tr>
+			<td>(2) $EMPLOYEE_NAME, $DESIGNATION, $OFFICE_NAME.</td>
+		</tr>
+		<tr>
+			<td>(3) Service book/ service roll of person concerned with option.</td>
+		</tr>
+		<tr>
+			<td>(4) Office Order file.</td>
+		</tr>
+		<tr>
+			<td>(5) Accounts Officer, Pay Verification Unit.</td>
+		</tr>
+	</table>
+</body>
+
+</html>

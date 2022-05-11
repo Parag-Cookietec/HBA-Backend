@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Appendices" pageWidth="802" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6438cb8d-b689-46b0-9e2f-3d9e6227129e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="81"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mfy.FY AS "fyEng",
+	mfy.FY_GUJ AS "fyGuj"
+	FROM MASTER_V1.MS_FINANCIAL_YEAR mfy
+	WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="275">
+			<textField>
+				<reportElement x="0" y="0" width="802" height="45" uuid="c9fed248-25fa-4ae4-9b5a-9a6de1c88394"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પરિશિષ્ટ-૭"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="45" width="802" height="95" uuid="4e97bcd8-fa5e-45b0-94c3-9a109f588851">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGuj}+" ના વર્ષ માટે વિભાગવાર, સાગરખેડુ સર્વાંગી વિકાસ યોજના હેઠળની સૂચિત <BR/> જોગવાઈ દર્શાવતું પત્રક (₹.લાખ માં)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="140" width="802" height="40" uuid="6abc534b-fa96-4363-a3cc-8158f0284b45">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["APPENDIX 7"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="180" width="802" height="95" uuid="8d7385f0-3604-41b4-ba0d-5e24751a2fd5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement Showing the Details of Financial Provision made for Sagarkhedu Sarvanghi Vikal Yojana <BR/> incorporated by the Departments for the year "+$F{fyEng}+"  (₹. In Lakhs)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="36">
+			<break>
+				<reportElement x="0" y="2" width="802" height="1" uuid="e6387298-9a77-41ce-9765-35869e9cdf84">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="4" width="802" height="30" isRemoveLineWhenBlank="true" uuid="064296ff-ea2c-4b40-8a0d-7c4ddeb61f42">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_29-1/Appendix-7.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

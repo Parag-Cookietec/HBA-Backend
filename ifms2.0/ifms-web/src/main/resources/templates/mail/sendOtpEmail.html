@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>OTP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<p th:text="#{OTP_SENT  (${empNo})}">As per your reset password request for Employee number :</p>
+	<p th:text="#{OTP_ADD  (${opt} , ${trn_no})}"></p>
+	<p th:text="#{OTP_EXP  (${exp})}">Your OTP will expire in {0}
+		minutes.</p>
+</body>
+</html>

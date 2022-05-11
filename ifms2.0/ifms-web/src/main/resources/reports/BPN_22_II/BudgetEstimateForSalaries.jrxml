@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimateForSalaries" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="168e82ba-b9d1-4cd7-a755-57849a71f01b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="demandId" class="java.lang.Long"/>
+	<parameter name="majHeadId" class="java.lang.Long"/>
+	<parameter name="subMajHeadId" class="java.lang.Long"/>
+	<parameter name="minorHeadId" class="java.lang.Long"/>
+	<parameter name="subHeadId" class="java.lang.Long"/>
+	<parameter name="detailHeadId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+COALESCE(NFY.OBJECT_CODE, CFY1.OBJECT_CODE) AS OBJECT_CODE,
+COALESCE(NFY.OBJECT_NAME, CFY1.OBJECT_NAME) AS OBJECT_CODE_NAME,
+COALESCE(NFY.OBJECT_NAME_GUJ, CFY1.OBJECT_NAME_GUJ) AS OBJECT_NAME_GUJ,
+NFY.BE AS BUDGET_ESTIMATE,
+CFY1.MBE AS MODIFIED_BE
+FROM 
+(
+SELECT tph.DEMAND_ID,tph.MAJORHEAD_ID,tph.SUBMAJORHEAD_ID,tph.MINORHEAD_ID,tph.SUBHEAD_ID,tph.DETAILHEAD_ID,
+mo1.OBJECT_CODE ,mo1.OBJECT_NAME,mo1.OBJECT_NAME_GUJ,tpgd.PROPOSED_AMOUNT AS BE 
+FROM 
+BUDGET.TBUD_PUB_HDR tph
+LEFT JOIN BUDGET.TBUD_PUB_DTL tpd ON tph.TBUD_PUB_HDR_ID = tpd.TBUD_PUB_HDR_ID 
+LEFT JOIN BUDGET.TBUD_PUB_GIA_DTL tpgd ON tph.TBUD_PUB_HDR_ID = tpgd.TBUD_PUB_HDR_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON  tpd.OBJECT_ID = mo.OBJECT_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo1 ON tpgd.OBJECT_ID = mo1.OBJECT_ID 
+WHERE 
+tph.APP_TYPE_ID IN (425,426,427)
+              AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+              AND tph.BPN_ID= $P{bpnId} 
+              AND tph.DEMAND_ID = $P{demandId} 
+              AND tph.MAJORHEAD_ID = $P{majHeadId}
+              AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+              AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+              AND tph.SUBHEAD_ID  = $P{subHeadId} 
+              AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+              AND mo1.OBJECT_CODE NOT IN ('3131','3132','3561')
+              AND mo.OBJECT_CODE <> mo1.OBJECT_CODE )NFY
+FULL OUTER JOIN 
+(
+SELECT tph.DEMAND_ID,tph.MAJORHEAD_ID,tph.SUBMAJORHEAD_ID,tph.MINORHEAD_ID,tph.SUBHEAD_ID,tph.DETAILHEAD_ID,
+mo1.OBJECT_CODE ,mo1.OBJECT_NAME,mo1.OBJECT_NAME_GUJ,tpgd.PROPOSED_AMOUNT AS MBE 
+FROM 
+BUDGET.TBUD_PUB_HDR tph
+LEFT JOIN BUDGET.TBUD_PUB_DTL tpd ON tph.TBUD_PUB_HDR_ID = tpd.TBUD_PUB_HDR_ID 
+LEFT JOIN BUDGET.TBUD_PUB_GIA_DTL tpgd ON tph.TBUD_PUB_HDR_ID = tpgd.TBUD_PUB_HDR_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON  tpd.OBJECT_ID = mo.OBJECT_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo1 ON tpgd.OBJECT_ID = mo1.OBJECT_ID 
+WHERE 
+tph.APP_TYPE_ID IN (425,426,427)
+              AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1
+              AND tph.BPN_ID= $P{bpnId} 
+              AND tph.DEMAND_ID = $P{demandId} 
+              AND tph.MAJORHEAD_ID = $P{majHeadId}
+              AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+              AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+              AND tph.SUBHEAD_ID  = $P{subHeadId} 
+              AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+              AND tph.IS_REVISED <> 1
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+              AND mo1.OBJECT_CODE NOT IN ('3131','3132','3561')
+              AND mo.OBJECT_CODE <> mo1.OBJECT_CODE ) CFY1 ON CFY1.DEMAND_ID=NFY.DEMAND_ID AND CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+                                  AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                  AND CFY1.SUBHEAD_ID=NFY.SUBHEAD_ID AND CFY1.DETAILHEAD_ID=NFY.DETAILHEAD_ID
+                                  AND CFY1.OBJECT_CODE=NFY.OBJECT_CODE
+              
+              ORDER BY OBJECT_CODE]]>
+	</queryString>
+	<field name="OBJECT_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_CODE"/>
+	</field>
+	<field name="OBJECT_CODE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_CODE_NAME"/>
+	</field>
+	<field name="OBJECT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_NAME_GUJ"/>
+	</field>
+	<field name="BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_GIA_DTL"/>
+	</field>
+	<field name="MODIFIED_BE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_GIA_DTL"/>
+	</field>
+	<variable name="salariesPrinted" class="java.lang.Boolean">
+		<variableExpression><![CDATA[EQUALS(TRIM($F{OBJECT_CODE}),"0100")?true:($V{salariesPrinted}?true:false)]]></variableExpression>
+		<initialValueExpression><![CDATA[false]]></initialValueExpression>
+	</variable>
+	<variable name="tot_sal_be" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{BUDGET_ESTIMATE}]]></variableExpression>
+	</variable>
+	<variable name="tot_sal_mbe" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{MODIFIED_BE}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{OBJECT_CODE}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField textAdjust="StretchHeight" pattern="#0.00;">
+				<reportElement x="190" y="15" width="70" height="15" isRemoveLineWhenBlank="true" uuid="ed067edd-39f5-4adb-ae77-c83a3a22f778">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODIFIED_BE}==null?"--":$F{MODIFIED_BE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="330" y="15" width="160" height="15" isRemoveLineWhenBlank="true" uuid="90f95a5b-0f6f-4888-b57a-985f566273c1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OBJECT_NAME_GUJ}==null?"--":$F{OBJECT_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="531" y="15" width="200" height="15" isRemoveLineWhenBlank="true" uuid="1d179587-cac0-4779-b237-3a58545a56fa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OBJECT_CODE_NAME}==null?"--":$F{OBJECT_CODE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00;">
+				<reportElement x="731" y="15" width="70" height="15" isRemoveLineWhenBlank="true" uuid="ed013548-f5e7-4c21-919d-f4d08688fd33">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUDGET_ESTIMATE}==null? "--" : ($F{BUDGET_ESTIMATE}==0 ? "--" :$F{BUDGET_ESTIMATE})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="531" y="0" width="200" height="15" isRemoveLineWhenBlank="true" uuid="a94e001d-22cc-4dd9-879d-8a9faa4bba8f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[(EQUALS(TRIM($F{OBJECT_CODE}),"0101") && NOT($V{salariesPrinted})) || (EQUALS(TRIM($F{OBJECT_CODE}),"0100") && $V{salariesPrinted})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salaries : "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="160" height="15" isRemoveLineWhenBlank="true" uuid="8b714045-f516-43a6-82ce-451eb1eb0571">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[(EQUALS(TRIM($F{OBJECT_CODE}),"0101") && NOT($V{salariesPrinted})) || (EQUALS(TRIM($F{OBJECT_CODE}),"0100") && $V{salariesPrinted})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પગાર :"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00;">
+				<reportElement stretchType="RelativeToTallestObject" x="731" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="802a10cb-569b-42a9-a8b1-5b6592ce4c86">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[EQUALS(TRIM($F{OBJECT_CODE}),"0100")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?"--":$F{BUDGET_ESTIMATE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00;">
+				<reportElement stretchType="RelativeToTallestObject" x="190" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="711136a7-38d3-4b6e-ae1f-b649cd4a6546">
+					<printWhenExpression><![CDATA[EQUALS(TRIM($F{OBJECT_CODE}),"0100")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[OR($F{MODIFIED_BE}==null,EQUALS($F{MODIFIED_BE},0.00)) ?"--":$F{MODIFIED_BE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00;(#0.00-)">
+				<reportElement stretchType="RelativeToTallestObject" x="260" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="35a5da14-ebd8-4273-a740-5207fbb25f66">
+					<printWhenExpression><![CDATA[EQUALS(TRIM($F{OBJECT_CODE}),"0100")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00;(#0.00-)">
+				<reportElement stretchType="RelativeToTallestObject" x="120" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="c394ed42-c417-48a1-97b9-b11e9f38e60c">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[EQUALS(TRIM($F{OBJECT_CODE}),"0100")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="32" height="15" isRemoveLineWhenBlank="true" uuid="ec5014a6-cc6b-4e2e-9890-80b8d01c286b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[(EQUALS(TRIM($F{OBJECT_CODE}),"0101") && NOT($V{salariesPrinted})) || (EQUALS(TRIM($F{OBJECT_CODE}),"0100") && $V{salariesPrinted})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0100"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="15" width="60" height="15" isRemoveLineWhenBlank="true" uuid="fdbae5b0-4d5b-4a9a-a295-21922187ab38">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="60" y="15" width="60" height="15" isRemoveLineWhenBlank="true" uuid="a7e1ccd6-401a-45cf-8d54-b8b0e86edca4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="120" y="15" width="70" height="15" isRemoveLineWhenBlank="true" uuid="2da2e87c-760b-4f2a-a91f-aa27134287f8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="490" y="15" width="32" height="15" isRemoveLineWhenBlank="true" uuid="3aad5736-eefe-40a9-93d0-a57ea3bd4c2b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[TRIM($F{OBJECT_CODE})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

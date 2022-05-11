@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookExpenditurePartOne" pageWidth="842" pageHeight="900" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="861a87e0-d75d-4556-b052-4428deef5611">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB_Conn"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+	mb.BPN_NAME AS "BPN_NAME",
+	mb.BPN_NAME_GUJ AS "BPN_NAME_GUJ",
+	md.DEMAND_CODE AS "DEMAND_CODE",
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(md.DEMAND_CODE,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS "DEMAND_CODE_GUJ",
+	tph.DEMAND_ID AS "DEMAND_ID",
+	md.DEMAND_NAME AS "SERVICES_ENG", 
+	md.DEMAND_NAME_GUJ AS "SERVICES_GUJ",
+	prevYear.FY AS "ACC_FY_ENG",
+	prevYear.FY_GUJ AS "ACC_FY_GUJ",	
+	currYear.FY AS "MOD_FY_ENG",
+	currYear.FY_GUJ AS "MOD_FY_GUJ",	
+	nextYear.FY AS "BE_FY_ENG",
+	nextYear.FY_GUJ AS "BE_FY_GUJ"
+FROM 
+	BUDGET.TBUD_PUB_HDR tph,
+	MASTER_V1.MS_BPN mb,
+	MASTER_V1.MS_DEMAND md,
+	MASTER_V1.MS_FINANCIAL_YEAR prevYear,
+	MASTER_V1.MS_FINANCIAL_YEAR currYear,
+	MASTER_V1.MS_FINANCIAL_YEAR nextYear	
+WHERE 
+	md.BPN_ID = mb.BPN_ID AND tph.BPN_ID=mb.BPN_ID
+	AND tph.DEMAND_ID = md.DEMAND_ID 
+	AND prevYear.FINANCIAL_YEAR_ID = $P{fyId}-2
+	AND currYear.FINANCIAL_YEAR_ID = $P{fyId}-1
+	AND nextYear.FINANCIAL_YEAR_ID = $P{fyId}
+	AND tph.APP_TYPE_ID IN (425,426,427,428,429)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}
+	AND tph.BPN_ID= $P{bpnId} 
+ORDER BY "DEMAND_CODE"]]>
+	</queryString>
+	<field name="BPN_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BPN_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="BPN_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BPN_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="DEMAND_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEMAND"/>
+	</field>
+	<field name="DEMAND_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_CODE_GUJ"/>
+	</field>
+	<field name="DEMAND_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="SERVICES_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SERVICES_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEMAND"/>
+	</field>
+	<field name="SERVICES_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SERVICES_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEMAND"/>
+	</field>
+	<field name="ACC_FY_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_FY_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="ACC_FY_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_FY_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="MOD_FY_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MOD_FY_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="MOD_FY_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MOD_FY_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="BE_FY_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BE_FY_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="BE_FY_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BE_FY_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1"/>
+	</title>
+	<detail>
+		<band height="297" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="0" width="802" height="1" uuid="834576a9-048c-4b4f-9697-1558487a0696">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</break>
+			<textField>
+				<reportElement x="-1" y="38" width="409" height="32" uuid="b0f30c04-e241-4861-87ac-4b2973a0dbd8"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["માગણી નં. : "+$F{DEMAND_CODE_GUJ} +"\n"+
+"સેવા નુ નામ: "+$F{SERVICES_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="38" width="386" height="32" uuid="d9508ba0-3eb2-4fce-a8b6-94ecb0ec5311">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Demand No. : "+$F{DEMAND_CODE}+"\n"+
+"Name of Service:"+$F{SERVICES_ENG}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="106" width="802" height="1" uuid="7bd6e3cd-02f6-45ac-95c9-918216ca31b9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="112" width="79" height="40" uuid="133efd63-d270-405b-b3a2-08455561924d"/>
+				<box topPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACC_FY_GUJ}+"નો\n"+
+"હિસાબ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="112" width="102" height="40" uuid="6c6cc8cf-092e-4557-aa9f-588aeef10ba4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MOD_FY_GUJ}+"નો\n"+
+"ફેરફાર કરેલ અંદાજ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="703" y="71" width="95" height="30" uuid="ecb3763d-53c7-4b51-8c62-d5279776ad40"/>
+				<textElement>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)
+(₹. In Lakhs)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="182" y="112" width="94" height="40" uuid="db864038-3abb-4ec2-9283-f65a1c3d892b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MOD_FY_GUJ}+"નો\n"+
+"સુધારેલા અંદાજ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="730" y="106" width="70" height="92" uuid="21406191-01e1-4b58-a318-f01cf3b87629">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BE_FY_GUJ}+"નો\n"+
+"અંદાજપત્રના\n" + "પૃષ્ઠ નંબર"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="112" width="90" height="40" uuid="a6088dcd-4231-4b36-9986-3c84e5317691">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BE_FY_GUJ}+"નો\n"+
+"અંદાજ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="278" y="199" width="150" height="20" uuid="bf96a2b5-68cf-4aff-9488-f503b4aa2d3a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[મુખ્ય સદર]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="199" width="182" height="20" uuid="989ce080-eacd-4f18-b025-c83475e8d3f2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Major Head]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="222" width="802" height="1" uuid="383c6b72-526a-4829-a701-ac24cda398c5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="255" width="802" height="1" uuid="4d92bede-c2f7-4d79-9ad9-801789957953">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement x="-20" y="260" width="842" height="33" uuid="bf08de26-7fa5-42a0-8ef0-4329990c98a7"/>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="demandId">
+					<subreportParameterExpression><![CDATA[$F{DEMAND_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookExpenditurePartTwo.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="2" y="200" width="78" height="20" uuid="8cebf5ff-17f0-4421-b6d9-d385f3d61fd6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ACC_FY_ENG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="199" width="102" height="20" uuid="0bff75a0-6ade-45c3-bbf1-056a685011a6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MOD_FY_ENG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="199" width="94" height="20" uuid="16b8a002-9fb2-4f63-8f7f-817c346aea84">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MOD_FY_ENG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="642" y="200" width="90" height="20" uuid="82cabdd5-81ac-45d1-bd24-2977859c32b6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BE_FY_ENG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="732" y="199" width="70" height="20" uuid="6f6379ed-edcd-4c57-9237-c83e1313dc9d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BE_FY_ENG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="5" width="385" height="30" uuid="a1312700-0c9c-4547-8e19-ffe7259f4f35"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BPN_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="5" width="385" height="30" uuid="a7f9a0f2-4272-4327-ab4b-351be5969a90"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BPN_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="154" width="802" height="27" uuid="c0f2071e-a5a6-4d93-ad78-4ec034b7edd5"/>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="80" height="45" uuid="38301f61-ddeb-4525-9bda-ba005d682205"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Accounts"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="82" y="2" width="100" height="46" uuid="721a0ed5-226d-4097-9fc6-85ae9a60f863">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Modified Budget Estimates"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="182" y="2" width="94" height="42" uuid="d0ae2473-4c9f-4789-a4be-59b5a486e225">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Revised Estimates"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="642" y="3" width="88" height="44" uuid="d5582069-3b93-4610-99a7-33c2547b5e62">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Budget Estimates"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="730" y="3" width="70" height="42" uuid="a44bdc4d-6a04-4034-8a73-bc53d8483d1f">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page No. of\n"+
+"Budget Estimate"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="184" y="228" width="94" height="21" uuid="9ec8bf65-dae7-4862-b5a1-9f340fb5805c"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="228" width="78" height="21" uuid="575bce9b-1d20-4fa4-894d-e6c810bd1817"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="228" width="102" height="21" uuid="c195a0d9-e856-44eb-88dd-984e13f787ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="228" width="181" height="21" uuid="718799ff-8759-41b8-8204-bac8f77742fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="228" width="90" height="21" uuid="8a959053-57e4-4b7c-8ada-d1b3c410d66b"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="732" y="228" width="70" height="21" uuid="7274516a-a5b8-4e1d-8410-3f8fcd354460"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="229" width="150" height="21" uuid="34c31056-4293-419a-abae-2a74d221bea1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimateUrbanPanchajatExplanatoryNote" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3abad3ba-9f9d-4f32-b3c7-71f471016fb1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID 
+FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="FY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="FY_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="FINANCIAL_YEAR_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="FINANCIAL_YEAR_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" uuid="c114cd68-2621-415e-8daa-1a8197eb706b"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Explanatory Note:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="802" height="33" uuid="959c420f-a9d0-4be8-9e5a-e3d4776de1fc"/>
+				<box topPadding="4" leftPadding="4"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[     Assistance given by the State Government to Panchayati Raj Institutions (PRIs) and Urban Local Bodies (ULBs) is presently booked as lump amount under various minor-heads.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="802" height="52" uuid="4e22d5dd-5557-43d3-9d4e-3dfcc6cc7007"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[      The Budget document does not depict the details of budget provisions for amounts transferred to each tier of PRIs and each category of ULBs. In order to bring transparency in showing the details of budget provisions, the Government has decided to bring out a supplement to budget publications showing transfers separately to PRIs and ULBs. These statements have prepared in compliance to meet aforesaid Government Schemes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="123" width="30" height="20" uuid="7aa318e4-0aa4-41df-8ec7-9bb599a8fc9e">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.25" lineStyle="Double"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="123" width="620" height="20" uuid="302ea4ec-b157-4bd8-8ec8-2f00ad726c1e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTENTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="123" width="150" height="20" uuid="d0d77454-9452-435e-9e5a-4e8bcbba62e3"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="143" width="150" height="40" uuid="df9eb6d9-55dd-4166-9fca-c1c659ace048">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="183" width="150" height="40" uuid="74d53a39-cb50-4a82-8d11-0b8b837da874">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="223" width="150" height="25" uuid="5443ecdd-5e2a-404b-99c5-512d00013e82">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="248" width="150" height="40" uuid="21ee9a26-80c5-412b-8eb9-4bee9d5763b8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="288" width="150" height="40" uuid="d03fbb48-aaa8-4f4f-96b6-9a362c29e198">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[--]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="288" width="620" height="40" uuid="8c363c67-5a20-416b-b4d0-d2f52043dd08">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box leftPadding="2">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["શહેરી વિસ્તારના દરેક સ્તરે અંદાજપત્રીય ફાળવણી	<br>"+"શહેરી સ્થાનિક સ્વરાજ્યની સંસ્થાઓ માટેનું પૂરક અંદાજપત્ર : "+$F{FY_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="248" width="620" height="40" uuid="c2d7ee71-379c-485f-911f-3b41a86dfffa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box leftPadding="2">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પંચાયતના દરેક સ્તરે અંદાજપત્રીય ફાળવણી <br>"+"પંચાયતી રાજ સંસ્થાઓ માટેનું પૂરક અંદાજપત્ર : "+$F{FY_GUJ}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="223" width="620" height="25" uuid="94e5ffa4-c402-42d9-9954-59e051f48e49">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિષયસૂચિ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="183" width="620" height="40" uuid="9d6aeac1-3e1b-48c8-9060-ba7590f1c710">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box leftPadding="2">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Allocation for the Budget provision for all tiers of Panchayat <br>"+"SUPPLEMENT BUDGET FOR PRIs : YEAR : "+$F{FY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="143" width="620" height="40" uuid="8efad9c5-9053-4016-8420-127f3273ec58">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box leftPadding="2">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Allocation for the Budget provision for all categories of Urban Area "+"<br>"+"SUPPLEMENT BUDGET FOR ULBs : YEAR : "+$F{FY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="143" width="30" height="40" uuid="7aaad80c-bbdb-4669-a797-dc74928c76a4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="183" width="30" height="40" uuid="d86dcd70-4319-4bed-8092-776f554dfe63">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="223" width="30" height="25" uuid="96a44b21-3068-416e-8d26-31c8ecf7f713">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="248" width="30" height="40" uuid="529fef98-4545-4e36-88cf-48c55f6aeb55">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[૧]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="288" width="30" height="40" uuid="036c8724-3a39-4867-a510-388fb75a2044">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[૨]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

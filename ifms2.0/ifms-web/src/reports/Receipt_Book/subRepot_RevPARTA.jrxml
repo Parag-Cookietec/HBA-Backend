@@ -1,0 +1,3503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Revenue_PartA" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce2e82ed-3279-4361-ae88-4c7477498092">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2 Adapter"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="8b042531-6c10-43bc-96ca-62dc21ee0b70">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString language="SQL">
+			<![CDATA[]]>
+		</queryString>
+		<field name="TYPE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TYPE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="RECEIPT_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="RECEIPT_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="SECTOR" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SECTOR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="SUBSECTOR" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUBSECTOR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="MAJOR_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJOR_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="MINOR_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="SUB_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="TOTAL" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="TOTAL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="ACCOUNTS" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="BUDGET" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="BUDGET"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="MODIFIEDBUDGET" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="MODIFIEDBUDGET"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<group name="Group1"/>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="c6d58ae1-39ce-443b-9727-e94934952c32">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DBDataAdapter "/>
+		<queryString language="SQL">
+			<![CDATA[select * from BUDGET.JASPERTRIAL]]>
+		</queryString>
+		<field name="TYPE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TYPE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="RECEIPT_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="RECEIPT_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="SECTOR" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SECTOR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="SUBSECTOR" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUBSECTOR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="MAJOR_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJOR_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="MINOR_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="SUB_HEAD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_HEAD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="TOTAL" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="TOTAL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="ACCOUNTS" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="BUDGET" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="BUDGET"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+		<field name="MODIFIEDBUDGET" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="MODIFIEDBUDGET"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="JASPERTRIAL"/>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset4" uuid="431b7ae9-594f-4fc6-b2c7-743c3e27446b">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2 Adapter"/>
+		<parameter name="fyId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="bpnId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="majorHead" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{majorHead}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT  
+                main_table.SUBMAJORHEAD_CODE AS "SUB_MAJOR_HEAD_CODE",
+                main_table.SUBMAJORHEAD_NAME AS "SUB_MAJOR_HEAD_NAME_ENG",
+                main_table.SUBMAJORH_NAME_GUJ AS "SUB_MAJOR_HEAD_NAME_GUJ",
+                main_table.MINORHEAD_CODE AS "MINOR_HEAD_CODE",
+                main_table.MINORHEAD_NAME AS "MINOR_HEAD_NAME_ENG",
+                main_table.MINORHEAD_NAME_GUJ AS "MINOR_HEAD_NAME_GUJ",
+                main_table.SUBHEAD_CODE AS "SUB_HEAD_CODE",
+                main_table.SUBHEAD_NAME AS "SUB_HEAD_NAME_ENG",
+                main_table.SUBHEAD_NAME_GUJ AS "SUB_HEAD_NAME_GUJ",
+                main_table.ACC_BUD_EST AS "ACCOUNTS",
+                main_table.MOD_BUD_EST AS "MODIFIED_BUDGET_ESTIMATE",
+                 main_table.RE_BUD_EST AS "REVISED_ESTIMATE",
+                main_table.BUD_EST AS "BUDGET_ESTIMATE",
+                nextYear.FY AS BUD_EST_YEAR_ENG,
+                nextYear.FY_GUJ AS BUD_EST_YEAR_GUJ,
+                currYear.FY AS MOD_REV_YEAR_ENG,
+                currYear.FY_GUJ AS MOD_REV_YEAR_GUJ,
+                prevYear.FY AS ACC_YEAR_ENG,
+                prevYear.FY_GUJ AS ACC_YEAR_GUJ,
+                main_table.MAJORHEAD_NAME,
+                main_table.MAJORHEAD_NAME_GUJ,
+                main_table.MAJORHEAD_CODE,
+                 main_table.DETAILHEAD_NAME,
+                main_table.DETAILHEAD_NAME_GUJ,
+                main_table.DETAILHEAD_CODE,
+                REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.MAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.MINORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MINORHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.SUBMAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBMAJORHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.SUBHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.DETAILHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DETAILHEAD_CODE_GUJ
+FROM
+(
+SELECT 
+                COALESCE(NFY.SUBMAJORHEAD_CODE, CFY1.SUBMAJORHEAD_CODE, CFY2.SUBMAJORHEAD_CODE, PFY.SUBMAJORHEAD_CODE) AS SUBMAJORHEAD_CODE,
+                COALESCE(NFY.SUBMAJORHEAD_NAME, CFY1.SUBMAJORHEAD_NAME, CFY2.SUBMAJORHEAD_NAME, PFY.SUBMAJORHEAD_NAME) AS SUBMAJORHEAD_NAME,
+                COALESCE(NFY.SUBMAJORH_NAME_GUJ, CFY1.SUBMAJORH_NAME_GUJ, CFY2.SUBMAJORH_NAME_GUJ, PFY.SUBMAJORH_NAME_GUJ) AS SUBMAJORH_NAME_GUJ,
+                COALESCE(NFY.MINORHEAD_CODE, CFY1.MINORHEAD_CODE, CFY2.MINORHEAD_CODE, PFY.MINORHEAD_CODE) AS MINORHEAD_CODE,
+                COALESCE(NFY.MINORHEAD_NAME, CFY1.MINORHEAD_NAME, CFY2.MINORHEAD_NAME, PFY.MINORHEAD_NAME) AS MINORHEAD_NAME,
+                COALESCE(NFY.MINORHEAD_NAME_GUJ, CFY1.MINORHEAD_NAME_GUJ, CFY2.MINORHEAD_NAME_GUJ, PFY.MINORHEAD_NAME_GUJ) AS MINORHEAD_NAME_GUJ,
+                NFY.BUD_EST,
+                CFY1.MOD_BUD_EST,
+                CFY2.RE_BUD_EST,
+                PFY.ACC_BUD_EST,
+                COALESCE(NFY.MAJORHEAD_NAME, CFY1.MAJORHEAD_NAME, CFY2.MAJORHEAD_NAME, PFY.MAJORHEAD_NAME) AS MAJORHEAD_NAME,
+                COALESCE(NFY.MAJORHEAD_NAME_GUJ, CFY1.MAJORHEAD_NAME_GUJ, CFY2.MAJORHEAD_NAME_GUJ, PFY.MAJORHEAD_NAME_GUJ) AS MAJORHEAD_NAME_GUJ,
+                COALESCE(NFY.MAJORHEAD_CODE, CFY1.MAJORHEAD_CODE, CFY2.MAJORHEAD_CODE, PFY.MAJORHEAD_CODE) AS MAJORHEAD_CODE,
+                COALESCE(NFY.SUBHEAD_NAME, CFY1.SUBHEAD_NAME, CFY2.SUBHEAD_NAME, PFY.SUBHEAD_NAME) AS SUBHEAD_NAME,
+                COALESCE(NFY.SUBHEAD_NAME_GUJ, CFY1.SUBHEAD_NAME_GUJ, CFY2.SUBHEAD_NAME_GUJ, PFY.SUBHEAD_NAME_GUJ) AS SUBHEAD_NAME_GUJ,
+                COALESCE(NFY.SUBHEAD_CODE, CFY1.SUBHEAD_CODE, CFY2.SUBHEAD_CODE, PFY.SUBHEAD_CODE) AS SUBHEAD_CODE,
+                COALESCE(NFY.DETAILHEAD_CODE, CFY1.DETAILHEAD_CODE, CFY2.DETAILHEAD_CODE, PFY.DETAILHEAD_CODE) AS DETAILHEAD_CODE,
+                COALESCE(NFY.DETAILHEAD_NAME, CFY1.DETAILHEAD_NAME, CFY2.DETAILHEAD_NAME, PFY.DETAILHEAD_NAME) AS DETAILHEAD_NAME,
+                COALESCE(NFY.DETAILHEAD_NAME_GUJ, CFY1.DETAILHEAD_NAME_GUJ, CFY2.DETAILHEAD_NAME_GUJ, PFY.DETAILHEAD_NAME_GUJ) AS DETAILHEAD_NAME_GUJ
+FROM
+(
+SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.BE),2) AS BUD_EST,
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE,
+                tprd.RECEIPT_AMOUNT AS BE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                tph.MAJORHEAD_ID, 
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                msub.SUBHEAD_ID,
+                msub.SUBHEAD_CODE,
+                msub.SUBHEAD_NAME,
+                msub.SUBHEAD_NAME_GUJ,
+                mdet.DETAILHEAD_ID,
+                mdet.DETAILHEAD_CODE,
+                mdet.DETAILHEAD_NAME,
+                mdet.DETAILHEAD_NAME_GUJ
+                
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_SUBHEAD msub,
+                MASTER_V1.MS_DETAILHEAD mdet
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID 
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND msub.SUBHEAD_ID=tprd.SUBHEAD_ID
+                AND mdet.SUBHEAD_ID =msub.SUBHEAD_ID 
+                AND mdet.DETAILHEAD_ID=tprd.DETAILHEAD_ID
+                AND mdet.MINORHEAD_ID =mm.MINORHEAD_ID 
+                AND mdet.SUBMAJORHEAD_ID =ms.SUBMAJORHEAD_ID 
+                
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND mm2.MAJORHEAD_TYPE_ID =3
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE,msub.SUBHEAD_CODE,mdet.DETAILHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+              abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                 abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+                
+
+                ) NFY
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.MBE),2) AS MOD_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS MBE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                msub.SUBHEAD_ID,
+                msub.SUBHEAD_CODE,
+                msub.SUBHEAD_NAME,
+                msub.SUBHEAD_NAME_GUJ,
+                 mdet.DETAILHEAD_ID,
+                mdet.DETAILHEAD_CODE,
+                mdet.DETAILHEAD_NAME,
+                mdet.DETAILHEAD_NAME_GUJ
+                
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_SUBHEAD msub,
+                 MASTER_V1.MS_DETAILHEAD mdet
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND ms.MAJORHEAD_ID =mm2.majorhead_id
+                AND msub.SUBHEAD_ID=tprd.SUBHEAD_ID
+                 AND mdet.DETAILHEAD_ID=tprd.DETAILHEAD_ID
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =472
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE,msub.SUBHEAD_CODE,mdet.DETAILHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                 abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+) CFY1 ON CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID AND CFY1.SUBHEAD_ID=NFY.SUBHEAD_ID AND CFY1.DETAILHEAD_ID=NFY.DETAILHEAD_ID
+                                  
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.RE),2) AS RE_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS RE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                msub.SUBHEAD_ID,
+                msub.SUBHEAD_CODE,
+                msub.SUBHEAD_NAME,
+                msub.SUBHEAD_NAME_GUJ,
+                 mdet.DETAILHEAD_ID,
+                mdet.DETAILHEAD_CODE,
+                mdet.DETAILHEAD_NAME,
+                mdet.DETAILHEAD_NAME_GUJ
+                
+FROM 
+ MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2, 
+                MASTER_V1.MS_SUBHEAD msub,
+                 MASTER_V1.MS_DETAILHEAD mdet,
+                BUDGET.TBUD_PUB_RE_HDR tph LEFT JOIN  
+                BUDGET.TBUD_PUB_RE_DTL tprd ON tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+               
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                 AND mdet.DETAILHEAD_ID=tprd.DETAILHEAD_ID
+                AND msub.SUBHEAD_ID=tprd.SUBHEAD_ID
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =473
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE,msub.SUBHEAD_CODE,mdet.DETAILHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                 abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+) CFY2 ON CFY2.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY2.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY2.MINORHEAD_ID=NFY.MINORHEAD_ID AND CFY2.SUBHEAD_ID=NFY.SUBHEAD_ID AND CFY2.DETAILHEAD_ID=NFY.DETAILHEAD_ID
+                                  
+FULL OUTER JOIN 
+(
+ SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.ACC),2) AS ACC_BUD_EST,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+FROM
+(
+SELECT 
+                  mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                  mm.MINORHEAD_CODE, 
+                  tph.RECEIPT_AMOUNT AS ACC,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID, 
+                tph.MINORHEAD_ID,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                msub.SUBHEAD_ID,
+                msub.SUBHEAD_CODE,
+                msub.SUBHEAD_NAME,
+                msub.SUBHEAD_NAME_GUJ,
+                 mdet.DETAILHEAD_ID,
+                mdet.DETAILHEAD_CODE,
+                mdet.DETAILHEAD_NAME,
+                mdet.DETAILHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_AC tph, 
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_SUBHEAD msub,
+                master_v1.MS_MAJORHEAD mm2,
+                 MASTER_V1.MS_DETAILHEAD mdet
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.MINORHEAD_ID = mm.MINORHEAD_ID
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND  tph.DETAILHEAD_ID =mdet.DETAILHEAD_ID 
+                AND msub.SUBHEAD_ID=tph.SUBHEAD_ID
+                AND tph.APP_TYPE_ID IN (472,473)
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-2 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE,msub.SUBHEAD_CODE,mdet.DETAILHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE,
+                 abc.SUBHEAD_CODE,
+                abc.SUBHEAD_NAME ,
+                abc.SUBHEAD_NAME_GUJ,
+                abc.SUBHEAD_ID,
+                 abc.DETAILHEAD_ID,
+                abc.DETAILHEAD_CODE,
+                abc.DETAILHEAD_NAME,
+                abc.DETAILHEAD_NAME_GUJ
+) PFY ON  PFY.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND PFY.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND PFY.MINORHEAD_ID=NFY.MINORHEAD_ID AND PFY.SUBHEAD_ID=NFY.SUBHEAD_ID AND PFY.DETAILHEAD_ID=NFY.DETAILHEAD_ID
+                                
+ORDER BY SUBMAJORHEAD_CODE, MINORHEAD_CODE,SUBHEAD_CODE,DETAILHEAD_CODE
+) main_table
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+WHERE main_table.MAJORHEAD_CODE=$P{majorHead} ORDER BY main_table.majorhead_code]]>
+		</queryString>
+		<field name="SUB_MAJOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_CODE"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="MINOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_CODE"/>
+		</field>
+		<field name="MINOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="MINOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="SUB_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_HEAD_CODE"/>
+		</field>
+		<field name="SUB_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_HEAD_NAME_ENG"/>
+		</field>
+		<field name="SUB_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="ACCOUNTS" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+		</field>
+		<field name="MODIFIED_BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BUDGET_ESTIMATE"/>
+		</field>
+		<field name="REVISED_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="REVISED_ESTIMATE"/>
+		</field>
+		<field name="BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATE"/>
+		</field>
+		<field name="BUD_EST_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="BUD_EST_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MAJORHEAD_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		</field>
+		<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		</field>
+		<field name="MAJORHEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+		</field>
+		<field name="DETAILHEAD_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_NAME"/>
+		</field>
+		<field name="DETAILHEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_NAME_GUJ"/>
+		</field>
+		<field name="DETAILHEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_CODE"/>
+		</field>
+		<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		</field>
+		<field name="MINORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_CODE_GUJ"/>
+		</field>
+		<field name="SUBMAJORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_CODE_GUJ"/>
+		</field>
+		<field name="SUBHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_CODE_GUJ"/>
+		</field>
+		<field name="DETAILHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_CODE_GUJ"/>
+		</field>
+		<variable name="Net Total" class="java.lang.Double" resetType="Group" resetGroup="MinorHeadGroup" calculation="Sum">
+			<variableExpression><![CDATA[$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="AccTotal" class="java.lang.Double" resetType="Group" resetGroup="MinorHeadGroup" calculation="Sum">
+			<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="BudTotal" class="java.lang.Double" resetType="Group" resetGroup="MinorHeadGroup" calculation="Sum">
+			<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="ModBudTotal" class="java.lang.Double" resetType="Group" resetGroup="MinorHeadGroup" calculation="Sum">
+			<variableExpression><![CDATA[$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="SMHAccTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="SMHBudTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="SMHModBudTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="SMHTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<group name="Group1">
+			<groupExpression><![CDATA[$F{SUB_MAJOR_HEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="MinorHeadGroup">
+			<groupExpression><![CDATA[$F{MINOR_HEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="Group2">
+			<groupExpression><![CDATA[$F{SUB_HEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="Group3">
+			<groupExpression><![CDATA[$F{DETAILHEAD_CODE}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="Dataset5" uuid="60105673-bedd-4a7f-a5d2-79ba0182bd30">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="391"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="602"/>
+		<parameter name="fyId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="bpnId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="majorHead" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{majorHead}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT  
+                main_table.SUBMAJORHEAD_CODE AS "SUB_MAJOR_HEAD_CODE",
+                main_table.SUBMAJORHEAD_NAME AS "SUB_MAJOR_HEAD_NAME_ENG",
+                main_table.SUBMAJORH_NAME_GUJ AS "SUB_MAJOR_HEAD_NAME_GUJ",
+                main_table.MINORHEAD_CODE AS "MINOR_HEAD_CODE",
+                main_table.MINORHEAD_NAME AS "MINOR_HEAD_NAME_ENG",
+                main_table.MINORHEAD_NAME_GUJ AS "MINOR_HEAD_NAME_GUJ",
+                main_table.ACC_BUD_EST AS "ACCOUNTS",
+                main_table.MOD_BUD_EST AS "MODIFIED_BUDGET_ESTIMATE",
+                 main_table.RE_BUD_EST AS "REVISED_ESTIMATE",
+                main_table.BUD_EST AS "BUDGET_ESTIMATE",
+                nextYear.FY AS BUD_EST_YEAR_ENG,
+                nextYear.FY_GUJ AS BUD_EST_YEAR_GUJ,
+                currYear.FY AS MOD_REV_YEAR_ENG,
+                currYear.FY_GUJ AS MOD_REV_YEAR_GUJ,
+                prevYear.FY AS ACC_YEAR_ENG,
+                prevYear.FY_GUJ AS ACC_YEAR_GUJ,
+                main_table.MAJORHEAD_NAME,
+                main_table.MAJORHEAD_NAME_GUJ,
+                main_table.MAJORHEAD_CODE,
+                REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.MAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.MINORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MINORHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.SUBMAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBMAJORHEAD_CODE_GUJ
+FROM
+(
+SELECT 
+                COALESCE(NFY.SUBMAJORHEAD_CODE, CFY1.SUBMAJORHEAD_CODE, CFY2.SUBMAJORHEAD_CODE, PFY.SUBMAJORHEAD_CODE) AS SUBMAJORHEAD_CODE,
+                COALESCE(NFY.SUBMAJORHEAD_NAME, CFY1.SUBMAJORHEAD_NAME, CFY2.SUBMAJORHEAD_NAME, PFY.SUBMAJORHEAD_NAME) AS SUBMAJORHEAD_NAME,
+                COALESCE(NFY.SUBMAJORH_NAME_GUJ, CFY1.SUBMAJORH_NAME_GUJ, CFY2.SUBMAJORH_NAME_GUJ, PFY.SUBMAJORH_NAME_GUJ) AS SUBMAJORH_NAME_GUJ,
+                COALESCE(NFY.MINORHEAD_CODE, CFY1.MINORHEAD_CODE, CFY2.MINORHEAD_CODE, PFY.MINORHEAD_CODE) AS MINORHEAD_CODE,
+                COALESCE(NFY.MINORHEAD_NAME, CFY1.MINORHEAD_NAME, CFY2.MINORHEAD_NAME, PFY.MINORHEAD_NAME) AS MINORHEAD_NAME,
+                COALESCE(NFY.MINORHEAD_NAME_GUJ, CFY1.MINORHEAD_NAME_GUJ, CFY2.MINORHEAD_NAME_GUJ, PFY.MINORHEAD_NAME_GUJ) AS MINORHEAD_NAME_GUJ,
+                NFY.BUD_EST,
+                CFY1.MOD_BUD_EST,
+                CFY2.RE_BUD_EST,
+                PFY.ACC_BUD_EST,
+                COALESCE(NFY.MAJORHEAD_NAME, CFY1.MAJORHEAD_NAME, CFY2.MAJORHEAD_NAME, PFY.MAJORHEAD_NAME) AS MAJORHEAD_NAME,
+                COALESCE(NFY.MAJORHEAD_NAME_GUJ, CFY1.MAJORHEAD_NAME_GUJ, CFY2.MAJORHEAD_NAME_GUJ, PFY.MAJORHEAD_NAME_GUJ) AS MAJORHEAD_NAME_GUJ,
+                COALESCE(NFY.MAJORHEAD_CODE, CFY1.MAJORHEAD_CODE, CFY2.MAJORHEAD_CODE, PFY.MAJORHEAD_CODE) AS MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.BE),2) AS BUD_EST,
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE,
+                tprd.RECEIPT_AMOUNT AS BE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                tph.MAJORHEAD_ID, 
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2 
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID 
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND mm2.MAJORHEAD_TYPE_ID =3
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+              abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+
+                ) NFY
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.MBE),2) AS MOD_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS MBE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+                
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2 
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND ms.MAJORHEAD_ID =mm2.majorhead_id
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =472
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) CFY1 ON CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                  
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.RE),2) AS RE_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS RE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+                
+FROM 
+ MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2, 
+                BUDGET.TBUD_PUB_RE_HDR tph LEFT JOIN  
+                BUDGET.TBUD_PUB_RE_DTL tprd ON tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+               
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =473
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) CFY2 ON CFY2.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY2.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY2.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                  
+FULL OUTER JOIN 
+(
+ SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.ACC),2) AS ACC_BUD_EST,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                  mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                  mm.MINORHEAD_CODE, 
+                  tph.RECEIPT_AMOUNT AS ACC,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID, 
+                tph.MINORHEAD_ID,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_AC tph, 
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.MINORHEAD_ID = mm.MINORHEAD_ID
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.APP_TYPE_ID IN (472,473)
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-2 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) PFY ON  PFY.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND PFY.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND PFY.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                
+ORDER BY SUBMAJORHEAD_CODE, MINORHEAD_CODE
+) main_table
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+WHERE main_table.MAJORHEAD_CODE=$P{majorHead} ORDER BY main_table.majorhead_code]]>
+		</queryString>
+		<field name="SUB_MAJOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SUB_MAJOR_HEAD_CODE"/>
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_CODE"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SUB_MAJOR_HEAD_NAME_ENG"/>
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SUB_MAJOR_HEAD_NAME_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="MINOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MINOR_HEAD_CODE"/>
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_CODE"/>
+		</field>
+		<field name="MINOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MINOR_HEAD_NAME_ENG"/>
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="MINOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MINOR_HEAD_NAME_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="ACCOUNTS" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="ACCOUNTS"/>
+			<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+		</field>
+		<field name="MODIFIED_BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="MODIFIED_BUDGET_ESTIMATE"/>
+			<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BUDGET_ESTIMATE"/>
+		</field>
+		<field name="REVISED_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="REVISED_ESTIMATE"/>
+			<property name="com.jaspersoft.studio.field.label" value="REVISED_ESTIMATE"/>
+		</field>
+		<field name="BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="BUDGET_ESTIMATE"/>
+			<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATE"/>
+		</field>
+		<field name="BUD_EST_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FY"/>
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="BUD_EST_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FY_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FY"/>
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FY_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FY"/>
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FY_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MAJORHEAD_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_NAME"/>
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		</field>
+		<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_NAME_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		</field>
+		<field name="MAJORHEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_CODE"/>
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+		</field>
+		<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_CODE_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		</field>
+		<field name="MINORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MINORHEAD_CODE_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_CODE_GUJ"/>
+		</field>
+		<field name="SUBMAJORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SUBMAJORHEAD_CODE_GUJ"/>
+			<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_CODE_GUJ"/>
+		</field>
+		<variable name="AccTotal" class="java.lang.Double" resetType="Group" resetGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?0:$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="BudTotal" class="java.lang.Double" resetType="Group" resetGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?0:$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="ModBudTotal" class="java.lang.Double" resetType="Group" resetGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?0:$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="Net Total" class="java.lang.Double" resetType="Group" resetGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?0:$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="SMHAccTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="SMHBudTotal" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="SMHModBudTotal" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="SMHTotal" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="AccDiff" class="java.lang.Double" resetType="Group" resetGroup="Group3">
+			<variableExpression><![CDATA[OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?$V{AccTotal}:$V{AccTotal}-$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="ModBudDiff" class="java.lang.Double">
+			<variableExpression><![CDATA[OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?$V{BudTotal}:$V{BudTotal}-$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="RevBudDiff" class="java.lang.Double">
+			<variableExpression><![CDATA[OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?$V{ModBudTotal}:$V{ModBudTotal}-$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="BudDiff" class="java.lang.Double">
+			<variableExpression><![CDATA[OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?$V{Net Total}:$V{Net Total}-$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="AccDiff2" class="java.lang.Double" resetType="Group" resetGroup="Group2">
+			<variableExpression><![CDATA[$V{AccTotal}-$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="ModBudDiff2" class="java.lang.Double" resetType="Group" resetGroup="Group2">
+			<variableExpression><![CDATA[$V{BudTotal}-$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="RevBudDiff2" class="java.lang.Double" resetType="Group" resetGroup="Group2">
+			<variableExpression><![CDATA[$V{ModBudTotal}-$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="BudDiff2" class="java.lang.Double">
+			<variableExpression><![CDATA[$V{Net Total}-$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="AccTotal2" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$V{AccTotal}]]></variableExpression>
+		</variable>
+		<variable name="ModBudTotal2" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$V{ModBudTotal}]]></variableExpression>
+		</variable>
+		<variable name="BudTotal2" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$V{BudTotal}]]></variableExpression>
+		</variable>
+		<variable name="NetTotal2" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$V{Net Total}]]></variableExpression>
+		</variable>
+		<variable name="AccDeduct" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$F{MINOR_HEAD_CODE}.equals("900")?(OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?0:$F{ACCOUNTS}):0.0]]></variableExpression>
+		</variable>
+		<variable name="ModBudDeduct" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$F{MINOR_HEAD_CODE}.equals("900")?(OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?0:$F{MODIFIED_BUDGET_ESTIMATE}):0.0]]></variableExpression>
+		</variable>
+		<variable name="RevBudDeduct" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$F{MINOR_HEAD_CODE}.equals("900")?(OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?0:$F{REVISED_ESTIMATE}):0.0]]></variableExpression>
+		</variable>
+		<variable name="NetTotalDeduct" class="java.lang.Double" resetType="Group" resetGroup="Group1" incrementType="Group" incrementGroup="Group3" calculation="Sum">
+			<variableExpression><![CDATA[$F{MINOR_HEAD_CODE}.equals("900")?(OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?0:$F{BUDGET_ESTIMATE}):0.0]]></variableExpression>
+		</variable>
+		<group name="Group6"/>
+		<group name="Group1">
+			<groupExpression><![CDATA[$F{MAJORHEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="Group2">
+			<groupExpression><![CDATA[$F{MAJORHEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="Group3">
+			<groupExpression><![CDATA[$F{SUB_MAJOR_HEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="Group4">
+			<groupExpression><![CDATA[$F{SUB_MAJOR_HEAD_CODE}]]></groupExpression>
+		</group>
+		<group name="Group5">
+			<groupExpression><![CDATA[$F{SUB_MAJOR_HEAD_CODE}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="Dataset3" uuid="6d8db931-f72b-4837-9b53-466ddea38888">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2 Adapter"/>
+		<parameter name="fyId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="bpnId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="majorHead" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{majorHead}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT  
+                main_table.SUBMAJORHEAD_CODE AS "SUB_MAJOR_HEAD_CODE",
+                main_table.SUBMAJORHEAD_NAME AS "SUB_MAJOR_HEAD_NAME_ENG",
+                main_table.SUBMAJORH_NAME_GUJ AS "SUB_MAJOR_HEAD_NAME_GUJ",
+                main_table.ACC_BUD_EST AS "ACCOUNTS",
+                main_table.MOD_BUD_EST AS "MODIFIED_BUDGET_ESTIMATE",
+                 main_table.RE_BUD_EST AS "REVISED_ESTIMATE",
+                main_table.BUD_EST AS "BUDGET_ESTIMATE",
+                nextYear.FY AS BUD_EST_YEAR_ENG,
+                nextYear.FY_GUJ AS BUD_EST_YEAR_GUJ,
+                currYear.FY AS MOD_REV_YEAR_ENG,
+                currYear.FY_GUJ AS MOD_REV_YEAR_GUJ,
+                prevYear.FY AS ACC_YEAR_ENG,
+                prevYear.FY_GUJ AS ACC_YEAR_GUJ,
+                main_table.MAJORHEAD_NAME,
+                main_table.MAJORHEAD_NAME_GUJ,
+                main_table.MAJORHEAD_CODE,
+                REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.MAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table.SUBMAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBMAJORHEAD_CODE_GUJ
+FROM
+(
+SELECT 
+                COALESCE(NFY.SUBMAJORHEAD_CODE, CFY1.SUBMAJORHEAD_CODE, CFY2.SUBMAJORHEAD_CODE, PFY.SUBMAJORHEAD_CODE) AS SUBMAJORHEAD_CODE,
+                COALESCE(NFY.SUBMAJORHEAD_NAME, CFY1.SUBMAJORHEAD_NAME, CFY2.SUBMAJORHEAD_NAME, PFY.SUBMAJORHEAD_NAME) AS SUBMAJORHEAD_NAME,
+                COALESCE(NFY.SUBMAJORH_NAME_GUJ, CFY1.SUBMAJORH_NAME_GUJ, CFY2.SUBMAJORH_NAME_GUJ, PFY.SUBMAJORH_NAME_GUJ) AS SUBMAJORH_NAME_GUJ,
+                 NFY.BUD_EST,
+                CFY1.MOD_BUD_EST,
+                CFY2.RE_BUD_EST,
+                PFY.ACC_BUD_EST,
+                COALESCE(NFY.MAJORHEAD_NAME, CFY1.MAJORHEAD_NAME, CFY2.MAJORHEAD_NAME, PFY.MAJORHEAD_NAME) AS MAJORHEAD_NAME,
+                COALESCE(NFY.MAJORHEAD_NAME_GUJ, CFY1.MAJORHEAD_NAME_GUJ, CFY2.MAJORHEAD_NAME_GUJ, PFY.MAJORHEAD_NAME_GUJ) AS MAJORHEAD_NAME_GUJ,
+                COALESCE(NFY.MAJORHEAD_CODE, CFY1.MAJORHEAD_CODE, CFY2.MAJORHEAD_CODE, PFY.MAJORHEAD_CODE) AS MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                ROUND(sum(abc.BE),2) AS BUD_EST,
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+              
+                tprd.RECEIPT_AMOUNT AS BE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                ms.SUBMAJORHEAD_ID ,
+     
+                tph.MAJORHEAD_ID, 
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2 
+WHERE 
+                md.BPN_ID = mb.BPN_ID
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID 
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND mm2.MAJORHEAD_TYPE_ID =3
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+              abc.SUBMAJORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+
+                ) NFY
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                ROUND(sum(abc.MBE),2) AS MOD_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS MBE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+                
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2 
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND ms.MAJORHEAD_ID =mm2.majorhead_id
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =472
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) CFY1 ON CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID 
+                                  
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                ROUND(sum(abc.RE),2) AS RE_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS RE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+                
+FROM 
+ MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2, 
+                BUDGET.TBUD_PUB_RE_HDR tph LEFT JOIN  
+                BUDGET.TBUD_PUB_RE_DTL tprd ON tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+               
+WHERE 
+                md.BPN_ID = mb.BPN_ID
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =473
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) CFY2 ON CFY2.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY2.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID 
+                                  
+FULL OUTER JOIN 
+(
+ SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                ROUND(sum(abc.ACC),2) AS ACC_BUD_EST,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                  mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                  tph.RECEIPT_AMOUNT AS ACC,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID, 
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_AC tph, 
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.APP_TYPE_ID IN (472,473)
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-2 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) PFY ON  PFY.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND PFY.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID 
+                                
+ORDER BY SUBMAJORHEAD_CODE
+) main_table
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+WHERE main_table.MAJORHEAD_CODE=$P{majorHead} ORDER BY main_table.majorhead_code]]>
+		</queryString>
+		<field name="SUB_MAJOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_CODE"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="ACCOUNTS" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+		</field>
+		<field name="MODIFIED_BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BUDGET_ESTIMATE"/>
+		</field>
+		<field name="REVISED_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="REVISED_ESTIMATE"/>
+		</field>
+		<field name="BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATE"/>
+		</field>
+		<field name="BUD_EST_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="BUD_EST_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MAJORHEAD_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		</field>
+		<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		</field>
+		<field name="MAJORHEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		</field>
+		<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		</field>
+		<field name="SUBMAJORHEAD_CODE_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_CODE_GUJ"/>
+		</field>
+		<variable name="AccTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="BudTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="ModBudTotal" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="Net Total" class="java.lang.Double" resetType="Group" resetGroup="Group1" calculation="Sum">
+			<variableExpression><![CDATA[$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="AccDiff" class="java.lang.Double" resetType="Group" resetGroup="Group1">
+			<variableExpression><![CDATA[$V{AccTotal}-$F{ACCOUNTS}]]></variableExpression>
+		</variable>
+		<variable name="ModBudDiff" class="java.lang.Double" resetType="Group" resetGroup="Group1">
+			<variableExpression><![CDATA[$V{BudTotal}-$F{MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="RevBudDiff" class="java.lang.Double" resetType="Group" resetGroup="Group1">
+			<variableExpression><![CDATA[$V{ModBudTotal}-$F{REVISED_ESTIMATE}]]></variableExpression>
+		</variable>
+		<variable name="BudDiff" class="java.lang.Double" resetType="Group" resetGroup="Group1">
+			<variableExpression><![CDATA[$V{Net Total}-$F{BUDGET_ESTIMATE}]]></variableExpression>
+		</variable>
+		<group name="Group1">
+			<groupExpression><![CDATA[$F{MAJORHEAD_CODE}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="major" class="java.lang.String"/>
+	<parameter name="mod1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{mod1}]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT ms.SECTORHEAD_NAME,ms.SECTORHEAD_NAME_GUJ,mss.SUB_SECTOR_NAME,mss.SUB_SECTOR_NAME_GUJ,
+mm.MAJORHEAD_NAME,mm.MAJORHEAD_NAME_GUJ ,mm.MAJORHEAD_CODE,
+  nextYear.FY AS BUD_EST_YEAR_ENG,
+      nextYear.FY_GUJ AS BUD_EST_YEAR_GUJ,
+                currYear.FY AS MOD_REV_YEAR_ENG,
+                currYear.FY_GUJ AS MOD_REV_YEAR_GUJ,
+                prevYear.FY AS ACC_YEAR_ENG,
+                prevYear.FY_GUJ AS ACC_YEAR_GUJ,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm.MAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ
+FROM MASTER_V1.MS_MAJORHEAD mm LEFT JOIN MASTER_V1.MS_SECTORHEAD ms ON mm.SECTORHEAD_CODE=ms.SECTORHEAD_ID
+LEFT  JOIN
+MASTER_V1.MS_SUB_SECTOR mss ON mm.SUB_SECTOR_CODE=mss.SUB_SECTOR_ID
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2  WHERE mm.MAJORHEAD_TYPE_ID =3 AND mm.MAJORHEAD_CODE=$P{major}
+ORDER BY MAJORHEAD_CODE]]>
+	</queryString>
+	<field name="SECTORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+	</field>
+	<field name="SECTORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+	</field>
+	<field name="SUB_SECTOR_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUB_SECTOR"/>
+	</field>
+	<field name="SUB_SECTOR_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUB_SECTOR"/>
+	</field>
+	<field name="MAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="BUD_EST_YEAR_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="BUD_EST_YEAR_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="MOD_REV_YEAR_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="MOD_REV_YEAR_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="ACC_YEAR_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="ACC_YEAR_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<variable name="Net Total" class="java.lang.Integer" resetType="Group" resetGroup="Group5" calculation="Sum"/>
+	<group name="Group1"/>
+	<group name="Group2"/>
+	<group name="Group3"/>
+	<group name="Group4">
+		<groupExpression><![CDATA[$F{SECTORHEAD_NAME}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="Group5" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{MAJORHEAD_CODE}]]></groupExpression>
+		<groupHeader>
+			<band height="291">
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="390" y="90" width="412" height="20" uuid="4573c0a8-0077-4319-9dd8-1742dea949a6">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MAJOR HEAD--"+$F{MAJORHEAD_CODE}+"---"+$F{MAJORHEAD_NAME}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="390" y="70" width="412" height="20" isRemoveLineWhenBlank="true" uuid="f65629d0-1588-4e60-b308-7a7cef102d9a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["SUB-SECTOR--"+$F{SUB_SECTOR_NAME}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="390" y="50" width="412" height="20" isRemoveLineWhenBlank="true" uuid="8839b3e9-4b03-42b7-9bbc-fab90861277c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["SECTOR--"+$F{SECTORHEAD_NAME}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="390" y="30" width="412" height="20" isRemoveLineWhenBlank="true" uuid="8b498fc6-7d4e-46ac-80a0-0d666cb76e57">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Receipts Heads - Revenue Accounts"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="390" y="10" width="412" height="20" isRemoveLineWhenBlank="true" uuid="a108f76a-bd60-48f1-b3d2-502dc4b65d42">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CONSOLIDATED FUND-- REVENUE"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="0" y="90" width="380" height="20" uuid="8b364a38-c98d-4ba9-b48e-b739dbfe86f2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["મુખ્ય સદર : "+$F{MAJORHEAD_CODE_GUJ}+"--"+$F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="0" y="70" width="380" height="20" isRemoveLineWhenBlank="true" uuid="a0b557d6-04a3-4dad-a2d6-80c0fd8bdc4f">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["પેટા સેક્ટર :"+$F{SUB_SECTOR_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="0" y="50" width="380" height="20" isRemoveLineWhenBlank="true" uuid="20d44918-9246-4a44-b0ad-5f9975f6d192">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["સેક્ટર :"+$F{SECTORHEAD_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="0" y="30" width="380" height="20" isRemoveLineWhenBlank="true" uuid="f2dde231-eced-4a29-a86c-fbde0769da05">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["પ્રાપ્તિનાં સદર : મહેસૂલી હિસાબ"]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="0" y="10" width="380" height="20" isRemoveLineWhenBlank="true" uuid="3be42111-8f7d-4cdd-af8d-7015fa0b4126">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["એકત્રિત નિધિ :મહેસૂલ"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="270" width="90" height="15" uuid="6c8d48c2-99e7-40e2-bdbd-c03cc2fae0fe">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="90" y="270" width="90" height="15" uuid="7791d999-a95b-47ee-8a07-bdf1be3d6e0c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[2]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="180" y="270" width="120" height="15" uuid="858e33a1-700e-4ba1-8b7a-4d4a831f7903">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="300" y="270" width="190" height="15" uuid="fa9ade32-3c9a-4139-afeb-fd0bbf7d1ed9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="270" width="200" height="15" uuid="904c474d-6b2c-4ee8-9677-a58b6c9680b7">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[5]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="690" y="270" width="112" height="15" uuid="a711fd49-6d04-4502-94d0-692a5f99e03f">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[6]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="120" width="800" height="18" uuid="58dc0955-f011-498c-91ce-77d3d7b272ac"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[(₹. લાખ માં)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="138" width="800" height="18" uuid="80bcc3eb-a0df-4c4e-a96a-e5a2f312dee2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[(₹. In Lakhs)]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="169" width="90" height="69" isRemoveLineWhenBlank="true" uuid="5c72a55b-9ba2-4e3f-af19-55b35384afa5">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ACC_YEAR_GUJ}+"નો<BR/>"+
+"હિસાબ<BR/>"+
+"Accounts"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="90" y="170" width="90" height="68" isRemoveLineWhenBlank="true" uuid="c6e1b558-fd9c-4b12-a563-9f02201c3c39">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{mod1}==1?$F{MOD_REV_YEAR_GUJ}+"૯નો<BR/>"+
+"ફેરફાર કરેલ અંદાજ<BR/>"+
+"Modified Budget Estimates":$F{MOD_REV_YEAR_GUJ}+"૯નો<BR/>"+
+"અંદાજ<BR/>"+"Budget Estimates"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="170" width="120" height="68" isRemoveLineWhenBlank="true" uuid="ac4f49bb-649f-4765-86f5-df52a0ca20dd">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MOD_REV_YEAR_GUJ}+"નો<BR/>"+
+"સુધારેલા અંદાજ<BR/>"+
+"Revised Estimates"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="690" y="167" width="112" height="71" isRemoveLineWhenBlank="true" uuid="b175f7d3-a758-42fb-8ba7-321071e72c99">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BUD_EST_YEAR_GUJ}+"નો<BR/>"+
+"અંદાજ<BR/>"+
+"Budget Estimates"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="300" y="198" width="190" height="20" isRemoveLineWhenBlank="true" uuid="e7fcd5f0-3d0d-4cd7-a0f3-f59976c376ae">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[પેટા-મુખ્ય સદર]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="198" width="200" height="20" isRemoveLineWhenBlank="true" uuid="d69156f3-4bd0-4621-8424-c51c9acdc794">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub-Major Heads:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="238" width="90" height="22" uuid="ac25ad01-be3e-424b-849c-de0038c5995f">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ACC_YEAR_ENG}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="90" y="238" width="90" height="22" uuid="627c00bc-57d2-4d40-b672-77d631ca6608">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MOD_REV_YEAR_ENG}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="238" width="120" height="22" uuid="ce7907a7-86f0-497c-a72f-c96799433cdb">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MOD_REV_YEAR_ENG}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="690" y="238" width="112" height="22" uuid="9ff041b2-874f-4c18-a5f0-708dad60faee">
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BUD_EST_YEAR_ENG}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="161" width="801" height="1" isRemoveLineWhenBlank="true" uuid="0ff46ddd-10b3-46f4-8cd6-cd3ac26cc483">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<printWhenExpression><![CDATA[$V{Group5_COUNT}==0]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="267" width="801" height="1" uuid="fd032e26-6fd8-4a0c-aa5a-2db625267f3c">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="290" width="801" height="1" uuid="f624676d-440e-43f9-a4b6-01381fc80d88">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="NetTotal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="40">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="802" height="40" isRemoveLineWhenBlank="true" printWhenGroupChanges="Group5" uuid="323591e6-248f-4773-9464-35a08be1d4fe">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset5" uuid="6ca901f3-e982-4cff-b298-83055599f67a">
+						<datasetParameter name="fyId">
+							<datasetParameterExpression><![CDATA[$P{fyId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="bpnId">
+							<datasetParameterExpression><![CDATA[$P{bpnId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="majorHead">
+							<datasetParameterExpression><![CDATA[$F{MAJORHEAD_CODE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="db27b8e7-f5d4-4538-aaa0-9ab872de51d1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<box>
+									<pen lineWidth="0.0"/>
+								</box>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="b8c5ed7a-de87-40e4-a4ea-7a5bb53c2e6e"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?$V{AccTotal}:$V{AccTotal}-$F{ACCOUNTS})==0?"--":$V{AccTotal}-$F{ACCOUNTS}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="90" height="25" isRemoveLineWhenBlank="true" uuid="2beab4bd-b25b-4027-a25b-bbade2a581ca"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?"--":-$F{ACCOUNTS}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="90" height="25" isRemoveLineWhenBlank="true" uuid="8a35fac2-1291-47ea-9862-20d0cfe67d13"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?$V{AccTotal}:$V{AccTotal}+$F{ACCOUNTS})==0?"--":$V{AccTotal}+$F{ACCOUNTS}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="4e82d125-5720-46b4-b88b-86d695792d19"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{AccTotal2}-$V{AccDeduct}==0?"--":$V{AccTotal2}-$V{AccDeduct}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="90" height="25" isRemoveLineWhenBlank="true" uuid="60d9b3f5-cf8d-47de-ab2e-483b76e3ef57"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{AccDeduct}==null,EQUALS($V{AccDeduct},0.00)) ?"--":(-$V{AccDeduct})]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="90" height="25" isRemoveLineWhenBlank="true" uuid="83b4a17d-d47b-4520-89bd-9fdc322ebcc2"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{AccTotal2}==0?"--":$V{AccTotal2}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="d90a098c-a42c-47ff-a8bd-4bfcebe47b14"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{SMHAccTotal}==null,EQUALS($V{SMHAccTotal},0.00)) ?"--":$V{SMHAccTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="30" isRemoveLineWhenBlank="true" uuid="9d15aa63-8671-4e26-a3a9-c9978ec34ecd"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{AccTotal}==null,EQUALS($V{AccTotal},0.00)) ?"--":$V{AccTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="90" height="30" printWhenGroupChanges="Group3" uuid="2bf103f0-ac06-47be-a7c4-ced826c891d4"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[--]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField pattern="#0.00;(-)#0.00">
+								<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="5935c09c-f59b-4504-90e2-f5279c2a3ab9">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<box>
+									<pen lineWidth="0.0" lineStyle="Solid"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[OR($F{ACCOUNTS}==null,EQUALS($F{ACCOUNTS},0.00)) ?"--":$F{ACCOUNTS}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="e3ae2ef8-8ef3-4e25-89b2-67245a1800e4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<box>
+									<pen lineWidth="0.0"/>
+								</box>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="bf312797-adbe-4612-a583-ef3ba12aa8b9"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?$V{BudTotal}:$V{BudTotal}-$F{MODIFIED_BUDGET_ESTIMATE})==0?"--":$V{BudTotal}-$F{MODIFIED_BUDGET_ESTIMATE}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="90" height="25" isRemoveLineWhenBlank="true" uuid="420bfb7b-25eb-40de-9eb5-3a50fd4944ef"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?"--":-$F{MODIFIED_BUDGET_ESTIMATE}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="90" height="25" isRemoveLineWhenBlank="true" uuid="5f1ee29c-d612-4c96-9df6-b3406ce6a406"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?$V{ModBudDiff}:$V{ModBudDiff}+$F{MODIFIED_BUDGET_ESTIMATE})==0?"--":$V{ModBudDiff}+$F{MODIFIED_BUDGET_ESTIMATE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="e6856e27-a360-4e92-800e-ba8bf96e911d"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{BudTotal2}-$V{RevBudDeduct}==0?"--":$V{BudTotal2}-$V{RevBudDeduct}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="90" height="25" isRemoveLineWhenBlank="true" uuid="66132144-cb0c-4496-b290-d4d791faca1c"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{ModBudDeduct}==null,EQUALS($V{ModBudDeduct},0.00)) ?"--":(-$V{ModBudDeduct})]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="90" height="25" isRemoveLineWhenBlank="true" uuid="5b9b39fe-2421-48fa-947a-c8c79c892412"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{BudTotal2}==0?"--":$V{BudTotal2}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="1f38b54d-b1d0-4c9c-8fbb-8e618c050d0a"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{SMHBudTotal}==null,EQUALS($V{SMHBudTotal},0.00)) ?"--":$V{SMHBudTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="90" height="30" isRemoveLineWhenBlank="true" uuid="7b8be7e0-e191-4b11-b058-7d3cc95e89c5"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{BudTotal}==null,EQUALS($V{BudTotal},0.00)) ?"--":$V{BudTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="90" height="30" uuid="eb5dbb74-cc52-4bd8-8a80-0996845561a7"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[--]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField pattern="#0.00;(-)#0.00">
+								<reportElement x="0" y="0" width="90" height="25" isRemoveLineWhenBlank="true" uuid="2024edb0-9ff3-4128-8ec7-f70b149af2f1">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<box>
+									<pen lineWidth="0.0" lineStyle="Solid"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[OR($F{MODIFIED_BUDGET_ESTIMATE}==null,EQUALS($F{MODIFIED_BUDGET_ESTIMATE},0.00)) ?"--":$F{MODIFIED_BUDGET_ESTIMATE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="79c6f07a-1045-4a06-8cca-c9a0a3d02fce">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<box>
+									<pen lineWidth="0.0"/>
+								</box>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="110" height="25" isRemoveLineWhenBlank="true" uuid="91f10b62-f7e5-4699-b611-bb66e098b279"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?$V{ModBudTotal}:$V{ModBudTotal}-$F{REVISED_ESTIMATE})==0?"--":$V{ModBudTotal}-$F{REVISED_ESTIMATE}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="110" height="25" isRemoveLineWhenBlank="true" uuid="0c6053c7-b7da-41f7-86ea-69ca1eadf340"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?"--":-$F{REVISED_ESTIMATE}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="110" height="25" isRemoveLineWhenBlank="true" uuid="8601eb86-73f9-412d-ad36-c529092affdc"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?$V{RevBudDiff}:$V{RevBudDiff}+$F{REVISED_ESTIMATE})==0?"--":$V{RevBudDiff}+$F{REVISED_ESTIMATE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="110" height="25" isRemoveLineWhenBlank="true" uuid="bf1f7c4e-287b-47e1-bab1-2fde26afa162"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{ModBudTotal2}-$V{ModBudDeduct}==0?"--":$V{ModBudTotal2}-$V{ModBudDeduct}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="110" height="25" isRemoveLineWhenBlank="true" uuid="52b51553-a9c7-4a44-b8db-5309e2b726d0"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{RevBudDeduct}==null,EQUALS($V{RevBudDeduct},0.00)) ?"--":(-$V{RevBudDeduct})]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="110" height="25" isRemoveLineWhenBlank="true" uuid="227547fc-9ffd-470c-85ad-545444e9168c"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{ModBudTotal2}==0?"--":$V{ModBudTotal2}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="110" height="25" isRemoveLineWhenBlank="true" uuid="c4a3a722-66c4-45ae-9f88-d82fd3f74f35"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{SMHModBudTotal}==null,EQUALS($V{SMHModBudTotal},0.00)) ?"--":$V{SMHModBudTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="110" height="30" isRemoveLineWhenBlank="true" uuid="f093b51a-41a5-41cf-a4f7-069e1b69ff77"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{ModBudTotal}==null,EQUALS($V{ModBudTotal},0.00)) ?"--":$V{ModBudTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="110" height="30" uuid="4bc53900-d516-4ef6-a083-4f20637e3a22"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[--]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField pattern="#0.00;(-)#0.00">
+								<reportElement x="0" y="0" width="110" height="25" isRemoveLineWhenBlank="true" uuid="b53ac0c2-5ced-4f34-be03-933e1940f7f4">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<box>
+									<pen lineWidth="0.0" lineStyle="Solid"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[OR($F{REVISED_ESTIMATE}==null,EQUALS($F{REVISED_ESTIMATE},0.00)) ?"--":$F{REVISED_ESTIMATE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="75e1dc54-9cdc-4da4-9898-793ead1a623c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="4912b8b5-e279-4079-8235-d57c8ff52d4c"/>
+									<textElement verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="40" height="25" uuid="f6649915-32d6-484e-a754-2aee87671046"/>
+									<textElement textAlignment="Right" verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[$F{SUBMAJORHEAD_CODE_GUJ}+" - "]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="e8ef246b-6e6a-4b58-b027-03135817193f"/>
+									<textElement verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="562f4794-e6b0-4a94-b2bd-0f1542459b29"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="40" height="25" uuid="ec0d8e47-6329-432a-9aba-8b849cf9890b"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="50" width="40" height="25" uuid="60e8fdbc-1045-496d-a3fe-2f5dfe9d5cfb"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="40" height="25" uuid="d6945556-c8f3-4e5c-a499-ac7143a0af5a"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<text><![CDATA[]]></text>
+								</staticText>
+								<textField>
+									<reportElement x="0" y="25" width="40" height="25" uuid="3a2286c7-13a6-4b13-a984-97ad107ffae0"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="50" width="40" height="25" uuid="b9d381f6-415b-4822-9e06-43dcc73027a4"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="17d4c2be-7f92-42c6-a5ce-7ab069a951de"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="30" uuid="b51e525a-c718-462e-882e-9817a5837801"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="40" height="30" uuid="28860ace-bab1-456a-a8c9-2fb1f8eba65f"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25" isRemoveLineWhenBlank="true" uuid="96a61ff8-ca56-48bb-a6e9-19d25e6de8f6">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Top"/>
+								<textFieldExpression><![CDATA[$F{MINORHEAD_CODE_GUJ}+" - "]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="364f5344-6718-4c23-8e8d-da98bc67609d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<staticText>
+									<reportElement x="0" y="0" width="150" height="25" uuid="fa09f0e9-af37-4ffc-b160-f0b2130e94b5"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[પેટા મુખ્ય સદર :]]></text>
+								</staticText>
+								<textField textAdjust="StretchHeight">
+									<reportElement x="0" y="25" width="150" height="25" uuid="1a126aec-c2d2-4885-94fc-24d219e3c115"/>
+									<textElement textAlignment="Left" verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[$F{SUB_MAJOR_HEAD_NAME_GUJ}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="150" height="25" uuid="e812b289-3fde-4e92-aa0b-7a4a0a5c0fe6"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ગૌણ સદર :]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<box>
+									<pen lineWidth="0.0"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="150" height="25" isRemoveLineWhenBlank="true" uuid="858e4c68-adaf-4709-849b-5ba76bc3120e"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["એકંદર સરવાળો  :"+$F{SUBMAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="150" height="25" isRemoveLineWhenBlank="true" uuid="5c01da50-9351-4adc-b514-7e258c4ed619"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["૯૦૦ - બાદ રિફંડ"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="50" width="150" height="25" isRemoveLineWhenBlank="true" uuid="51ac9f76-79c8-4184-95bc-4fe91436a559"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["ચોખ્ખો સરવાળો :"+$F{SUBMAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="150" height="25" isRemoveLineWhenBlank="true" uuid="6dac3788-be23-4a7a-bf6e-4afe473eae89"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["એકંદર સરવાળો  :"+$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="150" height="25" isRemoveLineWhenBlank="true" uuid="eee769a0-da9b-4366-9019-f8ba0435cd8a"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["૯૦૦ - બાદ રિફંડ"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="50" width="150" height="25" isRemoveLineWhenBlank="true" uuid="dc62cba3-da56-4cbe-bb2d-f1030338bbf2"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["ચોખ્ખો સરવાળો :"+$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="150" height="25" isRemoveLineWhenBlank="true" uuid="ee035fed-23f3-4ce3-a526-22a8304f6648"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["ચોખ્ખો સરવાળો :"+$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField pattern="#,##0.00">
+									<reportElement x="0" y="0" width="150" height="30" isRemoveLineWhenBlank="true" uuid="1d276040-e41b-44d6-8b9c-39f1e85bde6c"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["ચોખ્ખો સરવાળો :"+$F{SUBMAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="150" height="30" uuid="d506632a-b06c-41f2-9116-3556bd4ed10b"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[સરવાળો- પેટા સેક્ટર : (ઘ) વિદેશી સરકારો
+સાથેના હિસાબો]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="150" height="25" isRemoveLineWhenBlank="true" uuid="1efe8668-ac1d-41a1-934c-74b4c229df0a">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<box>
+									<pen lineWidth="0.0" lineStyle="Solid"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Top"/>
+								<textFieldExpression><![CDATA[$F{MINOR_HEAD_NAME_GUJ}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="25c1d3a7-82ff-4f4d-bb41-e821c5f988a4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="01313ce3-d30b-4052-b3cf-078270b797c6"/>
+									<textElement verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="40" height="25" uuid="b638dd4a-a96a-4fdd-925b-09fe741d1776"/>
+									<textElement textAlignment="Right" verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[$F{SUB_MAJOR_HEAD_CODE}+" - "]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="fd7ac709-9a6c-4c97-89f3-9914082ea4bb"/>
+									<textElement verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="490481f2-ee10-40fa-bc0f-3de12d9e1543"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="40" height="25" uuid="4fd16b0e-7332-4e61-b4c3-557329e18d35"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="50" width="40" height="25" uuid="38e1ba09-4ed5-484e-84f0-55f85ff45844"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="516a9918-3c4d-4744-b715-69674ad10688"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="25" width="40" height="25" uuid="15845d7d-5372-4a0c-b636-4cbfe9d00e78"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="0" y="50" width="40" height="25" uuid="9535672d-27e2-4803-90b4-ca9ed3799c2f"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="25" uuid="2b744335-2044-46ca-b8a0-9ab01b394b3a"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="40" height="30" uuid="23178de1-bee7-4cac-8c13-687e5208a7e1"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="40" height="30" uuid="cadf7c88-65bd-4f99-9895-5cf4fd569c88"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25" isRemoveLineWhenBlank="true" uuid="8433bfd7-7086-4719-9d97-d0990c26d619">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Top"/>
+								<textFieldExpression><![CDATA[$F{MINOR_HEAD_CODE}+" - "]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="170" uuid="0d2f3cf5-d01d-4cf1-b206-2dd415def83c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="170" height="25" uuid="572ce4f7-b3dc-4a0b-aac5-3024c5490cff"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Sub Major Head :]]></text>
+								</staticText>
+								<textField textAdjust="StretchHeight">
+									<reportElement x="0" y="25" width="170" height="25" uuid="2c477ec8-7579-4cd2-a17d-259539c2e63e"/>
+									<textElement textAlignment="Left" verticalAlignment="Top"/>
+									<textFieldExpression><![CDATA[$F{SUB_MAJOR_HEAD_NAME_ENG}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="170" height="25" uuid="3084235c-ade5-4b3c-b71e-00585a5c093d"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Minor Head :]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<box>
+									<pen lineWidth="0.0"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="170" height="25" isRemoveLineWhenBlank="true" uuid="b9291971-3c33-4358-b52b-c8c37a931c01"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Gross Total : "+$F{SUB_MAJOR_HEAD_CODE}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="0" y="25" width="170" height="25" isRemoveLineWhenBlank="true" uuid="784367c5-1012-4dd0-9121-7c517354102e"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[900 - Deduct Refunds]]></text>
+								</staticText>
+								<textField>
+									<reportElement x="0" y="50" width="170" height="25" isRemoveLineWhenBlank="true" uuid="ffb63fe2-7293-445c-a6dc-112113916e8c"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Net Total : "+$F{SUB_MAJOR_HEAD_CODE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="170" height="25" isRemoveLineWhenBlank="true" uuid="8e848978-c590-4c28-93e2-6f7799422b97"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Gross Total : "+$F{MAJORHEAD_CODE}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="0" y="25" width="170" height="25" isRemoveLineWhenBlank="true" uuid="0e66fd71-d9a1-4e7c-875d-757927e4d1cd"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[900 - Deduct Refunds]]></text>
+								</staticText>
+								<textField>
+									<reportElement x="0" y="50" width="170" height="25" isRemoveLineWhenBlank="true" uuid="bc147243-2be9-4450-b921-d242def443ba"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Net Total : "+$F{MAJORHEAD_CODE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="170" height="25" isRemoveLineWhenBlank="true" uuid="11a91efb-f14c-4700-9de0-1cec989babb1"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Net Total : "+$F{MAJORHEAD_CODE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField pattern="#,##0.00">
+									<reportElement x="0" y="0" width="170" height="30" isRemoveLineWhenBlank="true" uuid="b363a719-db06-4d91-bfbe-7e59b77f5280"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Net Total : "+$F{SUB_MAJOR_HEAD_CODE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="170" height="30" uuid="14f93335-9bf9-4e36-a136-18d84da74551"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Total- SUB-SECTOR--(d) Accounts with
+Government of Foreign Countires]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="170" height="25" isRemoveLineWhenBlank="true" uuid="b8f31596-f237-441f-b8b2-b4496ce3cbde">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<box>
+									<pen lineWidth="0.0" lineStyle="Solid"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{MINOR_HEAD_NAME_ENG}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="112" uuid="3ef0c02b-16c7-43a5-83e0-a67c744fc5e8">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:groupHeader groupName="Group4">
+							<jr:cell height="50" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Group5">
+							<jr:cell height="25" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="Group3">
+							<jr:cell height="75" rowSpan="1">
+								<box>
+									<pen lineWidth="0.0"/>
+								</box>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="112" height="25" isRemoveLineWhenBlank="true" uuid="69043034-349d-4e70-9022-e8c899ff1638"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?$V{Net Total}:$V{Net Total}-$F{BUDGET_ESTIMATE})==0?"--":$V{Net Total}-$F{BUDGET_ESTIMATE}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="112" height="25" isRemoveLineWhenBlank="true" uuid="91399acc-c44b-4689-a6dc-6edc99489a31"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?"--":-$F{BUDGET_ESTIMATE}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="112" height="25" isRemoveLineWhenBlank="true" uuid="17f9cc55-c775-4e15-b433-6a095b43252b"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[(OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?$V{Net Total}:$V{BudDiff}+$F{BUDGET_ESTIMATE})==0?"--":$V{BudDiff}+$F{BUDGET_ESTIMATE}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group1">
+							<jr:cell height="75" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="112" height="25" isRemoveLineWhenBlank="true" uuid="2d2e5c7f-3168-4f0e-a960-751a8fa9a9b9"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{NetTotal2}-$V{NetTotalDeduct}==0?"--":$V{NetTotal2}-$V{NetTotalDeduct}]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="25" width="112" height="25" isRemoveLineWhenBlank="true" uuid="b3a4b13b-2e7f-49e3-9fb2-520e6402b7aa"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{NetTotalDeduct}==null,EQUALS($V{NetTotalDeduct},0.00)) ?"--":(-$V{NetTotalDeduct})]]></textFieldExpression>
+								</textField>
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="50" width="112" height="25" isRemoveLineWhenBlank="true" uuid="22367890-0f1b-4594-9ec8-de5126c89d62"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{NetTotal2}-$V{NetTotalDeduct}-$V{NetTotalDeduct}==0?"--":$V{NetTotal2}-$V{NetTotalDeduct}-$V{NetTotalDeduct}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group2">
+							<jr:cell height="25" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="112" height="25" isRemoveLineWhenBlank="true" uuid="3041751a-ea79-4a7b-a1a8-378e54ce7905"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{SMHTotal}==null,EQUALS($V{SMHTotal},0.00)) ?"--":$V{SMHTotal}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group4">
+							<jr:cell height="30" rowSpan="1">
+								<textField pattern="#0.00;(-)#0.00">
+									<reportElement x="0" y="0" width="112" height="30" isRemoveLineWhenBlank="true" uuid="121e0cab-1e7b-439d-b3fd-79c37d322d85"/>
+									<box>
+										<pen lineWidth="1.75"/>
+										<topPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.75" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[OR($V{Net Total}==null,EQUALS($V{Net Total},0.00)) ?"--":$V{Net Total}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="Group6">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Table_TD" x="0" y="0" width="112" height="30" uuid="4478231d-424b-43ce-a56c-5b29db0febf4"/>
+									<box>
+										<pen lineWidth="1.25"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.25" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Top">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[--]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="25">
+							<textField pattern="#0.00;(-)#0.00">
+								<reportElement x="0" y="0" width="112" height="25" isRemoveLineWhenBlank="true" uuid="6d1b797e-4170-4525-9c7b-0bbd231f6236">
+									<printWhenExpression><![CDATA[!$F{MINOR_HEAD_CODE}.equals("900")]]></printWhenExpression>
+								</reportElement>
+								<box>
+									<pen lineWidth="0.0" lineStyle="Solid"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[OR($F{BUDGET_ESTIMATE}==null,EQUALS($F{BUDGET_ESTIMATE},0.00)) ?"--":$F{BUDGET_ESTIMATE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnHeader/>
+					<jr:groupHeader groupName="Group1">
+						<jr:row/>
+					</jr:groupHeader>
+					<jr:groupHeader groupName="Group2">
+						<jr:row>
+							<printWhenExpression><![CDATA[!$F{SUB_MAJOR_HEAD_CODE}.equals("00")]]></printWhenExpression>
+						</jr:row>
+					</jr:groupHeader>
+					<jr:groupHeader groupName="Group3">
+						<jr:row/>
+					</jr:groupHeader>
+					<jr:groupHeader groupName="Group4">
+						<jr:row>
+							<printWhenExpression><![CDATA[!$F{SUB_MAJOR_HEAD_CODE}.equals("00")]]></printWhenExpression>
+						</jr:row>
+					</jr:groupHeader>
+					<jr:groupFooter groupName="Group1">
+						<jr:row>
+							<printWhenExpression><![CDATA[$F{MINOR_HEAD_CODE}.equals("900") && ($F{MAJORHEAD_CODE}.equals("1601") || Integer.parseInt($F{MAJORHEAD_CODE})>0046) ||  $F{MAJORHEAD_CODE}.equals("0047")  || $F{MAJORHEAD_CODE}.equals("0216") || $F{MAJORHEAD_CODE}.equals("0810") || $F{MAJORHEAD_CODE}.equals("1601")]]></printWhenExpression>
+						</jr:row>
+					</jr:groupFooter>
+					<jr:groupFooter groupName="Group2">
+						<jr:row>
+							<printWhenExpression><![CDATA[(!$F{MINOR_HEAD_CODE}.equals("900") && !$F{MAJORHEAD_CODE}.equals("1601") && Integer.parseInt($F{MAJORHEAD_CODE})<0047) || $F{MAJORHEAD_CODE}.equals("0039")|| $F{MAJORHEAD_CODE}.equals("0040")|| $F{MAJORHEAD_CODE}.equals("0041")|| $F{MAJORHEAD_CODE}.equals("0042")|| $F{MAJORHEAD_CODE}.equals("0043")|| $F{MAJORHEAD_CODE}.equals("0044")|| $F{MAJORHEAD_CODE}.equals("0045")]]></printWhenExpression>
+						</jr:row>
+					</jr:groupFooter>
+					<jr:groupFooter groupName="Group6">
+						<jr:row>
+							<printWhenExpression><![CDATA[$F{MAJORHEAD_CODE}.equals("1456")]]></printWhenExpression>
+						</jr:row>
+					</jr:groupFooter>
+					<jr:groupFooter groupName="Group3">
+						<jr:row>
+							<printWhenExpression><![CDATA[$F{MINOR_HEAD_CODE}.equals("900") && !$F{MAJORHEAD_CODE}.equals("1601") && !$F{SUB_MAJOR_HEAD_CODE}.equals("00") && !$F{MAJORHEAD_CODE}.equals("0217")&& !$F{MAJORHEAD_CODE}.equals("0049") && !$F{MAJORHEAD_CODE}.equals("0059") && !$F{MAJORHEAD_CODE}.equals("0071")
+ && !$F{MAJORHEAD_CODE}.equals("0575")  && !$F{MAJORHEAD_CODE}.equals("0801")  
+ && !$F{MAJORHEAD_CODE}.equals("0802")  && !$F{MAJORHEAD_CODE}.equals("1051")
+ && !$F{MAJORHEAD_CODE}.equals("0875")]]></printWhenExpression>
+						</jr:row>
+					</jr:groupFooter>
+					<jr:groupFooter groupName="Group4">
+						<jr:row>
+							<printWhenExpression><![CDATA[!$F{SUB_MAJOR_HEAD_CODE}.equals("00") && !$F{MINOR_HEAD_CODE}.equals("900") && (!$F{MAJORHEAD_CODE}.equals("0070") || !$F{MAJORHEAD_CODE}.equals("0217")|| !$F{MAJORHEAD_CODE}.equals("0049"))]]></printWhenExpression>
+						</jr:row>
+					</jr:groupFooter>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

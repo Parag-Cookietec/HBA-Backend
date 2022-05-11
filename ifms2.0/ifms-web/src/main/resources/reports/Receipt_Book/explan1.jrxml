@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="explan1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="15e498b7-a1fc-4cdb-8924-ab9e4f6f6d36">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="major" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT tpe.RECEIPT,tpe.RECEIPT_GUJ,mm.MAJORHEAD_CODE FROM 
+MASTER_V1.MS_MAJORHEAD mm,budget.TBUD_PUB_EXP tpe
+WHERE mm.majorhead_id=tpe.MAJORHEAD_ID AND mm.MAJORHEAD_TYPE_ID =3
+AND tpe.FINANCIAL_YEAR_ID=$P{fyId}  AND tpe.BPN_ID = $P{bpnId} 
+AND mm.MAJORHEAD_CODE= $P{major} 
+ORDER BY mm.MAJORHEAD_ID]]>
+	</queryString>
+	<field name="RECEIPT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RECEIPT"/>
+		<property name="com.jaspersoft.studio.field.label" value="RECEIPT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_EXP"/>
+	</field>
+	<field name="RECEIPT_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="RECEIPT_GUJ"/>
+		<property name="com.jaspersoft.studio.field.label" value="RECEIPT_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_EXP"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="35">
+			<staticText>
+				<reportElement x="380" y="12" width="420" height="22" uuid="c65867c0-8636-4208-9bdd-987a9b2f5936">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECEIPT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="12" width="379" height="23" uuid="5c2eba97-fb1f-48e0-99a3-68f70fb79fdc">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[પ્રાપ્તિ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="10" width="810" height="1" uuid="689e8746-4732-4ebc-be2c-374ded43a44d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="14" width="810" height="1" uuid="92767eda-e595-4ca0-be39-d11cfa6ad6f4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement x="380" y="0" width="420" height="20" uuid="9815aa37-faa8-4743-b578-fe23544f1d38"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECEIPT}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="0" width="379" height="20" uuid="e92cbc42-87ba-4ca2-affe-2d9467d6c872"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECEIPT_GUJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8">
+			<line>
+				<reportElement x="0" y="7" width="810" height="1" uuid="240b82b9-1601-445e-9799-fad6643d16b4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

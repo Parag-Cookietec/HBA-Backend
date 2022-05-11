@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportdemo" pageWidth="380" pageHeight="555" orientation="Landscape" columnWidth="380" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8f1d52ed-98a0-4c70-95d3-bf198f3dada1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="deptId" class="java.lang.Long"/>
+	<parameter name="curYear" class="java.lang.String"/>
+	<parameter name="nexYear" class="java.lang.String"/>
+	<parameter name="nexToNex" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT CASE WHEN mlli1.LOOKUP_INFO_ID = '624' THEN 'Fully Central Sponsored Scheme'
+WHEN mlli1.LOOKUP_INFO_ID = '623' THEN 'State Funded Scheme' 
+ELSE mlli1.LOOKUP_INFO_NAME
+END AS SCHEME,
+--mlli1.LOOKUP_INFO_NAME AS SCHEME,
+mlli.LOOKUP_INFO_NAME AS TypeofScheme,
+--CONCAT(tpd.BH,CONCAT(', ', tpd.SCHEME_TYPE_ID))AS NameOFScheme,
+CONCAT(md.DEMAND_CODE,CONCAT('-',CONCAT(mm.MAJORHEAD_CODE,CONCAT('-',CONCAT(ms.SUBMAJORHEAD_CODE,CONCAT('-',CONCAT(mm1.MINORHEAD_CODE,CONCAT('-',CONCAT(msh.SUBHEAD_CODE,CONCAT(' ',msh.SUBHEAD_NAME)))))))))) AS SCHEME_NAME,
+pfd.FP_AMOUNT,
+CONCAT(pfd.PT,CONCAT('(',CONCAT(pfd.UNIT,')'))) AS PT_UNIT,
+pfd.FY_NEXT_1,pfd.FY_NEXT_2,pfd.FY_NEXT_3,
+pfd.FP_GROUP,
+pfd.TOCB_PT_DTL_ID 
+FROM 
+BUDGET.TOCB_MOCB_HDR tmh 
+INNER JOIN BUDGET.TOCB_PT_DTL tpd ON tmh.TOCB_MOCB_HDR_ID = tpd.TOCB_MOCB_HDR_ID 
+INNER JOIN BUDGET.TOCB_PT_FP_DTL pfd  ON pfd.TOCB_PT_DTL_ID = tpd.TOCB_PT_DTL_ID 
+INNER JOIN MASTER_V1.MS_DEMAND  md ON tpd.DEMAND_ID  = md.DEMAND_ID 
+INNER JOIN MASTER_V1.LU_LOOKUP_INFO mlli ON mlli.LOOKUP_INFO_ID =tpd.SCHEME_TYPE_ID
+INNER JOIN MASTER_V1.LU_LOOKUP_INFO mlli1 ON mlli1.LOOKUP_INFO_ID =tpd.TYPE_OF_SCHEME 
+INNER JOIN MASTER_V1.MS_MAJORHEAD mm ON tpd.MAJORHEAD_ID  = mm.MAJORHEAD_ID 
+INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tpd.SUBMAJORHEAD_ID  = ms.SUBMAJORHEAD_ID
+INNER JOIN MASTER_V1.MS_MINORHEAD mm1 ON tpd.MINORHEAD_ID  = mm1.MINORHEAD_ID
+LEFT JOIN MASTER_V1.MS_SUBHEAD  msh ON tpd.SUBHEAD_ID   = msh.SUBHEAD_ID 
+WHERE tmh.DEPARTMENT_ID = $P{deptId}
+AND tmh.FINANCIAL_YEAR_ID =  $P{fyId}
+ORDER BY SCHEME,SCHEME_NAME]]>
+	</queryString>
+	<field name="SCHEME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SCHEME"/>
+	</field>
+	<field name="TYPEOFSCHEME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TYPEOFSCHEME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="LU_LOOKUP_INFO"/>
+	</field>
+	<field name="SCHEME_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SCHEME_NAME"/>
+	</field>
+	<field name="FP_AMOUNT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="FP_AMOUNT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+	</field>
+	<field name="PT_UNIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PT_UNIT"/>
+	</field>
+	<field name="FY_NEXT_1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY_NEXT_1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+	</field>
+	<field name="FY_NEXT_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY_NEXT_2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+	</field>
+	<field name="FY_NEXT_3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY_NEXT_3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+	</field>
+	<field name="FP_GROUP" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="FP_GROUP"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+	</field>
+	<field name="TOCB_PT_DTL_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="TOCB_PT_DTL_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="0" width="380" height="30" uuid="80c0546a-02aa-40ac-9e71-69ca8d1de73a"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Physical Target]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="190" height="40" uuid="00cb4c8a-286d-4c4e-ba63-a0f4e9effee9"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="30" width="60" height="40" uuid="79eb3dfb-4b96-4fe6-9761-04d3f3b6d31e"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{curYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="30" width="60" height="40" uuid="6ac8d846-dae7-41b4-be1e-57e0d5f3f22a"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nexYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="30" width="70" height="40" uuid="aaa9e3eb-4465-44c3-9498-87f69be320f5"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nexToNex}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

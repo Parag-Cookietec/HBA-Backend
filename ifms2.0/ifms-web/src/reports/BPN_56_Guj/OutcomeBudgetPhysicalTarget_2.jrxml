@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OutcomeBudgetPhysicalTarget" pageWidth="810" pageHeight="555" orientation="Landscape" columnWidth="810" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="883815a3-c137-4b0c-a7f7-c34db15fe1ed">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="2.0" lineColor="#000000"/>
+			<leftPen lineWidth="2.0" lineColor="#000000"/>
+			<bottomPen lineWidth="2.0" lineColor="#000000"/>
+			<rightPen lineWidth="2.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="2.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_columnHeader">
+		<box>
+			<topPen lineWidth="2.0"/>
+			<leftPen lineWidth="2.0"/>
+			<bottomPen lineWidth="2.0"/>
+			<rightPen lineWidth="2.0"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="fc9a9085-5af7-4634-a6fe-3ebedfba5dd2">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="fyId" class="java.lang.String"/>
+		<parameter name="deptId" class="java.lang.Long"/>
+		<parameter name="fpAmountSum" class="java.lang.Double">
+			<defaultValueExpression><![CDATA[$V{fpAmountSum}]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT DISTINCT  CASE WHEN mlli1.LOOKUP_INFO_ID = '624' THEN 'કેન્દ્ર પુરસ્કૃત યોજનાઓ'
+WHEN mlli1.LOOKUP_INFO_ID = '623' THEN 'રાજ્ય સરકારની યોજના' 
+ELSE 'આંશિક કેન્દ્ર પુરસ્કૃત યોજનાઓ'
+END AS SCHEME,
+mlli.LOOKUP_INFO_NAME_GUJ AS TypeofScheme,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(CONCAT(md.DEMAND_CODE,CONCAT('-',CONCAT(mm.MAJORHEAD_CODE,CONCAT('-',CONCAT(ms.SUBMAJORHEAD_CODE,CONCAT('-',CONCAT(mm1.MINORHEAD_CODE,CONCAT('-',CONCAT(msh.SUBHEAD_CODE,CONCAT(' ',msh.SUBHEAD_NAME_GUJ)))))))))),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SCHEME_NAME,
+pfd.FP_AMOUNT,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(RIGHT ('0'+CAST(CAST(pfd.FP_AMOUNT AS decimal(15,2)) AS varchar(15)),13),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS FP_AMOUNT_GUJ,
+pfd.TOCB_PT_DTL_ID,pfd.FP_GROUP,
+tpd.DETAILHEAD_ID ,ms.DETAILHEAD_ID AS NORAMAL_DET_ID , ms1.SCSP_DETAILHEAD_ID,ms2.TASP_DETAILHEAD_ID,
+COALESCE(ms.MS_STM_ID,ms1.MS_STM_ID,ms2.MS_STM_ID) AS MS_STM_ID,
+COALESCE(ms.DETAILHEAD_ID,ms1.DETAILHEAD_ID,ms2.DETAILHEAD_ID) AS DETAILHEAD_ID_1,
+curYear.FY_GUJ AS currentYear,
+nxtYear.FY_GUJ AS nextYear,
+nextToNext.FY_GUJ AS nextToNext
+FROM 
+BUDGET.TOCB_MOCB_HDR tmh 
+INNER JOIN BUDGET.TOCB_PT_DTL tpd ON tmh.TOCB_MOCB_HDR_ID = tpd.TOCB_MOCB_HDR_ID 
+INNER JOIN BUDGET.TOCB_PT_FP_DTL pfd  ON pfd.TOCB_PT_DTL_ID = tpd.TOCB_PT_DTL_ID 
+INNER JOIN MASTER_V1.MS_DEMAND  md ON tpd.DEMAND_ID  = md.DEMAND_ID 
+INNER JOIN MASTER_V1.LU_LOOKUP_INFO mlli ON mlli.LOOKUP_INFO_ID =tpd.SCHEME_TYPE_ID
+INNER JOIN MASTER_V1.LU_LOOKUP_INFO mlli1 ON mlli1.LOOKUP_INFO_ID =tpd.TYPE_OF_SCHEME 
+INNER JOIN MASTER_V1.MS_MAJORHEAD mm ON tpd.MAJORHEAD_ID  = mm.MAJORHEAD_ID 
+INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tpd.SUBMAJORHEAD_ID  = ms.SUBMAJORHEAD_ID
+INNER JOIN MASTER_V1.MS_MINORHEAD mm1 ON tpd.MINORHEAD_ID  = mm1.MINORHEAD_ID
+INNER JOIN MASTER_V1.MS_SUBHEAD  msh ON tpd.SUBHEAD_ID   = msh.SUBHEAD_ID 
+
+LEFT JOIN MASTER_V1.MS_STM ms ON ms.DETAILHEAD_ID = tpd.DETAILHEAD_ID 
+LEFT JOIN MASTER_V1.MS_STM ms1 ON ms1.SCSP_DETAILHEAD_ID  = tpd.DETAILHEAD_ID 
+LEFT JOIN MASTER_V1.MS_STM ms2 ON ms2.TASP_DETAILHEAD_ID = tpd.DETAILHEAD_ID 
+JOIN MASTER_V1.MS_FINANCIAL_YEAR mfy ON mfy.FINANCIAL_YEAR_ID = tmh.FINANCIAL_YEAR_ID
+JOIN (SELECT mfy.FY_GUJ,mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) curYear ON curYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}+1) nxtYear ON nxtYear.FINANCIAL_YEAR_ID=$P{fyId}+1
+JOIN (SELECT mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}+2) nextToNext ON nextToNext.FINANCIAL_YEAR_ID=$P{fyId}+2
+WHERE tmh.DEPARTMENT_ID = $P{deptId}
+AND tmh.FINANCIAL_YEAR_ID =  $P{fyId}
+AND tmh.ACTIVE_STATUS=1
+ORDER BY SCHEME,MS_STM_ID,TypeofScheme,SCHEME_NAME]]>
+		</queryString>
+		<field name="SCHEME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SCHEME"/>
+		</field>
+		<field name="TYPEOFSCHEME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TYPEOFSCHEME"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="LU_LOOKUP_INFO"/>
+		</field>
+		<field name="SCHEME_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SCHEME_NAME"/>
+		</field>
+		<field name="FP_AMOUNT" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="FP_AMOUNT"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+		</field>
+		<field name="FP_AMOUNT_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="FP_AMOUNT_GUJ"/>
+		</field>
+		<field name="TOCB_PT_DTL_ID" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="TOCB_PT_DTL_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+		</field>
+		<field name="FP_GROUP" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="FP_GROUP"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_FP_DTL"/>
+		</field>
+		<field name="DETAILHEAD_ID" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_PT_DTL"/>
+		</field>
+		<field name="NORAMAL_DET_ID" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="NORAMAL_DET_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_STM"/>
+		</field>
+		<field name="SCSP_DETAILHEAD_ID" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="SCSP_DETAILHEAD_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_STM"/>
+		</field>
+		<field name="TASP_DETAILHEAD_ID" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="TASP_DETAILHEAD_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_STM"/>
+		</field>
+		<field name="MS_STM_ID" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="MS_STM_ID"/>
+		</field>
+		<field name="DETAILHEAD_ID_1" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_ID_1"/>
+		</field>
+		<field name="CURRENTYEAR" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CURRENTYEAR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="NEXTYEAR" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NEXTYEAR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="NEXTTONEXT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NEXTTONEXT"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<variable name="fpAmountSum" class="java.lang.Double" resetType="Group" resetGroup="grp_scheme" calculation="Sum">
+			<variableExpression><![CDATA[$F{FP_AMOUNT}]]></variableExpression>
+		</variable>
+		<variable name="macroOutcomeTotal" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{FP_AMOUNT}]]></variableExpression>
+		</variable>
+		<group name="grp_scheme">
+			<groupExpression><![CDATA[$F{SCHEME}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="deptId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 1 FROM "SYSIBM".DUAL]]>
+	</queryString>
+	<field name="1" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="1"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="192" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="810" height="192" isPrintWhenDetailOverflows="true" uuid="d3ee48c7-d88d-4466-8028-ac2faee55c26">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="Dataset1" uuid="69026343-74ca-4ad2-b4b7-623472e99b52">
+						<datasetParameter name="deptId">
+							<datasetParameterExpression><![CDATA[$P{deptId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fyId">
+							<datasetParameterExpression><![CDATA[$P{fyId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="810" uuid="8eb17c0d-a425-4549-ba89-12e474853136">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [2]"/>
+						<jr:tableFooter style="Table_TH" height="2" rowSpan="1">
+							<box>
+								<topPen lineWidth="2.0"/>
+								<leftPen lineWidth="2.0"/>
+								<bottomPen lineWidth="2.0"/>
+								<rightPen lineWidth="2.0"/>
+							</box>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="grp_scheme">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<box>
+									<topPen lineWidth="2.0"/>
+									<leftPen lineWidth="2.0"/>
+									<bottomPen lineWidth="2.0"/>
+									<rightPen lineWidth="2.0"/>
+								</box>
+								<textField>
+									<reportElement isPrintRepeatedValues="false" x="0" y="0" width="810" height="30" uuid="9b80bac4-1a27-4815-a503-aa8fa5d827a0"/>
+									<box>
+										<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{SCHEME}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="grp_scheme">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<pen lineWidth="2.0"/>
+									<topPen lineWidth="2.0"/>
+									<leftPen lineWidth="2.0"/>
+									<bottomPen lineWidth="2.0"/>
+									<rightPen lineWidth="2.0"/>
+								</box>
+								<textField pattern="#,#0.00#;(#,#00.00#-)">
+									<reportElement x="320" y="0" width="108" height="30" printWhenGroupChanges="grp_scheme" uuid="e55ff4f3-be0a-4a38-a43a-a578f9f99b97">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[Gujraati.convertDigitEnToGj($V{fpAmountSum}.toString())]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="102" y="0" width="218" height="30" uuid="18aad470-419d-49b3-8554-cccfff96ad35"/>
+									<box>
+										<pen lineWidth="0.0"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[કુલ]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="429" y="0" width="381" height="30" uuid="fe27b1a5-d048-4ddb-88c3-5baac62aa0f3"/>
+									<box>
+										<topPen lineWidth="2.0"/>
+										<leftPen lineWidth="2.0"/>
+										<bottomPen lineWidth="2.0"/>
+										<rightPen lineWidth="2.0"/>
+									</box>
+									<text><![CDATA[]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="0" y="0" width="102" height="30" uuid="e2c9df6d-d75a-41cd-a6b4-b0d71cf3db3b">
+										<property name="com.jaspersoft.studio.unit.y" value="px"/>
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<text><![CDATA[]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:column width="810" uuid="48e72258-0a05-45ee-b355-87a6d9f2fa7f">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<property name="com.jaspersoft.studio.layout"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<topPen lineWidth="2.0"/>
+									<leftPen lineWidth="2.0"/>
+									<bottomPen lineWidth="2.0"/>
+									<rightPen lineWidth="2.0"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="102" height="30" uuid="faec6ad2-a10a-4ee7-a201-8a4ca57d3ed4"/>
+									<box>
+										<topPen lineWidth="2.0"/>
+										<leftPen lineWidth="2.0"/>
+										<bottomPen lineWidth="2.0"/>
+										<rightPen lineWidth="2.0"/>
+									</box>
+									<text><![CDATA[]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="102" y="0" width="218" height="30" uuid="55e1d44d-4070-44b5-b8f5-67e94fa5eddb"/>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[મહત્વની પરિણામલક્ષી યોજનાની કુલ જોગવાઈ]]></text>
+								</staticText>
+								<textField pattern="#,#0.00#;(#,#00.00#-)">
+									<reportElement x="320" y="0" width="108" height="30" uuid="d78f2fbd-98cf-40d0-b3dd-c9a074414d6d">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[Gujraati.convertDigitEnToGj($V{macroOutcomeTotal}.toString())]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="0" y="0" width="102" height="30" uuid="7c12ad6d-32e7-46f4-9c1d-c6ea9b44582f">
+										<property name="com.jaspersoft.studio.unit.y" value="px"/>
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									</reportElement>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<text><![CDATA[]]></text>
+								</staticText>
+							</jr:tableFooter>
+							<jr:groupFooter groupName="grp_scheme">
+								<jr:cell style="Table_CH" height="0" rowSpan="1">
+									<box>
+										<topPen lineWidth="2.0"/>
+										<leftPen lineWidth="2.0"/>
+										<bottomPen lineWidth="2.0"/>
+										<rightPen lineWidth="2.0"/>
+									</box>
+								</jr:cell>
+							</jr:groupFooter>
+							<jr:columnHeader style="Table_CH" height="70" rowSpan="1">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<topPen lineWidth="2.0"/>
+									<leftPen lineWidth="2.0"/>
+									<bottomPen lineWidth="2.0"/>
+									<rightPen lineWidth="2.0"/>
+								</box>
+								<staticText>
+									<reportElement style="Table_columnHeader" x="0" y="0" width="102" height="70" uuid="cae18213-e025-4015-b3dc-1c1b0d8f587b"/>
+									<box>
+										<topPen lineWidth="3.0"/>
+										<leftPen lineWidth="3.0"/>
+										<bottomPen lineWidth="3.0"/>
+										<rightPen lineWidth="3.0"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[યોજનાનો પ્રકાર]]></text>
+								</staticText>
+								<textField>
+									<reportElement x="320" y="0" width="108" height="70" uuid="f548fa85-3b72-48de-bca9-29089f240c06"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["વર્ષ "+$F{CURRENTYEAR}+  " માં નાણાકીય જોગવાઈ (રુ. કરોડમાં) "]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement style="Table_columnHeader" x="102" y="0" width="218" height="70" uuid="f5af4547-cc0b-48d9-a5a2-51fb18c4a4c7"/>
+									<box>
+										<topPen lineWidth="2.0"/>
+										<leftPen lineWidth="2.0"/>
+										<bottomPen lineWidth="2.0"/>
+										<rightPen lineWidth="2.0"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[યોજનાનું નામ]]></text>
+								</staticText>
+								<subreport>
+									<reportElement style="Table_columnHeader" x="429" y="0" width="381" height="70" uuid="e40a738e-580d-4a98-bb9b-1a678ab32d28"/>
+									<subreportParameter name="fyId">
+										<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+									</subreportParameter>
+									<subreportParameter name="deptId">
+										<subreportParameterExpression><![CDATA[$P{deptId}]]></subreportParameterExpression>
+									</subreportParameter>
+									<subreportParameter name="curYear">
+										<subreportParameterExpression><![CDATA[$F{CURRENTYEAR}]]></subreportParameterExpression>
+									</subreportParameter>
+									<subreportParameter name="nexYear">
+										<subreportParameterExpression><![CDATA[$F{NEXTYEAR}]]></subreportParameterExpression>
+									</subreportParameter>
+									<subreportParameter name="nexToNex">
+										<subreportParameterExpression><![CDATA[$F{NEXTTONEXT}]]></subreportParameterExpression>
+									</subreportParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									<subreportExpression><![CDATA["src/reports/BPN_56_Guj/subreportdemo_Guj.jasper"]]></subreportExpression>
+								</subreport>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+									<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<frame>
+									<reportElement x="0" y="0" width="810" height="30" uuid="0d19ee1d-f47d-4f96-8e87-410b105621ba"/>
+									<box>
+										<bottomPen lineWidth="1.0"/>
+									</box>
+									<textField textAdjust="StretchHeight">
+										<reportElement stretchType="RelativeToTallestObject" x="102" y="0" width="218" height="30" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="grp_scheme" uuid="d4100f7a-411f-472f-ad15-e92066765edb"/>
+										<box>
+											<pen lineWidth="1.0"/>
+											<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+											<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										</box>
+										<textElement textAlignment="Left" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[""]]></textFieldExpression>
+									</textField>
+									<textField textAdjust="StretchHeight" pattern="#,#00.00#;(#,#00.00#-)" isBlankWhenNull="true">
+										<reportElement stretchType="RelativeToBandHeight" x="320" y="0" width="109" height="30" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="e91c9fdb-1a38-413b-a016-cd2837a7b566">
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<box padding="0">
+											<pen lineWidth="1.0"/>
+											<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+											<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										</box>
+										<textElement textAlignment="Right" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[""]]></textFieldExpression>
+									</textField>
+									<textField textAdjust="StretchHeight">
+										<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="30" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="grp_scheme" uuid="a91a9090-8cc9-4475-9ebb-50a79f23dad2"/>
+										<box>
+											<pen lineWidth="1.0"/>
+											<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+											<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										</box>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[""]]></textFieldExpression>
+									</textField>
+									<textField textAdjust="ScaleFont">
+										<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="30" isPrintInFirstWholeBand="true" printWhenGroupChanges="grp_scheme" uuid="f2104b1b-cb00-476a-b1e4-0a259a210da0">
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.x" value="px"/>
+											<property name="com.jaspersoft.studio.unit.y" value="px"/>
+										</reportElement>
+										<box>
+											<pen lineWidth="1.0"/>
+											<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+											<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										</box>
+										<textElement textAlignment="Center" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[$F{TYPEOFSCHEME}]]></textFieldExpression>
+									</textField>
+									<textField textAdjust="ScaleFont">
+										<reportElement stretchType="RelativeToTallestObject" x="102" y="0" width="218" height="30" isPrintInFirstWholeBand="true" printWhenGroupChanges="grp_scheme" uuid="ecbc4038-32d9-43de-8086-4c7546dad93e">
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.x" value="px"/>
+											<property name="com.jaspersoft.studio.unit.y" value="px"/>
+										</reportElement>
+										<box>
+											<pen lineWidth="1.0"/>
+											<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+											<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										</box>
+										<textElement textAlignment="Left" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[$F{SCHEME_NAME}]]></textFieldExpression>
+									</textField>
+									<textField textAdjust="ScaleFont" pattern="#,#0.00#;(#,#00.00#-)" isBlankWhenNull="true">
+										<reportElement stretchType="RelativeToBandHeight" x="320" y="0" width="109" height="30" isPrintInFirstWholeBand="true" uuid="d5fab3e3-ec3e-41d3-bed3-0749fe2b23f3">
+											<property name="com.jaspersoft.studio.unit.x" value="px"/>
+											<property name="com.jaspersoft.studio.unit.y" value="px"/>
+											<property name="com.jaspersoft.studio.unit.height" value="px"/>
+											<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										</reportElement>
+										<box padding="0">
+											<pen lineWidth="1.0"/>
+											<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+											<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+											<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+										</box>
+										<textElement textAlignment="Right" verticalAlignment="Middle"/>
+										<textFieldExpression><![CDATA[TRIM($F{FP_AMOUNT_GUJ})]]></textFieldExpression>
+									</textField>
+									<subreport>
+										<reportElement stretchType="RelativeToTallestObject" x="429" y="0" width="381" height="30" uuid="daf8b7c2-97b1-4cb7-a2f8-7a17b2030eac"/>
+										<subreportParameter name="ptDetId">
+											<subreportParameterExpression><![CDATA[$F{TOCB_PT_DTL_ID}]]></subreportParameterExpression>
+										</subreportParameter>
+										<subreportParameter name="fyId">
+											<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+										</subreportParameter>
+										<subreportParameter name="deptId">
+											<subreportParameterExpression><![CDATA[$P{deptId}]]></subreportParameterExpression>
+										</subreportParameter>
+										<subreportParameter name="fpGroup">
+											<subreportParameterExpression><![CDATA[$F{FP_GROUP}]]></subreportParameterExpression>
+										</subreportParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+										<subreportExpression><![CDATA["src/reports/BPN_56_Guj/subreportone_Guj.jasper"]]></subreportExpression>
+									</subreport>
+								</frame>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="0" uuid="7ffabd76-577f-445f-bb06-90e1a9f48bfd">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<box>
+									<topPen lineWidth="2.0"/>
+									<leftPen lineWidth="2.0"/>
+									<bottomPen lineWidth="2.0"/>
+									<rightPen lineWidth="2.0"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="0" height="30" uuid="1dfb88b3-9a9c-459f-bb82-dbf870d711b5"/>
+									<box>
+										<topPen lineWidth="2.0"/>
+										<leftPen lineWidth="2.0"/>
+										<bottomPen lineWidth="2.0"/>
+										<rightPen lineWidth="2.0"/>
+									</box>
+									<text><![CDATA[]]></text>
+								</staticText>
+							</jr:tableFooter>
+							<jr:groupFooter groupName="grp_scheme">
+								<jr:cell style="Table_CH" height="0" rowSpan="1">
+									<box>
+										<topPen lineWidth="2.0"/>
+										<leftPen lineWidth="2.0"/>
+										<bottomPen lineWidth="2.0"/>
+										<rightPen lineWidth="2.0"/>
+									</box>
+								</jr:cell>
+							</jr:groupFooter>
+							<jr:columnHeader style="Table_CH" height="70" rowSpan="1">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+								<box>
+									<topPen lineWidth="2.0"/>
+									<leftPen lineWidth="2.0"/>
+									<bottomPen lineWidth="2.0"/>
+									<rightPen lineWidth="2.0"/>
+								</box>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<box>
+									<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="38">
+			<staticText>
+				<reportElement x="0" y="0" width="810" height="18" uuid="da91fbf0-145b-48af-8506-f3cb021f43e0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[*કોષ્ટકમાં માત્ર પસંદગીની યોજનાઓ સામેલ છે. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="810" height="18" uuid="42f98de7-f708-4823-be6b-432c5ab96f2e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[**ભૌતિક લક્ષ્યાંકોના એકમો એકમો જુદા હોવાથી કુલ સરવાળો આપેલ નથી.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

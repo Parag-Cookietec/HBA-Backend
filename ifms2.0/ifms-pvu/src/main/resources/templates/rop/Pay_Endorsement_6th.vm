@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 18px;font-size:11px;">
+	<table width="100%" text-align="left" style="padding: 1%;">
+		<tr>
+			<td colspan="2">To,</td>
+		</tr>
+		<tr>
+			<td colspan="2">$OFFICE_NAME</td>
+		</tr>
+		<tr>
+			<td colspan="2">$OFFICE_ADDRESS</td>
+		</tr>
+		<tr>
+			<td colspan="2">$DISTRICT_NAME $TALUKA</td>
+		</tr>
+		<tr>
+			<td colspan="2">$PINCODE</td>
+		</tr>
+	</table>
+	<table style="padding: 1%;" width="100%">
+		<tr>
+			<td>Pay Verification Unit, $PVU_OFFICE_NAME, $DEPARTMENT_NAME, $PVU_DISTRICT_NAME</td>
+		</tr>
+		<tr>
+			<td>Employee Number: $EMPLOYEE_NO</td>
+		</tr>
+		<tr>
+			<td>ROP 1998 Pay Scale $BASIC_LAST_PAY_SCALE Basic $PAY_BASIC</td>
+		</tr>
+	</table>
+	<table width="100%" style="padding: 1%;">
+		<tr>
+			<td>Initial pay fixation of  $EMPLOYEE_FULL_NAME,  $DESIGNATION,  $CLASS_NAME,  $DDO_OFFICE_NAME under the Gujarat Civil Services (Revision of Pay)  Rules, 2009.</td>
+		</tr>		
+	</table>
+	<table CELLSPACING=0 width="100%" style="padding: 1%;">
+		<tr>
+			<td colspan="6">Initial Pay admitted as under: </td>
+		</tr>
+        <tr>
+            <th style="border: 1px solid; padding:7px">Event Name</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Pay in the Pay Band</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Grade Pay</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Basic Pay</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Revised Pay Band</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Date of Next Increment</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:7px">$EVENT_NAME</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$PAY_IN_THE_PAY_BAND</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$GRADE_PAY</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$BASIC_PAY</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$REVISED_PAY_BAND</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$DATE_OF_NEXT_INCREMENT</td>
+        </tr>
+    </table>
+	<table width="100%" style="padding: 1%;">
+		<tr>
+			<td>Remarks: $REMARK</td>
+		</tr>
+		<tr>
+			<td>Print Date:  $ENDORSEMENT_PRINT_DATE</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>
+				<table cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td style="width:30%;text-align:center;"></td>
+						<td style="width:30%;text-align:center;">
+							$AUTHORIZED_BY_NAME<br /> Accounts Officer<br /> Pay Verification Unit<br /> $DEPARTMENT_NAME
+						</td>
+						<td style="width:30%;text-align:center;">
+							Issued by, <br /> Accounts Officer <br /> Pay Verification Unit <br /> $DEPARTMENT_NAME <br />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>$ENDORSEMENT_REPRINT_DATE</td>
+		</tr>
+		<tr>
+			<td>$NUMBER_OF_COUNT_REPRINTED</td>
+		</tr>
+		<tr>
+			<td>$REPRINT_REMARK</td>
+		</tr>
+	</table>
+</body>
+
+</html>

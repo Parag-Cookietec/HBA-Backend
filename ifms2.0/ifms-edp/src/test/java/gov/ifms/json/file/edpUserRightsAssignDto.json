@@ -1,0 +1,16 @@
+{
+  "edpUserRoleMappingDto": {
+    "employeeId": 195,
+    "postOfficeUserId": 164
+  },
+  "empId": 195,
+  "lstEdpTrnUserMenuRolePerDtos": [
+    {
+      "isRemoved": 0,
+      "isWorkFlow": 1,
+      "menuId": 18,
+      "rolePrmId":1
+    }
+  ],
+  "postOfficeUserId": 164
+}

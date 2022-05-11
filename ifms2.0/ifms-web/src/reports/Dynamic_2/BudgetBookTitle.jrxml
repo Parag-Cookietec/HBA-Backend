@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookTitle" pageWidth="780" pageHeight="650" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dd05375-6b37-479e-9aaa-98571ed9cd0a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+mbpn.BPN_NAME AS "bpnNameEng", 
+mbpn.BPN_NAME_GUJ AS "bpnNameGuj", 
+mbpn.BPN_SHORT_NAME AS "bpnShortName", 
+mfy.FY AS "fyEng",
+mfy.FY_GUJ AS "fyGuj",
+LTRIM(mbpn.BPN_CODE,'0')  AS "bpnCode",
+CASE 
+WHEN mbpn.BPN_CODE='18' THEN ' (Part-I)' 
+WHEN mbpn.BPN_CODE='22' THEN ' (Part-I)' 
+WHEN mbpn.BPN_CODE='24a' THEN '-I'
+WHEN mbpn.BPN_CODE='24b' THEN '-II'
+WHEN mbpn.BPN_CODE='24c' THEN '-III'
+WHEN mbpn.BPN_CODE='24d' THEN '-IV'
+ELSE '' 
+END AS "bpnCodePart"
+FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnShortName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnShortName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="bpnCode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnCode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnCodePart" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnCodePart"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="610" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout"/>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="109" width="739" height="72" uuid="7d048d29-5a01-4b31-a093-2ab07085d679"/>
+				<imageExpression><![CDATA["/images/asokaemblem.JPG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="186" width="739" height="40" uuid="bd63b6e7-505e-43df-9984-a90330f52d4b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ગુજરાત સરકાર
+GOVERNMENT OF GUJARAT]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="297" width="739" height="69" uuid="2cc99266-2b1d-4ef7-958d-695e33fa6fcc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ગુજરાત સરકારનું " + $F{fyGuj} + " ના વર્ષનું <br> વાર્ષિક નાણાકીય પત્રક  <br> (અંદાજપત્ર)"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="-10" y="400" width="750" height="55" uuid="e5c7cd8f-9601-4d4b-a4bb-5685ab3dea10"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ANNUAL FINANCIAL STATEMENT (BUDGET) OF THE <br> GOVERNMENT OF GUJARAT FOR THE YEAR <br>" + $F{fyEng}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="545" width="739" height="1" uuid="5b33ae04-2c05-46c9-b6c2-78559b555b89"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="548" width="740" height="30" uuid="28aa3db3-c68a-45f3-ae81-bb4ee7a043e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[[ ભારતના સંવિધાનની કલમ ૨૦૨ (૧) અન્વયે વિધાનસભા સમક્ષ રજૂ ]
+[ Presented to the Legislative Assembly Under Article 202 (1) of the Constitution of India ]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="-7" width="196" height="79" uuid="34d22797-86c5-4587-bb67-a6d97ecdb0ae">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box rightPadding="7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અંદાજપત્ર પ્રકાશન નં.
+Budget Publication No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="694" y="-12" width="36" height="80" uuid="2d88d1ea-cc1d-484b-8b87-0d7b1e9d65c3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="35" isBold="true"/>
+					<paragraph lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["}" + $F{bpnCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="733" y="-6" width="65" height="79" isRemoveLineWhenBlank="true" uuid="56207e47-1452-4e04-a6e0-908f2f1a4db5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Calibri" size="30" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bpnCodePart}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="78" width="736" height="1" uuid="f7401a06-122d-4738-8b74-cf021a04f2ba">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid" lineColor="#969696"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="542" width="736" height="1" uuid="8e134c45-7e36-4fc1-b90b-188b93d437a0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid" lineColor="#969696"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="75" width="739" height="1" uuid="cc71fe6c-77f7-4bad-92ee-ac4c695f1402"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+</jasperReport>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookGovReco" pageWidth="780" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="49a4c10b-f9b5-4b18-b976-273fa28ef04e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="MAJORHEAD_COUNT_CHORVOT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_COUNT_CHORVOT"/>
+	</field>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEngBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyEngMBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngMBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujMBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujMBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyEngACC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngACC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujACC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujACC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="SECTORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+	</field>
+	<field name="SECTORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+	</field>
+	<field name="SUB_SECTOR_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME"/>
+	</field>
+	<field name="SUB_SECTOR_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="ACCOUNTS" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_AC"/>
+	</field>
+	<field name="MODIFIED_BUDGET_ESTIMATES" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BUDGET_ESTIMATES"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="REVIESED_ESTIMATES" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="REVIESED_ESTIMATES"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="BUDGET_ESTIMATES" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATES"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="50"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="75">
+			<subreport>
+				<reportElement x="1" y="-1" width="750" height="30" uuid="4ef17a89-0966-4fe2-95e0-7b42c523e054">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["BudgetBookGovReco1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="-1" y="40" width="740" height="30" uuid="21846f90-543d-40e8-8f85-f86db7420022">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["BudgetBookGovReco2.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="40" width="740" height="1" uuid="5f2bc683-1d35-403a-8613-0fc85d623515">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+		</band>
+	</detail>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

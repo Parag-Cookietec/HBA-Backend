@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimateSalariesSum" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8907b2a5-2468-498c-a91e-0ccf090fb42a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="demandId" class="java.lang.Long"/>
+	<parameter name="majHeadId" class="java.lang.Long"/>
+	<parameter name="subMajHeadId" class="java.lang.Long"/>
+	<parameter name="minorHeadId" class="java.lang.Long"/>
+	<parameter name="subHeadId" class="java.lang.Long"/>
+	<parameter name="detailHeadId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+ROUND(sum(BUDGET_ESTIMATE),2) AS "TOTAL_BUDGET_ESTIMATE",
+ROUND(sum(MODIFIED_BE),2) AS "TOTAL_MODIFIED_BUDGET_ESTIMATE"
+FROM 
+(
+SELECT 
+COALESCE(NFY.OBJECT_CODE, CFY1.OBJECT_CODE) AS OBJECT_CODE,
+COALESCE(NFY.OBJECT_NAME, CFY1.OBJECT_NAME) AS OBJECT_CODE_NAME,
+COALESCE(NFY.OBJECT_NAME_GUJ, CFY1.OBJECT_NAME_GUJ) AS OBJECT_NAME_GUJ,
+NFY.BE AS BUDGET_ESTIMATE,
+CFY1.MBE AS MODIFIED_BE
+FROM 
+(
+SELECT tph.DEMAND_ID,tph.MAJORHEAD_ID,tph.SUBMAJORHEAD_ID,tph.MINORHEAD_ID,tph.SUBHEAD_ID,tph.DETAILHEAD_ID,
+mo1.OBJECT_CODE ,mo1.OBJECT_NAME,mo1.OBJECT_NAME_GUJ,tpgd.PROPOSED_AMOUNT AS BE 
+FROM 
+BUDGET.TBUD_PUB_HDR tph
+LEFT JOIN BUDGET.TBUD_PUB_DTL tpd ON tph.TBUD_PUB_HDR_ID = tpd.TBUD_PUB_HDR_ID 
+LEFT JOIN BUDGET.TBUD_PUB_GIA_DTL tpgd ON tph.TBUD_PUB_HDR_ID = tpgd.TBUD_PUB_HDR_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON  tpd.OBJECT_ID = mo.OBJECT_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo1 ON tpgd.OBJECT_ID = mo1.OBJECT_ID 
+WHERE 
+tph.APP_TYPE_ID IN (425,426,427)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND mo.OBJECT_CODE <> mo1.OBJECT_CODE )NFY
+FULL OUTER JOIN 
+(
+SELECT tph.DEMAND_ID,tph.MAJORHEAD_ID,tph.SUBMAJORHEAD_ID,tph.MINORHEAD_ID,tph.SUBHEAD_ID,tph.DETAILHEAD_ID,
+mo1.OBJECT_CODE ,mo1.OBJECT_NAME,mo1.OBJECT_NAME_GUJ,tpgd.PROPOSED_AMOUNT AS MBE 
+FROM 
+BUDGET.TBUD_PUB_HDR tph
+LEFT JOIN BUDGET.TBUD_PUB_DTL tpd ON tph.TBUD_PUB_HDR_ID = tpd.TBUD_PUB_HDR_ID 
+LEFT JOIN BUDGET.TBUD_PUB_GIA_DTL tpgd ON tph.TBUD_PUB_HDR_ID = tpgd.TBUD_PUB_HDR_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON  tpd.OBJECT_ID = mo.OBJECT_ID
+INNER JOIN MASTER_V1.MS_OBJECTHEAD mo1 ON tpgd.OBJECT_ID = mo1.OBJECT_ID 
+WHERE 
+tph.APP_TYPE_ID IN (425,426,427)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tph.IS_REVISED <> 1
+	AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND mo.OBJECT_CODE <> mo1.OBJECT_CODE ) CFY1 ON CFY1.DEMAND_ID=NFY.DEMAND_ID AND CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+                                  AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                  AND CFY1.SUBHEAD_ID=NFY.SUBHEAD_ID AND CFY1.DETAILHEAD_ID=NFY.DETAILHEAD_ID
+	
+	ORDER BY OBJECT_CODE)total]]>
+	</queryString>
+	<field name="TOTAL_BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL_BUDGET_ESTIMATE"/>
+	</field>
+	<field name="TOTAL_MODIFIED_BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL_MODIFIED_BUDGET_ESTIMATE"/>
+	</field>
+	<variable name="tot_be_sal_new" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{TOTAL_BUDGET_ESTIMATE}==null?0:$F{TOTAL_BUDGET_ESTIMATE}]]></variableExpression>
+	</variable>
+	<variable name="tot_mbe_sal_new" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{TOTAL_MODIFIED_BUDGET_ESTIMATE}==null?0:$F{TOTAL_MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+</jasperReport>

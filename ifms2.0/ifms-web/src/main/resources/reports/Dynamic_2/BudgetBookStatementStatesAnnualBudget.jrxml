@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookStatementStatesAnnualBudget" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5c760b8-9b7f-4305-b56d-7d2f7a5c1f74">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main.SR_NO, '1', '૧'), '2', '૨'), '3', '૩'), '4', '૪'), '5', '૫'), '6', '૬'), '7', '૭'), '8', '૮'), '9', '૯'), '0', '૦') AS SR_NO_GUJ,
+          main.DEPARTMENT_NAME_GUJ AS "DEPARTMENT_NAME_GUJ",
+          main."SR_NO" AS "SR_NO",
+          main.DEPARTMENT_NAME AS "DEPARTMENT_NAME",
+          NVL(main."Provision_included_in_the_Budget",0) AS "Provision_included_in_the_Budget",
+              nextYear.FY AS FINANCIAL_YEAR,
+              nextYear.FY_GUJ AS FINANCIAL_YEAR_GUJ
+FROM 
+(
+SELECT       ROW_NUMBER() OVER (ORDER BY abc.DEPARTMENT_NAME asc) AS SR_NO,
+              dept.DEPARTMENT_ID,
+              dept.DEPARTMENT_NAME,
+              dept.DEPARTMENT_NAME_GUJ,
+              round(abc."Provision_included_in_the_Budget",2) AS "Provision_included_in_the_Budget"
+FROM         
+(
+SELECT DISTINCT 
+          tph.DEPARTMENT_ID,
+          md.DEPARTMENT_NAME ,
+          md.DEPARTMENT_NAME_GUJ,
+          (sum(tph.PROPOSED_AMOUNT)/100) AS "Provision_included_in_the_Budget"
+FROM   BUDGET.TBUD_PUB_HDR tph
+  JOIN       MASTER_V1.MS_DEPARTMENT md ON
+              (tph.DEPARTMENT_ID = md.DEPARTMENT_ID)
+WHERE tph.IS_REVISED=0 AND 
+         tph.ACTIVE_STATUS=1 AND 
+         tph.FINANCIAL_YEAR_ID = $P{fyId}
+GROUP BY 
+              md.DEPARTMENT_NAME_GUJ,
+              md.DEPARTMENT_NAME,
+              tph.DEPARTMENT_ID
+)abc 
+RIGHT  OUTER JOIN (SELECT    md.DEPARTMENT_ID,
+          md.DEPARTMENT_NAME ,
+          md.DEPARTMENT_NAME_GUJ 
+          FROM MASTER_V1.MS_DEPARTMENT md
+          WHERE md.DEPARTMENT_ID <=28
+           AND md.DEPARTMENT_ID <>11
+          ORDER BY  1)dept ON ( dept.DEPARTMENT_ID=abc.DEPARTMENT_ID)
+ORDER BY dept.DEPARTMENT_ID   
+)main
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+ORDER BY main."SR_NO"]]>
+	</queryString>
+	<field name="SR_NO_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SR_NO_GUJ"/>
+	</field>
+	<field name="DEPARTMENT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<field name="SR_NO" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SR_NO"/>
+	</field>
+	<field name="DEPARTMENT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<field name="Provision_included_in_the_Budget" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Provision_included_in_the_Budget"/>
+	</field>
+	<field name="FINANCIAL_YEAR" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FINANCIAL_YEAR"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="FINANCIAL_YEAR_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FINANCIAL_YEAR_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<variable name="AmtTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Provision_included_in_the_Budget}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="227" splitType="Stretch">
+			<staticText>
+				<reportElement x="270" y="146" width="261" height="21" uuid="839ab1e5-3e6c-43ad-81bd-0cfaa41dd92d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[જોડાણ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="167" width="261" height="18" uuid="eb183570-7634-4184-9ae7-79a6d5ab0d31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANNEXURE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="186" width="450" height="20" uuid="20e6acb3-0a63-45e0-86e5-36705e40dc55">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["રાજ્યની "+ $F{FINANCIAL_YEAR_GUJ}+" નુ વાર્ષિક અંદાજપત્ર દર્શાવતું પત્રક"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="176" y="206" width="510" height="20" uuid="90e5e0e4-3a9b-418a-8fa0-f54ab9cfd2bf">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["STATEMENT SHOWING THE STATE'S ANNUAL BUDGET FOR THE YEAR  "+$F{FINANCIAL_YEAR}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="0" y="0" width="380" height="16" uuid="5dcbb827-3bfb-4dde-a943-387b689eebf2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["વાર્ષિક યોજના, "+$F{FINANCIAL_YEAR_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="380" y="0" width="421" height="16" uuid="77b094eb-615b-458b-8a34-5af60bedbb30">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Annual Budget, "+$F{FINANCIAL_YEAR}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="0" y="43" width="376" height="68" uuid="9cfe27bd-823c-4394-b85d-891a2fc3d900">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["સને "+$F{FINANCIAL_YEAR_GUJ}+" ના અંદાજપત્રમાં વાર્ષિક અંદાજપત્ર માટેનુ કદ રૂ. "+
+
+(($V{AmtTotal} == null ? 0 : $V{AmtTotal}) == 0 ?  "--  " : 
+	(
+Gujraati.convertDigitEnToGj((new BigDecimal($V{AmtTotal}).setScale(2,BigDecimal.ROUND_HALF_UP))+""))
+	
+)
+
++" કરોડ વિચારાયુ છે. "+$F{FINANCIAL_YEAR_GUJ}+"  ના અંદાજપત્રમાં તે મુજબ ખર્ચની જોગવાઈ કરવામાં આવેલ છે. વિભાગવાર વિગતોપરિશિષ્ટમાં આપેલ છે. "]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="387" y="43" width="412" height="68" uuid="74df7e24-f69b-4588-a501-9eb862536f4f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["The Annual Budget "+$F{FINANCIAL_YEAR}+" is proposed at Rs. "+
+
+(($V{AmtTotal} == null ? 0 : $V{AmtTotal}) == 0 ?  "--  " : ( new BigDecimal($V{AmtTotal}).setScale(2,BigDecimal.ROUND_HALF_UP)))
+
++" Crore. An outlay has been provided for the expenditure in the budget for "+$F{FINANCIAL_YEAR}+".The department wise breakup is given in the annexure."]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="123" width="800" height="1" uuid="a5386dfb-63d6-4a86-9306-2108e3134123">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<line>
+				<reportElement x="96" y="15" width="180" height="1" uuid="bdceddc9-a132-4967-9382-55f8266a10ac">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="501" y="15" width="180" height="1" uuid="d18504e9-5f20-42c4-8d1b-959698f886e1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="123" width="800" height="1" uuid="a845d0b9-3a4b-47d9-b638-0721d71518f6">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="113" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="108" width="802" height="1" uuid="013c5356-5d20-417f-a604-ce07fdcfff2d"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="81" width="20" height="27" uuid="32349ae6-41c8-41f8-aa98-2bed2234b84b">
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૧]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="81" width="40" height="27" uuid="2cb75597-3f23-4ced-8688-f968451f2f9d">
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૨]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="81" width="20" height="27" uuid="b93dee66-0668-4acc-ac77-a2136ed4ccbd">
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="81" width="30" height="27" uuid="1c60def3-21d8-4e4f-ac9e-e8f5e04e1f2e">
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="693" y="81" width="40" height="27" uuid="ed421e73-25a8-47ed-a165-7117062a4544">
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="32" width="20" height="39" uuid="35a0e05c-d5c7-40dc-8488-dffba540d248"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["ક્રમ નં"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="33" width="296" height="32" uuid="d5ffd61a-5636-4ab9-b474-11893212542d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["વિભાગનું નામ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="334" y="33" width="13" height="38" uuid="9905842c-9735-4717-8a3f-ebcd97f48538">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Sr.No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="33" width="236" height="32" uuid="17e5770e-5c6f-4cb9-ac87-4278ee7abde5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Name of Department"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="36" width="202" height="24" uuid="731fe404-1e21-41d6-839b-f249ea3387ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["અંદાજપત્રમાં સમાવિષ્ટ જોગવાઈ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="60" width="201" height="20" uuid="ff245d28-8af5-41e4-a090-d76971402ceb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Provision included in the Budget"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="720" y="0" width="78" height="29" isRemoveLineWhenBlank="true" uuid="57820dd4-1134-4324-b001-454a32d0b819"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[(₹. કરોડમા)
+(₹.  In Crores)
+]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="31" width="802" height="1" isRemoveLineWhenBlank="true" uuid="120f6936-3754-4c46-a50e-c4de102f88bf"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="80" width="802" height="1" uuid="d03bcbd7-bdbb-4807-9b21-df0591803072"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="29" y="0" width="302" height="25" uuid="0012728f-9334-4fb0-b9a1-f94a26aaa912">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e1428f3-10b7-4d19-bf71-778f7f4408b7"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="2" rightPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPARTMENT_NAME_GUJ} == null ? "--" : $F{DEPARTMENT_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="351" y="0" width="268" height="25" uuid="1a912fd1-68c0-4aa0-9be9-e7bf010b7ebf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d7fd5fc0-2544-49d0-ac9c-edaa36cec9b3"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box leftPadding="2" rightPadding="1">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPARTMENT_NAME} == null ?  "--" : $F{DEPARTMENT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="21" y="0" width="8" height="25" uuid="dc0c33e8-b01b-4484-8627-d96fde1cd204">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#" isBlankWhenNull="true">
+				<reportElement x="620" y="0" width="181" height="25" uuid="1c36d035-f9b9-4dcd-9658-3f37eb8dc588">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fa7075a5-a178-4582-86b7-13e81df95ec1"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box leftPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph leftIndent="10" rightIndent="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{Provision_included_in_the_Budget} == null ? 0 : $F{Provision_included_in_the_Budget}) == 0 ? "--  " : $F{Provision_included_in_the_Budget}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="20" height="25" uuid="e68c6a3f-9b1e-4f9c-a711-c463d31d17ed">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db2ba1db-9c5a-4982-a3fd-26808aa974ba"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SR_NO_GUJ}+"."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="0" width="20" height="25" uuid="da984229-c43c-4ba2-990d-7e91f7185716">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1ddf6634-4685-4b75-8afa-4d52dae8c38c"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SR_NO}+"."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="2" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<line>
+				<reportElement x="2" y="0" width="800" height="1" uuid="d2497c1f-4437-40f1-9a74-0be2edf17076">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="84" splitType="Stretch">
+			<textField>
+				<reportElement x="7" y="64" width="172" height="20" uuid="9a66a144-feda-4946-990a-8a58858e6808"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["તારીખી:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="609" y="64" width="192" height="20" uuid="424bd1a3-c74c-40eb-bb05-336ae50ee2c4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Additional Chief Secretary to Government"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="671" y="44" width="110" height="20" uuid="680d31fb-f8bb-4de0-822c-fd7292c64bd2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="44" width="100" height="20" uuid="9faf4ff4-7603-4311-b20d-9f0552a0c2f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="44" width="112" height="20" uuid="b05bfffa-8a10-440e-bb7b-f720297183dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Finance Department"]]></textFieldExpression>
+			</textField>
+			<textField pattern="d MMMM, yyyy">
+				<reportElement x="440" y="64" width="146" height="20" uuid="c2f64cff-3c16-4034-8dd9-31dc31fc3afc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="64" width="190" height="20" uuid="90704fb6-8865-46f5-9aaa-c13a99f5df65"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["સરકારના અધિક મુખ્ય સચિવ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="44" width="126" height="20" uuid="e2797c18-e2f1-4017-8730-c4c9485f94b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["નાણા વિભાગ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="64" width="40" height="20" uuid="ef5c5f99-2f7a-4b00-a1ed-dc889947b3e1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Dated : "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="20" height="21" uuid="4768a056-ea49-42ef-8358-5529d56dac68">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db2ba1db-9c5a-4982-a3fd-26808aa974ba"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="21" y="0" width="8" height="21" uuid="3205533e-dec6-4b02-95ae-c9f516b32b6a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="29" y="0" width="302" height="21" uuid="436b9c0e-d86c-4699-a4ef-0f303d464500">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e1428f3-10b7-4d19-bf71-778f7f4408b7"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["કુલ સરવાળો :"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="0" width="20" height="21" uuid="bb056353-dc12-4653-9528-b71ce0ab0e13">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1ddf6634-4685-4b75-8afa-4d52dae8c38c"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="351" y="0" width="268" height="21" uuid="9f8ff87d-d281-4c6c-8227-153cfeef1b13">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d7fd5fc0-2544-49d0-ac9c-edaa36cec9b3"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Grand Total:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#" isBlankWhenNull="true">
+				<reportElement x="619" y="0" width="182" height="21" uuid="c4f8d365-f9ad-4402-b6ac-b1f1062c549e"/>
+				<box leftPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="10" rightIndent="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{AmtTotal} == null ? 0 : $V{AmtTotal}) == 0 ?  "--  " : $V{AmtTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

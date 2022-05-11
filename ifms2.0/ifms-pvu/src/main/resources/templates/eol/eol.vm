@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 13.5px;font-size:10px;">
+	<table width="100%" text-align="center" style="border: 1px solid #000; border-bottom:0;">
+
+		<tr>
+			<td colspan="2" align="center">$OFFICE_NAME</td>
+		</tr>
+		<tr>
+			<td colspan="2"  align="center">$OFFICE_ADDRESS</td>
+		</tr>
+		<tr>
+			<td colspan="2"  align="center">Office order for $EVENT_NAME</td>
+		</tr>
+	</table>
+	<table style="border: 1px solid #000; " width="100%">
+		<tr>
+			<td>Reference No.: $TRANSACION_NO</td>
+			<td align="right">Date: $TRANSACION_DATE</td>
+		</tr>
+	</table>
+<table width="100%" style="">
+        <tr>
+            <td align="center">
+				<h3><strong>Office Order</strong></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                $EMPLOYEE_NAME, $DESIGNATION is accorded sanction for 
+                $noOfDays days extra ordinary leave from $LEAVE_START_DATE to $LEAVE_END_DATE.
+            </td>
+        </tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+        <tr>
+            <td>
+                This is to certify that if $EMPLOYEE_NAME has not availed the leave, he would have been continuing on the same post.
+            </td>
+        </tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_NAME</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_DESIGNATION</td>
+		</tr>
+    </table>
+</body>
+
+</html>

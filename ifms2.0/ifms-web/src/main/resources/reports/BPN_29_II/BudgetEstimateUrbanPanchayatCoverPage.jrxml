@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimateUrbanPanchayatCoverPage" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ba484cb5-5928-4aac-8a2c-8d99a6de4075">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID 
+FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="FY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="FY_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FY_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="FINANCIAL_YEAR_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="FINANCIAL_YEAR_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="555" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="50" uuid="cc1756c1-48b0-454c-9e67-71791a197dd2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[APP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="200" height="25" uuid="8f58675a-7521-4240-8216-fc110ea47287">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અંદાજપત્ર પ્રકાશન નં.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="25" width="200" height="25" uuid="91954474-e71c-448b-a57c-170fa3370544">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget Publication No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="0" width="140" height="50" uuid="54f28cde-1c88-47fc-846b-411a4fbb2369">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box leftPadding="4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[} 29 (Part-II)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="355" y="73" width="90" height="100" uuid="5a26f894-8422-4524-ab32-7a0fe72fd4d5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["src/images/asokaemblem.JPG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="190" width="802" height="20" uuid="16704bb8-f5e0-4a14-b7c9-25f74c7e7d0a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ગુજરાત સરકાર]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="802" height="20" uuid="ae3c9a08-b1c4-4fa6-ad99-5a6535b1895e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNMENT OF GUJARAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="297" width="802" height="20" uuid="54d0737e-a504-4314-a91f-9290e7f056a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[પરિશિષ્ટો - પુસ્તક - ૨]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="297" width="802" height="30" uuid="14aa544e-99ee-4a7f-a199-c3891feeb629">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[પુરક પત્રકો (પંચાયતી રાજ સંસ્થા અને શહેરી સ્થાનિક સંસ્થા)
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="364" width="802" height="30" uuid="6fcee213-8abb-42d4-b945-4c3eb5313423">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APPENDICES - VOLUME - II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="397" width="802" height="30" uuid="94a8f608-289f-4a32-8ab8-3e1e274268e5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPPLEMENT STATEMENTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="427" width="802" height="30" uuid="66512cca-7ca8-4b12-9d1f-8a2d9372c053"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[PANCHAYATI RAJ INSTITUTIONS AND URBAN LOCAL BODIES]
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="475" width="802" height="30" uuid="29b011cb-1811-440a-8ef5-a155ecd23993"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[ ભારતના સંવિધાનની કલમ ૨૦૨ (૧) અન્વયે વિધાનસભા સમક્ષ રજૂ ]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="505" width="802" height="30" uuid="9a3b54a3-270e-4a69-8f43-4a99cb33d70e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[ Presented to the Legislative Assembly Under Article 202 (1) of the Constitution of India ]
+]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="67" width="802" height="1" uuid="e9159588-888d-4282-8adf-1997eddc08a7">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="470" width="802" height="1" uuid="12f69126-c422-432f-913f-866f539f7ba9">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="330" width="802" height="30" uuid="460b8026-90bf-45aa-a97e-b4eaac9e8dbd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BUDGET ESTIMATES OF YEAR : "+$F{FY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="238" width="802" height="30" uuid="abc6fa37-e3f2-4cd4-97b9-1a676142517d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FY_GUJ}+" ના વર્ષ માટેનું અંદાજપત્ર"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="267" width="802" height="30" uuid="c4228bf5-8d7a-46fe-88ef-6ef192e78ea4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પરિશિષ્ટ - પુસ્તક - ૨"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

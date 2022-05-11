@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookRecpSt2" pageWidth="400" pageHeight="817" orientation="Landscape" columnWidth="400" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6befb3ce-bb8f-433c-acff-d8bbb535ff52">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="pubHdrId" class="java.lang.Long" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT 
+	mo.OBJECT_NAME_GUJ,
+	mo.OBJECT_CODE,
+	mo.OBJECT_NAME,
+	tpd.RECURRENT_AMOUNT AS RECURRENT_AMOUNT,
+	tpd.NON_RECURRENT_AMOUNT AS NON_RECURRENT_AMOUNT,
+	ROUND(tpd.ULTIMATE_ANNUAL_RECURRENT_AMOUNT) AS ULT_ANN_REC_AMT,
+	tpd.PROPOSED_AMOUNT AS BUD_ESTIMATE
+FROM 
+	BUDGET.TBUD_PUB_HDR tph,
+	BUDGET.TBUD_PUB_DTL tpd,
+	MASTER_V1.MS_OBJECTHEAD mo 
+WHERE 
+	tpd.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	AND tpd.OBJECT_ID = mo.OBJECT_ID 
+	AND tph.TBUD_PUB_HDR_ID =$P{pubHdrId}
+	ORDER BY
+	mo.OBJECT_CODE ]]>
+	</queryString>
+	<field name="OBJECT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_OBJECTHEAD"/>
+	</field>
+	<field name="OBJECT_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_OBJECTHEAD"/>
+	</field>
+	<field name="OBJECT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_OBJECTHEAD"/>
+	</field>
+	<field name="RECURRENT_AMOUNT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RECURRENT_AMOUNT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_DTL"/>
+	</field>
+	<field name="NON_RECURRENT_AMOUNT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NON_RECURRENT_AMOUNT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_DTL"/>
+	</field>
+	<field name="ULT_ANN_REC_AMT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ULT_ANN_REC_AMT"/>
+	</field>
+	<field name="BUD_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BUD_ESTIMATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_DTL"/>
+	</field>
+	<variable name="RecTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{RECURRENT_AMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="NonRecTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{NON_RECURRENT_AMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="UltAccTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ULT_ANN_REC_AMT}]]></variableExpression>
+	</variable>
+	<variable name="BudEstotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{BUD_ESTIMATE}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="2" width="211" height="21" isRemoveLineWhenBlank="true" uuid="162acf78-5bf7-4419-b439-b43d7cfd6e68">
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Statement - II - 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="23" width="70" height="15" isRemoveLineWhenBlank="true" uuid="3e35a4d5-f6f3-4778-8e3b-bf1d48a2127f">
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="38" width="70" height="15" isRemoveLineWhenBlank="true" uuid="30728f1d-4bad-4166-aa24-e8cefa3ae81e">
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. In Lakhs)]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="55" width="396" height="40" uuid="7a1c9fcb-3df5-4e49-ab8c-619b674d4bfa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="25" height="40" isRemoveLineWhenBlank="true" uuid="b9126433-610e-42ff-b8e9-34658633b729">
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sr.No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="0" width="110" height="40" isRemoveLineWhenBlank="true" uuid="aa884510-eddc-4f52-af44-ef63e6a675e4">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Details Of Head]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="135" y="0" width="70" height="40" isRemoveLineWhenBlank="true" uuid="929a8212-b13d-4575-bf0d-6672274e3d4d">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Recurrent Amount for 11months ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="205" y="0" width="50" height="40" isRemoveLineWhenBlank="true" uuid="4a945906-6bcd-4bc3-8516-1fcba0cd06b6">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Non-Recurrent Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="255" y="0" width="92" height="40" isRemoveLineWhenBlank="true" uuid="12ce3284-8f59-4a74-a302-57c025e196f3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ultimate Annual Recurrent Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="347" y="0" width="49" height="40" isRemoveLineWhenBlank="true" uuid="ee0731fe-a5da-4991-91aa-c15de9f0519e">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Budget Estimates]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="25" height="28" isRemoveLineWhenBlank="true" uuid="e3b65f3c-2f8d-4b0b-95c2-2e9ffcdf81e4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="25" y="0" width="110" height="28" isRemoveLineWhenBlank="true" uuid="f4c0d2f7-4cda-411b-9a3a-a985dd4ffd47">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OBJECT_NAME_GUJ}+"-"+$F{OBJECT_CODE}+"-"+$F{OBJECT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement stretchType="RelativeToTallestObject" x="135" y="0" width="70" height="28" isRemoveLineWhenBlank="true" uuid="f483a99a-5879-4169-81e2-005c2846d042">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{RECURRENT_AMOUNT} == null || $F{RECURRENT_AMOUNT} == 00.00) ? "--":$F{RECURRENT_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement stretchType="RelativeToTallestObject" x="205" y="0" width="50" height="28" isRemoveLineWhenBlank="true" uuid="985516cc-473b-4472-aafa-4207f7047608">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{NON_RECURRENT_AMOUNT} == null || $F{NON_RECURRENT_AMOUNT} == 00.00) ? "--" : $F{NON_RECURRENT_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement stretchType="RelativeToTallestObject" x="255" y="0" width="92" height="28" isRemoveLineWhenBlank="true" uuid="be5ac007-fede-4f7a-9d53-33d03589fea5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{ULT_ANN_REC_AMT} == null || $F{ULT_ANN_REC_AMT} == 00.00) ? "--" : $F{ULT_ANN_REC_AMT}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement stretchType="RelativeToTallestObject" x="347" y="0" width="49" height="28" isRemoveLineWhenBlank="true" uuid="d0df383e-ddf1-413b-a612-db1e94ea0ffb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{BUD_ESTIMATE} == null || $F{BUD_ESTIMATE} == 00.00) ? "--" : $F{BUD_ESTIMATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="396" height="20" uuid="201640c7-b3d1-450d-8e20-ed7ea32743aa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="1" y="0" width="134" height="20" isRemoveLineWhenBlank="true" uuid="d6f77634-4876-499c-9a1b-60f9b0db8457">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField pattern="#0.00#">
+					<reportElement x="135" y="0" width="70" height="20" isRemoveLineWhenBlank="true" uuid="ada91c93-0db5-4040-83c2-67baef895e97">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($V{RecTotal} == null || $V{RecTotal} == 00.00) ? "--":$V{RecTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="205" y="0" width="50" height="20" isRemoveLineWhenBlank="true" uuid="5c1c5d32-751d-42f8-80df-693e95a04877">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($V{NonRecTotal} == null || $V{NonRecTotal} == 00.00) ? "--":$V{NonRecTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="256" y="0" width="91" height="20" isRemoveLineWhenBlank="true" uuid="294ae070-ab41-4c6c-b41d-fe2a33dfb9b7">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($V{UltAccTotal} == null || $V{UltAccTotal} == 00.00) ? "--":$V{UltAccTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="347" y="0" width="49" height="20" isRemoveLineWhenBlank="true" uuid="a4dff0d5-a553-42f3-8aed-1ccfd4e6140b">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[!$F{OBJECT_NAME}.equals("") && $F{OBJECT_NAME}!= null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($V{BudEstotal} == null || $V{BudEstotal} == 00.00) ? "--":$V{BudEstotal}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

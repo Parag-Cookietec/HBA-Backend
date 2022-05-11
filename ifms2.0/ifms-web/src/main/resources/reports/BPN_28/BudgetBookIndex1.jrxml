@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookIndex1" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT sum(NewItems) AS "newItem", sum(AppendixOne) AS "appendOne", sum(AppendixTwo) AS "appendTwo", sum(AnnexureA) AS "annexA"
+FROM
+(
+	SELECT count(1) NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA
+	FROM BUDGET.TBUD_PUB_HDR WHERE APP_TYPE_ID IN (426,428) 
+	AND BPN_ID=$P{bpnId} AND FINANCIAL_YEAR_ID =$P{fyId} 
+  UNION ALL
+	SELECT 0 NewItems , count(1) AppendixOne, 0 AppendixTwo, 0 AnnexureA
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_DTL tpd, MASTER_V1.MS_OBJECTHEAD mo 
+	WHERE tph.TBUD_PUB_HDR_ID=tpd.TBUD_PUB_HDR_ID AND tpd.OBJECT_ID = mo.OBJECT_ID 
+	AND tpd.IS_RURAL=1 AND mo.OBJECT_CODE IN ('3131','3132')
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, count(1) AppendixTwo, 0 AnnexureA
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_NC_HDR tpnh, MASTER_V1.LU_LOOKUP_INFO lli
+	WHERE tph.TBUD_PUB_HDR_ID=tpnh.TBUD_PUB_HDR_ID AND lli.LOOKUP_INFO_ID=tpnh.IS_CSS
+	AND upper(lli.LOOKUP_INFO_NAME) IN ('STATE','BOTH')
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, count(1) AnnexureA
+	FROM BUDGET.TBUD_PUB_FY_BUDGET 
+	WHERE IS_MODIFIED_BUDGET=1 AND FINANCIAL_YEAR_ID =$P{fyId}
+)]]>
+	</queryString>
+	<field name="newItem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="newItem"/>
+	</field>
+	<field name="appendOne" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendOne"/>
+	</field>
+	<field name="appendTwo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendTwo"/>
+	</field>
+	<field name="annexA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="annexA"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="210" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="20" isRemoveLineWhenBlank="true" uuid="02d0ef44-ed37-4ece-8cc7-81d955535b03">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="280" height="20" isRemoveLineWhenBlank="true" uuid="c233d99b-911f-4612-a604-c3cf95a2105a">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ભાગ - ખ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="50" height="20" isRemoveLineWhenBlank="true" uuid="d5c50a2a-7ea8-4cad-bfd3-1a68cdde3cbc">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="280" height="20" isRemoveLineWhenBlank="true" uuid="eaa03543-569f-4147-81f1-6959fc7a87f3">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PART - B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="25" width="50" height="20" isRemoveLineWhenBlank="true" uuid="051bfeb8-b37b-415d-9d02-3831c40057b6">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૫]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="25" width="280" height="20" isRemoveLineWhenBlank="true" uuid="e0d66d5a-6e85-40f5-9226-64fcb1f8dc06">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[નવી બાબતો]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="25" width="50" height="20" isRemoveLineWhenBlank="true" uuid="5037a23b-8931-49ec-b01b-1874abaf4b8e">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="25" width="280" height="20" isRemoveLineWhenBlank="true" uuid="ad21a63f-f2d6-4d90-85d7-25c30b1db71a">
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[New Items]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="50" width="50" height="20" isRemoveLineWhenBlank="true" uuid="fed0a28a-ca45-420f-8493-091437118fb1">
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{newItem}>0 ? "૬" : "૫"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="50" y="50" width="280" height="20" isRemoveLineWhenBlank="true" uuid="d02b71d5-87b3-4e08-bd17-18bea08e971f">
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[પરિશિષ્ટો]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="50" width="50" height="20" isRemoveLineWhenBlank="true" uuid="adc1b680-d5d6-4bf1-9a66-2e5aa6070295">
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{newItem}>0 ? "6" : "5"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="50" width="280" height="20" isRemoveLineWhenBlank="true" uuid="9332db61-2fbe-4993-9211-ff66ce40fb3a">
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[APPENDICES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="146" width="50" height="20" isRemoveLineWhenBlank="true" uuid="3b512705-2247-45f9-b6c3-60783e6b4e93">
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{newItem}>0? ((($F{appendOne}>0) || ($F{appendTwo}>0))? "૭": "૬"): ((($F{appendOne}>0) || ($F{appendTwo}>0))?"૬":"૫")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="50" y="146" width="280" height="20" isRemoveLineWhenBlank="true" uuid="4b525ae7-240a-430a-b95c-1e8a9862316c">
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[જોડાણ-ક]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="146" width="50" height="20" isRemoveLineWhenBlank="true" uuid="61f4bd05-bb6d-4312-a012-c05f21f1bc98">
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{newItem}>0? ((($F{appendOne}>0) || ($F{appendTwo}>0))? "7":" 6"): ((($F{appendOne}>0) || ($F{appendTwo}>0))?"6":"5")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="146" width="280" height="20" isRemoveLineWhenBlank="true" uuid="12fed272-9280-4e17-80d3-eb9cd45c9ec3">
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANNEXUTURE-A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="166" width="280" height="44" isRemoveLineWhenBlank="true" uuid="ac4c2554-cbf1-44a9-84dc-ea9a358e69e9">
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[(૧) આકસ્મિક નિધિમાંથી ઉપાડવામાં આવેલ મતપાત્ર/બિનમતપાત્ર ખર્ચ મટેની પેશગીની પરત જોગવઈઓની વિગત દર્શાવતુ પત્રક.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="166" width="280" height="44" isRemoveLineWhenBlank="true" uuid="61af1cc4-dcf4-414f-937d-793ed6f09689">
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[(1) Statement showing the details of provisions made for recoupment of advance sanctioned of from contiugence fund for voted expenditure.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="70" width="280" height="35" isRemoveLineWhenBlank="true" uuid="4787d69d-ccde-4b34-9946-6c0c8a1c5933">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["(1) Statement showing details of Scheme Wise provision made for Grant-in-Aid to Panchayats"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="105" width="280" height="41" isRemoveLineWhenBlank="true" uuid="fb6b9b8e-fdee-4441-bddd-632968d2a7d8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[($F{appendOne}>0? "(2)" : "(1)") + " Statement showing details of Scheme Wise provision made for Centrally Sponsored/Central Plan Schemes."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="70" width="280" height="35" isRemoveLineWhenBlank="true" uuid="c623b27d-15cb-492f-9366-33e6088feab2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["(૧) પંચાયતોને સહાયક અનુદાન માટેની યોજનાવાર જોગવાઇઓની વિગતો દર્શાવતુ પત્રક."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="105" width="280" height="41" isRemoveLineWhenBlank="true" uuid="b54ea8c0-d691-420e-8073-a53a79deb220">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[($F{appendOne}>0) || ($F{appendTwo}>0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[($F{appendOne}>0? "(૨)" : "(૧)") + "  કેન્દ્ર પુરસ્કૃત/કેન્દ્રીય આયોજન યોજના માટે કરેલી યોજનાવાર જોગવાઇઓની વિગતો દર્શાવતુ પત્રક."]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

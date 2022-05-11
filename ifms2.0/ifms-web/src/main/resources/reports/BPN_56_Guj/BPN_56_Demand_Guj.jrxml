@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BPN_56_Demand_Guj" pageWidth="842" pageHeight="900" orientation="Landscape" columnWidth="810" leftMargin="20" rightMargin="12" topMargin="20" bottomMargin="0" uuid="861a87e0-d75d-4556-b052-4428deef5611">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(tmh.DEPARTMENT_ID,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEPTID_GUJ,  tmh.DEPARTMENT_ID AS DEPTID, 
+md.DEPARTMENT_NAME_GUJ, 
+LISTAGG( REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(tmdd.DEMAND_ID,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦'), ',') WITHIN GROUP (ORDER BY tmdd.DEMAND_ID)
+AS DEMANDS
+FROM 
+BUDGET.TOCB_MOCB_HDR tmh 
+LEFT  JOIN BUDGET.TOCB_MOCB_DM_DTL tmdd ON tmh.TOCB_MOCB_HDR_ID = tmdd.TOCB_MOCB_HDR_ID 
+INNER JOIN MASTER_V1.MS_DEPARTMENT md ON md.DEPARTMENT_ID = tmh.DEPARTMENT_ID
+WHERE  
+tmh.FINANCIAL_YEAR_ID =  $P{fyId} AND tmh.ACTIVE_STATUS = 1
+AND tmdd.DEMAND_ID NOT IN(SELECT DEMAND_ID FROM  MASTER_V1.MS_DEMAND WHERE BPN_ID=2) 
+GROUP BY tmh.DEPARTMENT_ID,md.DEPARTMENT_NAME_GUJ
+]]>
+	</queryString>
+	<field name="DEPTID_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPTID_GUJ"/>
+	</field>
+	<field name="DEPTID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEPTID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_MOCB_HDR"/>
+	</field>
+	<field name="DEPARTMENT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<field name="DEMANDS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMANDS"/>
+	</field>
+	<detail>
+		<band height="103" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="810" height="39" uuid="a1312700-0c9c-4547-8e19-ffe7259f4f35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["માંગણી ક્રમાંક .: " + $F{DEMANDS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="39" width="810" height="32" uuid="d9508ba0-3eb2-4fce-a8b6-94ecb0ec5311">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["વિભાગનું નામ: "+$F{DEPARTMENT_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="802" height="1" uuid="873618e2-513f-45c0-9e19-9120c6eba271">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement x="0" y="74" width="810" height="29" uuid="7714f72b-f545-4e2f-861d-85fe933c8447">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="deptId">
+					<subreportParameterExpression><![CDATA[$F{DEPTID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_56_Guj/BPN_56_MacroOutcome_Guj.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="30" width="810" height="30" uuid="87f3a638-c6bc-4cfb-b15e-e9160116dc4b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="deptId">
+					<subreportParameterExpression><![CDATA[$F{DEPTID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_56_Guj/OutcomeBudgetPhysicalTarget_2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="21">
+			<break>
+				<reportElement x="0" y="20" width="810" height="1" uuid="ff38f1b4-5a76-4113-bd14-d7a10ea9d3bb"/>
+			</break>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="10" width="810" height="40" uuid="a113b306-823d-4f29-8d91-3025629f6506">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_56_Guj/BPN_56_Disclaimer_Guj.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookClimateChangeSchemeTitle" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="d5c760b8-9b7f-4305-b56d-7d2f7a5c1f74">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+    mfy.FY AS "Next_Eng",
+    mfy.FY_GUJ AS "Next_GUJ",
+    (
+        SELECT cur_fin.FY
+        FROM MASTER_V1.MS_FINANCIAL_YEAR cur_fin
+        WHERE cur_fin.FINANCIAL_YEAR_ID = $P{fyId}-1
+    ) AS "Cur_Eng",
+    (
+        SELECT cur_fin.FY_GUJ
+        FROM MASTER_V1.MS_FINANCIAL_YEAR cur_fin
+        WHERE cur_fin.FINANCIAL_YEAR_ID = $P{fyId}-1
+    ) AS "Cur_GUJ",
+    (
+        SELECT pre_fin.FY
+        FROM MASTER_V1.MS_FINANCIAL_YEAR pre_fin
+        WHERE pre_fin.FINANCIAL_YEAR_ID = $P{fyId}-2
+    ) AS "previous_Eng",
+    (
+        SELECT pre_fin.FY_GUJ
+        FROM MASTER_V1.MS_FINANCIAL_YEAR pre_fin
+        WHERE pre_fin.FINANCIAL_YEAR_ID = $P{fyId}-2
+    ) AS "previous_GUJ"
+FROM
+    MASTER_V1.MS_FINANCIAL_YEAR mfy
+WHERE
+    mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="Next_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Next_Eng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="Next_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Next_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="Cur_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cur_Eng"/>
+	</field>
+	<field name="Cur_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cur_GUJ"/>
+	</field>
+	<field name="previous_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="previous_Eng"/>
+	</field>
+	<field name="previous_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="previous_GUJ"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="555" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="171" width="800" height="1" uuid="a5386dfb-63d6-4a86-9306-2108e3134123">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<line>
+				<reportElement x="0" y="171" width="800" height="1" uuid="a845d0b9-3a4b-47d9-b638-0721d71518f6">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="378" width="800" height="1" uuid="e444fd36-7491-4798-891c-0cd22921b47d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="208" width="739" height="50" uuid="666d1908-24b4-4347-86fc-c06c6f7db843">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Climate Change Scheme of Other Departments"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="259" width="740" height="50" uuid="e1ce7a3b-d999-42e9-9ac7-b01cf064d6f0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["અન્ય વિભાગોની ક્લાઈમેટ ચેન્જ યોજના"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="174" width="799" height="1" uuid="581669c3-ced7-4aa8-9f13-d576c3ef599b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid" lineColor="#969696"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="173" width="799" height="1" uuid="0e6431b3-4688-4b8b-9c2f-09154f6a19b4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid" lineColor="#969696"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="375" width="799" height="1" uuid="82df9518-3cdd-46ea-ab04-a583f282040f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid" lineColor="#969696"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

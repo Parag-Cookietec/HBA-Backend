@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<title>Stepping_Up 6th pay</title>
+
+</head>
+
+<body style="font-size:12px;">
+
+<table style="margin: 15px; width: 100%;">
+<tr>
+<td align="center">
+
+<h2><b><u> $steppingUpType </u></b></h2>
+
+<h3 style="line-height: .25px;"><b><u>Employee No.: $empNo</u></b></h3>
+
+</td>
+</tr>
+<tr>
+<td style="margin-top:25px; text-align: justify;">
+
+<table style="width: 100%">
+
+<tr>
+
+<td>
+
+In accordance with the provision of G.C.S. Revision of Pay Rules,<span
+
+class="paycommissionrules"> 1975/1987/1998/2009/2016</span>
+
+and the following amendments made time to time,
+
+<span class="empname">$empName </span>
+
+<span class="empdesi">$empDesgn ,</span>
+
+<span class="ddooffice">$ddoOfficeAddress </span>, is given benefit of
+
+<span class="eventname"> $steppingUpType </span> as on date
+
+<span class="evntdate">$eventDate</span> against
+
+<span class="gender">$gender</span> junior
+
+<span class="jrempname">$jrEmpName </span>
+
+<span class="jrempdesi">$jrEmpDesgn ,</span>
+
+<span class="jrddooffice">$jrDdoOfficeAddress </span>.
+
+<span class="gender">$gender</span> pay is fixed at Rs.
+
+<span class="paybandvalue">$payBandValue</span> in the pay band
+
+<span class="payband">$payBand</span> along with Grade Pay
+
+<span class="gradepay">$gradePay</span> &
+
+<span class="gender">$gender</span> next date of increment will be
+
+<span class="dateofnxtinc">$dateofnxtinc</span>.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+Print Date: <span class="print-date">$printDate</span>
+<br />
+#if($rePrintCount >=2)
+
+Reprint Date: <span class="repprint-date">$rePrintDate</span>
+
+<br />
+#set ($rePrintCount = $rePrintCount - 1)
+
+Reprint Count: <span class="Reprintcount">$rePrintCount</span>.
+<br />
+
+Reprint Remarks: <span class="remarks">$rePrintRemarks</span>.
+
+#end
+
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 20px;"></div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Place : Gandhinagar</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<table style="width: 100%">
+
+<tr>
+
+<td style="width:30%;text-align:center;"></td>
+
+<td style="width:30%;text-align:center;">
+
+$authorizeBy <br />
+
+Accounts Officer<br />
+
+Pay Verification Unit<br />
+
+Finance Department
+
+</td>
+
+<td style="width:30%;text-align:center;">
+
+Issued by, <br />
+
+Accounts Officer <br />
+
+Pay Verification Unit <br />
+
+Finance Department <br />
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<div style="height: 15px;"></div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Remarks: <span class="remarks">$remarks</span>
+
+</td>
+
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>

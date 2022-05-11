@@ -1,0 +1,19 @@
+{
+    "createdBy": 1,
+    "createdDate": "2005-03-29T18:30:00.000+0000",
+    "createdByPost": 1,
+    "updatedByPost": 1,
+    "activeStatus": 1,
+    "updatedBy": 1,
+    "updatedDate": "2005-03-29T18:30:00.000+0000",
+    "designationId": 1,
+    "designationName": "Under Secretary",
+    "designationNameGuj": " ",
+    "designationDescription": " ",
+    "designationDescriptionGuj": " ",
+    "designationTypeId": 0,
+    "parentDesignationId": 0,
+    "designationCode": "1",
+    "designationCodeGuj": " ",
+    "designationCodeName": "1 : Under Secretary"
+  }

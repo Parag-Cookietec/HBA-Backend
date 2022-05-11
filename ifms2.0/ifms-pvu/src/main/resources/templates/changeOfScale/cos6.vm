@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 13.5px;font-size:10px;">
+	<table width="100%" text-align="center" style="border: 1px solid #000; ;border-bottom:0;">
+		<tr>
+			<td colspan="2" align="center">$OFFICE_NAME</td>
+		</tr>
+		<tr>
+			<td colspan="2"  align="center">$OFFICE_ADDRESS</td>
+		</tr>
+		<tr>
+			<td colspan="2"  align="center">Office order for $EVENT_NAME</td>
+		</tr>
+	</table>
+	<table style="border: 1px solid #000; ;" width="100%">
+		<tr>
+			<td>Reference No.: $TRANSACION_NO</td>
+			<td align="right">Date: $TRANSACION_DATE</td>
+		</tr>
+	</table>
+	<table width="100%" style=";">
+		<tr>
+			<td>Read :</td>
+		</tr>
+		<tr>
+			<td>Order No.: $ORDER_NO</td>
+		</tr>
+		<tr>
+			<td>Gujarat Civil Services (Pay) Rules, 2002</td>
+		</tr>
+		<tr>
+			<td>Option Under Rules given by $EMPLOYEE_NAME, $DESIGNATION, Employee No.: $EMPLOYEE_NO, $DESIGNATION & $OFFICE_NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Sub: Pay Fixation under Gujarat Civil Services (pay) rules, 2002 for $EVENT_NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Order: In Pursuance Of the rule 24 of the Gujarat Civil Services (Pay) Rules, 2002 and other orders issued from time to time in this behalf, as per the option Not Availed Option $YesNo by $EMPLOYEE_NAME, $DESIGNATION, Employee No.: $EMPLOYEE_NO; $hisher pay is fixed as under as with effect from $EVENT_EFFECTIVE_DATE  </td>
+		</tr>
+		
+	</table>
+    <table CELLSPACING=0 width="100%" style=";">
+        <tr>
+            <th colspan="2" style="border: 1px solid; padding:5px">Existing Pay Details</th>
+            <th colspan="2" style="border: 1px solid; border-left-width: 0; padding:5px">Revised Pay Details</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:5px">Pay Band</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0;padding:5px">$CURRENT_PAY_BAND</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0;padding:5px">Pay Band</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0;padding:5px">$PAY_BAND</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0;padding:5px">Pay in the Pay Band</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$CURRENT_PAY_BAND_VALUE</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Pay in the Pay Band</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$PAY_BAND_VALUE</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0;padding:5px">Grade Pay</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$CURRENT_GRADE_PAY</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Grade Pay</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$GRADE_PAY</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:5px">Basic Pay</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$CURRENT_BASIC_PAY</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Basic Pay</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$BASIC_PAY</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:5px">Next Date of Increment</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$CURRENT_DNI</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">Next Date of Increment</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:5px">$DNI</td>
+        </tr>
+    </table>
+	<table width="100%" style=";">
+		<tr>
+			<td>(2) $EMPLOYEE_NAME, $DESIGNATION will be entitled to draw Pay at Rs. $BASIC_PAY in the pay band of $PAY_BAND along with Grade Pay at Rs. $GRADE_PAY with effect from $EVENT_EFFECTIVE_DATE.</td>
+		</tr>
+		<tr>
+			<td>(3) Pay Fixation is subject to recovery of the over payment if it comes to the notice at the time of verification of the pay by pay verification authority.</td>
+		</tr>
+		<tr>
+			<td>(4) Other allowances will be paid as per Govt. orders issued from time to time.</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_NAME</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_DESIGNATION</td>
+		</tr>
+		<tr>
+			<td>Copy forwarded with compliments to: $USER_NAME</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>(1) The Pay and Account Officer, District Treasury Office, Gandhinagar</td>
+		</tr>
+		<tr>
+			<td>(2) Bill Clerk (two copies)</td>
+		</tr>
+		<tr>
+			<td>(3) Mr. HARDIKKUMAR CHUNILAL NENUJI, Account Officer-Class II, Office of Registrar, Gandhinagar.</td>
+		</tr>
+		<tr>
+			<td>(4) Service book/ service roll of person concerned with option.</td>
+		</tr>
+		<tr>
+			<td>(5) Office Order file.</td>
+		</tr>
+		<tr>
+			<td>(6) Accounts Officer, Pay Verification Unit.</td>
+		</tr>
+	</table>
+</body>
+
+</html>

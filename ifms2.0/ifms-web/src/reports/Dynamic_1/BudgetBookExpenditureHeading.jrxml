@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookExpenditureHeading" pageWidth="842" pageHeight="900" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02391bf7-f5d5-478b-a886-19c04db67fd0">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+mbpn.BPN_NAME AS "bpnNameEng", 
+mbpn.BPN_NAME_GUJ AS "bpnNameGuj"
+FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy
+WHERE mbpn.BPN_ID = $P{bpnId} AND mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="293" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="88" width="802" height="54" uuid="09382825-ce03-4ac9-84a5-2412e703cfdc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bpnNameGuj} + "  હેઠળનાં ખર્ચનાં સદરને લગતી સમજૂતી "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="152" width="802" height="30" uuid="6e97803c-624e-4122-b7f7-cdcafa617992"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ભાગ - ક]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="192" width="802" height="45" uuid="e9dc8e0f-f1b3-4cd0-88c4-631521ec4553"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EXPLANATION PERTAINING TO EXPENDITURE HEADS UNDER  \n "+$F{bpnNameEng}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="250" width="802" height="30" uuid="b50a020b-6b1a-471d-a0e7-741ab1ff139c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PART - A]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="286" width="802" height="1" uuid="26179251-d3f2-4dc7-aa20-fe6789de82a7"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="72" width="802" height="1" uuid="73c26a0d-0241-4c18-bb72-d8f7cb66a734"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<summary>
+		<band height="21">
+			<break>
+				<reportElement x="0" y="0" width="802" height="1" uuid="78be2518-618c-4cfd-9ef1-5cd01021f4e6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<subreport overflowType="Stretch">
+				<reportElement x="0" y="1" width="802" height="20" uuid="915482bb-e9a2-4c16-aec9-4558298c83ad">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/Dynamic_1//BudgetBookExpenditurePartOne.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="head_of_content" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2ba3d13-60f4-4fd3-8211-dc81f1ca8045">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT ms.SECTORHEAD_NAME,ms.SECTORHEAD_NAME_GUJ,mss.SUB_SECTOR_NAME,mss.SUB_SECTOR_NAME_GUJ,mm.SECTORHEAD_CODE,mm.SUB_SECTOR_CODE,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm.MAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+mm.MAJORHEAD_NAME,mm.MAJORHEAD_NAME_GUJ ,mm.MAJORHEAD_CODE
+FROM MASTER_V1.MS_MAJORHEAD mm 
+LEFT JOIN MASTER_V1.MS_SECTORHEAD ms 
+ON mm.SECTORHEAD_CODE=ms.SECTORHEAD_ID 
+LEFT  JOIN 
+MASTER_V1.MS_SUB_SECTOR mss ON mm.SUB_SECTOR_CODE=mss.SUB_SECTOR_ID  WHERE mm.MAJORHEAD_TYPE_ID =3
+ORDER BY MAJORHEAD_CODE]]>
+	</queryString>
+	<field name="SECTORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+		<property name="com.jaspersoft.studio.field.name" value="SECTORHEAD_NAME"/>
+	</field>
+	<field name="SECTORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+		<property name="com.jaspersoft.studio.field.name" value="SECTORHEAD_NAME_GUJ"/>
+	</field>
+	<field name="SUB_SECTOR_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUB_SECTOR"/>
+		<property name="com.jaspersoft.studio.field.name" value="SUB_SECTOR_NAME"/>
+	</field>
+	<field name="SUB_SECTOR_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUB_SECTOR"/>
+		<property name="com.jaspersoft.studio.field.name" value="SUB_SECTOR_NAME_GUJ"/>
+	</field>
+	<field name="SECTORHEAD_CODE" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+		<property name="com.jaspersoft.studio.field.name" value="SECTORHEAD_CODE"/>
+	</field>
+	<field name="SUB_SECTOR_CODE" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+		<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_NAME"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+		<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_NAME_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+		<property name="com.jaspersoft.studio.field.name" value="MAJORHEAD_CODE"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{SECTORHEAD_CODE}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isBlankWhenNull="true">
+					<reportElement key="" x="390" y="0" width="350" height="20" uuid="61f1dd76-9baa-4a65-82e2-7af4f575ee2a"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECTORHEAD_NAME}.substring(2)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="30" y="-1" width="330" height="21" uuid="05145c46-9165-49c1-8e8b-a084a9159bcf"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECTORHEAD_NAME_GUJ}.substring(2)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="30" height="20" uuid="7c11a8b7-5132-4631-8f01-a2daa38274e7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECTORHEAD_NAME_GUJ}.substring(0,1)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="360" y="0" width="30" height="20" uuid="0e06fd50-b0c9-467a-a2f8-24c373444bcb">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECTORHEAD_NAME}.substring(0,1)+"."]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{SUB_SECTOR_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="63">
+				<textField isBlankWhenNull="true">
+					<reportElement x="390" y="0" width="350" height="20" isRemoveLineWhenBlank="true" uuid="1143cc55-679d-4ce2-adf7-66e2e9681fcc">
+						<printWhenExpression><![CDATA[Integer.parseInt($F{MAJORHEAD_CODE})<6003&& $F{SECTORHEAD_CODE}!=3 && ($F{SECTORHEAD_CODE}!=2 && $F{SUB_SECTOR_CODE}<35) || ($F{SECTORHEAD_CODE}==2 && ($F{SUB_SECTOR_CODE}==6||$F{SUB_SECTOR_CODE}==16))]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME}.substring(3)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="30" y="0" width="330" height="20" isRemoveLineWhenBlank="true" uuid="6f6b88f6-3a22-4a82-9b7d-45cc85d1a058">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[Integer.parseInt($F{MAJORHEAD_CODE})<6003&& $F{SECTORHEAD_CODE}!=3 && ($F{SECTORHEAD_CODE}!=2 && $F{SUB_SECTOR_CODE}<35)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}.substring(3)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="30" height="20" isRemoveLineWhenBlank="true" uuid="8ba4fbed-e4b9-4aa9-b074-ebd8df8f37ee">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[Integer.parseInt($F{MAJORHEAD_CODE})<6003&& $F{SECTORHEAD_CODE}!=3 && ($F{SECTORHEAD_CODE}!=2 && $F{SUB_SECTOR_CODE}<35)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}.substring(0,3)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="360" y="0" width="30" height="20" isRemoveLineWhenBlank="true" uuid="427980be-bff9-4473-be96-15f3f8054140">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[Integer.parseInt($F{MAJORHEAD_CODE})<6003&& $F{SECTORHEAD_CODE}!=3 && ($F{SECTORHEAD_CODE}!=2 && $F{SUB_SECTOR_CODE}<35)|| ($F{SECTORHEAD_CODE}==2 && ($F{SUB_SECTOR_CODE}==6||$F{SUB_SECTOR_CODE}==16))]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME}.substring(0,3)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="" isPrintRepeatedValues="false" x="390" y="21" width="350" height="20" isRemoveLineWhenBlank="true" uuid="6fa55356-341f-489c-99dc-213ecabc4161">
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 &&  $F{SUB_SECTOR_CODE}==35]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME}.substring(3,25)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="30" y="20" width="330" height="21" isRemoveLineWhenBlank="true" uuid="51eb64b2-99a0-40ed-949e-46a2d488ec9e">
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 &&  $F{SUB_SECTOR_CODE}==35]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}.substring(3,23)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="0" y="21" width="30" height="20" isRemoveLineWhenBlank="true" uuid="32f6c007-1966-4cf0-abc7-f1134a831f8d">
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 &&  $F{SUB_SECTOR_CODE}==35]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}.substring(0,3)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="360" y="21" width="30" height="20" isRemoveLineWhenBlank="true" uuid="0a139905-9eaf-4996-a58f-0057ff4ed436">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 &&  $F{SUB_SECTOR_CODE}==35]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME}.substring(0,3)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="" isPrintRepeatedValues="false" x="390" y="43" width="350" height="20" isRemoveLineWhenBlank="true" uuid="46b93fa4-8bf8-4c31-9837-124618d840e9">
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 && $F{SUB_SECTOR_CODE}>34]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_CODE}==35?$F{SUB_SECTOR_NAME}.substring(29):$F{SUB_SECTOR_CODE}==36?$F{SUB_SECTOR_NAME}.substring(30):$F{SUB_SECTOR_NAME}.substring(31)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="30" y="42" width="330" height="21" isRemoveLineWhenBlank="true" uuid="3ddb7e71-e8ce-416d-a940-d6ceb286804a">
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 && $F{SUB_SECTOR_CODE}>34]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}.substring(26)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="0" y="43" width="30" height="20" isRemoveLineWhenBlank="true" uuid="a46bb6fb-8b13-4f7c-8a38-3a7cde2212db">
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 && $F{SUB_SECTOR_CODE}>34]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}.substring(23,26)]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="360" y="43" width="30" height="20" isRemoveLineWhenBlank="true" uuid="640f5e5a-463e-4124-b5b7-66ef464d2514">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$F{SECTORHEAD_CODE}==2 && $F{SUB_SECTOR_CODE}>34]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_CODE}==35?$F{SUB_SECTOR_NAME}.substring(25,29):$F{SUB_SECTOR_CODE}==36?$F{SUB_SECTOR_NAME}.substring(25,30):$F{SUB_SECTOR_NAME}.substring(25,31)]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="46" width="371" height="20" uuid="a1c88a39-8251-40e9-9df2-424370593bfb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[મહેસૂલના સદર]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="46" width="368" height="20" uuid="64977d4c-b44e-44e8-aa82-324b86fdd83d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HEAD OF REVENUE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="753" y="46" width="52" height="20" uuid="bce246b4-591b-4d46-b671-af074efc74b0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="10" width="420" height="31" uuid="2712fda1-805f-4006-be6e-d043d79f785d">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTENTS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="41" width="800" height="1" uuid="264af6cf-f052-4365-981e-f5d33ce8e54a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="68" width="800" height="1" uuid="412ca9fa-3259-4c46-9d39-98370a52ccbe">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="10" width="380" height="31" uuid="f8d84a8b-7069-4f4d-8d0c-754fd822e218">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિષયસૂચિ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement x="360" y="0" width="30" height="20" uuid="9479c10c-59e6-4170-be58-dd467d1f00cd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1edecea1-dfbc-41e5-a328-6098f024232f"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}.equals("8000")?"<BR/>"+"<BR/>"+$F{MAJORHEAD_CODE}:$F{MAJORHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="394" y="0" width="346" height="20" uuid="f93f7583-abd9-4bed-bce1-252523028a0c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e2c4f9e2-0a42-4076-b650-2a23fb2f8cda"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}.equals("8000")?"<BR/><b>CONTIGENCY FUND</b>"+"<BR/>-"+$F{MAJORHEAD_NAME}+"<BR/>"+"<BR/><b>PUBLIC ACCOUNTS</b>":"-"+$F{MAJORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="0" width="30" height="20" uuid="2b4f4ecf-d2ff-4537-94d0-86fec011dcca">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE_GUJ}.equals("8000")?"<BR/>"+"<BR/>"+"<BR/>"+$F{MAJORHEAD_CODE_GUJ}:$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="0" width="330" height="20" uuid="6daba9ce-0bd8-4084-a0a7-ad20937683ff"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}.equals("8000")?"<BR/><b>આકસ્મિકતા નિધિ</b>"+"<BR/>-"+$F{MAJORHEAD_NAME_GUJ}+"<BR/>"+"<BR/><b>જાહેર હિસાબ </b>":"-"+$F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

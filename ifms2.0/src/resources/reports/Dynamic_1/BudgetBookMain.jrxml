@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookMain" pageWidth="595" pageHeight="900" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dd05375-6b37-479e-9aaa-98571ed9cd0a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mbpn.BPN_NAME AS "bpnNameEng", mbpn.BPN_NAME_GUJ AS "bpnNameGuj", mfy.FY AS "fyEng", mfy.FY_GUJ AS "fyGuj",
+sum(NewItems) AS "newItem", sum(AppendixOne) AS "appendOne", sum(AppendixTwo) AS "appendTwo", sum(AnnexureA) AS "annexA"
+FROM
+(
+	SELECT count(1) NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA, BPN_ID, FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR 
+	WHERE APP_TYPE_ID IN (426,428) AND BPN_ID=$P{bpnId} AND FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY BPN_ID, FINANCIAL_YEAR_ID
+  UNION ALL
+	SELECT 0 NewItems , count(1) AppendixOne, 0 AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_DTL tpd, MASTER_V1.MS_OBJECTHEAD mo
+	WHERE tph.TBUD_PUB_HDR_ID=tpd.TBUD_PUB_HDR_ID AND tpd.OBJECT_ID = mo.OBJECT_ID
+	AND tpd.IS_RURAL=1 AND mo.OBJECT_CODE IN ('3131','3132') 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId}
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, count(1) AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_NC_HDR tpnh
+	WHERE tph.TBUD_PUB_HDR_ID=tpnh.TBUD_PUB_HDR_ID 
+	AND TPNH.SCHEME_TYPE_ID IN (624, 625)
+	AND tph.BPN_ID = $P{bpnId}
+	AND tph.IS_REVENUE_CAPITAL IN(5, 6)
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}
+	AND tph.APP_TYPE_ID IN (425, 426, 427, 428, 429)
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, count(1) AnnexureA,  tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_FY_BUDGET tpfb 
+	WHERE tpfb.FINANCIAL_YEAR_ID = tph.FINANCIAL_YEAR_ID AND tpfb.IS_MODIFIED_BUDGET=1 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA,  mbpn.BPN_ID, mfy.FINANCIAL_YEAR_ID
+	FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy
+	WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+) main_table
+JOIN MASTER_V1.MS_BPN mbpn ON mbpn.BPN_ID = main_table.BPN_ID
+JOIN MASTER_V1.MS_FINANCIAL_YEAR mfy ON mfy.FINANCIAL_YEAR_ID =main_table.FINANCIAL_YEAR_ID
+WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+GROUP BY mbpn.BPN_NAME, mbpn.BPN_NAME_GUJ, mfy.FY, mfy.FY_GUJ]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="newItem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="newItem"/>
+	</field>
+	<field name="appendOne" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendOne"/>
+	</field>
+	<field name="appendTwo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendTwo"/>
+	</field>
+	<field name="annexA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="annexA"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout"/>
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="550" height="69" uuid="507236a5-96e0-4b47-8b26-58b1748831cd"/>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookTitle.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="70" width="549" height="1" uuid="d89a5867-fbf7-4d7b-bfbf-44ef2795b096">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="71" width="550" height="29" uuid="e44f7219-cf8c-42d0-b099-d1de9ab5f9e4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookIndex.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="76" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="0" width="549" height="1" uuid="929782ca-7cde-4054-a689-bef6d0c47dc0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="1" width="550" height="75" isRemoveLineWhenBlank="true" uuid="371fd466-f7cb-4b14-9a61-d3a21f7c4e30">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/DemandCumMajorHeadTable.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="76">
+			<break>
+				<reportElement x="0" y="0" width="549" height="1" uuid="1763e10d-bbbb-45ca-a857-2a2472773756">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="1" width="550" height="75" isRemoveLineWhenBlank="true" uuid="ab839f51-0214-4918-90ec-be38a6d33d7d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/SummaryByMajorHeadTable.jrxml"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="75">
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="75" isRemoveLineWhenBlank="true" uuid="8a2c9dc3-f84b-4ac4-92a9-92273adf7e39">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetEstimatesDemand.jrxml"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="76">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="0" width="549" height="1" uuid="1c229652-40f5-4a91-ba11-1a9c4ad7cb48">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="1" width="550" height="75" isRemoveLineWhenBlank="true" uuid="e877d354-1cd6-4945-b35d-5194ff660c1e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookExpenditureHeading.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="76">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="0" width="549" height="1" uuid="a5721550-90c8-42bb-bea9-a79919032793">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="1" width="550" height="75" isRemoveLineWhenBlank="true" uuid="b3672b2e-ee07-4e1e-98d7-e8342b9f3798">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/PartBNewItemHeading.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<break>
+				<reportElement x="0" y="0" width="549" height="1" uuid="a4bd0984-7f21-4b5f-9a8a-1a11ed8ed7cc">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="60" isRemoveLineWhenBlank="true" uuid="cab949de-bb3c-43dd-a52e-42fca271e10c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{newItem}>0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/Dynamic_1/BudgetBookSect1Cover.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="64">
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="64" isRemoveLineWhenBlank="true" uuid="cffe4876-d044-4242-b04f-8a70be857b3f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[OR(($F{appendOne}>0),($F{appendTwo}>0))]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookAppendices.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="66">
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="2" width="550" height="64" isRemoveLineWhenBlank="true" uuid="66432ab3-37e5-4db4-b6f6-490663bc07e8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{appendTwo}>0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/Dynamic_1//AppendixPart2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="66">
+			<subreport>
+				<reportElement x="0" y="2" width="550" height="64" isRemoveLineWhenBlank="true" uuid="e8ef30cb-2593-46bf-b938-bf7c255b50c7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{annexA}>0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookAnnexutureA_Guj.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

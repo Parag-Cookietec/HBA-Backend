@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="New_work_guj_common" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba12e54e-8cfa-4d72-96ca-7faefef93cbb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+	mb.BPN_NAME_GUJ,
+	mmic.MINISTER_NAME_GUJ,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+	mm.MAJORHEAD_NAME_GUJ,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ms.SUBMAJORH_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBMAJORH_CODE_GUJ,
+	ms.SUBMAJORH_NAME_GUJ,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mmh.MINORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MINORHEAD_CODE_GUJ,
+	mmh.MINORHEAD_NAME_GUJ,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(msh.SUBHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBHEAD_CODE_GUJ,
+	msh.SUBHEAD_NAME_GUJ,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mo.OBJECT_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS OBJECT_CODE_GUJ,
+	mo.OBJECT_NAME_GUJ,
+	tph.MAJORHEAD_ID,
+	tph.SUBMAJORHEAD_ID,
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tpnh.OBJECT_ID 
+FROM 
+	BUDGET.TBUD_PUB_HDR tph,
+	BUDGET.TBUD_PUB_NC_HDR tpnh,
+	MASTER_V1.MS_BPN mb,
+	MASTER_V1.MS_MAJORHEAD mm,
+	MASTER_V1.MS_SUBMAJORHEAD ms,
+	MASTER_V1.MS_MINORHEAD mmh,
+	MASTER_V1.MS_SUBHEAD msh,
+	MASTER_V1.MS_OBJECTHEAD mo,
+	MASTER_V1.MS_MINISTER_IN_CHARGE mmic
+WHERE
+	tph.BPN_ID = mb.BPN_ID 
+	AND tph.MAJORHEAD_ID = mm.MAJORHEAD_ID 
+	AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+	AND tph.MINORHEAD_ID = mmh.MINORHEAD_ID 
+	AND tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	AND tph.TBUD_PUB_HDR_ID = tpnh.TBUD_PUB_HDR_ID 
+	AND tpnh.OBJECT_ID = mo.OBJECT_ID 
+	AND tpnh.MINISTER_IN_CHARGE = mmic.MS_MINI_IN_CHARGE_ID 
+	AND tph.APP_TYPE_ID = 428
+	AND tph.BPN_ID=$P{bpnId}
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}
+ORDER BY 
+	MAJORHEAD_CODE_GUJ,
+	SUBMAJORH_CODE_GUJ,
+	MINORHEAD_CODE_GUJ,
+	SUBHEAD_CODE_GUJ]]>
+	</queryString>
+	<field name="BPN_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BPN_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="MINISTER_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINISTER_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINISTER_IN_CHARGE"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORH_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORH_CODE_GUJ"/>
+	</field>
+	<field name="SUBMAJORH_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORH_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="MINORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_CODE_GUJ"/>
+	</field>
+	<field name="MINORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="SUBHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_CODE_GUJ"/>
+	</field>
+	<field name="SUBHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="OBJECT_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_CODE_GUJ"/>
+	</field>
+	<field name="OBJECT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_OBJECTHEAD"/>
+	</field>
+	<field name="MAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="SUBMAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="MINORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="SUBHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="OBJECT_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NC_HDR"/>
+	</field>
+	<variable name="total_val" class="java.lang.Double" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="150">
+			<staticText>
+				<reportElement x="210" y="129" width="108" height="20" uuid="e2e1e928-a77a-4923-8319-6a3c240ef4f0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[હેતુ સદર]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="332" y="89" width="48" height="21" isRemoveLineWhenBlank="true" uuid="1c8f5340-9f6d-4e59-9ebe-5aa653dae744">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{MINORHEAD_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="380" y="130" width="423" height="20" isRemoveLineWhenBlank="true" uuid="7b8dbc2b-a35e-4e44-a4de-97a89b3bd1ff">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{OBJECT_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="210" y="10" width="571" height="19" isRemoveLineWhenBlank="true" uuid="b07a06f2-47d8-4e90-81a4-ebc38e89a938">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BPN_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="380" y="89" width="423" height="21" isRemoveLineWhenBlank="true" uuid="020b8d61-21aa-42a8-b804-c0440dc047a7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{MINORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="330" y="130" width="50" height="20" isRemoveLineWhenBlank="true" uuid="3609d785-90f5-42ba-9b7f-cc575cfdb97b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{OBJECT_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="30" width="108" height="20" uuid="3b43932d-5bb3-4cbc-86f1-1c726ad30fdc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[મંત્રીશ્રી]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="109" width="108" height="20" uuid="18715516-8903-4890-8557-42973d528099"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[પેટા સદર]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="380" y="51" width="423" height="23" isRemoveLineWhenBlank="true" uuid="57030383-48c3-4bd5-9eae-aa023c167ae6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="332" y="110" width="48" height="20" isRemoveLineWhenBlank="true" uuid="adc00c5f-b7c7-43a2-b062-df8d56b830a8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{SUBHEAD_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="330" y="30" width="472" height="20" isRemoveLineWhenBlank="true" uuid="aa99aa02-42fc-41d0-80b1-48835dc42f75">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{MINISTER_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="330" y="74" width="50" height="16" isRemoveLineWhenBlank="true" uuid="90e51aae-7d3a-4d1c-88b3-4b1b9625521d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{SUBMAJORH_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="73" width="108" height="16" uuid="9af3ddef-c15b-4fa7-bb80-2ed2e4e892b8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[પેટા મુખ્ય સદર]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="88" width="108" height="21" uuid="8193266a-0d6a-4dcd-9777-ed3ad717aa53"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ગૌણ  સદર]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="380" y="110" width="423" height="20" isRemoveLineWhenBlank="true" uuid="9864e724-5da4-46b7-a54e-67d6f5e7f195">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{SUBHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="330" y="51" width="50" height="23" isRemoveLineWhenBlank="true" uuid="49b2524b-65bb-482d-8d42-69e9fb7202cb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="380" y="74" width="423" height="16" isRemoveLineWhenBlank="true" uuid="e72fce84-e996-4642-ac04-3c2476e98a95">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{SUBMAJORH_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="50" width="108" height="23" uuid="858b6ce9-6ef0-47c4-9572-76545c3ccd3e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[મુખ્ય સદર]]></text>
+			</staticText>
+		</band>
+		<band height="88">
+			<staticText>
+				<reportElement x="2" y="49" width="30" height="38" uuid="164c9356-c3d9-4364-b794-2585c73e4e24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[બાબત નંબર]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="732" y="0" width="70" height="28" isPrintWhenDetailOverflows="true" uuid="675ec206-efeb-4a58-90ae-fc38f0e2c384"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)
+(₹. In Lakhs)
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="50" width="151" height="37" uuid="3d49b80b-67f9-4f44-a053-2bfd0a6519e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[યોજનાનુ નામ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="50" width="80" height="37" uuid="5957ec6b-94e8-4f51-91eb-41a686092995"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૨૦૨૦-૨૦૨૧
+ના અંદાજપત્ર માટે
+ના અંદાજ
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="49" width="140" height="38" uuid="ee74c43b-07b6-4043-983b-cefb86e5402c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[પ્રાદેશીકતા]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="49" width="802" height="1" uuid="63a4cb9d-92d0-4dfd-9a8c-0fcf331550c9"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="472" y="49" width="79" height="39" uuid="55af695c-e472-4d68-98e6-743684d8895d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[અંદાજી ખર્ચ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="631" y="50" width="173" height="38" uuid="ee8ef1df-a761-4b64-9284-3517e765b101"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[વિશેષ નોંધ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="49" width="149" height="38" uuid="8ca113d9-e039-48cb-b720-5bfcdc7472a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[કાર્યપાલક પ્રભાગ]]></text>
+			</staticText>
+		</band>
+		<band height="31">
+			<subreport>
+				<reportElement x="-20" y="0" width="840" height="30" uuid="e722f05b-a250-4e2a-b4c3-3de0a7b2617b"/>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="majId">
+					<subreportParameterExpression><![CDATA[$F{MAJORHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subMajId">
+					<subreportParameterExpression><![CDATA[$F{SUBMAJORHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="minId">
+					<subreportParameterExpression><![CDATA[$F{MINORHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subHeadId">
+					<subreportParameterExpression><![CDATA[$F{SUBHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="objectId">
+					<subreportParameterExpression><![CDATA[$F{OBJECT_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="pro_total" toVariable="total_val"/>
+				<subreportExpression><![CDATA["/src/reports/BPN_28//New_work_guj_detaail.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="30" width="802" height="1" forecolor="#FFFFFF" uuid="e6f3fc34-60e4-435d-a93e-f562cd9d3c26">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</break>
+		</band>
+	</detail>
+	<summary>
+		<band height="32">
+			<subreport overflowType="Stretch">
+				<reportElement x="-20" y="2" width="840" height="30" uuid="6707e13e-5db0-4b1d-83b3-076a0a22cfd9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/BPN_28/New_work_eng_common.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

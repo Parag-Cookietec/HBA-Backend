@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<body style="font-size:12px;">
+	<table width="100%" text-align="left" style="padding: 1%;">
+		<tr>
+			<td colspan="2">Statement of fixation of pay under Gujarat Civil Service(Revision of Pay) Rules,2016
+				(See Para-2 of the Government Resolution, Finance Department No.PGR-102016-3-Pay Cell(M)
+				dated 26-08-2016)</td>
+		</tr>
+	</table>
+	<table style="padding: 1%;" width="100%">
+		<tr>
+			<td width="3%">1</td>
+			<td width="70%">Name of the Government Servant</td>
+			<td width="3%">:</td>
+			<td width="24%">$GOV_SERVANT_NAME</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Designation of the post in which pay is to be fixed as on 01/01/2016</td>
+			<td>:</td>
+			<td>$GOV_SERVANT_DESIGNATION_2016</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Status(substantive/officiating)</td>
+			<td>:</td>
+			<td>$GOV_SERVANT_STATUS</td>
+		</tr>
+		<tr>
+			<td valign="top">4</td>
+			<td>(i) Pre-revised scale(s) of Pay</td>
+			<td>:</td>
+			<td>$PRE_REVISED_SCALE</td>
+		</tr>
+		<tr>
+			<td valign="top"></td>
+			<td>(ii) The Higher Pay Scale of Pay in which employee drawing his pay as on 01/01/2016</td>
+			<td>:</td>
+			<td>$HIGHER_PAY_SCALE</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Existing emoluments as on 01/01/2016</td>
+			<td>:</td>
+			<td>$EXISTING_EMOLUMENTS_2016</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>(a) Basic Pay ( Pay in the applicable Pay Band plus applicable Grade Pay or basic pay in the
+				applicable scale) in the pre-revised structure as on 01/01/2016</td>
+			<td>:</td>
+			<td>$BASIC_PAY_2016</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>(b) Dearness Allowance sanctioned w.e.f. 01/01/2016</td>
+			<td>:</td>
+			<td>$DEARNESS_ALLOWANCE_2016</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>(c) NPA</td>
+			<td>:</td>
+			<td>$NPA_2016</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>(d) Total existing emoluments [(a) + (b) + (c)]</td>
+			<td>:</td>
+			<td>$TOTAL_EXISTING_EMOLUMENTS_2016</td>
+		</tr>
+		<tr>
+			<td valign="top">6</td>
+			<td>Basic Pay ( Pay in the applicable Pay Band plus applicable Grade Pay or basic pay in the
+				applicable scale) in the pre-revised structure as on 01/01/2016</td>
+			<td>:</td>
+			<td>$BASIC_PAY_IF_APPLICABLE_2016</td>
+		</tr>
+		<tr>
+			<td valign="top">7</td>
+			<td>Application Level in Pay Matrix corresponding to Pay Band and Grade Pay or scale shown at S.No 4</td>
+			<td>:</td>
+			<td>$APPLICATION_LEVEL</td>
+		</tr>
+		<tr>
+			<td valign="top">8</td>
+			<td>Amount arrived at by multiplying basic pay as at SI.No. 6 by 2.57</td>
+			<td>:</td>
+			<td>$AMOUNT_BASIC_PAY</td>
+		</tr>
+		<tr>
+			<td valign="top">9</td>
+			<td>Applicable Cell in the Level either equal to or just above the Amount at SI. No. 8</td>
+			<td>:</td>
+			<td>$APPLICATION_CELL</td>
+		</tr>
+		<tr>
+			<td valign="top">10</td>
+			<td>Revised Basic Pay(as per SI. No. 9) as on date</td>
+			<td>:</td>
+			<td>$REVISED_BASIC_PAY_2016</td>
+		</tr>
+		<tr>
+			<td valign="top">11</td>
+			<td>Personal Pay, if any [Rule 7(7) and 7(9)]</td>
+			<td>:</td>
+			<td>$PERSONAL_PAY_2016</td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td>Revised pay with reference to the Substantive Pay in cases where the pay fixed in the officiating post
+				is lower than the pay fixed in the substantive post if applicable [Rule 7(11)]</td>
+			<td>:</td>
+			<td>$REVISED_PAY_2016</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td>Personal Pay if admissible </td>
+			<td>:</td>
+			<td>$PERSONAL_PAY_ADMISSIBLE</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td>Non-Practicing Allowance , if admissible</td>
+			<td>:</td>
+			<td>$NON_PRACTICING_ALLOWANCE_2016</td>
+		</tr>
+		<tr>
+			<td valign="top">15</td>
+			<td>Date of Next increment(rules 9 & 10) and pay after grant of increment</td>
+			<td>:</td>
+			<td>$DATE_OF_NEXT_INC_2016</td>
+		</tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+	</table>
+	<table CELLSPACING=0 width="100%" style="padding: 1%;">
+		<tr>
+			<td>Pay After Increment</td>
+		</tr>
+		<tr>
+			<th style="border: 1px solid; padding:7px">Date Of Increment</th>
+			<th style="border: 1px solid; border-left-width: 0; padding:7px">Pay in the Pay Band/Scale</th>
+		</tr>
+		#foreach($increment in $PAYHISTORY)
+		<tr>
+			<td style="border: 1px solid; border-top-width: 0; padding:7px">$increment['PAY_AFTER_INC_TABLE']</td> 
+			<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$increment['PAY_IN_PAY_BAND_SACLE_TABLE']</td> 
+		</tr>
+		#end
+	</table>
+	<table width="100%" style="padding: 2% 1%;">
+		<tr>
+			<td width="3%" valign="top">16</td>
+			<td width="70%">Any other relevant information</td>
+			<td width="3%">:</td>
+			<td width="24%">$ANY_OTHER_INFO</td>
+		</tr>
+	</table>
+	<table width="100%" style="padding: 1%;">
+		<tr>
+			<td>Date : $DATE</td>
+		</tr>
+	</table>
+</body>
+
+</html>

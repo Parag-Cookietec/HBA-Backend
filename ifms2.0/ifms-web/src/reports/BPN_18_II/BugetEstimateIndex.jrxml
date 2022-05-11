@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookIndex" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mbpn.BPN_NAME AS "bpnNameEng", mbpn.BPN_NAME_GUJ AS "bpnNameGuj", mfy.FY AS "fyEng", mfy.FY_GUJ AS "fyGuj",
+sum(NewItems) AS "newItem", sum(AppendixOne) AS "appendOne", sum(AppendixTwo) AS "appendTwo", sum(AnnexureA) AS "annexA"
+FROM
+(
+	SELECT count(1) NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA, BPN_ID, FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR 
+	WHERE APP_TYPE_ID IN (426,428) AND BPN_ID=$P{bpnId} AND FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY BPN_ID, FINANCIAL_YEAR_ID
+  UNION ALL
+	SELECT 0 NewItems , count(1) AppendixOne, 0 AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_DTL tpd, MASTER_V1.MS_OBJECTHEAD mo
+	WHERE tph.TBUD_PUB_HDR_ID=tpd.TBUD_PUB_HDR_ID AND tpd.OBJECT_ID = mo.OBJECT_ID
+	AND tpd.IS_RURAL=1 AND mo.OBJECT_CODE IN ('3131','3132') 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId}
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, count(1) AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_NC_HDR tpnh, MASTER_V1.LU_LOOKUP_INFO lli
+	WHERE tph.TBUD_PUB_HDR_ID=tpnh.TBUD_PUB_HDR_ID AND lli.LOOKUP_INFO_ID=tpnh.IS_CSS
+	AND upper(lli.LOOKUP_INFO_NAME) IN ('STATE','BOTH') 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId}
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, count(1) AnnexureA,  tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_FY_BUDGET tpfb 
+	WHERE tpfb.FINANCIAL_YEAR_ID = tph.FINANCIAL_YEAR_ID AND tpfb.IS_MODIFIED_BUDGET=1 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA,  mbpn.BPN_ID, mfy.FINANCIAL_YEAR_ID
+	FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy
+	WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+) main_table
+JOIN MASTER_V1.MS_BPN mbpn ON mbpn.BPN_ID = main_table.BPN_ID
+JOIN MASTER_V1.MS_FINANCIAL_YEAR mfy ON mfy.FINANCIAL_YEAR_ID =main_table.FINANCIAL_YEAR_ID
+WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+GROUP BY mbpn.BPN_NAME, mbpn.BPN_NAME_GUJ, mfy.FY, mfy.FY_GUJ]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="newItem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="newItem"/>
+	</field>
+	<field name="appendOne" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendOne"/>
+	</field>
+	<field name="appendTwo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendTwo"/>
+	</field>
+	<field name="annexA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="annexA"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="152" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="41" width="390" height="19" uuid="6db817c0-75c8-44c2-a4a7-d9c10a7d9974"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિષયસૂચિ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="41" width="391" height="19" uuid="c0066af4-1a01-42da-b1cc-5740b6264fb0"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTENTS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="69" width="802" height="1" uuid="5c10ad4a-106d-40d9-9370-9ecd37f375c7"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="75" width="50" height="20" uuid="d99aaf08-4302-4f95-88bd-40106def950d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ક્રમ નં.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="75" width="280" height="20" uuid="1a171611-3883-4a00-bd31-862dc9b05567"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિગતો]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="75" width="60" height="20" uuid="ed784abc-c77d-466d-8b7b-743b568eba07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[પૃષ્ઠ નં.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="75" width="50" height="20" uuid="4c336627-451d-49ce-bd5e-e642ea612031"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sr. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="75" width="280" height="20" uuid="7e7c148b-659d-4fc2-88a6-b3940b003980"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="75" width="60" height="20" uuid="991775a3-65b1-4538-9591-138d4a083b89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="100" width="802" height="1" uuid="7117e0ee-ce4d-4796-9f2e-ad5d72f37051"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="112" width="50" height="23" uuid="15388dac-f826-45c1-986c-f77ac77029d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[(૧)]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="50" y="112" width="280" height="23" uuid="db6249f7-26a1-423f-aa7d-6db565c16717">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પંચાયતોને સહાયક અનુદાન માટેની યોજનાવાર જોગવાઇઓની વિગતો દર્શાવતુ પત્રક."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="112" width="50" height="23" uuid="9c09a3f3-e574-4f70-a650-f783e677add9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[(1)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="112" width="280" height="23" uuid="ef503f7f-3d6f-4bec-ac8b-26b28ef9470c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement showing details of Scheme Wise provision \n"+"made for Grant-in-Aid to Panchayats"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="2" width="391" height="38" uuid="2780ff12-e233-41cd-a59d-6d48920fb7cd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bpnNameEng}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="2" width="390" height="38" uuid="02dfb206-8796-45d5-bc95-9a556c31c70a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bpnNameGuj}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="151" width="802" height="1" uuid="27d69e69-46c0-42e6-80dc-f3da9be523ab"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

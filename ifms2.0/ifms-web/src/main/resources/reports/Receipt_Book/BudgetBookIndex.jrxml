@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookIndex" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mbpn.BPN_NAME AS "bpnNameEng", mbpn.BPN_NAME_GUJ AS "bpnNameGuj", mfy.FY AS "fyEng", mfy.FY_GUJ AS "fyGuj",
+sum(NewItems) AS "newItem", sum(AppendixOne) AS "appendOne", sum(AppendixTwo) AS "appendTwo", sum(AnnexureA) AS "annexA"
+FROM
+(
+	SELECT count(1) NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA, BPN_ID, FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR 
+	WHERE APP_TYPE_ID IN (426,428) AND BPN_ID=$P{bpnId} AND FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY BPN_ID, FINANCIAL_YEAR_ID
+  UNION ALL
+	SELECT 0 NewItems , count(1) AppendixOne, 0 AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_DTL tpd, MASTER_V1.MS_OBJECTHEAD mo
+	WHERE tph.TBUD_PUB_HDR_ID=tpd.TBUD_PUB_HDR_ID AND tpd.OBJECT_ID = mo.OBJECT_ID
+	AND tpd.IS_RURAL=1 AND mo.OBJECT_CODE IN ('3131','3132') 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId}
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, count(1) AppendixTwo, 0 AnnexureA,  tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_NC_HDR tpnh, MASTER_V1.LU_LOOKUP_INFO lli
+	WHERE tph.TBUD_PUB_HDR_ID=tpnh.TBUD_PUB_HDR_ID AND lli.LOOKUP_INFO_ID=tpnh.IS_CSS
+	AND upper(lli.LOOKUP_INFO_NAME) IN ('STATE','BOTH') 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId}
+	GROUP BY tph.BPN_ID, tph.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, count(1) AnnexureA,  tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+	FROM BUDGET.TBUD_PUB_HDR tph, BUDGET.TBUD_PUB_FY_BUDGET tpfb 
+	WHERE tpfb.FINANCIAL_YEAR_ID = tph.FINANCIAL_YEAR_ID AND tpfb.IS_MODIFIED_BUDGET=1 
+	AND tph.BPN_ID=$P{bpnId} AND tph.FINANCIAL_YEAR_ID =$P{fyId} 
+	GROUP BY tph.BPN_ID, tpfb.FINANCIAL_YEAR_ID
+  UNION ALL 
+	SELECT 0 NewItems , 0 AppendixOne, 0 AppendixTwo, 0 AnnexureA,  mbpn.BPN_ID, mfy.FINANCIAL_YEAR_ID
+	FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy
+	WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+) main_table
+JOIN MASTER_V1.MS_BPN mbpn ON mbpn.BPN_ID = main_table.BPN_ID
+JOIN MASTER_V1.MS_FINANCIAL_YEAR mfy ON mfy.FINANCIAL_YEAR_ID =main_table.FINANCIAL_YEAR_ID
+WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}
+GROUP BY mbpn.BPN_NAME, mbpn.BPN_NAME_GUJ, mfy.FY, mfy.FY_GUJ]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="newItem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="newItem"/>
+	</field>
+	<field name="appendOne" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendOne"/>
+	</field>
+	<field name="appendTwo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="appendTwo"/>
+	</field>
+	<field name="annexA" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="annexA"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="510" splitType="Stretch">
+			<staticText>
+				<reportElement x="-17" y="20" width="397" height="20" uuid="8a44108e-50d6-4bf9-823b-61c04cd9802a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[આમુખ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="20" width="381" height="20" uuid="41ca7455-7b93-4449-b2e8-8c9b04c50cf2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFACE]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="-9" y="50" width="390" height="110" uuid="80a7c683-81c4-48d2-b160-c7e84d4cce6a"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" ભારતના કોમ્પ્ટ્રોલર અને ઓડિટર જનરલે ભારતના સંવિધાન ની કલમ ૧૫૦ અન્વયે પાંચમી પંચવર્ષીય યોજનાના પ્રથમ વર્ષને સમવર્તી એટલે કે ૧૯૭૪-૭૫ના વર્ષથી સંઘ, રાજ્યો અને સંઘ પ્રદેશ ની સરકારોના હિસાબો રાખવા માટેનું સુધારેલું ફોર્મ નિયત કર્યું છે. રાજ્યનું "+$F{fyGuj}+" માટેનું અંદાજપત્ર, ભારતના કોમ્પ્ટ્રોલર અને ઓડિટર જનરલે નિયત કર્યા પ્રમાણેની હિસાબ વર્ગીકરણની સુધારેલી પદ્ધતિ મુજબ તૈયાર કરવામાં આવ્યું છે."]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="-9" y="180" width="390" height="60" uuid="fbd46d14-62a5-40c6-b2f1-6b2ae4c284a4"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   રાજ્ય વિધાનસભા સમક્ષ અનુદાન માટેની માંગણી તેમજ અંદાજપત્ર ની રજૂઆત, અંદાજ સમિતિએ પાંચમી ગુજરાત વિધાનસભાના નવમાં અહેવાલમાં કરેલી ભલામણો મુજબ કરવામાં આવી છે."]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="420" y="180" width="381" height="60" uuid="e4703f12-de99-47ed-b781-db1eb292802e"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" The form of presentation of demand of grant as well as the Budget Estimates to the State Legislature are as per recommendations made by Estimates Committee in its Ninth Report of the Fifth Gujarat Legislative Assembly."]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="420" y="50" width="381" height="110" uuid="c1beaeb9-91e5-4983-98a8-0fc9bd55d8f5"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["The Comptroller and Auditor General of India has, under Article 150 of the Constitution of India, prescribed a revised form in which the accounts of the Union, the State and the Union Territory Government should be kept from the year 1974-75 which coincided with the first year of Fifth Five year plan. The State Budget Estimates for "+$F{fyEng}+" have been prepared under the revised system of accounts classifications as prescribed by the Comptroller and Auditor General of India."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="748" y="320" width="52" height="20" uuid="0dc2a1fd-dc4d-4495-b37c-5b432488f508"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="340" width="801" height="1" uuid="0d0f0062-36e8-4ddf-9615-0a72a53d40d0"/>
+			</line>
+			<line>
+				<reportElement x="3" y="320" width="801" height="1" uuid="9038040a-ba2e-428c-908a-0b4faa6bfed8"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="380" width="20" height="35" uuid="d850fa75-64a6-4f10-ba50-bcfc7263284d"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[૨]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="320" width="253" height="20" uuid="0396846c-cd60-49d3-bbd6-f292561cc520"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિગતો]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="19" y="490" width="321" height="20" uuid="176bf679-cfd4-4592-a97b-89891e96b364"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGuj}+"માટે મુખ્ય સદર - વિભાગવાર ખર્ચનો સારાંશ"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="20" y="437" width="320" height="32" uuid="ba88e55c-8dd8-4c79-aae7-820a9f09c6f8"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(ખ)"+$F{fyGuj}+ " આકસ્મિતા નિધિ અને જાહેર હિસાબ વગેરે હેઠળની લેવડદેવડ અંગેના"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="490" width="20" height="20" uuid="6966eb17-792f-48d9-ac05-73a40ebf7be8"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[4	         ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="380" width="359" height="35" uuid="9f3ff931-7aab-42da-a79e-2616c158031c"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Receipt and Outgoing under contigency Fund and Public Account etc. for "+$F{fyEng}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="370" y="380" width="30" height="30" uuid="e6f75580-8325-4b6c-84c9-98e6b0ca9b4d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[2	               ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="350" width="30" height="30" uuid="4025813d-00dd-4cda-aa3e-0531b9299779"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[1	                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="415" width="20" height="22" uuid="0391741b-3b71-462b-9f52-baa2af36dea2"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[3	             ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="415" width="320" height="22" uuid="b541a971-f054-4626-acb3-a4910ee3dbec"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(ક) એકત્રિત નિધિ હેઠળ પ્રાપ્તિ; અને"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="462" width="320" height="28" uuid="6ab7e658-6b62-4995-a06c-85a3e17eeda0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["આંકડાને લગતી સમજૂતી."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="415" width="359" height="22" uuid="b5972137-bff0-47d7-8589-51d20d48bf79"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Explanation pertaining to the figures under :-"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="380" width="320" height="37" uuid="c61b88df-2701-42e1-9bc0-f64710f77644"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGuj}+"માટે અકસ્મિતા નિધિ અને જાહેર હિસાબ વગેરે હેઠળ પ્રાપ્તિ અને ખર્ચ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="280" width="842" height="20" uuid="075ff744-be7f-402c-aacd-308f49974335"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિષય−સૂચિ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="341" width="359" height="39" uuid="5ff3f204-4614-402b-8321-ddae9712fb46">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Detailed Budget Estimates of Receipt under Consolidated Fund of "+$F{fyEng}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="300" width="840" height="20" uuid="b4ed47c0-0b00-439f-924e-9e27d5ca0cef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFACE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="321" width="69" height="19" uuid="bd2d5dad-faac-4af2-9b71-11d7a4edcac3"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ક્રમાંક]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="320" width="340" height="20" uuid="4a7c3471-94b6-4e02-a9bb-8a52af34b17f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="320" width="85" height="20" uuid="8fc26166-53d3-450a-bca5-e293011d6a5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[	Sr. No.	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="415" width="20" height="22" uuid="72d6f39d-bce9-4740-b464-9494eed00937"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[૩]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="20" y="341" width="420" height="39" uuid="a0a63fe4-a01e-4b20-8130-7506e54d6d65"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGuj}+"માટે એકત્રિત નિધિ હેઠળ પ્રાપ્તિના વિગતવાર અંદાજ."]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="381" y="462" width="359" height="28" uuid="6c747162-1212-4243-b34e-d402596728dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(b)  Tranactions under Contingency Fund and Public Accounts etc. for 2020-2021"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="437" width="359" height="32" uuid="4c143499-3c49-4346-8fd8-7760211fca74"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(a) Receipt under Consolidate Fund; and"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="380" y="490" width="359" height="20" uuid="999440fe-7fdd-4c21-86b0-cc7824fdbc9e"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Major Head-cum-Department wise Summary of Expenditure for "+$F{fyEng}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="350" width="29" height="30" uuid="69768b68-0f9f-435b-ba94-d7532da7efeb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[૧	               ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="490" width="19" height="20" uuid="a6afe505-f953-4879-b520-0913f93d3a9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[૪]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="270" width="97" height="1" uuid="04720814-0732-4f6a-915d-89ea8d86c909"/>
+			</break>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

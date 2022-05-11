@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="New_work_eng_common" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba12e54e-8cfa-4d72-96ca-7faefef93cbb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+	mb.BPN_NAME,
+	mmic.MINISTER_NAME,
+	mm.MAJORHEAD_CODE,
+	mm.MAJORHEAD_NAME,
+	ms.SUBMAJORHEAD_CODE,
+	ms.SUBMAJORHEAD_NAME,
+	mmh.MINORHEAD_CODE,
+	mmh.MINORHEAD_NAME,
+	msh.SUBHEAD_CODE,
+	msh.SUBHEAD_NAME,
+	mo.OBJECT_CODE,
+	mo.OBJECT_NAME,
+	tph.MAJORHEAD_ID,
+	tph.SUBMAJORHEAD_ID,
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tpnh.OBJECT_ID 
+FROM 
+	BUDGET.TBUD_PUB_HDR tph,
+	BUDGET.TBUD_PUB_NC_HDR tpnh,
+	MASTER_V1.MS_BPN mb,
+	MASTER_V1.MS_MAJORHEAD mm,
+	MASTER_V1.MS_SUBMAJORHEAD ms,
+	MASTER_V1.MS_MINORHEAD mmh,
+	MASTER_V1.MS_SUBHEAD msh,
+	MASTER_V1.MS_OBJECTHEAD mo,
+	MASTER_V1.MS_MINISTER_IN_CHARGE mmic
+WHERE
+	tph.BPN_ID = mb.BPN_ID 
+	AND tph.MAJORHEAD_ID = mm.MAJORHEAD_ID 
+	AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+	AND tph.MINORHEAD_ID = mmh.MINORHEAD_ID 
+	AND tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	AND tph.TBUD_PUB_HDR_ID = tpnh.TBUD_PUB_HDR_ID 
+	AND tpnh.OBJECT_ID = mo.OBJECT_ID 
+	AND tpnh.MINISTER_IN_CHARGE = mmic.MS_MINI_IN_CHARGE_ID 
+	AND tph.APP_TYPE_ID = 428
+	AND tph.BPN_ID=$P{bpnId}
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}
+ORDER BY 
+	mm.MAJORHEAD_CODE,
+	ms.SUBMAJORHEAD_CODE,
+	mmh.MINORHEAD_CODE,
+	msh.SUBHEAD_CODE]]>
+	</queryString>
+	<field name="BPN_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BPN_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="MINISTER_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINISTER_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINISTER_IN_CHARGE"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="MINORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="MINORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="SUBHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="SUBHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="OBJECT_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_OBJECTHEAD"/>
+	</field>
+	<field name="OBJECT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_OBJECTHEAD"/>
+	</field>
+	<field name="MAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="SUBMAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="MINORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="SUBHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="OBJECT_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NC_HDR"/>
+	</field>
+	<variable name="total_val" class="java.lang.Double" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="140">
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="239" y="5" width="560" height="19" isRemoveLineWhenBlank="true" uuid="b07a06f2-47d8-4e90-81a4-ebc38e89a938">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BPN_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="409" y="45" width="390" height="19" isRemoveLineWhenBlank="true" uuid="57030383-48c3-4bd5-9eae-aa023c167ae6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{MAJORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="409" y="121" width="390" height="19" isRemoveLineWhenBlank="true" uuid="7b8dbc2b-a35e-4e44-a4de-97a89b3bd1ff">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{OBJECT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="359" y="64" width="50" height="19" uuid="90e51aae-7d3a-4d1c-88b3-4b1b9625521d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{SUBMAJORHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="101" width="108" height="19" uuid="18715516-8903-4890-8557-42973d528099"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Head]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="409" y="64" width="390" height="19" isRemoveLineWhenBlank="true" uuid="e72fce84-e996-4642-ac04-3c2476e98a95">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{SUBMAJORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="409" y="102" width="390" height="19" isRemoveLineWhenBlank="true" uuid="9864e724-5da4-46b7-a54e-67d6f5e7f195">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{SUBHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="82" width="108" height="19" uuid="8193266a-0d6a-4dcd-9777-ed3ad717aa53"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Minor Head]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="25" width="108" height="19" uuid="3b43932d-5bb3-4cbc-86f1-1c726ad30fdc"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Minister in charge]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="409" y="83" width="390" height="19" isRemoveLineWhenBlank="true" uuid="020b8d61-21aa-42a8-b804-c0440dc047a7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-" +$F{MINORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="361" y="83" width="47" height="19" uuid="1c8f5340-9f6d-4e59-9ebe-5aa653dae744">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{MINORHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="44" width="108" height="19" uuid="858b6ce9-6ef0-47c4-9572-76545c3ccd3e"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Major head]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="359" y="25" width="440" height="19" isRemoveLineWhenBlank="true" uuid="aa99aa02-42fc-41d0-80b1-48835dc42f75">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{MINISTER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="359" y="45" width="50" height="19" uuid="49b2524b-65bb-482d-8d42-69e9fb7202cb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" + $F{MAJORHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="359" y="121" width="50" height="19" isRemoveLineWhenBlank="true" uuid="3609d785-90f5-42ba-9b7f-cc575cfdb97b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{OBJECT_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="120" width="108" height="19" uuid="e2e1e928-a77a-4923-8319-6a3c240ef4f0"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Object Head]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.00#">
+				<reportElement x="361" y="102" width="48" height="19" uuid="adc00c5f-b7c7-43a2-b062-df8d56b830a8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[":" +$F{SUBHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="63" width="108" height="19" uuid="9af3ddef-c15b-4fa7-bb80-2ed2e4e892b8"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Major Head]]></text>
+			</staticText>
+		</band>
+		<band height="93">
+			<staticText>
+				<reportElement x="171" y="46" width="149" height="47" uuid="13a0314c-6040-485f-a54e-3c2015bab4c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Executive Division]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="46" width="140" height="47" uuid="5d25a660-7645-4657-9db3-1cd715fc6e2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Locality]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="46" width="80" height="47" uuid="f8dd5b1e-0314-48b2-8a5e-fd0c681f26aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Provision Proposed for 2020 -2021]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="46" width="30" height="47" uuid="aa7024ec-95c1-486e-a0d8-863b74960205"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Item No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="46" width="150" height="47" uuid="11ad7768-1196-45d3-bbf7-97329cf6cab1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Name of the Work]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="46" width="170" height="47" uuid="a594ef57-c65d-4709-80e0-78a9ccabf4f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Explanation regarding Necessity and urgency of Work]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="46" width="79" height="47" uuid="ada4193b-f547-4ff6-8d38-eb63c231dc34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Amount of Sanctioned Estimated Item]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-2" y="45" width="802" height="1" uuid="214bc017-c292-4926-9579-e78ea234ecd1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="730" y="0" width="70" height="28" uuid="4a8d9c2e-8885-4474-8406-e90571c49680"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)
+(₹. In Lakhs)
+]]></text>
+			</staticText>
+		</band>
+		<band height="34">
+			<subreport>
+				<reportElement x="-20" y="0" width="842" height="30" uuid="99079517-aa0a-4579-8307-f0c7b0df7b1e"/>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="majId">
+					<subreportParameterExpression><![CDATA[$F{MAJORHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subMajId">
+					<subreportParameterExpression><![CDATA[$F{SUBMAJORHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="minId">
+					<subreportParameterExpression><![CDATA[$F{MINORHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subHeadId">
+					<subreportParameterExpression><![CDATA[$F{SUBHEAD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="objectId">
+					<subreportParameterExpression><![CDATA[$F{OBJECT_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="pro_total" toVariable="total_val" calculation="Sum"/>
+				<subreportExpression><![CDATA["/src/reports/BPN_28/New_work_eng_detaail.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="33" width="802" height="1" forecolor="#FFFFFF" uuid="8604972b-d60b-48f5-b2ec-7ab928e3a370"/>
+			</break>
+		</band>
+	</detail>
+</jasperReport>

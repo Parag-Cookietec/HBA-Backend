@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>New Data Adapter 1</name><driver>com.ibm.db2.jcc.DB2Driver</driver><username>EDP_U63</username><password>Mad@!23</password><savePassword>true</savePassword><url>jdbc:db2://10.10.7.4:50000/IFMS_V1</url><database></database><serverAddress></serverAddress><classpath>D:\db2jcc4 (4).jar</classpath></jdbcDataAdapter>

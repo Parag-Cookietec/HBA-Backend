@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimateObjectDistrict" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d2e23e84-3949-4faf-93f9-3de54fe48799">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="demandId" class="java.lang.Long"/>
+	<parameter name="majHeadId" class="java.lang.Long"/>
+	<parameter name="subMajHeadId" class="java.lang.Long"/>
+	<parameter name="majHeadCode" class="java.lang.String"/>
+	<parameter name="objHeadId" class="java.lang.Long"/>
+	<parameter name="detailHeadId" class="java.lang.String"/>
+	<parameter name="minorHeadId" class="java.lang.Long"/>
+	<parameter name="subHeadId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+NFY.DEMAND_ID, 
+	NFY.MAJORHEAD_ID, 
+	NFY.SUBMAJORHEAD_ID, 
+	NFY.MINORHEAD_ID,
+	NFY.SUBHEAD_ID,
+	NFY.DETAILHEAD_ID,
+	NFY.OBJECT_ID,
+NFY.DISTRICT_ID,
+COALESCE(NFY.DISTRICT_NAME,CFY1.DISTRICT_NAME ) AS DISTRICT_NAME,
+COALESCE(NFY.DISTRICT_NAME_GUJ ,CFY1.DISTRICT_NAME_GUJ) AS DISTRICT_NAME_GUJ,
+NFY.BUDGET_ESTIMATE,
+NFY.ESTIMATED_COST,
+NFY.PROBABLE_EXP,CFY1.MOD_BUDGET_ESTIMATE ,
+0 AS ACCOUNTS
+FROM 
+(
+SELECT abc.DEMAND_ID, 
+	abc.MAJORHEAD_ID, 
+	abc.SUBMAJORHEAD_ID, 
+	abc.MINORHEAD_ID,
+	abc.SUBHEAD_ID,
+	abc.DETAILHEAD_ID,
+	abc.OBJECT_ID,
+abc.DISTRICT_ID,abc.DISTRICT_NAME, abc.DISTRICT_NAME_GUJ ,
+ROUND(sum(abc.BE),2) AS BUDGET_ESTIMATE,
+ROUND(sum(abc.ESTIMATED_COST),2) AS ESTIMATED_COST,ROUND(sum(abc.PROBABLE_EXP),2) AS PROBABLE_EXP
+FROM 
+(
+SELECT 
+	workOlder.DEMAND_ID, 
+	workOlder.MAJORHEAD_ID, 
+	workOlder.SUBMAJORHEAD_ID, 
+	workOlder.MINORHEAD_ID,
+	workOlder.SUBHEAD_ID,
+	workOlder.DETAILHEAD_ID,
+	workOlder.OBJECT_ID,
+	workOlder.DISTRICT_ID,
+	workOlder.DISTRICT_NAME,
+	workOlder.DISTRICT_NAME_GUJ ,
+	workOlder."1a" AS ESTIMATED_COST,
+	wip."1b" AS PROBABLE_EXP,
+	wip.PROPOSED_AMOUNT AS BE
+
+FROM 
+(SELECT 
+tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+	tph.SUBMAJORHEAD_ID, 
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tph.DETAILHEAD_ID,
+	tpnh.OBJECT_ID,
+	tpnl.DISTRICT_ID,
+	md.DISTRICT_NAME ,
+	md.DISTRICT_NAME_GUJ ,
+tpnl.ESTIMATED_COST AS "1a",
+	tpnl.TBUD_PUB_NW_LST_ID 
+FROM 
+BUDGET.TBUD_PUB_HDR tph
+INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+LEFT JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+LEFT JOIN MASTER_V1.MS_DISTRICT md ON md.DISTRICT_ID = tpnl.DISTRICT_ID
+LEFT JOIN MASTER_V1.MS_EXECUTIVE_DIVI med ON med.EXEC_DIVI_TYPE_ID = tpnl.EXECUTIVE_DIVISION 
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+   AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.FINANCIAL_YEAR_ID < $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tpnh.OBJECT_ID  = $P{objHeadId} 
+	ORDER BY WORK_NO )workOlder
+LEFT JOIN 	
+(
+	SELECT tpwl.TOT_PRO_EXP_CUR_FY AS "1b",
+	   tpwl.PROPOSED_AMOUNT,
+	   tpwl.TBUD_PUB_NW_LST_ID
+	FROM BUDGET.TBUD_PUB_WIP_LST tpwl
+		INNER JOIN BUDGET.TBUD_PUB_HDR tph ON tpwl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+		INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	WHERE 
+		tph.APP_TYPE_ID = 429 
+		AND tph.BPN_ID = $P{bpnId}
+		AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+		AND tph.IS_REVENUE_CAPITAL IN (5,6) 
+		AND tph.DEMAND_ID = $P{demandId} 
+		AND tph.MAJORHEAD_ID = $P{majHeadId}
+		AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+		AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+		AND tph.SUBHEAD_ID  = $P{subHeadId} 
+		AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+		AND tpnh.OBJECT_ID  = $P{objHeadId} 
+) wip ON wip.TBUD_PUB_NW_LST_ID = workOlder.TBUD_PUB_NW_LST_ID 	
+
+UNION ALL 
+
+SELECT 
+tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+	tph.SUBMAJORHEAD_ID, 
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tph.DETAILHEAD_ID,
+	tpnh.OBJECT_ID,
+	tpnl.DISTRICT_ID,
+	md.DISTRICT_NAME ,
+	md.DISTRICT_NAME_GUJ ,
+	tpnl.ESTIMATED_COST AS ESTIMATED_COST,
+	NULL AS PROBABLE_EXP,
+	(COALESCE(tpnl.ACTUAL_ESTABLISHMENT,0) + COALESCE(tpnl.ACTUAL_MACHINERY,0) + COALESCE(tpnl.PROVISION_NEXT_FY,0)) AS BE
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	LEFT JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	LEFT JOIN MASTER_V1.MS_DISTRICT md ON md.DISTRICT_ID = tpnl.DISTRICT_ID
+	LEFT JOIN MASTER_V1.MS_EXECUTIVE_DIVI med ON med.EXEC_DIVI_TYPE_ID = tpnl.EXECUTIVE_DIVISION 
+	WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+    AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tpnh.OBJECT_ID  = $P{objHeadId} 
+	
+	ORDER BY DISTRICT_NAME )abc
+		GROUP BY abc.DEMAND_ID, 
+	abc.MAJORHEAD_ID, 
+	abc.SUBMAJORHEAD_ID, 
+	abc.MINORHEAD_ID,
+	abc.SUBHEAD_ID,
+	abc.DETAILHEAD_ID,
+	abc.OBJECT_ID,abc.DISTRICT_ID,abc.DISTRICT_NAME, abc.DISTRICT_NAME_GUJ)	
+	NFY
+	
+	FULL OUTER JOIN 
+	
+	/*SELECT
+CFY1.DEMAND_ID, 
+	CFY1.MAJORHEAD_ID, 
+	CFY1.SUBMAJORHEAD_ID, 
+	CFY1.MINORHEAD_ID,
+	CFY1.SUBHEAD_ID,
+	CFY1.DETAILHEAD_ID,
+	CFY1.OBJECT_ID,
+CFY1.DISTRICT_ID,CFY1.DISTRICT_NAME, CFY1.DISTRICT_NAME_GUJ ,
+CFY1.MOD_BUDGET_ESTIMATE 
+FROM(*/
+	(
+SELECT abc.DEMAND_ID, 
+	abc.MAJORHEAD_ID, 
+	abc.SUBMAJORHEAD_ID, 
+	abc.MINORHEAD_ID,
+	abc.SUBHEAD_ID,
+	abc.DETAILHEAD_ID,
+	abc.OBJECT_ID,
+abc.DISTRICT_ID,abc.DISTRICT_NAME, abc.DISTRICT_NAME_GUJ ,
+ROUND(sum(abc.MOD_BUD_EST),2) AS MOD_BUDGET_ESTIMATE
+FROM 
+(
+SELECT 
+	workOlder.DEMAND_ID, 
+	workOlder.MAJORHEAD_ID, 
+	workOlder.SUBMAJORHEAD_ID, 
+	workOlder.MINORHEAD_ID,
+	workOlder.SUBHEAD_ID,
+	workOlder.DETAILHEAD_ID,
+	workOlder.OBJECT_CODE,
+	workOlder.OBJECT_ID,
+	workOlder.DISTRICT_ID,
+	workOlder.DISTRICT_NAME,
+	workOlder.DISTRICT_NAME_GUJ,
+	--workOlder.WORK_NO,
+	--workOlder.WORK_NAME,
+--	workOlder.WORK_NAME_GUJ,
+	NULL AS ESTIMATED_COST,
+--	NULL AS EXECUTIVE_DIVI_NAME,
+--	NULL AS EXECUTIVE_DIVI_NAME_GUJ,
+	NULL AS PROBABLE_EXP,
+	CASE WHEN $P{fyId}-1 = workOlder.FINANCIAL_YEAR_ID THEN workOlder.PROVISION_NEXT_FY ELSE wip.PROPOSED_AMOUNT END   AS MOD_BUD_EST
+FROM 
+(
+SELECT 	
+	tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+	tph.SUBMAJORHEAD_ID, 
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tph.DETAILHEAD_ID,
+	mo.OBJECT_CODE,
+	tpnh.OBJECT_ID,
+	md1.DISTRICT_ID ,
+	md1.DISTRICT_NAME ,
+	md1.DISTRICT_NAME_GUJ,
+	tpnl.WORK_NO,
+	tpnl.WORK_NAME,
+	tpnl.WORK_NAME_GUJ,
+	tpnl.ESTIMATED_COST AS "1a",
+	--med.EXECUTIVE_DIVI_NAME,
+	--med.EXECUTIVE_DIVI_NAME_GUJ,
+	tpnl.TBUD_PUB_NW_LST_ID, tpnl.PROVISION_NEXT_FY ,tph.FINANCIAL_YEAR_ID
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN MASTER_V1.MS_BPN mb ON tph.BPN_ID = mb.BPN_ID 
+	INNER JOIN MASTER_V1.MS_DEMAND md ON tph.DEMAND_ID = md.DEMAND_ID AND md.BPN_ID = mb.BPN_ID
+	INNER JOIN MASTER_V1.MS_MINORHEAD mm ON md.DEMAND_ID = mm.DEMAND_ID AND tph.MINORHEAD_ID = mm.MINORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID
+	INNER JOIN MASTER_V1.MS_SUBHEAD msh ON tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	INNER JOIN MASTER_V1.MS_DETAILHEAD mdh ON tph.DETAILHEAD_ID = mdh.DETAILHEAD_ID 
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	LEFT JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+--	LEFT JOIN MASTER_V1.MS_EXECUTIVE_DIVI med ON med.EXECUTIVE_DIVI_ID = tpnl.EXECUTIVE_DIVISION 
+	LEFT  JOIN MASTER_V1.MS_DISTRICT md1 ON md1.DISTRICT_ID = tpnl.DISTRICT_ID
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID < $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId} 
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tpnh.OBJECT_ID  = $P{objHeadId} 
+	ORDER BY WORK_NO) workOlder	
+LEFT JOIN 	
+(
+	SELECT tpwl.TOT_PRO_EXP_CUR_FY AS "1b",
+	   tpwl.PROPOSED_AMOUNT,
+	   tpwl.TBUD_PUB_NW_LST_ID
+	FROM BUDGET.TBUD_PUB_WIP_LST tpwl
+		INNER JOIN BUDGET.TBUD_PUB_HDR tph ON tpwl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+		INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	WHERE 
+		tph.APP_TYPE_ID = 429 
+		AND tph.BPN_ID = $P{bpnId}
+		AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1  
+		AND tph.IS_REVENUE_CAPITAL IN (5,6) 
+		AND tph.DEMAND_ID = $P{demandId} 
+		AND tph.MAJORHEAD_ID = $P{majHeadId}
+		AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+		AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+		AND tph.SUBHEAD_ID  = $P{subHeadId} 
+		AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+		AND tpnh.OBJECT_ID  = $P{objHeadId} 
+		AND tph.IS_REVISED <> 1
+) wip ON wip.TBUD_PUB_NW_LST_ID = workOlder.TBUD_PUB_NW_LST_ID)abc 
+GROUP BY abc.DEMAND_ID, 
+	abc.MAJORHEAD_ID, 
+	abc.SUBMAJORHEAD_ID, 
+	abc.MINORHEAD_ID,
+	abc.SUBHEAD_ID,
+	abc.DETAILHEAD_ID,
+	abc.OBJECT_ID,abc.DISTRICT_ID,abc.DISTRICT_NAME, abc.DISTRICT_NAME_GUJ
+	ORDER BY abc.DISTRICT_NAME)	
+	CFY1 ON CFY1.DEMAND_ID=NFY.DEMAND_ID AND CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+		  AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID
+		  AND CFY1.SUBHEAD_ID = NFY.SUBHEAD_ID AND CFY1.DETAILHEAD_ID = NFY.DETAILHEAD_ID
+		  AND CFY1.OBJECT_ID = NFY.OBJECT_ID 
+		   AND NFY.DISTRICT_ID=CFY1.DISTRICT_ID]]>
+	</queryString>
+	<field name="DEMAND_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_ID"/>
+	</field>
+	<field name="MAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_ID"/>
+	</field>
+	<field name="SUBMAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_ID"/>
+	</field>
+	<field name="MINORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_ID"/>
+	</field>
+	<field name="SUBHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_ID"/>
+	</field>
+	<field name="DETAILHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DETAILHEAD_ID"/>
+	</field>
+	<field name="OBJECT_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OBJECT_ID"/>
+	</field>
+	<field name="DISTRICT_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DISTRICT_ID"/>
+	</field>
+	<field name="DISTRICT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DISTRICT_NAME"/>
+	</field>
+	<field name="DISTRICT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DISTRICT_NAME_GUJ"/>
+	</field>
+	<field name="BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATE"/>
+	</field>
+	<field name="ESTIMATED_COST" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ESTIMATED_COST"/>
+	</field>
+	<field name="PROBABLE_EXP" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PROBABLE_EXP"/>
+	</field>
+	<field name="MOD_BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="MOD_BUDGET_ESTIMATE"/>
+	</field>
+	<field name="ACCOUNTS" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+	</field>
+	<variable name="sum_bud_est_dist" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[OR($F{BUDGET_ESTIMATE}==null,$F{DISTRICT_NAME}==null )?0:$F{BUDGET_ESTIMATE}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="531" y="0" width="200" height="15" isRemoveLineWhenBlank="true" uuid="629d0cc4-ca1d-44a1-9f2d-efc1b68b1b59">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DISTRICT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;">
+				<reportElement x="731" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="350293cd-c522-432d-b18f-c1c861164376">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{BUDGET_ESTIMATE}==null?"--":($F{BUDGET_ESTIMATE}==0?"--":$F{BUDGET_ESTIMATE})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00">
+				<reportElement x="0" y="0" width="60" height="15" isRemoveLineWhenBlank="true" uuid="1eca7adf-e6da-49ab-982c-70edc6caa5c7">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATED_COST}==null?"--":($F{ESTIMATED_COST}==0?"--":$F{ESTIMATED_COST})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;">
+				<reportElement x="190" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="de0cb29f-e222-42d2-ad2c-921d43ab10e0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{MOD_BUDGET_ESTIMATE} == null ? "--" : $F{MOD_BUDGET_ESTIMATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="70" height="15" isRemoveLineWhenBlank="true" uuid="2629b0c1-098d-4c51-89d9-5b252c486ac0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00">
+				<reportElement x="60" y="0" width="60" height="15" isRemoveLineWhenBlank="true" uuid="edbe76e3-9c05-484e-9464-a4889c38461c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="330" y="0" width="160" height="15" isRemoveLineWhenBlank="true" uuid="01072bab-ae64-4d9d-905f-3199097528ff">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{DISTRICT_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{DISTRICT_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="1"/>
+	</summary>
+</jasperReport>

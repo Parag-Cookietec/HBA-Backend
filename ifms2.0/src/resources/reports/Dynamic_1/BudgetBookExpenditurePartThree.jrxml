@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookExpenditurePartThree" language="javascript" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c03abd2-bba7-42bb-b616-77327325d694">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="demandId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+	tpe.EXPLANATION AS "EXPLANATION_ENG",
+	tpe.EXPLANATION_GUJ AS "EXPLANATION_GUJ"
+FROM 
+	BUDGET.TBUD_PUB_HDR tph,
+	BUDGET.TBUD_PUB_EXP tpe
+WHERE
+	tph.DEMAND_ID = tpe.DEMAND_ID 
+	AND tph.BPN_ID = tpe.BPN_ID
+	AND tph.APP_TYPE_ID IN (425,426,427,428,429)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tpe.FINANCIAL_YEAR_ID = $P{fyId}
+	AND tpe.BPN_ID= $P{bpnId}
+	AND tpe.DEMAND_ID = $P{demandId}]]>
+	</queryString>
+	<field name="EXPLANATION_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EXPLANATION_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_EXP"/>
+	</field>
+	<field name="EXPLANATION_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EXPLANATION_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_EXP"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="230" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="430" y="1" width="372" height="30" uuid="0816e235-a5a1-4387-8f73-53a062a46cb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXPENDITURE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="400" height="30" uuid="2d987ebc-1b5f-4cf7-8e8c-e11cdfe8f55a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ખર્ચ]]></text>
+			</staticText>
+			<textField textAdjust="ScaleFont">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="40" width="400" height="190" uuid="de227327-5146-4065-95b0-774d936755cf"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EXPLANATION_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="430" y="39" width="372" height="190" uuid="8457718e-9162-46e5-b506-808340b3e224">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EXPLANATION_ENG}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="10">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="3ec13a19-a557-4b07-998b-a9331c7cbb2e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

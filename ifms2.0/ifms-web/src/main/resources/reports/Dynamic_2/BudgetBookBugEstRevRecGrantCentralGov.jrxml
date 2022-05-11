@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookBugEstRevRecGrantCentralGov" pageWidth="780" pageHeight="900" orientation="Landscape" columnWidth="780" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="861a87e0-d75d-4556-b052-4428deef5611">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="364"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="628"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+	   (CASE WHEN main.SUBMAJORHEAD_CODE='06' THEN '(1) Grants for Centrally Sponsored Schemes'
+			WHEN main.SUBMAJORHEAD_CODE='07' THEN '(2) Finance Commission Grants'
+			WHEN main.SUBMAJORHEAD_CODE='08' THEN '(3) Other Transfer/Grants to States'
+		END) AS "Label_Name_Eng",
+	   main."BE" AS "Bud_Est_Amt_Eng",
+	   (CASE WHEN main.SUBMAJORHEAD_CODE='06' THEN '(૧) કેન્દ્ર પુરસ્કૃત યોજનાઓ માટે અનુદાન'
+			WHEN main.SUBMAJORHEAD_CODE='07' THEN '(૨) નાણા પંચ અનુદાન'
+			WHEN main.SUBMAJORHEAD_CODE='08' THEN '(૩) અન્ય સ્થાનાંતર/રાજ્યને અનુદાન'
+		END) AS "Label_Name_Guj",
+	   REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(decimal(main."BE",15,2),'1','૧'), '2', '૨'),'3','૩'),'4','૪'),'5','૫'),'6','૬'
+		),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS "Bud_Est_Amt_GUJ"
+FROM 
+(
+SELECT
+		abc.SUBMAJORHEAD_CODE,
+		abc.SUBMAJORHEAD_NAME,
+		round(sum(abc.recAmt)/100,2) AS "BE"
+FROM
+	(
+	SELECT
+		msm.SUBMAJORHEAD_CODE,
+		msm.SUBMAJORHEAD_NAME,
+		tprd.RECEIPT_AMOUNT recAmt
+	FROM
+		BUDGET.TBUD_PUB_RE_HDR trh, 
+		BUDGET.TBUD_PUB_RE_DTL tprd,
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_SUBMAJORHEAD msm,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID
+		AND trh.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND trh.BPN_ID = mb.BPN_ID
+		AND trh.DEMAND_ID = md.DEMAND_ID
+		AND trh.TBUD_PUB_RE_HDR_ID = tprd.TBUD_PUB_RE_HDR_ID 
+		AND ms2.SUBHEAD_ID = tprd.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tprd.MINORHEAD_ID 
+		AND msm.SUBMAJORHEAD_ID=mm2.SUBMAJORHEAD_ID
+		AND trh.FINANCIAL_YEAR_ID = $P{fyId}
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=5
+		AND trh.APP_TYPE_ID =472
+		AND mm.MAJORHEAD_CODE='1601'
+		AND msm.SUBMAJORHEAD_CODE IN ('06','07','08')
+	ORDER BY
+		trh.MAJORHEAD_ID,msm.SUBMAJORHEAD_CODE) abc
+GROUP BY 
+		abc.SUBMAJORHEAD_CODE,
+		abc.SUBMAJORHEAD_NAME
+)main
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2]]>
+	</queryString>
+	<field name="Label_Name_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Label_Name_Eng"/>
+	</field>
+	<field name="Bud_Est_Amt_Eng" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Bud_Est_Amt_Eng"/>
+	</field>
+	<field name="Label_Name_Guj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Label_Name_Guj"/>
+	</field>
+	<field name="Bud_Est_Amt_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Bud_Est_Amt_GUJ"/>
+	</field>
+	<variable name="BugEstRevReceipGrantCentralGov" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Bud_Est_Amt_Eng}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<detail>
+		<band height="32">
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="20" y="0" width="201" height="30" uuid="d4105ba3-0f78-49f7-89ac-518e1daf00ab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Label_Name_Guj} == null ? "" : $F{Label_Name_Guj}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00###">
+				<reportElement x="230" y="0" width="134" height="30" uuid="f037119a-d462-47d7-9be9-e50032c619f9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Bud_Est_Amt_GUJ}== null || $F{Bud_Est_Amt_GUJ}.equals(".૦૦") ? "--" :$F{Bud_Est_Amt_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="400" y="0" width="177" height="30" uuid="647f625b-2158-4a4f-8f6a-8f254a7fa348">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Label_Name_Eng} == null ? "" : $F{Label_Name_Eng}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00###">
+				<reportElement x="580" y="0" width="156" height="30" uuid="d8f497d6-d179-46a5-b4ea-125876b7b085">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Bud_Est_Amt_Eng}.doubleValue() == 0 ? "--" : $F{Bud_Est_Amt_Eng}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

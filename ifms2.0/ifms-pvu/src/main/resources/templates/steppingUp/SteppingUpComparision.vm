@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 14px;font-size:12px;">
+    <table width="100%" text-align="center">
+        <tr>
+            <td colspan="2" align="center">$OFFICE_NAME</td>
+        </tr>
+        <tr>
+            <td colspan="2"  align="center">$OFFICE_ADDRESS</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><strong><h3>Comparison Statement for $EVENT_NAME</h3></strong></td>
+        </tr>
+    </table>
+    <table width="100%" Cellspacing=0>
+        <thead>
+            <tr>
+                <th bgcolor="#e2e2e2" style="border: 1px solid; padding:7px">Details</th>
+                <th bgcolor="#e2e2e2" style="border: 1px solid; border-left-width: 0; padding:7px">Senior Employee</th>
+                <th bgcolor="#e2e2e2" style="border: 1px solid; border-left-width: 0; padding:7px">Junior Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Name</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_emp_name</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_emp_name</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Designation</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_emp_designation</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_emp_designation</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Date of Joining</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_emp_doj</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_emp_doj</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Seniority Number</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_seniority_no</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_seniority_no</td>
+            </tr>
+            #if($seventhPay)
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Current Pay Level</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_current_pay_level</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_current_pay_level</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Current Cell ID</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_current_cell_id</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_current_cell_id</td>
+            </tr>
+            #else
+            #end
+            #if($fifthPay)
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Current Pay Scale</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_current_pay_scale</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_current_pay_scale</td>
+            </tr>
+            #else
+            #end
+            #if($sixthPay)
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Current Pay Band</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_current_pay_band</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_current_pay_band</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Current Grade Pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_current_grade_pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_current_grade_pay</td>
+            </tr>
+            #else
+            #end
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Current Basic Pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_current_basic_pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$jn_current_basic_pay</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Date of Last (old) Pay Fixation</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_last_pay_fixation_date</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Date of Revised Pay Fixation</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_pay_fixation_date</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            #if($seventhPay)
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Revised Pay Level</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_pay_level</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Revised Cell ID</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_cell_id</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            #else
+            #end
+            #if($fifthPay)
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Revised Pay Scale</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_pay_scale</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            #else
+            #end
+            #if($sixthPay)
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Revised Pay Band</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_pay_band</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Revised Grade Pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_grade_pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            #else
+            #end
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Revised Basic Pay on given Option Date</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_revised_basic_pay</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Date of Next Increment in Revised Pay Scale</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_next_increment_date</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Suitable Date of Steppling Up</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_event_effective_date</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Reason for the Stepping Up availed</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$reason_availed</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid; border-top-width: 0; padding:7px">Other Details, If any</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px">$sr_other_details</td>
+                <td style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:7px"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align: center; font-size: 12px;">"This is an electronically generated report, hence does not require a signature".</p>
+</body>
+</html>

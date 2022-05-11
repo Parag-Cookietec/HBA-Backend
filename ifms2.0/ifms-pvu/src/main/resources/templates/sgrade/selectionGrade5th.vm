@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+   <body style="font-size:12px;">
+      <table style="margin: 15px; width: 100%;">
+         <tr>
+            <td align="center">
+               <h2><b><u>Selection Grade</u></b></h2>
+               <h3 style="line-height: .25px;"><b><u>Employee No.:$employeeNo</u></b></h3>
+            </td>
+         </tr>
+         <tr>
+            <td style="margin-top:25px; text-align: justify;">
+               <table width="100%">
+                  <tr>
+                     <td>
+                        <table width="100%">
+                         
+                               <tr>
+                <td>In accordance with the provision of Finance Department Resolution No. <span
+                        class="resonumber">_______________ dated ________ </span> and the following amendments made time to
+                    time,  <span class="salutation">$salutation </span>
+                  			  <span class="empname">$employeeName </span>
+                  			  <span class="middleName">$middleName </span>
+                  			  <span class="surname">$surname </span> <span
+                            class="empdesi">$!designation</span>,
+                    <span class='empofficename'>$!officeName</span> 
+                    
+							who is receiving pay in Pay Scale 
+							<span class="oldPayScale"> $!oldPayScale </span>
+							, Basic Pay Rs.
+							 <span class="oldBasic">  $!oldBasic </span>
+							 and $!genderHisHerPrefix next date of increment is 
+							 		<span class="oldIncrement">  $!oldIncrement </span>
+							, $!genderHisHerPrefix pay is fixed in the pay scale 
+							<span class="newPayScale">  $!newPayScale </span>
+							, basic pay Rs. 
+							<span class="newBasic"> $!newBasic </span>
+							 with effect from 
+							<span class="effictiveDate"> $!effectiveDate </span>
+							, $!genderHisHerPrefix next date of increment will be <span class="newIncrement">    $!newIncrement </span>
+                    
+                    
+                    
+                </td>
+               </tr>
+                    
+                           <tr>
+                              <td style="height: 15px;">
+                              </td>
+                           </tr>
+                           
+                           <tr>
+                              <td>
+                                 <p style="margin: 0;">Print Date: <span class="printDate">$endorsementPrintDate</span></p>
+                              </td>
+                           </tr>
+                            #if($rePrintCounter >=2)
+                           <tr>
+                              <td>
+                                 <p style="margin: 0;">Reprint Date: <span class="repprint-date">$endorsementReprintDate </span></p>
+                                 <p style="margin: 0;">Reprint Count: <span class="Reprintcount">$rePrintCount</span>.</p>
+                                 <p style="margin: 0;">Reprint Remarks: <span class="Reprintcount">$remarks </span>.</p>
+                              </td>
+                           </tr>
+                            #end
+                           <tr>
+                              <td style="height: 20px;">
+                              </td>
+                           </tr>
+                       <tr>
+                        <td>Place : Gandhinagar</td>
+                    </tr>
+                           
+                          <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                           
+                           
+                           <tr>
+                              <td>
+                                 <table cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                       <td style="width:30%;text-align:center;"></td>
+                                       <td style="width:30%;text-align:center;">
+                                          <span class="auth-name"> $authBy</span><br></br>
+                                          <p style="margin: 0;"> Accounts Officer</p>
+                                          <p style="margin: 0;">Pay Verification Unit</p>
+                                          <p style="margin: 0;">Finance Department</p>
+                                       </td>
+                                       <td style="width:30%;text-align:center;">
+                                          <p style="margin: 0;">Issued by,</p>
+                                          <p style="margin: 0;">Accounts Officer</p>
+                                          <p style="margin: 0;">Pay Verification Unit</p>
+                                          <p style="margin: 0;">Finance Department</p>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </td>
+                           </tr>
+                           <tr>
+		                    <td>
+		                        <div style="height: 15px;"></div>
+		                    </td>
+		                </tr>
+                           <tr>
+                              <td>
+                                 <p style="margin: 0;">Remarks: <span class="authRemarks">$authorizerRemarks</span></p>                                
+                              </td>
+                           </tr>
+                           <tr>
+                              <td style="height: 15px;">
+                              </td>
+                           </tr>
+                          
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookGovReco2" pageWidth="780" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="49a4c10b-f9b5-4b18-b976-273fa28ef04e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount1}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount2}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+mbpn.BPN_NAME AS "bpnNameEng", 
+mbpn.BPN_NAME_GUJ AS "bpnNameGuj", 
+mbpn.BPN_SHORT_NAME AS "bpnShortName", 
+mfy.FY AS "fyEng",
+mfy.FY_GUJ AS "fyGuj",
+LTRIM(mbpn.BPN_CODE,'0')  AS "bpnCode",
+CASE 
+WHEN mbpn.BPN_CODE='18' THEN ' (Part-I)' 
+WHEN mbpn.BPN_CODE='22' THEN ' (Part-I)' 
+WHEN mbpn.BPN_CODE='24a' THEN '-I'
+WHEN mbpn.BPN_CODE='24b' THEN '-II'
+WHEN mbpn.BPN_CODE='24c' THEN '-III'
+WHEN mbpn.BPN_CODE='24d' THEN '-IV'
+ELSE '' 
+END AS "bpnCodePart"
+FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnShortName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnShortName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="bpnCode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnCode"/>
+	</field>
+	<field name="bpnCodePart" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnCodePart"/>
+	</field>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="505" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="0" y="0" width="740" height="28" uuid="278451a1-3247-4c54-9d9d-7bb83e18885f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNOR’S RECOMMENDATION :-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="28" width="740" height="40" uuid="5e0ffeeb-911d-4956-9b7e-fac33052cd9c">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                       The Governor of Gujarat has recommended to the Gujarat Legislative Assembly the consideration of the Demands for " + $F{fyEng} + " as specified in the Schedule of Demands as required by Article 203 (3) read with Article 206 of the Constitution of India"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="91" width="741" height="28" uuid="d0a1db48-8d0c-4236-9627-56f86a949836">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A NOTE ON THE PROCEDURE OF PRESENTING GROSS DEMANDS TO THE VOTE OF THE LEGISLATIVE ASSEMBLY :-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="122" width="740" height="106" uuid="567b6a61-72f8-4aa6-ba86-96bb7c66febf">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                       Under the provisions of the Constitution, it is not permissible to withdraw any money from the Consolidated Fund of the State except under appropriation made by an Act of the State Legislature. In other words, actual expenditure to be incurred during a financial year out of the Consolidated Fund of the State under each major head of account or demand is required to be specifically authorised by the State Legislature, notwithstanding the receipts or recoveries under that major head or demand which are adjusted in reduction of the expenditure thereunder. Accordingly, a schedule showing the gross appropriations and demands for the next year is printed. Expenditure included in some of the demands in the Schedule pertains to more than one Minister, for the sake of convenience, such Demands are shown in the name of that Minister, who controls the largest provision."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="242" width="740" height="27" uuid="7dc69bbd-5635-4bfc-8c9a-c09e59147803">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A NOTE ON THE PRESENTATION OF DEMANDS :- ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="272" width="740" height="146" uuid="83eae975-86db-4229-8fc9-9766d94b171d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                     The Demands for Grants and Appropriations are prepared Departmental-Cum-Major Headwise and are for the gross amounts of estimed expenditure without taking in to account the recoveries and reduction in expenditure, the estimates of which have been shown below the respective Demands in the detailed Budget Estimates. Composite Demands for provisions to relating to services under Revenue and Capital (Including loans) are proposed except in the case of the provisions for functional buildings which are included in the composite demands for Public Works under the Roads and Buildings Department. Similarly, in respect of the provision proposed for assistence to Panchayati Raj Institutions for various functions included under the Community Developement Programmes, under Special Component Plan for Scheduled Castes and under Tribal Area Sub-Plan for Scheduled Tribes under Several functional major heads, composite demands for grants, as in the case of functional buildings, have been proposed under the Panchayats, Rural Housing and Rural Developement Department, Social Welfare Department and Tribal Developement Department.  "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="380" width="740" height="38" uuid="4a960a77-263f-4d29-abff-89add3c04fe0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                     Demands relating to the services and the related functions have been grouped together and brought under the same Demand of the Concerned Department."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="422" width="740" height="23" uuid="2751e751-bc3f-48d3-b43b-5e4da7fc8338">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECOMMENDATIONS OF THE ESTIMATE COMMITTEE AND THEIR IMPLEMENTATION :- ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="450" width="740" height="50" uuid="7f2ada69-ca4a-45ce-bd0f-93cbaaceaab8">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                       The "+
+
+($P{modifiedCount1} == null ? (
+"Budget Estimates" ) : (
+$P{modifiedCount1} == 1 ? (
+"Modified Budget Estimates") : (
+"Budget Estimates" ) ))
+
++" for the year " + $F{fyEng} + " have been prepared as per recommendations made by Estimates Committee in its Nineth Report of the 5th Gujarat Legislative Assembly, Sixth Report of the 7th Gujarat Legislative Assembly and third report of the 8th Gujarat Legislative Assembly."]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</columnHeader>
+</jasperReport>

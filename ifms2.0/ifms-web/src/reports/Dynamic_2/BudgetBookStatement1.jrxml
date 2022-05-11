@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookStatement1" pageWidth="780" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="49a4c10b-f9b5-4b18-b976-273fa28ef04e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount1}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount2}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+count(*) OVER (PARTITION BY main_table.MAJORHEAD_CODE) AS MAJORHEAD_COUNT_CHORVOT,
+	nextYear.FY AS "fyEngBE",
+	nextYear.FY_GUJ AS "fyGujBE",
+	currYear.FY AS "fyEngMBE",
+	currYear.FY_GUJ AS "fyGujMBE",
+	prevYear.FY AS "fyEngACC",
+	prevYear.FY_GUJ AS "fyGujACC",
+	main_table."SECTORHEAD_NAME",
+	main_table."SECTORHEAD_NAME_GUJ",
+	main_table."MAJORHEAD_CODE",
+	main_table."MAJORHEAD_CODE_GUJ",
+	main_table."SUB_SECTOR_NAME",
+	main_table."SUB_SECTOR_NAME_GUJ",
+	main_table."MAJORHEAD_ENG",
+	main_table."MAJORHEAD_NAME_GUJ",
+	main_table."ACCOUNTS",
+	main_table."MODIFIED_BUDGET_ESTIMATES",
+	main_table."REVIESED_ESTIMATES",
+	main_table."BUDGET_ESTIMATES"	
+FROM
+(
+SELECT
+DISTINCT
+	COALESCE(NFY.SECTORHEAD_NAME, CFY1.SECTORHEAD_NAME, CFY2.SECTORHEAD_NAME, PFY.SECTORHEAD_NAME) AS SECTORHEAD_NAME,
+	COALESCE(NFY.SECTORHEAD_NAME_GUJ, CFY1.SECTORHEAD_NAME_GUJ, CFY2.SECTORHEAD_NAME_GUJ, PFY.SECTORHEAD_NAME_GUJ) AS SECTORHEAD_NAME_GUJ,
+	COALESCE(NFY.MAJORHEAD_CODE, CFY1.MAJORHEAD_CODE, CFY2.MAJORHEAD_CODE, PFY.MAJORHEAD_CODE) AS MAJORHEAD_CODE,
+	COALESCE(NFY.MAJORHEAD_CODE_GUJ, CFY1.MAJORHEAD_CODE_GUJ, CFY2.MAJORHEAD_CODE_GUJ, PFY.MAJORHEAD_CODE_GUJ) AS MAJORHEAD_CODE_GUJ,	
+		COALESCE(NFY.SUB_SECTOR_NAME, CFY1.SUB_SECTOR_NAME, CFY2.SUB_SECTOR_NAME, PFY.SUB_SECTOR_NAME) AS SUB_SECTOR_NAME,
+	    COALESCE(NFY.SUB_SECTOR_NAME_GUJ, CFY1.SUB_SECTOR_NAME_GUJ, CFY2.SUB_SECTOR_NAME_GUJ, PFY.SUB_SECTOR_NAME_GUJ) AS SUB_SECTOR_NAME_GUJ,
+	COALESCE(NFY.MAJORHEAD_NAME, CFY1.MAJORHEAD_NAME, CFY2.MAJORHEAD_NAME, PFY.MAJORHEAD_NAME) AS MAJORHEAD_ENG,
+	COALESCE(NFY.MAJORHEAD_NAME_GUJ, CFY1.MAJORHEAD_NAME_GUJ, CFY2.MAJORHEAD_NAME_GUJ, PFY.MAJORHEAD_NAME_GUJ) AS MAJORHEAD_NAME_GUJ,
+	PFY."ACC" AS "ACCOUNTS",
+	CFY1."MBE" AS "MODIFIED_BUDGET_ESTIMATES",
+	CFY2."RE" AS "REVIESED_ESTIMATES",
+	NFY."BE" AS "BUDGET_ESTIMATES" 
+FROM
+(SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	round(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS BE,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tprd.RECEIPT_AMOUNT recAmt,
+		tprd.DED_REF_MAP_AMOUNT subtractionAmt,
+		trh.MAJORHEAD_ID, 
+		trh.TBUD_PUB_RE_HDR_ID
+	FROM
+		BUDGET.TBUD_PUB_RE_HDR trh, 
+		BUDGET.TBUD_PUB_RE_DTL tprd,
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID
+		AND trh.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND trh.BPN_ID = mb.BPN_ID
+		AND trh.DEMAND_ID = md.DEMAND_ID
+		AND trh.TBUD_PUB_RE_HDR_ID = tprd.TBUD_PUB_RE_HDR_ID 
+		AND ms2.SUBHEAD_ID = tprd.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tprd.MINORHEAD_ID 
+		AND trh.FINANCIAL_YEAR_ID = $P{fyId}
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=5
+		AND trh.APP_TYPE_ID =472
+	ORDER BY
+		trh.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+) NFY
+FULL OUTER JOIN 
+(SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS MBE,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tprd.RECEIPT_AMOUNT recAmt,
+		tprd.DED_REF_MAP_AMOUNT subtractionAmt,		
+		trh.MAJORHEAD_ID, 
+		trh.TBUD_PUB_RE_HDR_ID
+	FROM
+		BUDGET.TBUD_PUB_RE_HDR trh, 
+		BUDGET.TBUD_PUB_RE_DTL tprd,
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID
+		AND trh.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND trh.BPN_ID = mb.BPN_ID
+		AND trh.DEMAND_ID = md.DEMAND_ID
+		AND trh.TBUD_PUB_RE_HDR_ID = tprd.TBUD_PUB_RE_HDR_ID 
+		AND ms2.SUBHEAD_ID = tprd.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tprd.MINORHEAD_ID 
+		AND trh.FINANCIAL_YEAR_ID = $P{fyId}-1
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=5
+		AND trh.APP_TYPE_ID =472
+	ORDER BY
+		trh.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+) CFY1 ON  CFY1.MAJORHEAD_ID = NFY.MAJORHEAD_ID         
+FULL OUTER JOIN 
+(SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ, 
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS RE,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tprd.RECEIPT_AMOUNT recAmt,
+		tprd.DED_REF_MAP_AMOUNT subtractionAmt,
+		trh.MAJORHEAD_ID, 
+		trh.TBUD_PUB_RE_HDR_ID
+	FROM
+		BUDGET.TBUD_PUB_RE_HDR trh, 
+		BUDGET.TBUD_PUB_RE_DTL tprd,
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID
+		AND trh.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND trh.BPN_ID = mb.BPN_ID
+		AND trh.DEMAND_ID = md.DEMAND_ID
+		AND trh.TBUD_PUB_RE_HDR_ID = tprd.TBUD_PUB_RE_HDR_ID 
+		AND ms2.SUBHEAD_ID = tprd.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tprd.MINORHEAD_ID 
+		AND trh.FINANCIAL_YEAR_ID = $P{fyId}-1
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=5
+		AND trh.APP_TYPE_ID =473
+	ORDER BY
+		trh.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+) CFY2 ON CFY2.MAJORHEAD_ID = NFY.MAJORHEAD_ID   
+FULL OUTER JOIN 
+(SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS ACC,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tpra.RECEIPT_AMOUNT recAmt,
+		tpra.DED_REF_MAP_AMOUNT  subtractionAmt,
+		tpra.MAJORHEAD_ID, 
+		tpra.TBUD_PUB_RE_AC_ID 
+	FROM
+		BUDGET.TBUD_PUB_RE_AC tpra, 
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID
+		AND tpra.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND tpra.BPN_ID = mb.BPN_ID
+		AND tpra.DEMAND_ID = md.DEMAND_ID
+		AND ms2.SUBHEAD_ID = tpra.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tpra.MINORHEAD_ID 
+		AND tpra.FINANCIAL_YEAR_ID = $P{fyId}-2
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=5		
+	ORDER BY
+		tpra.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+) PFY ON NFY.MAJORHEAD_ID = PFY.MAJORHEAD_ID
+) main_table
+
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+ORDER BY  main_table."MAJORHEAD_CODE"]]>
+	</queryString>
+	<field name="MAJORHEAD_COUNT_CHORVOT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_COUNT_CHORVOT"/>
+	</field>
+	<field name="fyEngBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyEngMBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngMBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujMBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujMBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyEngACC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngACC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujACC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujACC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="SECTORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+	</field>
+	<field name="SECTORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SECTORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SECTORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="SUB_SECTOR_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME"/>
+	</field>
+	<field name="SUB_SECTOR_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUB_SECTOR_NAME_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="ACCOUNTS" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_AC"/>
+	</field>
+	<field name="MODIFIED_BUDGET_ESTIMATES" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BUDGET_ESTIMATES"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="REVIESED_ESTIMATES" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="REVIESED_ESTIMATES"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<field name="BUDGET_ESTIMATES" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATES"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<variable name="total_grpSubSecBugEstimate" class="java.lang.Double" resetType="Group" resetGroup="grpSubSectorName" calculation="Sum">
+		<variableExpression><![CDATA[$F{BUDGET_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSubSecRevEstimate" class="java.lang.Double" resetType="Group" resetGroup="grpSubSectorName" calculation="Sum">
+		<variableExpression><![CDATA[$F{REVIESED_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSubSecModBugEstimate" class="java.lang.Double" resetType="Group" resetGroup="grpSubSectorName" calculation="Sum">
+		<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSubSecAcc" class="java.lang.Double" resetType="Group" resetGroup="grpSubSectorName" calculation="Sum">
+		<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSecBugEstimate" class="java.lang.Double" resetType="Group" resetGroup="grpSectorHeadName" calculation="Sum">
+		<variableExpression><![CDATA[$F{BUDGET_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSecRevEstimate" class="java.lang.Double" resetType="Group" resetGroup="grpSectorHeadName" calculation="Sum">
+		<variableExpression><![CDATA[$F{REVIESED_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSecModBugEstimate" class="java.lang.Double" resetType="Group" resetGroup="grpSectorHeadName" calculation="Sum">
+		<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="total_grpSecAcc" class="java.lang.Double" resetType="Group" resetGroup="grpSectorHeadName" calculation="Sum">
+		<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="totalBugEstimate" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{BUDGET_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="totalRevEstimate" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{REVIESED_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="totalModBugEstimate" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{MODIFIED_BUDGET_ESTIMATES}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="totalAcc" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ACCOUNTS}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<group name="grpSectorHeadName">
+		<groupExpression><![CDATA[$F{SECTORHEAD_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement x="243" y="2" width="200" height="30" isRemoveLineWhenBlank="true" uuid="0a54fd89-c981-45d5-a47c-9d1d91db8630">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECTORHEAD_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement x="451" y="2" width="200" height="30" isRemoveLineWhenBlank="true" uuid="a86f4b7c-9faf-4318-bd65-2f807c4974b4">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SECTORHEAD_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+			<band height="47">
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="0" y="12" width="73" height="22" uuid="cfa05452-ee16-48a5-ba25-8088ce233a58">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSecAcc} == null || $V{total_grpSecAcc} == 0.00) ? "--" :$V{total_grpSecAcc}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="80" y="12" width="73" height="22" uuid="93953023-da90-49a3-a41b-85d3c26658f3">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSecModBugEstimate} == null || $V{total_grpSecModBugEstimate} == 0.00) ? "--" :$V{total_grpSecModBugEstimate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="161" y="12" width="73" height="22" uuid="d5beaebd-637b-4aa8-bc53-98ba550777c7">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSecRevEstimate} == null || $V{total_grpSecRevEstimate} == 0.00) ? "--" :$V{total_grpSecRevEstimate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="660" y="12" width="80" height="22" uuid="2e894781-b166-48ef-85f6-3f7c82ee6133">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSecBugEstimate} == null || $V{total_grpSecBugEstimate} == 0.00) ? "--" :$V{total_grpSecBugEstimate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="450" y="12" width="201" height="30" uuid="f12e398b-3dfc-444a-a9b7-8dd079de02d1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total -  "+$F{SECTORHEAD_NAME}.split("-")[0]]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="243" y="12" width="201" height="30" uuid="f2f9ff9e-ed6e-423c-8a3a-5b31dff30a85">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["સરવાળો -  "+$F{SECTORHEAD_NAME_GUJ}.split("-")[0]]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="grpSubSectorName">
+		<groupExpression><![CDATA[$F{SUB_SECTOR_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="36">
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement x="243" y="2" width="200" height="30" isRemoveLineWhenBlank="true" uuid="23e5a936-7f14-4492-8476-b787dfd57de4">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement x="451" y="2" width="200" height="30" isRemoveLineWhenBlank="true" uuid="a231554e-5527-4022-9fea-e6ccb3866c08">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SUB_SECTOR_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="40">
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="660" y="0" width="80" height="22" uuid="2fb3c2f6-b20f-46fd-aed4-8e2f3117760b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSubSecBugEstimate} == null || $V{total_grpSubSecBugEstimate} == 0.00) ? "--" :$V{total_grpSubSecBugEstimate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="161" y="0" width="73" height="22" uuid="d5fbe6e2-b9bc-40fc-9d2b-98046bd3c248">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSubSecRevEstimate} == null || $V{total_grpSubSecRevEstimate} == 0.00) ? "--" :$V{total_grpSubSecRevEstimate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="73" height="22" uuid="10af5b31-edd4-4424-8982-9feffa80b733">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSubSecAcc} == null || $V{total_grpSubSecAcc} == 0.00) ? "--" :$V{total_grpSubSecAcc}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="80" y="0" width="73" height="22" uuid="ded10174-51d8-49bf-9b6c-14ef10452f3b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{total_grpSubSecModBugEstimate} == null || $V{total_grpSubSecModBugEstimate} == 0.00) ? "--" :$V{total_grpSubSecModBugEstimate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="451" y="0" width="201" height="30" uuid="52e3c9ba-d1f1-474d-9402-7d8b391bb613">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total -  "+$F{SECTORHEAD_NAME}.split("-")[0]+" "+$F{SUB_SECTOR_NAME}.split(" ")[0]]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+					<reportElement x="243" y="0" width="201" height="30" uuid="1ef07e29-2c14-4303-8649-83a362356797">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["સરવાળો -  "+$F{SECTORHEAD_NAME_GUJ}.split("-")[0]+" "+$F{SUB_SECTOR_NAME_GUJ}.split(" ")[0]]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="190" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<line>
+				<reportElement x="0" y="56" width="740" height="1" uuid="20b387f0-4116-49f2-b50e-34c0c2beada3"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="-1" y="16" width="741" height="15" uuid="278451a1-3247-4c54-9d9d-7bb83e18885f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATEMENT-I-CONSOLIDATED FUND OF GUJARAT-REVENUE ACCOUNT-RECEIPTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="0" width="741" height="15" uuid="78aabdc1-5aff-49df-8173-3781e3e29e5d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ત્રક-૧ : ગુજરાતનો એકત્રિત નિધિ-મહેસૂલ હિસાબ- પ્રાપ્તિ]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="184" width="741" height="1" uuid="67f99403-76d7-4e28-8db6-9250c0960430"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="64" width="70" height="95" isRemoveLineWhenBlank="true" uuid="8a4a0ec8-0c82-4d76-af16-a388bc35de42">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGujACC}+"નો<BR/>"+
+"હિસાબ<BR/>"+
+"Accounts"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="65" width="73" height="95" isRemoveLineWhenBlank="true" uuid="779fbe2d-81b1-4163-bcec-ce768e02bbab">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{modifiedCount2} == null ? (
+
+$F{fyGujMBE}+"નો<BR/>"+
+"અંદાજ<BR/>"+
+"Budget Estimates" ) : (
+
+$P{modifiedCount2} == 1 ? (
+$F{fyGujMBE}+"નો<BR/>"+
+"ફેરફાર કરેલ અંદાજ<BR/>"+
+"Modified Budget Estimates") : (
+
+$F{fyGujMBE}+"નો<BR/>"+
+"અંદાજ<BR/>"+
+"Budget Estimates" ) )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="65" width="73" height="95" isRemoveLineWhenBlank="true" uuid="fd79baf9-91f7-4abe-b685-8278c3decf2b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGujMBE}+"નો<BR/>"+
+"સુધારેલા અંદાજ<BR/>"+
+"Revised Estimates"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="243" y="93" width="200" height="20" isRemoveLineWhenBlank="true" uuid="39dd7264-43e4-4c92-ba15-788c63ef0285"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[મહેસૂલી સદર]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="93" width="201" height="20" isRemoveLineWhenBlank="true" uuid="f7e73775-2132-4f6f-b6d5-0f6ba5bfd372"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Heads of Revenue]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="158" width="73" height="22" uuid="a48f90d0-e50a-4350-a57d-309f8b60d4e6"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyEngACC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="158" width="73" height="22" uuid="0086c2af-f1e0-4d0b-8b9f-6dd1bb2e0e6d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyEngMBE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="158" width="73" height="22" uuid="0802e2b1-0be1-4297-a13d-bcaf445abbca"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyEngMBE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="62" width="81" height="95" isRemoveLineWhenBlank="true" uuid="0628e8f9-de27-461e-b316-6135891caaef">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{modifiedCount1} == null ? (
+
+$F{fyGujBE}+"નો<BR/>"+
+"અંદાજ<BR/>"+
+"Budget Estimates" ) : (
+
+$P{modifiedCount1} == 1 ? (
+$F{fyGujBE}+"નો<BR/>"+
+"ફેરફાર કરેલ અંદાજ<BR/>"+
+"Modified Budget Estimates") : (
+
+$F{fyGujBE}+"નો<BR/>"+
+"અંદાજ<BR/>"+
+"Budget Estimates" ) )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="158" width="81" height="22" uuid="34ac5570-490f-4c9d-b3e3-493b4c9e211d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyEngBE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="661" y="27" width="78" height="29" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="6d49e2c8-b475-4864-9cdf-744d58ce653c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)
+(₹. In Lakhs)
+]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement x="270" y="0" width="168" height="30" isRemoveLineWhenBlank="true" uuid="43c67cf7-3f84-44b4-be77-553808bc2017">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="70226471-6bd8-4598-8203-8301f1412515"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="161" y="0" width="73" height="30" uuid="b794ece2-b79e-4db0-a741-19e44bcab55e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{REVIESED_ESTIMATES} == null || $F{REVIESED_ESTIMATES} ==0.00 ) ? "--" : $F{REVIESED_ESTIMATES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="0" width="32" height="30" uuid="87f56ee5-6dbd-4c63-8d9f-d7becc55f800">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2859f203-8393-490e-8a90-57511bcad00a"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE_GUJ}+" - "]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="80" y="0" width="73" height="30" uuid="528d1084-3fda-47ec-adae-ca882a0f344f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21ca1ea1-da1c-4d66-89ff-0b6018f00dd1"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{MODIFIED_BUDGET_ESTIMATES} == null || $F{MODIFIED_BUDGET_ESTIMATES} == 0.00 ) ? "--" :$F{MODIFIED_BUDGET_ESTIMATES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="0" width="32" height="30" uuid="a4bad6b5-0a36-45d0-9ec6-9ce07be5325b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63c9b3e7-5f6f-4c1c-b6b2-11c41e374b74"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE} +" - "]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="0" y="0" width="73" height="30" uuid="38e8bf68-4d23-4e75-8907-81684da8f84b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ACCOUNTS}== null || $F{ACCOUNTS}== 0.00 )? "--" : $F{ACCOUNTS}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="483" y="0" width="168" height="30" isRemoveLineWhenBlank="true" uuid="709f6be2-fa67-4193-8ca9-20b42fe44afb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8b5e8a24-551e-412d-bf67-7a8e3d63f029"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_ENG}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="660" y="0" width="81" height="30" uuid="db099fa5-600b-42ea-8fd4-85d741f9ed28">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{BUDGET_ESTIMATES} == null || $F{BUDGET_ESTIMATES} == 0.00) ? "--" :$F{BUDGET_ESTIMATES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="8">
+			<line>
+				<reportElement x="0" y="7" width="740" height="1" uuid="37eb62c2-d4f2-4cd5-ad2b-22398774dfb4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="85">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="0" y="14" width="73" height="22" uuid="f8fc8584-d4aa-4390-94f3-d9e1565a29c5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{totalAcc} == null || $V{totalAcc} == 0.00) ? "--" :$V{totalAcc}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="80" y="14" width="73" height="22" uuid="d59ba02f-4ec5-4e55-a4c7-2f647c763150">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{totalModBugEstimate} == null || $V{totalModBugEstimate} == 0.00) ? "--" :$V{totalModBugEstimate}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="161" y="14" width="73" height="22" uuid="1fce1b87-c2a0-40fb-81df-8fdc13ab54a6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{totalRevEstimate} == null || $V{totalRevEstimate} == 0.00) ? "--" :$V{totalRevEstimate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="243" y="13" width="200" height="30" uuid="3d2ee4d0-b6a4-44b9-bd10-407c1874c11e">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[સરવાળો : પ્રાપ્તિ નાં સદર-મહેસૂલ વિભાગ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="13" width="200" height="30" uuid="51801f0e-0463-43f6-af14-6d14f1fad548">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL-Receipt Heads-Revnue Account]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="660" y="14" width="80" height="22" uuid="5ee3c67d-971e-4094-9480-fcf8f90bbfdc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#4D4D4D"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{totalBugEstimate} == null || $V{totalBugEstimate} == 0.00) ? "--" : $V{totalBugEstimate}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="-20" y="51" width="780" height="33" uuid="c4736f16-c4d2-49c5-a797-a626ba5b2c29"/>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalAcc">
+					<subreportParameterExpression><![CDATA[$V{totalAcc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalModBugEstimate">
+					<subreportParameterExpression><![CDATA[$V{totalModBugEstimate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalRevEstimate">
+					<subreportParameterExpression><![CDATA[$V{totalRevEstimate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalBugEstimate">
+					<subreportParameterExpression><![CDATA[$V{totalBugEstimate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["BudgetBookExpenditurePartOne.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

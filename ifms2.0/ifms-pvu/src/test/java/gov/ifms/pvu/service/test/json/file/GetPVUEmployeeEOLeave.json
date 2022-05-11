@@ -1,0 +1,19 @@
+{
+  "createdBy": 1,
+  "createdDate": "2019-12-11T11:42:45.492+0000",
+  "createdByPost": 1,
+  "updatedByPost": 1,
+  "activeStatus": 1,
+  "updatedBy": 1,
+  "updatedDate": "2019-12-11T11:42:45.492+0000",
+  "empEolId": 45,
+  "empId": 1,
+  "transNo": "string",
+  "initiationDate": "2019-12-11T11:42:07.259+0000",
+  "startDate": "2019-12-11T11:42:07.259+0000",
+  "endDate": "2019-12-13T11:42:07.258+0000",
+  "noOfDays": 0,
+  "orderNoDate": "string",
+  "remarks": "string",
+  "statusId": 1
+}

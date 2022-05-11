@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimatesMinorHeadWork" pageWidth="802" pageHeight="900" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" uuid="69688600-2650-465e-9d37-a3cdb43e6c39">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="demandId" class="java.lang.Long"/>
+	<parameter name="majHeadId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+                COALESCE(NFY.DEMAND_ID, CFY1.DEMAND_ID, CFY2.DEMAND_ID, PFY.DEMAND_ID) AS DEMAND_ID,
+                COALESCE(NFY.DEMAND_CODE_ENG, CFY1.DEMAND_CODE_ENG, CFY2.DEMAND_CODE_ENG, PFY.DEMAND_CODE_ENG) AS DEMAND_CODE_ENG,
+                COALESCE(NFY.DEMAND_CODE_GUJ, CFY1.DEMAND_CODE_GUJ, CFY2.DEMAND_CODE_GUJ, PFY.DEMAND_CODE_GUJ) AS DEMAND_CODE_GUJ,
+                COALESCE(NFY.MAJORHEAD_ID, CFY1.MAJORHEAD_ID, CFY2.MAJORHEAD_ID, PFY.MAJORHEAD_ID) AS MAJORHEAD_ID,
+                COALESCE(NFY.MAJORHEAD_CODE, CFY1.MAJORHEAD_CODE, CFY2.MAJORHEAD_CODE, PFY.MAJORHEAD_CODE) AS MAJORHEAD_CODE,
+                COALESCE(NFY.MAJORHEAD_CODE_GUJ, CFY1.MAJORHEAD_CODE_GUJ, CFY2.MAJORHEAD_CODE_GUJ, PFY.MAJORHEAD_CODE_GUJ) AS MAJORHEAD_CODE_GUJ,
+                COALESCE(NFY.MAJORHEAD_NAME, CFY1.MAJORHEAD_NAME, CFY2.MAJORHEAD_NAME, PFY.MAJORHEAD_NAME) AS MAJORHEAD_NAME,
+                COALESCE(NFY.MAJORHEAD_NAME_GUJ, CFY1.MAJORHEAD_NAME_GUJ, CFY2.MAJORHEAD_NAME_GUJ, PFY.MAJORHEAD_NAME_GUJ) AS MAJORHEAD_NAME_GUJ,
+                COALESCE(NFY.SUBMAJORHEAD_ID, CFY1.SUBMAJORHEAD_ID, CFY2.SUBMAJORHEAD_ID, PFY.SUBMAJORHEAD_ID) AS SUBMAJORHEAD_ID,
+                COALESCE(NFY.SUBMAJORHEAD_CODE, CFY1.SUBMAJORHEAD_CODE, CFY2.SUBMAJORHEAD_CODE, PFY.SUBMAJORHEAD_CODE) AS SUBMAJORHEAD_CODE,
+                COALESCE(NFY.SUBMAJORHEAD_NAME, CFY1.SUBMAJORHEAD_NAME, CFY2.SUBMAJORHEAD_NAME, PFY.SUBMAJORHEAD_NAME) AS SUBMAJORHEAD_NAME,
+                COALESCE(NFY.SUBMAJORH_NAME_GUJ, CFY1.SUBMAJORH_NAME_GUJ, CFY2.SUBMAJORH_NAME_GUJ, PFY.SUBMAJORH_NAME_GUJ) AS SUBMAJORH_NAME_GUJ,
+                NFY.BUD_EST,
+                CFY1.MOD_BUD_EST,
+                CFY2.RE_BUD_EST,
+                PFY.ACC_BUD_EST,
+                NFY.BE_ChaVotEng,
+                NFY.BE_ChaVotGuj,
+                CFY1.MBE_ChaVotEng,
+                CFY1.MBE_ChaVotGuj,
+                CFY2.RE_ChaVotEng,
+                CFY2.RE_ChaVotGuj,
+                PFY.ACC_ChaVotEng,
+                PFY.ACC_ChaVotGuj,
+                NFY.EstimatedCost,
+                NFY.ProbableExp,
+                count(*) OVER (PARTITION BY COALESCE(NFY.DEMAND_ID, CFY1.DEMAND_ID, CFY2.DEMAND_ID, PFY.DEMAND_ID) ,COALESCE(NFY.MAJORHEAD_ID, CFY1.MAJORHEAD_ID, CFY2.MAJORHEAD_ID, PFY.MAJORHEAD_ID),COALESCE(NFY.SUBMAJORHEAD_ID, CFY1.SUBMAJORHEAD_ID, CFY2.SUBMAJORHEAD_ID, PFY.SUBMAJORHEAD_ID)) AS CHAVOTCOUNT
+
+FROM 
+(
+SELECT 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                ROUND(sum(abc.BE)+sum(abc.state)+sum(abc.css),2) AS BUD_EST,  
+                abc.BE_ChaVotEng,
+                abc.BE_ChaVotGuj,
+               ROUND(sum(abc.EstimatedCost),2) AS EstimatedCost,
+				ROUND(sum(abc.ProbableExp),2) AS ProbableExp
+                
+FROM 
+(
+SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                dtl.PROPOSED_AMOUNT AS BE, 0 AS state, 0 AS css, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS BE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS BE_ChaVotGuj,
+     0 AS EstimatedCost,
+	0 AS ProbableExp
+FROM 
+                BUDGET.TBUD_PUB_HDR tph,
+                BUDGET.TBUD_PUB_DTL dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_HDR_ID = dtl.TBUD_PUB_HDR_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (425,426,427)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}
+               
+  UNION ALL 
+  SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                 0 AS BE, PA_STATE AS state, PA_CSS AS css, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS BE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS BE_ChaVotGuj,
+     0 AS EstimatedCost,
+	0 AS ProbableExp
+FROM 
+                BUDGET.TBUD_PUB_HDR tph,
+                BUDGET.TBUD_PUB_NC_HDR dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_HDR_ID = dtl.TBUD_PUB_HDR_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (428,429)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}              
+             
+                
+      UNION ALL
+      
+      SELECT 
+	main_query.DEMAND_CODE_ENG, 
+	main_query.DEMAND_CODE_GUJ,
+	main_query.MAJORHEAD_CODE,
+	main_query.MAJORHEAD_CODE_GUJ, 	
+	main_query.MAJORHEAD_NAME, 
+	main_query.MAJORHEAD_NAME_GUJ, 
+	main_query.SUBMAJORHEAD_CODE,
+	main_query.SUBMAJORHEAD_NAME,
+	main_query.SUBMAJORH_NAME_GUJ,
+	main_query.DEMAND_ID,
+	main_query.MAJORHEAD_ID,
+	main_query.SUBMAJORHEAD_ID,
+	  0 AS BE, 0 AS state, 0 AS css,
+	main_query.BE_ChaVotEng, 
+	main_query.BE_ChaVotGuj, 
+	main_query.EstimatedCost,
+	main_query.ProbableExp
+	--main_query.PROPOSED_AMOUNT
+FROM 
+(
+SELECT 
+	workOlder.DEMAND_CODE_ENG, 
+	workOlder.DEMAND_CODE_GUJ,
+	workOlder.MAJORHEAD_CODE,
+	workOlder.MAJORHEAD_CODE_GUJ, 	
+	workOlder.MAJORHEAD_NAME, 
+	workOlder.MAJORHEAD_NAME_GUJ, 
+	workOlder.SUBMAJORHEAD_CODE,
+	workOlder.SUBMAJORHEAD_NAME,
+	workOlder.SUBMAJORH_NAME_GUJ,
+	workOlder.DEMAND_ID,
+	workOlder.MAJORHEAD_ID,
+	workOlder.SUBMAJORHEAD_ID,
+	workOlder.BUD_EST,
+	workOlder.BE_ChaVotEng, 
+	workOlder.BE_ChaVotGuj, 
+	workOlder.EstimatedCost,
+	wip.ProbableExp
+--	wip.PROPOSED_AMOUNT
+FROM 
+(
+SELECT 
+
+ LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+      mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,           
+                
+	ms.SUBMAJORHEAD_CODE, 
+	ms.SUBMAJORHEAD_NAME,
+	ms.SUBMAJORH_NAME_GUJ,
+	tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+    tph.SUBMAJORHEAD_ID,
+    0 AS BUD_EST, 
+    CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS BE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS BE_ChaVotGuj,	
+	tpnl.ESTIMATED_COST AS EstimatedCost,
+	tpnl.TBUD_PUB_NW_LST_ID 
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN MASTER_V1.MS_BPN mb ON tph.BPN_ID = mb.BPN_ID 
+	INNER JOIN MASTER_V1.MS_DEMAND md ON tph.DEMAND_ID = md.DEMAND_ID AND md.BPN_ID = mb.BPN_ID
+	INNER JOIN  MASTER_V1.MS_MAJORHEAD mm2 ON md.DEMAND_ID = mm2.DEMAND_ID  AND  tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_MINORHEAD mm ON md.DEMAND_ID = mm.DEMAND_ID AND tph.MINORHEAD_ID = mm.MINORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID
+	INNER JOIN MASTER_V1.MS_SUBHEAD msh ON tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	INNER JOIN MASTER_V1.MS_DETAILHEAD mdh ON tph.DETAILHEAD_ID = mdh.DETAILHEAD_ID 
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID < $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	 ORDER BY WORK_NO) workOlder	
+LEFT JOIN 	
+(
+	SELECT tpwl.TOT_PRO_EXP_CUR_FY AS ProbableExp,
+	   tpwl.PROPOSED_AMOUNT,
+	   tpwl.TBUD_PUB_NW_LST_ID
+	FROM BUDGET.TBUD_PUB_WIP_LST tpwl
+		INNER JOIN BUDGET.TBUD_PUB_HDR tph ON tpwl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	WHERE 
+		tph.APP_TYPE_ID = 429 
+		AND tph.BPN_ID = $P{bpnId}
+		AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+		AND tph.IS_REVENUE_CAPITAL IN (5,6) 
+		AND tph.DEMAND_ID = $P{demandId} 
+		AND tph.MAJORHEAD_ID = $P{majHeadId}
+) wip ON wip.TBUD_PUB_NW_LST_ID = workOlder.TBUD_PUB_NW_LST_ID 
+
+UNION ALL
+
+SELECT 
+	LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+      mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,           
+                
+	ms.SUBMAJORHEAD_CODE, 
+	ms.SUBMAJORHEAD_NAME,
+	ms.SUBMAJORH_NAME_GUJ,
+	tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+    tph.SUBMAJORHEAD_ID,
+    0 AS BUD_EST,
+    CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS BE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS BE_ChaVotGuj,	
+	tpnl.ESTIMATED_COST AS EstimatedCost,
+	NULL AS ProbableExp
+	--(COALESCE(tpnl.ACTUAL_ESTABLISHMENT,0) + COALESCE(tpnl.ACTUAL_MACHINERY,0) + COALESCE(tpnl.PROVISION_NEXT_FY,0)) AS PROPOSED_AMOUNT
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN MASTER_V1.MS_BPN mb ON tph.BPN_ID = mb.BPN_ID 
+	INNER JOIN MASTER_V1.MS_DEMAND md ON tph.DEMAND_ID = md.DEMAND_ID AND md.BPN_ID = mb.BPN_ID
+	INNER JOIN  MASTER_V1.MS_MAJORHEAD mm2 ON md.DEMAND_ID = mm2.DEMAND_ID  AND  tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_MINORHEAD mm ON md.DEMAND_ID = mm.DEMAND_ID AND tph.MINORHEAD_ID = mm.MINORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID
+	INNER JOIN MASTER_V1.MS_SUBHEAD msh ON tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	INNER JOIN MASTER_V1.MS_DETAILHEAD mdh ON tph.DETAILHEAD_ID = mdh.DETAILHEAD_ID 
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	 AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}) main_query
+	
+	) abc
+GROUP BY 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.BE_ChaVotEng,
+                abc.BE_ChaVotGuj
+) NFY
+FULL OUTER JOIN 
+(
+
+SELECT 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                ROUND(sum(abc.MBE)+sum(abc.state)+sum(abc.css),2) AS MOD_BUD_EST,  
+                abc.MBE_ChaVotEng,
+                abc.MBE_ChaVotGuj
+FROM 
+(
+SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                dtl.PROPOSED_AMOUNT AS MBE, 0 AS state, 0 AS css, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS MBE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS MBE_ChaVotGuj
+FROM 
+                BUDGET.TBUD_PUB_HDR tph,
+                BUDGET.TBUD_PUB_DTL dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_HDR_ID = dtl.TBUD_PUB_HDR_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (425,426,427)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}
+                AND tph.IS_REVISED <> 1
+               
+  UNION ALL 
+  SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                 0 AS MBE, PA_STATE AS state, PA_CSS AS css, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS MBE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS MBE_ChaVotGuj
+FROM 
+                BUDGET.TBUD_PUB_HDR tph,
+                BUDGET.TBUD_PUB_NC_HDR dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_HDR_ID = dtl.TBUD_PUB_HDR_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (428,429)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}
+               AND tph.IS_REVISED <> 1
+                ) abc
+GROUP BY 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.MBE_ChaVotEng,
+                abc.MBE_ChaVotGuj
+ORDER BY abc.SUBMAJORHEAD_CODE
+) CFY1 ON CFY1.DEMAND_ID=NFY.DEMAND_ID AND CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+                                  AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID
+                                  AND NFY.BE_ChaVotEng = CFY1.MBE_ChaVotEng
+FULL OUTER JOIN 
+(
+
+SELECT 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                ROUND(sum(abc.RE)+sum(abc.state)+sum(abc.css),2) AS RE_BUD_EST,  
+                abc.RE_ChaVotEng,
+                abc.RE_ChaVotGuj
+FROM 
+(
+SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                dtl.PROPOSED_AMOUNT AS RE, 0 AS state, 0 AS css, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS RE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS RE_ChaVotGuj
+FROM 
+                BUDGET.TBUD_PUB_HDR tph,
+                BUDGET.TBUD_PUB_DTL dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_HDR_ID = dtl.TBUD_PUB_HDR_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (425,426,427)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}
+                AND tph.IS_REVISED = 1
+               
+  UNION ALL 
+  SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                 0 AS RE, PA_STATE AS state, PA_CSS AS css, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS RE_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS RE_ChaVotGuj
+FROM 
+                BUDGET.TBUD_PUB_HDR tph,
+                BUDGET.TBUD_PUB_NC_HDR dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_HDR_ID = dtl.TBUD_PUB_HDR_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (428,429)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1
+               AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}
+               AND tph.IS_REVISED = 1
+                ) abc
+GROUP BY 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.RE_ChaVotEng,
+                abc.RE_ChaVotGuj
+ORDER BY abc.SUBMAJORHEAD_CODE
+) CFY2 ON CFY2.DEMAND_ID=NFY.DEMAND_ID AND CFY2.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+                                  AND CFY2.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID
+                                  AND NFY.BE_ChaVotEng = CFY2.RE_ChaVotEng
+FULL OUTER JOIN 
+(
+SELECT 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                ROUND(sum(abc.ACC),2) AS ACC_BUD_EST,  
+                abc.ACC_ChaVotEng,
+                abc.ACC_ChaVotGuj
+FROM 
+(
+SELECT
+                LTRIM(md.DEMAND_CODE, '0') AS DEMAND_CODE_ENG, 
+          REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LTRIM(md.DEMAND_CODE_GUJ, '0'),'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_CODE_GUJ,
+                mm2.MAJORHEAD_CODE,
+  REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+                '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ,
+                ms.SUBMAJORHEAD_CODE, 
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID,
+                dtl.AMOUNT AS ACC, 
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'CHARGED'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'VOTED'
+    END AS ACC_ChaVotEng,
+                CASE WHEN tph.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+                WHEN tph.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS ACC_ChaVotGuj
+FROM 
+                BUDGET.TBUD_PUB_AC tph,
+                BUDGET.TBUD_PUB_AC_DTL dtl,
+                MASTER_V1.MS_SUBMAJORHEAD ms,
+                MASTER_V1.MS_MAJORHEAD mm2,
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_OBJECTHEAD mo
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                 AND tph.TBUD_PUB_AC_ID = dtl.TBUD_PUB_AC_ID
+                 AND dtl.OBJECT_ID = mo.OBJECT_ID    
+                AND md.DEMAND_ID = mm2.DEMAND_ID 
+                AND tph.MAJORHEAD_ID = mm2.MAJORHEAD_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.APP_TYPE_ID IN (425,426,427,428,429)
+              --  AND tph.IS_REVENUE_CAPITAL IN (5,6)
+              AND mo.OBJECT_CODE IN ('3131','3132','3561')
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} -2
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.DEMAND_ID = $P{demandId} 
+                AND tph.MAJORHEAD_ID = $P{majHeadId}  
+                ) abc
+GROUP BY 
+                abc.DEMAND_CODE_ENG, 
+                abc.DEMAND_CODE_GUJ,
+                abc.MAJORHEAD_CODE,
+                abc.MAJORHEAD_CODE_GUJ,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.ACC_ChaVotEng,
+                abc.ACC_ChaVotGuj
+ORDER BY abc.SUBMAJORHEAD_CODE
+
+) PFY ON PFY.DEMAND_ID=NFY.DEMAND_ID AND PFY.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+                                AND PFY.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID
+                                AND NFY.BE_ChaVotEng = PFY.ACC_ChaVotEng
+ORDER BY 
+                SUBMAJORHEAD_CODE]]>
+	</queryString>
+	<field name="DEMAND_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_ID"/>
+	</field>
+	<field name="DEMAND_CODE_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_CODE_ENG"/>
+	</field>
+	<field name="DEMAND_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_CODE_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_ID"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+	</field>
+	<field name="MAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+	</field>
+	<field name="SUBMAJORHEAD_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_ID"/>
+	</field>
+	<field name="SUBMAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_CODE"/>
+	</field>
+	<field name="SUBMAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_NAME"/>
+	</field>
+	<field name="SUBMAJORH_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORH_NAME_GUJ"/>
+	</field>
+	<field name="BUD_EST" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BUD_EST"/>
+	</field>
+	<field name="MOD_BUD_EST" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="MOD_BUD_EST"/>
+	</field>
+	<field name="RE_BUD_EST" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RE_BUD_EST"/>
+	</field>
+	<field name="ACC_BUD_EST" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_BUD_EST"/>
+	</field>
+	<field name="BE_CHAVOTENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BE_CHAVOTENG"/>
+	</field>
+	<field name="BE_CHAVOTGUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BE_CHAVOTGUJ"/>
+	</field>
+	<field name="MBE_CHAVOTENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MBE_CHAVOTENG"/>
+	</field>
+	<field name="MBE_CHAVOTGUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MBE_CHAVOTGUJ"/>
+	</field>
+	<field name="RE_CHAVOTENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="RE_CHAVOTENG"/>
+	</field>
+	<field name="RE_CHAVOTGUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="RE_CHAVOTGUJ"/>
+	</field>
+	<field name="ACC_CHAVOTENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_CHAVOTENG"/>
+	</field>
+	<field name="ACC_CHAVOTGUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACC_CHAVOTGUJ"/>
+	</field>
+	<field name="ESTIMATEDCOST" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ESTIMATEDCOST"/>
+	</field>
+	<field name="PROBABLEEXP" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PROBABLEEXP"/>
+	</field>
+	<field name="CHAVOTCOUNT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CHAVOTCOUNT"/>
+	</field>
+	<variable name="tot_majhead_acc" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ACC_BUD_EST}==null?0:$F{ACC_BUD_EST}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="tot_majhead_mbe" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{MOD_BUD_EST}==null?0:$F{MOD_BUD_EST}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="tot_majhead_re" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{RE_BUD_EST}==null?0:$F{RE_BUD_EST}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="tot_majhead_be" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{BUD_EST}==null?0:$F{BUD_EST}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="tot_majhead_acc_voted" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"voted")?($F{ACC_BUD_EST}==null?0:$F{ACC_BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_mbe_voted" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"voted")?($F{MOD_BUD_EST}==null?0:$F{MOD_BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_re_voted" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"voted")?($F{RE_BUD_EST}==null?0:$F{RE_BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_be_voted" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"voted")?($F{BUD_EST}==null?0:$F{BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_acc_charged" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"charged")?($F{ACC_BUD_EST}==null?0:$F{ACC_BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_mbe_charged" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"charged")?($F{MOD_BUD_EST}==null?0:$F{MOD_BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_be_charged" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"charged")?($F{BUD_EST}==null?0:$F{BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_majhead_re_charged" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"charged")?($F{RE_BUD_EST}==null?0:$F{RE_BUD_EST}):0]]></variableExpression>
+	</variable>
+	<variable name="chargedExists" class="java.lang.Boolean">
+		<variableExpression><![CDATA[$F{CHAVOTCOUNT}>1?true:($V{chargedExists}==true?true:false)]]></variableExpression>
+		<initialValueExpression><![CDATA[false]]></initialValueExpression>
+	</variable>
+	<variable name="tot_est_cost_voted" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"voted")?($F{ESTIMATEDCOST}==null?0:$F{ESTIMATEDCOST}):0]]></variableExpression>
+	</variable>
+	<variable name="tot_est_cost_charged" class="java.lang.Double">
+		<variableExpression><![CDATA[EQUALS(TRIM(LOWER($F{ACC_CHAVOTENG}==null?($F{MBE_CHAVOTENG}==null?($F{RE_CHAVOTENG}==null?($F{BE_CHAVOTENG}==null?"--":$F{BE_CHAVOTENG}):$F{RE_CHAVOTENG}):$F{MBE_CHAVOTENG}):$F{ACC_CHAVOTENG} )),"charged")?($F{ESTIMATEDCOST}==null?0:$F{ESTIMATEDCOST}):0]]></variableExpression>
+	</variable>
+	<group name="grp_subMajHeadName">
+		<groupExpression><![CDATA[$F{SUBMAJORHEAD_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<subreport>
+					<reportElement x="0" y="0" width="802" height="21" isRemoveLineWhenBlank="true" uuid="f494f663-56fc-4e29-ad59-5140a6dbdf35">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<subreportParameter name="fyId">
+						<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="bpnId">
+						<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="demandId">
+						<subreportParameterExpression><![CDATA[$F{DEMAND_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="majHeadId">
+						<subreportParameterExpression><![CDATA[$F{MAJORHEAD_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subMajHeadId">
+						<subreportParameterExpression><![CDATA[$F{SUBMAJORHEAD_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="majHeadCode">
+						<subreportParameterExpression><![CDATA[$F{MAJORHEAD_CODE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["src/reports/BPN_22_II/BudgetEstimatesObjectHeadWorkFour.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1">
+			<break>
+				<reportElement x="0" y="0" width="802" height="1" uuid="3fed35f9-0d68-4ceb-99f7-7e89931a73bb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</break>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="87">
+			<textField>
+				<reportElement x="5" y="0" width="364" height="15" uuid="5d53d105-dd22-4ede-a3ac-8f83ed865b61">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["માંગણી નં.. : " + $F{DEMAND_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="401" height="15" uuid="172c84f3-fc38-4498-bdf5-864c318fee17">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Demand No. : " + $F{DEMAND_CODE_ENG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="15" width="364" height="15" uuid="d2cf5948-9ee2-4edb-8727-98c7e9ebbbe6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["મુખ્ય સદર:" + $F{MAJORHEAD_CODE_GUJ}+":" + $F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="15" width="401" height="15" uuid="ae7d8c00-e5ee-4dd5-a1a6-808cc3b1e17d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MAJOR HEAD:"+ $F{MAJORHEAD_CODE}+":" + $F{MAJORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="724" y="30" width="74" height="30" uuid="26b58640-e33a-4806-93de-ef626a31d48a">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)
+(₹. In Lakhs)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="63" width="70" height="21" isRemoveLineWhenBlank="true" uuid="9fbf4877-88a6-4a1b-8275-a24c001a1983">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[3]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="63" width="160" height="21" isRemoveLineWhenBlank="true" uuid="29d046a7-6251-473b-bd39-cac38c3c3806">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[4]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="731" y="63" width="70" height="21" isRemoveLineWhenBlank="true" uuid="8e0ca54c-6c49-4a92-9b89-17050301dc15">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[6]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="63" width="70" height="21" isRemoveLineWhenBlank="true" uuid="f7a0c140-39a1-4001-9ba0-4e2097f4df30">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[2]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="63" width="41" height="21" uuid="96d519cd-af84-4903-acb3-11615c363ef4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="531" y="63" width="200" height="21" isRemoveLineWhenBlank="true" uuid="fa322401-6d4f-4b6e-b78b-9a1431a04061">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[5]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="63" width="70" height="21" isRemoveLineWhenBlank="true" uuid="420ec2e4-1b15-4d76-b71c-a270e2af54f2"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[1]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="63" width="60" height="21" isRemoveLineWhenBlank="true" uuid="55eaf4d8-2572-46fd-a522-bb35e0d31406">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1(a)*"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="63" width="60" height="21" isRemoveLineWhenBlank="true" uuid="cf478731-e376-4782-a463-3b5b131b5768">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1(b)*"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="103">
+			<break>
+				<reportElement x="0" y="102" width="801" height="1" uuid="e8382576-6cf3-4f14-b6af-e36dbc7e874d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[1==0]]></printWhenExpression>
+				</reportElement>
+			</break>
+			<textField>
+				<reportElement x="494" y="3" width="32" height="30" isRemoveLineWhenBlank="true" uuid="89fa04e4-e9da-4869-a024-68e8eae83416">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="531" y="3" width="200" height="30" isRemoveLineWhenBlank="true" uuid="4d72dbfb-2901-4f6d-9cbc-f362fa1afe25">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gross Total, " + $F{MAJORHEAD_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="731" y="0" width="70" height="30" isRemoveLineWhenBlank="true" uuid="14a523af-8d99-43ac-9f5b-cad2da860159">
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_be}==00?"--":$V{tot_majhead_be}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="3" width="144" height="30" isRemoveLineWhenBlank="true" uuid="4d3ef442-963d-4eee-934c-81095e12b191">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["એકંદર સરવાળો, " + $F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="120" y="3" width="70" height="30" isRemoveLineWhenBlank="true" uuid="dbbce1d9-d1c5-41cb-8513-03de41e0b705">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[EQUALS($V{tot_majhead_acc},0.00)?"--":$V{tot_majhead_acc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="260" y="3" width="70" height="30" isRemoveLineWhenBlank="true" uuid="06d80812-3852-4f38-8faf-dc4a9f23104b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_re}==0?"--":$V{tot_majhead_re}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="190" y="3" width="70" height="30" isRemoveLineWhenBlank="true" uuid="7812cd41-9c5a-4421-b2b5-641c08c40dcc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_mbe}==0?"--":$V{tot_majhead_mbe}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="801" height="1" uuid="8faa20b5-12e3-4a4e-8af5-cfa89864632c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists}) && (1==0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="35" width="801" height="1" uuid="82e0c25c-62db-446e-bda3-0ab9f6bbed1a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="260" y="59" width="70" height="15" isRemoveLineWhenBlank="true" uuid="870f2f03-fd4b-4b9d-9a00-6b92737cbce3">
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_re_voted}==0.00?"--":$V{tot_majhead_re_voted}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="39" width="32" height="20" isRemoveLineWhenBlank="true" uuid="21569a14-90ca-470e-8600-c55b025ea29d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="190" y="39" width="70" height="20" isRemoveLineWhenBlank="true" uuid="c0408672-7afd-41db-8e21-50216e9d12bf">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_mbe_charged}==0.00?"--":$V{tot_majhead_mbe_charged}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="120" y="59" width="70" height="15" isRemoveLineWhenBlank="true" uuid="8e8101c0-6f70-4ae0-bcff-381e9cc98d28">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_acc_voted}==0.00?"--":$V{tot_majhead_acc_voted}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="531" y="39" width="200" height="20" isRemoveLineWhenBlank="true" uuid="d4e9a5c0-043e-43d6-93ac-f612c1f0e4dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gross Total, " + $F{MAJORHEAD_NAME} + " (Charged)"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="731" y="59" width="70" height="15" isRemoveLineWhenBlank="true" uuid="a92f9f63-9740-45f5-8e29-82dc74b3e98f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_be_voted}==0.00?"--":$V{tot_majhead_be_voted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="120" y="39" width="70" height="20" isRemoveLineWhenBlank="true" uuid="51af8b82-7507-4c23-bbe3-33c1e1c46175">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_acc_charged}==0.00?"--":$V{tot_majhead_acc_charged}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="731" y="39" width="70" height="20" isRemoveLineWhenBlank="true" uuid="a5857fa1-21f1-45fe-9d9b-a794bc8e6ab9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_be_charged}==0.00?"--":$V{tot_majhead_be_charged}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="360" y="39" width="140" height="20" isRemoveLineWhenBlank="true" uuid="40ac1566-49e7-4dc6-88c7-fcb8ba8acf06">
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["એકંદર સરવાળો, " + $F{MAJORHEAD_NAME_GUJ} + " (બિન-મતપાત્ર)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="59" width="137" height="15" isRemoveLineWhenBlank="true" uuid="4165ecee-e750-4374-98e6-52b1d257b137">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(મતપાત્ર)"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="190" y="59" width="70" height="15" isRemoveLineWhenBlank="true" uuid="5bdd5ec4-2d77-4236-9903-9de42d306223">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_mbe_voted}==0.00?"--":$V{tot_majhead_mbe_voted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="260" y="39" width="70" height="20" isRemoveLineWhenBlank="true" uuid="ae997ddf-20aa-4b8a-8320-4f874daeb548">
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_majhead_re_charged}==0.00?"--":$V{tot_majhead_re_charged}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="531" y="59" width="200" height="15" isRemoveLineWhenBlank="true" uuid="71959f3f-bace-4986-82ce-2bcfecab8b39">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Voted)"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="77" width="801" height="1" uuid="49cb8066-79b2-40c2-bce4-bc37b1ac12ec">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement x="0" y="80" width="802" height="21" isRemoveLineWhenBlank="true" uuid="191886fb-3f64-4bde-a086-13ff91c53851">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="demandId">
+					<subreportParameterExpression><![CDATA[$P{demandId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="majHeadId">
+					<subreportParameterExpression><![CDATA[$P{majHeadId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="maj_head_be_tot">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_be}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="maj_head_acc_tot">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_acc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="maj_head_mbe_tot">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_mbe}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="maj_head_re_tot">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_re}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="MAJORHEAD_NAME_ENG">
+					<subreportParameterExpression><![CDATA[$F{MAJORHEAD_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="MAJORHEAD_NAME_GUJ">
+					<subreportParameterExpression><![CDATA[$F{MAJORHEAD_NAME_GUJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="MAJORHEAD_CODE">
+					<subreportParameterExpression><![CDATA[$F{MAJORHEAD_CODE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="chargedExists">
+					<subreportParameterExpression><![CDATA[$V{chargedExists}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_acc_voted">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_acc_voted}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_be_voted">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_be_voted}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_mbe_voted">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_mbe_voted}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_re_voted">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_re_voted}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_acc_charged">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_acc_charged}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_be_charged">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_be_charged}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_mbe_charged">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_mbe_charged}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_re_charged">
+					<subreportParameterExpression><![CDATA[$V{tot_majhead_re_charged}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="maj_head_1a_tot">
+					<subreportParameterExpression><![CDATA[$V{tot_est_cost_voted}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tot_majhead_1a_voted">
+					<subreportParameterExpression><![CDATA[$V{tot_est_cost_voted}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_22_II/BudgetEstimatesDeductRecoveriesWork.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="60" y="3" width="60" height="30" isRemoveLineWhenBlank="true" uuid="8cf361b5-d590-4a97-9df9-60faea8400ba">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="0" y="3" width="60" height="30" isRemoveLineWhenBlank="true" uuid="5c128371-8359-4bce-9628-138e4e0fcfe7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_est_cost_voted}==0.00?"--":$V{tot_est_cost_voted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="60" y="39" width="60" height="20" isRemoveLineWhenBlank="true" uuid="f9a6217b-f6b2-4582-83e0-9ca0fe98bd97">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="0" y="39" width="60" height="20" isRemoveLineWhenBlank="true" uuid="5d6a814c-da28-4f1b-bdf5-e25e4d33ad14">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_est_cost_charged}==0.00?"--":$V{tot_est_cost_charged}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="0" y="59" width="60" height="15" isRemoveLineWhenBlank="true" uuid="511b96d2-7a63-4eda-8962-5c4c2a424fa1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_est_cost_voted}==0.00?"--":$V{tot_est_cost_voted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00;(#0.00-)">
+				<reportElement x="60" y="59" width="60" height="15" isRemoveLineWhenBlank="true" uuid="31689e2f-fd30-4af1-8292-b8092b301779">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["--"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="3" width="23" height="30" isRemoveLineWhenBlank="true" uuid="272f5ead-5522-4817-9e6b-f48d09fcdd5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[NOT($V{chargedExists})]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="39" width="30" height="20" isRemoveLineWhenBlank="true" uuid="fed7c61f-1b67-41d2-b838-ed553c232bc1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45d2e8cb-03ac-4149-a930-ff5b77d57fd8"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$V{chargedExists}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAJORHEAD_CODE_GUJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

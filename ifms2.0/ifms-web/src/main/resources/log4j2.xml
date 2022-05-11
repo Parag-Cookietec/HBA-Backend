@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %msg%n%ex</Property>
+        <!-- <Property name="APP_LOG_ROOT">c:/temp</Property> -->
+		<Property name="APP_LOG_ROOT">/opt/ifmslog/logs</Property>     
+    </Properties>
+    
+<Appenders>
+
+	<Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="budgetLog" fileName="${sys:APP_LOG_ROOT}/budgetLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+          <File name="edpLog" fileName="${sys:APP_LOG_ROOT}/edpLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+          <File name="commonLog" fileName="${sys:APP_LOG_ROOT}/commonLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="ifmsLog" fileName="${sys:APP_LOG_ROOT}/ifmsLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="pvuLog" fileName="${sys:APP_LOG_ROOT}/pvuLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="recLog" fileName="${sys:APP_LOG_ROOT}/recLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="emdLog" fileName="${sys:APP_LOG_ROOT}/emdLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+         <File name="lcLog" fileName="${sys:APP_LOG_ROOT}/lcLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+         <File name="bpseLog" fileName="${sys:APP_LOG_ROOT}/bpseLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+  </Appenders>
+       
+         
+     
+ <Loggers>
+
+     
+     <Logger name="gov.ifms.budget" level="info" additivity="false">
+            <AppenderRef ref="budgetLog"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="gov.ifms.edp" level="info" additivity="false">
+             <AppenderRef ref="edpLog"/>
+             <AppenderRef ref="console"/>
+        </Logger>
+         <Logger name="gov.ifms.common" level="info" additivity="false">
+             <AppenderRef ref="commonLog"/>
+             <AppenderRef ref="console"/>
+        </Logger>
+         <Logger name="gog.ifms" level="info" additivity="false">
+              <AppenderRef ref="ifmsLog"/>
+              <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="gov.ifms.pvu" level="info" additivity="false">
+              <AppenderRef ref="pvuLog"/>
+              <AppenderRef ref="console"/>
+        </Logger>
+         <Logger name="gov.ifms.receipt" level="info" additivity="false">
+              <AppenderRef ref="recLog"/>
+              <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="gov.ifms.emd" level="info" additivity="false">
+              <AppenderRef ref="emdLog"/>
+              <AppenderRef ref="console"/>
+        </Logger>
+         <Logger name="gov.ifms.loc" level="info" additivity="false">
+              <AppenderRef ref="emdLog"/>
+              <AppenderRef ref="console"/>
+        </Logger>
+         <Logger name="gov.ifms.bpse" level="info" additivity="false">
+              <AppenderRef ref="emdLog"/>
+              <AppenderRef ref="console"/>
+        </Logger>
+        <Root level="info">
+          <AppenderRef ref="console"/>
+        </Root>
+
+</Loggers>
+   
+</Configuration>

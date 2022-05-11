@@ -1,0 +1,21 @@
+{
+	"formAction": null,
+	"createdBy": 1,
+	"createdDate": "2019-12-01T18:30:00.000+0000",
+	"createdByPost": 1,
+	"updatedByPost": 1,
+	"activeStatus": 1,
+	"updatedBy": 1,
+	"updatedDate": "2019-12-21T10:05:17.847+0000",
+	"stEventId": 1,
+	"trnNo": "ABCD",
+	"officeId": 2,
+	"eventOrderNo": "123",
+	"eventOrderDate": "2019-12-20T13:30:00.519+0000",
+	"eventEffDate": "2019-12-23T13:30:00.519+0000",
+	"payComm": 2,
+	"statusId": 1,
+	"workFlow": 1,
+	"workFlowRole": 1,
+	"pvuStEmpDto": null
+}

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookAnnexutureA_Guj" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fb656ab-a265-4c9d-a2fc-52bad4fb9d81">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+	GU.GUJ AS SRNO_GUJ,
+	final_query.CF_MEMO_NO_DATE_GUJ,
+	final_query.DTL_EXP_SHORT_GUJ,
+	final_query.EXP_TYPE_GUJ,
+	final_query.AMOUNT_GUJ,
+	final_query.CF_MEMO_NO_DATE_GUJ,
+	(final_query.majCode || '-' || final_query.subMajCode || '-' || final_query.minCode || '-' || final_query.subHeadCode) AS HEAD_ACC_PROVISIONS
+FROM
+(
+SELECT 
+	ROW_NUMBER() OVER() AS NO,
+	taad.CF_MEMO_NO_DATE_GUJ,
+	taad.DTL_EXP_SHORT_GUJ,
+	CASE WHEN taah.IS_CHARGED_VOTED = 223 THEN 'ષબન-મતપાત્ર'
+         WHEN taah.IS_CHARGED_VOTED = 224 THEN 'મતપાત્ર'
+    END AS EXP_TYPE_GUJ,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(CAST(CAST(taad.AMT_OF_ADVANCE AS DECIMAL(15,0))
+    AS VARCHAR) ,'1','૧'), '2', '૨'),'3','૩'), '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS AMOUNT_GUJ,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm.MAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS majCode,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ms.SUBMAJORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS subMajCode,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm2.MINORHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS minCode,
+	REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ms2.SUBHEAD_CODE,'1','૧'), '2', '૨'),'3','૩'),
+	'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS subHeadCode	    
+FROM 
+	BUDGET.TBUD_ANNEXURE_A_DTL taad,
+	BUDGET.TBUD_ANNEXURE_A_HDR taah,
+	BUDGET.TBUD_PUB_FY_BUDGET tpfb,
+	MASTER_V1.MS_MAJORHEAD mm,
+	MASTER_V1.MS_SUBMAJORHEAD ms,
+	MASTER_V1.MS_MINORHEAD mm2,
+	MASTER_V1.MS_SUBHEAD ms2
+WHERE 
+	taad.MAJORHEAD_ID = mm.MAJORHEAD_ID 
+	AND taad.TBUD_ANNEXURE_A_HDR_ID = taah.TBUD_ANNEXURE_A_HDR_ID 
+	AND taad.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+	AND taad.MINORHEAD_ID = mm2.MINORHEAD_ID 
+	AND taad.SUBHEAD_ID = ms2.SUBHEAD_ID
+	AND tpfb.FINANCIAL_YEAR_ID = taah.FINANCIAL_YEAR_ID 
+	AND tpfb.IS_MODIFIED_BUDGET = 1
+	AND taah.BPN_ID = $P{bpnId}
+	AND taah.FINANCIAL_YEAR_ID = $P{fyId} ) final_query	
+JOIN (SELECT ENG EN, GUJ FROM EDP.GUJNO ORDER BY ENG) GU ON final_query.NO = GU.EN
+ORDER BY final_query.NO]]>
+	</queryString>
+	<field name="SRNO_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SRNO_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="GUJNO"/>
+	</field>
+	<field name="CF_MEMO_NO_DATE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CF_MEMO_NO_DATE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_ANNEXURE_A_DTL"/>
+	</field>
+	<field name="DTL_EXP_SHORT_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DTL_EXP_SHORT_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_ANNEXURE_A_DTL"/>
+	</field>
+	<field name="EXP_TYPE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EXP_TYPE_GUJ"/>
+	</field>
+	<field name="AMOUNT_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="AMOUNT_GUJ"/>
+	</field>
+	<field name="COLUMN_6" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CF_MEMO_NO_DATE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_ANNEXURE_A_DTL"/>
+	</field>
+	<field name="HEAD_ACC_PROVISIONS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HEAD_ACC_PROVISIONS"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="285" y="8" width="231" height="21" uuid="f860d50c-c921-4c07-a6b5-b2f87cc97f02"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[બીડાણ-ક]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="812" height="16" uuid="47e53969-39f6-4c1d-b6de-8c590fae252f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[આકસ્મિકતા નિધિમાંથી મંજૂર થયેલ પેશગીઓની ભરપાઈ મટે કરવામાં આવેલી જોગવઈઓની વિગતો દર્શાવતુ પત્રક. મતપત્ર/બિનમતપાત્ર ખર્ચ.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="67" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="802" height="1" uuid="e007a0a3-f18f-4f04-88ec-7748af94a179"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="3" width="35" height="27" uuid="18d87c73-2763-4bd6-8724-cd22fc252df4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ક્રમ નં.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="3" width="184" height="27" uuid="5df83feb-a56d-4ff3-9354-9e9ca80492ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[આકસ્મિકતા નિધિ યાદીની નં. અને તારીખ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="3" width="230" height="27" uuid="0e87748e-6cea-4258-ba03-a4534b867a2d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ખર્ચની સંક્ષિપ્ત વિગત ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="3" width="159" height="27" uuid="407d5c6d-e4b4-438c-ada8-abb3ea91ae06">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ખર્ચનો પ્રકાર મતપાત્ર/બિનમતપાત]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="31" width="35" height="27" uuid="076e8407-d8de-45de-94fa-f01dc2d6d688">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૧]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="31" width="184" height="27" uuid="01a715c1-5fcd-4cd7-bb87-ba01e2432104">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૨]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="31" width="230" height="27" uuid="c59f24a2-8069-43dc-bbab-1ea9b7ccdeb9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૩]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="31" width="159" height="27" uuid="f6ab753d-f3f3-4ca1-8d09-f1b046d814d8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૪]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="3" width="80" height="27" uuid="8bc6600a-8d67-4b66-8018-b09f306646f1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[પેશગીઓની રકમ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="3" width="111" height="27" uuid="22c8eabe-4c12-4b10-a99d-4290b366059f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ખતાનું સદર (ટૂંકમાં)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="31" width="80" height="27" uuid="992fbdec-9315-49c3-9576-6a20b92789c6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૫]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="31" width="111" height="27" uuid="8760a767-8691-4bc2-84d8-83779964cde7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[૬]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="58" width="802" height="1" uuid="e7ac9dcf-512f-4d69-894a-1c788dbd9b34"/>
+			</line>
+			<line>
+				<reportElement x="0" y="30" width="802" height="1" uuid="2348c016-315d-40af-8e38-3275017b0dc7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="35" height="15" uuid="385806af-b154-482f-be77-db97e09d6c93">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{SRNO_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="0" width="265" height="15" uuid="77c09908-e828-4eca-9451-0fbb3544fee7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["ક્ર્માંક:"+$F{CF_MEMO_NO_DATE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="0" width="272" height="15" uuid="25d3da34-6fef-4f01-9de1-91d0712c647f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{DTL_EXP_SHORT_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="0" width="139" height="15" uuid="acbf1739-54c5-4ff8-b246-bb94b6667aed">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{EXP_TYPE_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="617" y="0" width="80" height="15" uuid="2b67be31-ff5e-4f10-bd35-a58e6985bb78">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{AMOUNT_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="697" y="0" width="105" height="15" uuid="a29b8f9a-fea7-45a7-b46c-edcaf180bbb4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{HEAD_ACC_PROVISIONS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="803" height="1" uuid="78b35420-177e-4341-a272-da86ab877b86">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</line>
+			<subreport overflowType="Stretch">
+				<reportElement x="-6" y="3" width="802" height="20" uuid="9e304584-437a-43bb-b41a-3fb45c6414c0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/Dynamic_1//BudgetBookAnnexutureA_Eng.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

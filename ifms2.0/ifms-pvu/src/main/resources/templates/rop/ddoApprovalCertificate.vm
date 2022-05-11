@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 18px;font-size:12px;">
+    <table width="100%" text-align="center" style="padding: 2%;">
+        <tr>
+            <td>
+                This is to certify that, the information provided in this online case & documents attached here with for $EVENT_NAME of 
+                Shri/Smt. $EMP_NAME "Employee No.: $EMP_NO", "$DESIGNATION_NAME", "$CLASS_NAME", "$OFFICE_NAME"; is verified with his/her 
+                service records and are true as per the best of my knowledge.
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="right">$DDO_DESIGNATION</td>
+        </tr>
+        <tr>
+            <td align="right">$DDO_NAME</td>
+        </tr>
+        <tr>
+            <td align="right">$OFFICE_NAME</td>
+        </tr>
+        <tr>
+            <td>Place: $PLACE $PLACE1</td>
+        </tr>
+        <tr>
+            <td>Date: $DATE</td>
+        </tr>
+    </table>
+</body>
+</html>

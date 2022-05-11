@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!--PARENT POM -->
+	<parent>
+		<groupId>ifms</groupId>
+		<artifactId>ifms2.0</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<!--PARENT POM -->
+
+	<!--CURRENT MODULE -->
+	<groupId>ifms-dmo</groupId>
+	<artifactId>ifms-dmo</artifactId>
+	<packaging>jar</packaging>
+	<!--CURRENT MODULE -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>ifms-edp</groupId>
+			<artifactId>ifms-edp</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookSummaryOpeningBal" pageWidth="88" pageHeight="900" orientation="Landscape" columnWidth="88" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="861a87e0-d75d-4556-b052-4428deef5611">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT nvl(CLOSING_BAL,0) AS "Opening_Bal"
+FROM budget.TBUD_PUB_GREEN_BOOK_BAL op
+WHERE op.FINANCIAL_YEAR_ID=$P{fyId}-3
+        AND budget_Type='ACC']]>
+	</queryString>
+	<field name="Opening_Bal" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="Opening_Bal"/>
+	</field>
+	<variable name="OpeningBalanceAcc" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Opening_Bal}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<summary>
+		<band height="25">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="15" height="25" uuid="c39076bd-8e26-4529-a352-c201aa4543f6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{OpeningBalanceAcc} == null ? "" : ($V{OpeningBalanceAcc}== 0 ?   "" : ($V{OpeningBalanceAcc}> 0 ?   "(+)" :"(-)"))]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="10" y="0" width="77" height="25" uuid="11fa0818-0a00-42b3-8726-7f853a5c77c1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{Opening_Bal} == new BigDecimal(0.00) || $F{Opening_Bal} ==null ) ? "--" : ABS($F{Opening_Bal})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

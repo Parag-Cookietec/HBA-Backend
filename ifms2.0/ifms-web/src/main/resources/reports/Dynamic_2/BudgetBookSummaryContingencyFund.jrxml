@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookSummaryPublicAccount" pageWidth="740" pageHeight="900" orientation="Landscape" columnWidth="740" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="861a87e0-d75d-4556-b052-4428deef5611">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT xyz.REVIESED_ESTIMATES_ENG AS "REVIESED_ESTIMATES_ENG",
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(xyz.REVIESED_ESTIMATES_ENG,'1','૧'), '2', '૨'),'3','૩'),'4','૪'),'5','૫'),'6','૬'
+),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS "REVIESED_ESTIMATES_GUJ",
+xyz.ACCOUNTS_ENG AS "ACCOUNTS_ENG",
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(xyz.ACCOUNTS_ENG,'1','૧'), '2', '૨'),'3','૩'),'4','૪'),'5','૫'),'6','૬'
+),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS "ACCOUNTS_GUJ",
+xyz.ARE_DIFF AS "ARE_DIFF_ENG",
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(xyz.ARE_DIFF,'1','૧'), '2', '૨'),'3','૩'),'4','૪'),'5','૫'),'6','૬'
+),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS "ARE_DIFF_GUJ"
+FROM 
+(
+SELECT 
+decimal(sum(ab.REVIESED_ESTIMATES)/100,15,2) AS "REVIESED_ESTIMATES_ENG",
+decimal(sum(ab.ACCOUNTS)/100,15,2) AS "ACCOUNTS_ENG",
+decimal((sum(ab.ACCOUNTS)-sum(ab.REVIESED_ESTIMATES))/100,15,2) AS "ARE_DIFF"
+FROM 
+(
+SELECT 
+count(*) OVER (PARTITION BY main_table.MAJORHEAD_CODE) AS MAJORHEAD_COUNT_CHORVOT,
+    nextYear.FY AS "fyEngBE",
+	nextYear.FY_GUJ AS "fyGujBE",
+	currYear.FY AS "fyEngMBE",
+	currYear.FY_GUJ AS "fyGujMBE",
+	prevYear.FY AS "fyEngACC",
+	prevYear.FY_GUJ AS "fyGujACC",
+	main_table."SECTORHEAD_NAME",
+	main_table."SECTORHEAD_NAME_GUJ",
+	main_table."MAJORHEAD_CODE",
+	main_table."MAJORHEAD_CODE_GUJ",
+	main_table."SUB_SECTOR_NAME",
+	main_table."SUB_SECTOR_NAME_GUJ",
+	main_table."MAJORHEAD_NAME",
+	main_table."MAJORHEAD_NAME_GUJ",
+	main_table."RE" AS "REVIESED_ESTIMATES",
+	main_table."ACC" AS "ACCOUNTS"
+FROM 
+(
+SELECT 	CFY2."SECTORHEAD_NAME" AS "SECTORHEAD_NAME",
+		CFY2."SECTORHEAD_NAME_GUJ" AS "SECTORHEAD_NAME_GUJ",
+		CFY2."MAJORHEAD_CODE" AS "MAJORHEAD_CODE",
+		CFY2."MAJORHEAD_CODE_GUJ" AS "MAJORHEAD_CODE_GUJ",
+		CFY2."SUB_SECTOR_NAME" AS "SUB_SECTOR_NAME",
+		CFY2."SUB_SECTOR_NAME_GUJ" AS "SUB_SECTOR_NAME_GUJ",
+		CFY2."MAJORHEAD_NAME" AS "MAJORHEAD_NAME",
+		CFY2."MAJORHEAD_NAME_GUJ" AS "MAJORHEAD_NAME_GUJ",
+		CFY2.RE AS "RE",
+		PFY.ACC AS "ACC"
+
+FROM 
+(
+SELECT 	COALESCE(rec."SECTORHEAD_NAME",disb."SECTORHEAD_NAME") AS "SECTORHEAD_NAME",
+		COALESCE(rec."SECTORHEAD_NAME_GUJ",disb."SECTORHEAD_NAME_GUJ") AS "SECTORHEAD_NAME_GUJ",
+		COALESCE(rec."MAJORHEAD_CODE",disb."MAJORHEAD_CODE") AS "MAJORHEAD_CODE",
+		COALESCE(rec."MAJORHEAD_CODE_GUJ",disb."MAJORHEAD_CODE_GUJ") AS "MAJORHEAD_CODE_GUJ",
+		COALESCE(rec."SUB_SECTOR_NAME",disb."SUB_SECTOR_NAME") AS "SUB_SECTOR_NAME",
+		COALESCE(rec."SUB_SECTOR_NAME_GUJ",disb."SUB_SECTOR_NAME_GUJ") AS "SUB_SECTOR_NAME_GUJ",
+		COALESCE(rec."MAJORHEAD_NAME",disb."MAJORHEAD_NAME") AS "MAJORHEAD_NAME",
+		COALESCE(rec."MAJORHEAD_NAME_GUJ",disb."MAJORHEAD_NAME_GUJ") AS "MAJORHEAD_NAME_GUJ",
+		(rec.rec_RE) - (disb.disb_RE)  AS "RE",
+		COALESCE(rec."MAJORHEAD_ID",disb."MAJORHEAD_ID") AS "MAJORHEAD_ID"
+  FROM 
+(
+SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS rec_RE,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tprd.RECEIPT_AMOUNT recAmt,
+		tprd.DED_REF_MAP_AMOUNT subtractionAmt,
+		trh.MAJORHEAD_ID, 
+		trh.TBUD_PUB_RE_HDR_ID
+	FROM
+		BUDGET.TBUD_PUB_RE_HDR trh, 
+		BUDGET.TBUD_PUB_RE_DTL tprd,
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID (+)
+		AND trh.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND trh.BPN_ID = mb.BPN_ID
+		AND trh.DEMAND_ID = md.DEMAND_ID
+		AND trh.TBUD_PUB_RE_HDR_ID = tprd.TBUD_PUB_RE_HDR_ID 
+		AND ms2.SUBHEAD_ID = tprd.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tprd.MINORHEAD_ID 
+		AND trh.FINANCIAL_YEAR_ID = $P{fyId}-1
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=6
+		AND trh.APP_TYPE_ID =473
+		AND md.DEMAND_ID =109
+		AND mm.MAJORHEAD_CODE ='8000'
+	ORDER BY
+		trh.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+)rec
+FULL OUTER JOIN 
+(
+SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS disb_RE,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tprd.DISB_AMOUNT recAmt,
+		tprd.DED_REF_MAP_AMOUNT subtractionAmt,
+		trh.MAJORHEAD_ID, 
+		trh.TBUD_PUB_RE_HDR_ID
+	FROM
+		BUDGET.TBUD_PUB_RE_HDR trh, 
+		BUDGET.TBUD_PUB_RE_DTL tprd,
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID (+)
+		AND trh.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND trh.BPN_ID = mb.BPN_ID
+		AND trh.DEMAND_ID = md.DEMAND_ID
+		AND trh.TBUD_PUB_RE_HDR_ID = tprd.TBUD_PUB_RE_HDR_ID 
+		AND ms2.SUBHEAD_ID = tprd.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tprd.MINORHEAD_ID 
+		AND trh.FINANCIAL_YEAR_ID = $P{fyId}-1
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=6
+		AND trh.APP_TYPE_ID =473
+		AND md.DEMAND_ID =109
+		AND mm.MAJORHEAD_CODE ='8000'
+	ORDER BY
+		trh.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+) disb ON (disb.MAJORHEAD_CODE=rec.MAJORHEAD_CODE)
+)CFY2
+FULL OUTER JOIN 
+(
+SELECT 	COALESCE(rec."SECTORHEAD_NAME",disb."SECTORHEAD_NAME") AS "SECTORHEAD_NAME",
+		COALESCE(rec."SECTORHEAD_NAME_GUJ",disb."SECTORHEAD_NAME_GUJ") AS "SECTORHEAD_NAME_GUJ",
+		COALESCE(rec."MAJORHEAD_CODE",disb."MAJORHEAD_CODE") AS "MAJORHEAD_CODE",
+		COALESCE(rec."MAJORHEAD_CODE_GUJ",disb."MAJORHEAD_CODE_GUJ") AS "MAJORHEAD_CODE_GUJ",
+		COALESCE(rec."SUB_SECTOR_NAME",disb."SUB_SECTOR_NAME") AS "SUB_SECTOR_NAME",
+		COALESCE(rec."SUB_SECTOR_NAME_GUJ",disb."SUB_SECTOR_NAME_GUJ") AS "SUB_SECTOR_NAME_GUJ",
+		COALESCE(rec."MAJORHEAD_NAME",disb."MAJORHEAD_NAME") AS "MAJORHEAD_NAME",
+		COALESCE(rec."MAJORHEAD_NAME_GUJ",disb."MAJORHEAD_NAME_GUJ") AS "MAJORHEAD_NAME_GUJ",
+		(rec.rec_ACC) - (disb.disb_ACC) AS "ACC",
+		COALESCE(rec."MAJORHEAD_ID",disb."MAJORHEAD_ID") AS "MAJORHEAD_ID"
+  FROM 
+(
+SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS rec_ACC,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tpra.RECEIPT_AMOUNT recAmt,
+		tpra.DED_REF_MAP_AMOUNT  subtractionAmt,
+		tpra.MAJORHEAD_ID, 
+		tpra.TBUD_PUB_RE_AC_ID 
+	FROM
+		BUDGET.TBUD_PUB_RE_AC tpra, 
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,   
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID (+)
+		AND tpra.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND tpra.BPN_ID = mb.BPN_ID
+		AND tpra.DEMAND_ID = md.DEMAND_ID
+		AND ms2.SUBHEAD_ID = tpra.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tpra.MINORHEAD_ID 
+		AND tpra.FINANCIAL_YEAR_ID = $P{fyId}-2
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=6	
+		AND md.DEMAND_ID =109
+		AND mm.MAJORHEAD_CODE ='8000'
+	ORDER BY
+		tpra.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+)rec	
+INNER JOIN 
+(
+SELECT
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	ROUND(sum(nvl(abc.recAmt,0)) - sum(nvl(abc.subtractionAmt,0))) AS disb_ACC,
+	abc.MAJORHEAD_ID
+FROM
+	(
+	SELECT
+		ms.SECTORHEAD_NAME, 
+		ms.SECTORHEAD_NAME_GUJ, 
+		mm.MAJORHEAD_CODE, 
+		mm.MAJORHEAD_CODE_GUJ, 
+		mss.SUB_SECTOR_NAME, 
+		mss.SUB_SECTOR_NAME_GUJ, 
+		mm.MAJORHEAD_NAME, 
+		mm.MAJORHEAD_NAME_GUJ , 
+		tpra.DISB_AMOUNT recAmt,
+		tpra.DED_REF_MAP_AMOUNT  subtractionAmt,
+		tpra.MAJORHEAD_ID, 
+		tpra.TBUD_PUB_RE_AC_ID 
+	FROM
+		BUDGET.TBUD_PUB_RE_AC tpra, 
+		MASTER_V1.MS_MAJORHEAD mm, 
+		MASTER_V1.MS_SECTORHEAD ms, 
+		MASTER_V1.MS_SUB_SECTOR mss,   
+		MASTER_V1.MS_SUBHEAD ms2,
+		MASTER_V1.MS_MINORHEAD mm2,
+		MASTER_V1.MS_BPN mb, 
+		MASTER_V1.MS_DEMAND md
+	WHERE
+		mm.SUB_SECTOR_CODE = mss.SUB_SECTOR_ID (+)
+		AND tpra.MAJORHEAD_ID = mm.MAJORHEAD_ID
+		AND mm.SECTORHEAD_CODE = ms.SECTORHEAD_ID
+		AND mb.BPN_ID = md.BPN_ID
+		AND tpra.BPN_ID = mb.BPN_ID
+		AND tpra.DEMAND_ID = md.DEMAND_ID
+		AND ms2.SUBHEAD_ID = tpra.SUBHEAD_ID
+		AND mm2.MINORHEAD_ID = tpra.MINORHEAD_ID 
+		AND tpra.FINANCIAL_YEAR_ID = $P{fyId}-2
+		AND mm.MAJORHEAD_TYPE_ID = 3
+		AND mm.MAJORHEAD_SUB_TYPE=6	
+		AND md.DEMAND_ID =109
+		AND mm.MAJORHEAD_CODE ='8000'
+	ORDER BY
+		tpra.MAJORHEAD_ID, ms.SECTORHEAD_NAME) abc
+GROUP BY
+	abc.SECTORHEAD_NAME,
+	abc.SECTORHEAD_NAME_GUJ,
+	abc.SUB_SECTOR_NAME,
+	abc.SUB_SECTOR_NAME_GUJ,
+	abc.MAJORHEAD_NAME,
+	abc.MAJORHEAD_NAME_GUJ ,
+	abc.MAJORHEAD_CODE,
+	abc.MAJORHEAD_CODE_GUJ,
+	abc.MAJORHEAD_ID
+) disb ON (disb.MAJORHEAD_CODE=rec.MAJORHEAD_CODE)
+)PFY ON (PFY.MAJORHEAD_ID=CFY2.MAJORHEAD_ID AND PFY.MAJORHEAD_CODE=CFY2.MAJORHEAD_CODE)
+)main_table
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+ORDER BY  main_table."MAJORHEAD_CODE"
+)ab)xyz]]>
+	</queryString>
+	<field name="REVIESED_ESTIMATES_ENG" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="REVIESED_ESTIMATES_ENG"/>
+	</field>
+	<field name="REVIESED_ESTIMATES_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REVIESED_ESTIMATES_GUJ"/>
+	</field>
+	<field name="ACCOUNTS_ENG" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS_ENG"/>
+	</field>
+	<field name="ACCOUNTS_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS_GUJ"/>
+	</field>
+	<field name="ARE_DIFF_ENG" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ARE_DIFF_ENG"/>
+	</field>
+	<field name="ARE_DIFF_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ARE_DIFF_GUJ"/>
+	</field>
+	<variable name="totalAcc6" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ACCOUNTS_ENG}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<summary>
+		<band height="29">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="16" y="0" width="140" height="25" uuid="dc2122b6-a237-4706-a0aa-0425490e663d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["આકસ્મિતા નિધિ (ચોખ્ખો)"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="168" y="0" width="159" height="25" uuid="e5df4fc1-ca39-46d3-be52-49fcf9580911">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contingency Fund (Net) "]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="342" y="0" width="15" height="25" uuid="c39076bd-8e26-4529-a352-c201aa4543f6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalAcc6} == null ? "" : ($V{totalAcc6}== 0 ?   "" : ($V{totalAcc6}> 0 ?   "(+)" :"(-)"))]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="353" y="0" width="77" height="25" uuid="11fa0818-0a00-42b3-8726-7f853a5c77c1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{ACCOUNTS_ENG} == new BigDecimal(0.00) || $F{ACCOUNTS_ENG}==null) ? "--" : ABS($F{ACCOUNTS_ENG})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.#####">
+				<reportElement x="444" y="0" width="15" height="25" uuid="6a5a0932-657e-403c-9183-0e2763e9f28d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="455" y="0" width="77" height="25" uuid="6cc662cc-7cef-4ef6-9c34-6ace6ee72f36">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21ca1ea1-da1c-4d66-89ff-0b6018f00dd1"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="548" y="0" width="15" height="25" uuid="2795c8bd-cdbc-4fce-a7f3-d0f2164376d1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="560" y="0" width="77" height="25" uuid="a7099704-ac89-43a7-ad69-6172ab23c45a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.#####" isBlankWhenNull="true">
+				<reportElement x="652" y="0" width="15" height="25" uuid="b6e0cf05-7b61-4f94-864c-d2850322cbfb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="0" width="15" height="25" uuid="7c3bdaca-9d4c-44e1-9c0f-f7f34999b3ec">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[૨.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="0" width="15" height="25" uuid="b792bad6-e0ad-439a-86a4-d890632f99d6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[II.]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" evaluationTime="Auto" pattern="#0.00###">
+				<reportElement x="663" y="0" width="77" height="25" uuid="58ab5e4a-8bb0-483e-be08-5264057e5c1d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eed4f49d-9804-4035-9bf1-696ad9e4cd82"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

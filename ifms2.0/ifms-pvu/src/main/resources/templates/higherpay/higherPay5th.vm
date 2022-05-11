@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<body style="font-size:12px;">
+<table style="margin: 15px; width: 100%;">
+<tr>
+    <td align="center">
+        <h2><b><u>Higher Pay Scale - $hpscaletype</u></b></h2>
+        <h3 style="line-height: .25px;"><b><u>Employee No.:$employeeNo</u></b></h3>
+    </td>
+</tr>
+<tr>
+<td style="margin-top:25px; text-align: justify;">
+<table width="100%">
+    <tr>
+        <td>In accordance with the provision of Finance Department Resolution No. <span
+                class="resonumber">$resNo dated </span> <span>$resDtaed </span> and the following amendments made time to
+            time,<span class="empname"> $employeeName </span>
+            <span class="empdesi">$designation</span>,
+            <span class='empofficename'>$officeName</span>
+            <span class="compyear">on completion of $compYear </span> years of service in the pay scale
+            of $cPayScale. $prefix is given benefit of the laid down <span
+                    class="eventname">$hpType </span>of $payScale as on <span
+                    span="evntdate">$effectiveDate.</span> #if($optionDate!="")$prefix has given option
+                to fix pay from $!optionDate under Rule 12 of GCS (Pay) Rules, 2002 and $prefixdata #end
+                #if($optionDate=="") $prefixdataCap  #end
+            pay is fixed at Rs.$fifthBasic & $prefixdata next date
+            of increment will be $nextIncDate.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="height: 15px;"></div>
+        </td>
+    </tr>
+<tr>
+<td>Print Date: <span class="print-date">$endorsementPrintDate</span><br></br>
+#if($!rePrintCount > 0)
+    Reprint Date: <span class="repprint-date">$!endorsementReprintDate </span>
+    <br></br>
+    Reprint Count: <span class="Reprintcount">$!rePrintCount</span>.
+     <br></br>
+    Reprint Remarks: <span class="Reprintremarks">$!remarks</span>.
+#end
+</td>
+</tr>
+    <tr>
+        <td>
+            <div style="height: 20px;"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>Place : Gandhinagar</td>
+    </tr>
+    
+    
+   							<tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+    
+    
+    
+    
+    
+    <tr>
+        <td>
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td style="width:30%;text-align:center;"></td>
+                    <td style="width:30%;text-align:center;">
+                        <p style="margin: 0;">$authName</p>
+                                          <p style="margin: 0;"> Accounts Officer</p>
+                                          <p style="margin: 0;">Pay Verification Unit</p>
+                                          <p style="margin: 0;">Finance Department</p>
+                    </td>
+                    <td style="width:30%;text-align:center;">
+                      <p style="margin: 0;">Issued by,</p>
+                                          <p style="margin: 0;">Accounts Officer</p>
+                                          <p style="margin: 0;">Pay Verification Unit</p>
+                                          <p style="margin: 0;">Finance Department</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="height: 15px;"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Remarks:$authorizerRemark
+        </td>
+    </tr>
+</table>
+</td>
+ </tr>
+</table>
+ </body>
+
+</html>

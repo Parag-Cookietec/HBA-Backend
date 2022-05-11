@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookGovReco1" pageWidth="780" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="49a4c10b-f9b5-4b18-b976-273fa28ef04e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount1}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount2}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+mbpn.BPN_NAME AS "bpnNameEng", 
+mbpn.BPN_NAME_GUJ AS "bpnNameGuj", 
+mbpn.BPN_SHORT_NAME AS "bpnShortName", 
+mfy.FY AS "fyEng",
+mfy.FY_GUJ AS "fyGuj",
+LTRIM(mbpn.BPN_CODE,'0')  AS "bpnCode",
+CASE 
+WHEN mbpn.BPN_CODE='18' THEN ' (Part-I)' 
+WHEN mbpn.BPN_CODE='22' THEN ' (Part-I)' 
+WHEN mbpn.BPN_CODE='24a' THEN '-I'
+WHEN mbpn.BPN_CODE='24b' THEN '-II'
+WHEN mbpn.BPN_CODE='24c' THEN '-III'
+WHEN mbpn.BPN_CODE='24d' THEN '-IV'
+ELSE '' 
+END AS "bpnCodePart"
+FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnShortName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnShortName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="bpnCode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnCode"/>
+	</field>
+	<field name="bpnCodePart" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bpnCodePart"/>
+	</field>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="505" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="28" width="740" height="40" uuid="5e0ffeeb-911d-4956-9b7e-fac33052cd9c">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                       ભારતના સંવિધાનની કલમ ૨૦૩ (૩) ની સાથે વાંચતા કલમ ૨૦૬ અન્વયે જરૂરી માંગણીઓની અનુસૂચિમાં નિર્દિષ્ટ કરેલી " + $F{fyGuj} + " માટેની માંગણીઓ પર વિચારણા કરવા ગુજરાતના રાજ્યપાલશ્રીએ ગુજરાત વિધાનસભાને ભલામણ કરી છે."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="91" width="741" height="28" uuid="d0a1db48-8d0c-4236-9627-56f86a949836">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિધાનસભા ની મંજૂરી માટે એકંદર માંગણીઓ રજૂ કરવા અંગેની કાર્યપદ્ધતિ વિષે નોંધ:-
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="740" height="28" uuid="278451a1-3247-4c54-9d9d-7bb83e18885f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[રાજ્યપાલશ્રીની ભલામણ :-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="122" width="740" height="106" uuid="567b6a61-72f8-4aa6-ba86-96bb7c66febf">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                       સંવિધાનની જોગવાઈઓ મુજબ, રાજ્ય વિધાનમંડળના અધિનિયમથી કરાયેલ વિનિયોગ સિવાય, રાજ્યના એકત્રિત નિધિમાંથી કોઈ નાણાં ઉપાડવાની છૂટ નથી. બીજા શબ્દોમાં, નાણાકીય વર્ષ દરમિયાન હિસાબના દરેક મુખ્ય સદર અથવા માંગણી હેઠળ રાજ્યના એકત્રિત નિધિમાંથી કરવાનું વાસ્તવિક ખર્ચ, એ મુખ્ય સદર અથવા માંગણી હેઠળની પ્રાપ્તિ અથવા વસૂલાત, એની નીચેના ખર્ચના ઘટાડામાં સરભર કરવામા આવી હોય તેમ છતાં રાજ્ય વિધાનસભા દ્વારા સ્પષ્ટ રીતે અધિકૃત કરવું જરૂરી છે. તદ્દનુસાર, ૨૦૨૦-૨૦૨૧ આગામી વર્ષ માટેનાં એકંદર વિનિયોગો અન માંગણીઓ દર્શાવવા અનુસૂચિ છાપી છે. અનુસૂચિમાં કેટલીક માંગણીઓમાં સમાવિષ્ટ ખર્ચ એક કરતાં વધુ મંત્રીને લગતું છે. અનુકૂળતા ખાતર સૌથી મોટી જોગવાઈનું નિયંત્રણ કરતા હોય એ મંત્રીના નામ નીચે આવી માંગણીઓ દર્શાવવામાં આવી છે. "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="242" width="740" height="27" uuid="7dc69bbd-5635-4bfc-8c9a-c09e59147803">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[માંગણીઓ રજૂ કરવા અંગે નોંધ :-
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="272" width="740" height="146" uuid="83eae975-86db-4229-8fc9-9766d94b171d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                      અનુદાન અને વિનિયોગ માટેની માંગણીઓ, વિભાગ-મુખ્ય સદરવાર તૈયાર કરવામાં આવે છે અને એ વસૂલાત તથા ખર્ચમાં થયેલા ઘટાડાને લક્ષમાં લીધા વિના અંદાજી ખર્ચની એકંદર રકમ માટે હોય છે. તેના અંદાજ વિગતવાર અંદાજપત્રમાં જે તે માંગણી નીચે દર્શાવ્યા છે. માર્ગ અને મકાન વિભાગ હેઠળ રાજ્ય બાંધકામ માટેની સંયુક્ત માંગણીઓમાં જેનો સમાવેશ થાય છે. આ કાર્યલક્ષી મકાનો માટેની જોગવાઈના કેસ સિવાય મહેસૂલ અને મૂડી (લોન સહિત) હેઠળની સેવાઓને લગતી જોગવાઈઓ માટેની સંયુક્ત માંગણીઓ અંગેની દરખાસ્ત મૂકવામાં આવી છે. એ જ પ્રમાણે સમૂહ-વિકાસ કાર્યક્રમ હેઠળ સમાવિષ્ટ વિવિધ કામગીરીઓ માટે પંચાયતરાજ સંસ્થાઓને સહાય સારું, અનુસૂચિત જાતિઓ માટેની ખાસ અંગભૂત યોજના હેઠળ અને અનુસૂચિત અદિજાતિઓ માટે આદિજાતિ વિસ્તાર પેટા-યોજના હેઠળ કેટલાંક કાર્યલક્ષી મુખ્ય સદરો અંગે વિચારાયેલી જોગવાઈઓ પરત્વે, કાર્યલક્ષી મકાનોની બાબતમાં છે તેમ પંચાયત, ગ્રામ ગૃહનિર્માણ અને ગ્રામ વિકાસ વિભાગ, સમાજ કલ્યાણ વિભાગ અને આદિજાતિ વિકાસ વિભાગ હેઠળ અનુદાન માટેની સંયુક્ત માંગણીઓની દરખાસ્ત કરવામાં આવી છે. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="380" width="740" height="38" uuid="4a960a77-263f-4d29-abff-89add3c04fe0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                      સેવાઓ અને એને લગતાં કાર્યો અંગેની માંગણીઓનું એક જૂથ બનાવીને સંબંધિત વિભાગની એ જ માંગણી હેઠળ એને મુકવામાં આવ્યું છે. "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="422" width="740" height="23" uuid="2751e751-bc3f-48d3-b43b-5e4da7fc8338">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અંદાજ સમિતિની ભલામણો અને તેનો અમલ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="450" width="740" height="50" uuid="7f2ada69-ca4a-45ce-bd0f-93cbaaceaab8">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["                        " + $F{fyGuj} + " ના વર્ષના "+
+
+(
+	$P{modifiedCount1} == null ? (
+"અંદાજ" ) : (
+$P{modifiedCount1} == 1 ? (
+"ફેરફાર કરેલ અંદાજ") : (
+"અંદાજ" ) )
+) 
++", અંદાજ સમિતિએ પાંચમી ગુજરાત વિધાનસભાના નવમાં અહેવાલમાં, સાતમી ગુજરાત વિધાનસભાના છઠ્ઠા અહેવાલમાં અને આઠમી ગુજરાત વિધાનસભાના ત્રીજા અહેવાલમાં કરેલી ભલામણો અનુસાર તૈયાર કરવામાં આવ્યા છે."]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</columnHeader>
+</jasperReport>

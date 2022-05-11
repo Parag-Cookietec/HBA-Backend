@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookBugEstRevRecExpenditure" pageWidth="780" pageHeight="900" orientation="Landscape" columnWidth="780" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="861a87e0-d75d-4556-b052-4428deef5611">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT main."Label_Name_Eng" AS "Label_Name_Eng",
+	   main."Bud_Est_Amt" AS "Bud_Est_Amt",
+	   main."Label_Name_Guj" AS "Label_Name_Guj",
+	   	   REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(decimal(main."Bud_Est_Amt",15,2),'1','૧'), '2', '૨'),'3','૩'),'4','૪'),'5','૫'),'6','૬'
+		),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS "Bud_Est_Amt_GUJ"
+FROM 
+(
+SELECT 	   (CASE WHEN abc.SECTORHEAD_ID='14' THEN 'General services'
+			WHEN abc.SECTORHEAD_ID='16' THEN 'Social services'
+			WHEN abc.SECTORHEAD_ID='18' THEN 'Economic Services'
+			WHEN abc.SECTORHEAD_ID='20' THEN 'Grant-in-Aid and contibution'
+		END) AS "Label_Name_Eng",
+	   round(((sum(abc.disbAmt) - sum(abc.subtractionAmt))/100),2) AS "Bud_Est_Amt",
+	   (CASE WHEN abc.SECTORHEAD_ID='14' THEN 'સામાન્ય સેવાઓ'
+			WHEN abc.SECTORHEAD_ID='16' THEN 'સામાજિક સેવાઓ '
+			WHEN abc.SECTORHEAD_ID='18' THEN 'આર્થિક સેવાઓ'
+			WHEN abc.SECTORHEAD_ID='20' THEN 'સહાયક અનુદાન અને ફાળા'
+		END) AS "Label_Name_Guj"
+FROM 
+		(SELECT
+				ms.SECTORHEAD_NAME, 
+				ms.SECTORHEAD_NAME_GUJ, 
+				mm.MAJORHEAD_CODE, 
+				mm.MAJORHEAD_CODE_GUJ, 
+				mss.SUB_SECTOR_NAME, 
+				mss.SUB_SECTOR_NAME_GUJ, 
+				tph.PROPOSED_AMOUNT disbAmt,
+				tph.RECOVERY_AMOUNT subtractionAmt,
+				tph.MAJORHEAD_ID,
+				ms.SECTORHEAD_ID,
+				tph.TBUD_PUB_HDR_ID
+		FROM BUDGET.TBUD_PUB_HDR tph,
+			 MASTER_V1.MS_MAJORHEAD mm,
+			 MASTER_V1.MS_SUB_SECTOR mss,
+			 MASTER_V1.MS_SECTORHEAD ms,
+			 MASTER_V1.MS_DEMAND md,
+			 MASTER_V1.MS_BPN mb
+		WHERE  tph.MAJORHEAD_ID=mm.MAJORHEAD_ID
+			  AND mm.SUB_SECTOR_CODE =mss.SUB_SECTOR_ID (+)
+			  AND mm.SECTORHEAD_CODE =ms.SECTORHEAD_ID 
+			  AND tph.DEMAND_ID =md.DEMAND_ID 
+			  AND tph.BPN_ID =mb.BPN_ID 
+			  AND md.BPN_ID =mb.BPN_ID 
+			  AND tph.IS_REVENUE_CAPITAL=5
+			  AND IS_REVISED=0 
+			  AND tph.FINANCIAL_YEAR_ID = $P{fyId}	
+			  AND ms.SECTORHEAD_ID IN (14,16,18,20)
+			  --AND mm.MAJORHEAD_CODE BETWEEN '2011' AND '2075'
+			ORDER BY
+				tph.MAJORHEAD_ID, ms.SECTORHEAD_NAME
+		) abc  
+GROUP BY abc.SECTORHEAD_ID
+)main	
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2]]>
+	</queryString>
+	<field name="Label_Name_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Label_Name_Eng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="Bud_Est_Amt" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Bud_Est_Amt"/>
+	</field>
+	<field name="Label_Name_Guj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Label_Name_Guj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="Bud_Est_Amt_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Bud_Est_Amt_GUJ"/>
+	</field>
+	<variable name="BugEstRevReceiptExpenditure" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Bud_Est_Amt}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<detail>
+		<band height="32">
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="399" y="1" width="200" height="30" uuid="9a434c97-5fcc-4d76-9d1d-76b55031d717">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Label_Name_Eng} == null ? "--" : $F{Label_Name_Eng}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.#####">
+				<reportElement x="18" y="1" width="180" height="30" uuid="0f300bf5-a88f-4400-8c78-2781dfc208fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b764a3d-08c4-4103-8956-06cb53c14c26"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Label_Name_Guj} == null ? "--" : $F{Label_Name_Guj}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00###">
+				<reportElement x="200" y="0" width="160" height="30" uuid="f1cdbef6-35b7-48d2-8907-fc4979a0a974">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Bud_Est_Amt_GUJ}== null || $F{Bud_Est_Amt_GUJ}.equals(".૦૦") ? "--" :$F{Bud_Est_Amt_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#0.00###">
+				<reportElement x="600" y="1" width="140" height="30" uuid="aec41c94-59e6-4dcb-89fc-5746bb55c80b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dc2518f-a715-410c-8a53-dae9063f450c"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Bud_Est_Amt}.doubleValue() == 0 ? "--" : $F{Bud_Est_Amt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

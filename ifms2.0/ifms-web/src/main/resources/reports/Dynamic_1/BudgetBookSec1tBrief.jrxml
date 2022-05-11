@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookSec1tBrief" pageWidth="802" pageHeight="980" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3c4ec4f2-612a-44f5-8726-69e84e966efb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+    bpn.BPN_NAME,
+    bpn.BPN_NAME_GUJ,
+    tpnh.MINISTER_NAME,
+    tpnh.MINISTER_NAME_GUJ,
+    final_query.MAJORHEAD_CODE,  
+    final_query.MAJORHEAD_NAME,
+    final_query.MAJORHEAD_CODE_GUJ,
+    final_query.MAJORHEAD_NAME_GUJ,
+    final_query.SUBMAJORHEAD_CODE,
+    final_query.SUBMAJORHEAD_NAME,
+    final_query.SUBMAJORH_CODE_GUJ,
+    final_query.SUBMAJORH_NAME_GUJ,
+    final_query.MINORHEAD_CODE,
+    final_query.MINORHEAD_NAME,
+    final_query.MINORHEAD_CODE_GUJ,
+    final_query.MINORHEAD_NAME_GUJ,
+    final_query.SUBHEAD_CODE,
+    final_query.SUBHEAD_NAME,
+    final_query.SUBHEAD_CODE_GUJ,
+    final_query.SUBHEAD_NAME_GUJ,
+    GU.EN AS NUMOFGRANT_ENG,  
+    tpnh.ITEM_NAME,
+    GU.GUJ AS NUMOFGRANT_GUJ,
+    tpnh.ITEM_NAME_GUJ,
+    final_query.REC_AMT,
+    final_query.NON_REC_AMT,
+    final_query.ULT_ANN_REC_AMT,
+    tpnh.WRITE_UP,
+    tpnh.WRITE_UP_GUJ,
+    final_query.TBUD_PUB_HDR_ID  
+FROM
+(
+SELECT
+    ROW_NUMBER() OVER() AS NO,
+    main_table.MAJORHEAD_CODE,
+    main_table.MAJORHEAD_CODE_GUJ,
+    main_table.MAJORHEAD_NAME,
+    main_table.MAJORHEAD_NAME_GUJ,
+    main_table.SUBMAJORHEAD_CODE,
+    main_table.SUBMAJORH_CODE_GUJ,
+    main_table.SUBMAJORHEAD_NAME,
+    main_table.SUBMAJORH_NAME_GUJ,
+    main_table.MINORHEAD_CODE,
+    main_table.MINORHEAD_CODE_GUJ,
+    main_table.MINORHEAD_NAME,
+    main_table.MINORHEAD_NAME_GUJ,
+    main_table.SUBHEAD_CODE,
+    main_table.SUBHEAD_CODE_GUJ,
+    main_table.SUBHEAD_NAME,
+    main_table.SUBHEAD_NAME_GUJ,
+    main_table.REC_AMT,
+    main_table.NON_REC_AMT,
+    main_table.ULT_ANN_REC_AMT,
+    main_table.TBUD_PUB_HDR_ID
+FROM
+(
+SELECT
+    first_set.MAJORHEAD_CODE,
+    first_set.MAJORHEAD_CODE_GUJ,
+    first_set.MAJORHEAD_NAME,
+    first_set.MAJORHEAD_NAME_GUJ,
+    first_set.SUBMAJORHEAD_CODE,
+    first_set.SUBMAJORH_CODE_GUJ,
+    first_set.SUBMAJORHEAD_NAME,
+    first_set.SUBMAJORH_NAME_GUJ,
+    first_set.MINORHEAD_CODE,
+    first_set.MINORHEAD_CODE_GUJ,
+    first_set.MINORHEAD_NAME,
+    first_set.MINORHEAD_NAME_GUJ,
+    first_set.SUBHEAD_CODE,
+    first_set.SUBHEAD_CODE_GUJ,
+    first_set.SUBHEAD_NAME,
+    first_set.SUBHEAD_NAME_GUJ,
+    sum(first_set.REC_AMT) AS REC_AMT,
+    sum(first_set.NON_REC_AMT) AS NON_REC_AMT,
+    sum(first_set.ULT_ANN_REC_AMT) AS ULT_ANN_REC_AMT,
+    first_set.TBUD_PUB_HDR_ID  
+FROM
+(  
+SELECT
+    mm.MAJORHEAD_CODE,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mm.MAJORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+    '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MAJORHEAD_CODE_GUJ,
+    mm.MAJORHEAD_NAME,
+    mm.MAJORHEAD_NAME_GUJ,
+    msmh.SUBMAJORHEAD_CODE,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(msmh.SUBMAJORH_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+    '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBMAJORH_CODE_GUJ,
+    msmh.SUBMAJORHEAD_NAME,
+    msmh.SUBMAJORH_NAME_GUJ,
+    mmh.MINORHEAD_CODE,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(mmh.MINORHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+    '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS MINORHEAD_CODE_GUJ,
+    mmh.MINORHEAD_NAME,
+    mmh.MINORHEAD_NAME_GUJ,
+    ms.SUBHEAD_CODE,
+    REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ms.SUBHEAD_CODE_GUJ,'1','૧'), '2', '૨'),'3','૩'),
+    '4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS SUBHEAD_CODE_GUJ,
+    ms.SUBHEAD_NAME,
+    ms.SUBHEAD_NAME_GUJ,
+    tpd.RECURRENT_AMOUNT AS REC_AMT,
+    tpd.NON_RECURRENT_AMOUNT AS NON_REC_AMT,
+    ROUND(tpd.ULTIMATE_ANNUAL_RECURRENT_AMOUNT) AS ULT_ANN_REC_AMT,
+    tph.TBUD_PUB_HDR_ID
+FROM
+    BUDGET.TBUD_PUB_HDR tph,
+    BUDGET.TBUD_PUB_DTL tpd,
+    MASTER_V1.MS_MAJORHEAD mm,
+    MASTER_V1.MS_SUBMAJORHEAD msmh,
+    MASTER_V1.MS_MINORHEAD mmh,
+    MASTER_V1.MS_SUBHEAD ms
+WHERE
+    tpd.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+    AND tph.MAJORHEAD_ID = mm.MAJORHEAD_ID
+    AND tph.SUBMAJORHEAD_ID = msmh.SUBMAJORHEAD_ID
+    AND tph.MINORHEAD_ID = mmh.MINORHEAD_ID
+    AND tph.SUBHEAD_ID = ms.SUBHEAD_ID
+    AND tph.APP_TYPE_ID=426
+    AND tph.BPN_ID = $P{bpnId}
+    AND tph.FINANCIAL_YEAR_ID = $P{fyId}
+ORDER BY
+    mm.MAJORHEAD_CODE,
+    msmh.SUBMAJORHEAD_CODE,
+    mmh.MINORHEAD_CODE,
+    ms.SUBHEAD_CODE) first_set
+GROUP BY
+    first_set.MAJORHEAD_CODE,
+    first_set.MAJORHEAD_CODE_GUJ,
+    first_set.MAJORHEAD_NAME,
+    first_set.MAJORHEAD_NAME_GUJ,
+    first_set.SUBMAJORHEAD_CODE,
+    first_set.SUBMAJORH_CODE_GUJ,
+    first_set.SUBMAJORHEAD_NAME,
+    first_set.SUBMAJORH_NAME_GUJ,
+    first_set.MINORHEAD_CODE,
+    first_set.MINORHEAD_CODE_GUJ,
+    first_set.MINORHEAD_NAME,
+    first_set.MINORHEAD_NAME_GUJ,
+    first_set.SUBHEAD_CODE,
+    first_set.SUBHEAD_CODE_GUJ,
+    first_set.SUBHEAD_NAME,
+    first_set.SUBHEAD_NAME_GUJ,
+    first_set.TBUD_PUB_HDR_ID) main_table
+WHERE (main_table.REC_AMT > 50 OR main_table.NON_REC_AMT > 100)
+ORDER BY
+    main_table.MAJORHEAD_CODE,
+    main_table.SUBMAJORHEAD_CODE,
+    main_table.MINORHEAD_CODE,
+    main_table.SUBHEAD_CODE) final_query
+JOIN (SELECT ENG EN, GUJ FROM EDP.GUJNO ORDER BY ENG) GU ON final_query.NO = GU.EN
+JOIN (SELECT BPN_NAME, BPN_NAME_GUJ, BPN_ID FROM MASTER_V1.MS_BPN) bpn ON bpn.BPN_ID=$P{bpnId}
+JOIN
+(
+    SELECT
+        tpnh2.TBUD_PUB_HDR_ID,
+        tpnh2.ITEM_NAME,
+        tpnh2.ITEM_NAME_GUJ,
+        tpnh2.WRITE_UP,
+        tpnh2.WRITE_UP_GUJ,
+        mmic.MINISTER_NAME,
+        mmic.MINISTER_NAME_GUJ
+    FROM
+        BUDGET.TBUD_PUB_NC_HDR tpnh2
+        LEFT JOIN MASTER_V1.MS_MINISTER_IN_CHARGE mmic ON  tpnh2.MINISTER_IN_CHARGE = mmic.MS_MINI_IN_CHARGE_ID
+   ) tpnh ON final_query.TBUD_PUB_HDR_ID = tpnh.TBUD_PUB_HDR_ID
+ORDER BY final_query.NO]]>
+	</queryString>
+	<field name="BPN_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BPN_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="BPN_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BPN_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="MINISTER_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINISTER_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINISTER_IN_CHARGE"/>
+	</field>
+	<field name="MINISTER_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINISTER_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINISTER_IN_CHARGE"/>
+	</field>
+	<field name="MAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORH_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORH_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="SUBMAJORH_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBMAJORH_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBMAJORHEAD"/>
+	</field>
+	<field name="MINORHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="MINORHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="MINORHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="MINORHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MINORHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_MINORHEAD"/>
+	</field>
+	<field name="SUBHEAD_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="SUBHEAD_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="SUBHEAD_CODE_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_CODE_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="SUBHEAD_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SUBHEAD_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_SUBHEAD"/>
+	</field>
+	<field name="NUMOFGRANT_ENG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NUMOFGRANT_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="GUJNO"/>
+	</field>
+	<field name="ITEM_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NC_HDR"/>
+	</field>
+	<field name="NUMOFGRANT_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NUMOFGRANT_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="GUJNO"/>
+	</field>
+	<field name="ITEM_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NC_HDR"/>
+	</field>
+	<field name="REC_AMT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="REC_AMT"/>
+	</field>
+	<field name="NON_REC_AMT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NON_REC_AMT"/>
+	</field>
+	<field name="ULT_ANN_REC_AMT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ULT_ANN_REC_AMT"/>
+	</field>
+	<field name="WRITE_UP" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WRITE_UP"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NC_HDR"/>
+	</field>
+	<field name="WRITE_UP_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WRITE_UP_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NC_HDR"/>
+	</field>
+	<field name="TBUD_PUB_HDR_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="TBUD_PUB_HDR_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_HDR"/>
+	</field>
+	<variable name="sumTotal" class="java.lang.Double">
+		<variableExpression><![CDATA[SUM($F{REC_AMT},$F{NON_REC_AMT})]]></variableExpression>
+	</variable>
+	<title>
+		<band height="11">
+			<break>
+				<reportElement x="0" y="0" width="801" height="1" uuid="eb3c464e-c299-4153-abe4-56eb45ddc572">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</break>
+		</band>
+	</title>
+	<detail>
+		<band height="294" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="1" width="802" height="59" uuid="6e3717ad-cabf-48b7-a89e-3db5b884bc20">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="401" y="20" width="130" height="20" uuid="6c0db4c8-7132-4697-bb7e-f39e6c10d802">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box leftPadding="10"/>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MINISTER-IN-CHARGE:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="531" y="20" width="268" height="20" uuid="76d8f040-210b-4bf9-b31b-1075653d38a7">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MINISTER_NAME}==null?"":UPPER($F{MINISTER_NAME})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="399" height="20" uuid="376542cf-2625-42bd-936a-c6ef5d44c808">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BPN_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="20" width="400" height="20" uuid="fdae6edd-10b8-4ba6-aed0-63469fe05717">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["મંત્રી:"+($F{MINISTER_NAME_GUJ}==null?"":$F{MINISTER_NAME_GUJ})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="1" width="384" height="20" uuid="8846e4fd-a5ff-4048-a049-faf29d2bc29a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Bottom" markup="html">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BPN_NAME}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="401" y="43" width="394" height="15" uuid="f99a3a1d-daa2-45a8-88e9-e8a8cb653783">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<box leftPadding="10"/>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Major Head:"+$F{MAJORHEAD_CODE}+" "+"-"+" "+$F{MAJORHEAD_NAME}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement mode="Transparent" x="0" y="43" width="401" height="15" isRemoveLineWhenBlank="true" uuid="0bf8fe3b-7711-490b-bcd4-b9d5f555d96b">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA["મુખ્ય સદર:" + $F{MAJORHEAD_CODE_GUJ}+" "+"-"+$F{MAJORHEAD_NAME_GUJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement positionType="Float" x="732" y="182" width="70" height="15" uuid="ac2931df-a280-448b-93da-a83a52c32c82"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. In Lakhs)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="732" y="167" width="70" height="15" uuid="fed511a6-9954-48b1-94d2-b7ac88fe89c0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(₹. લાખ માં)]]></text>
+			</staticText>
+			<frame>
+				<reportElement positionType="Float" x="0" y="210" width="802" height="40" uuid="f1aae4ab-c82f-4c89-b9d9-260921138f48"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="70" height="20" uuid="8c17275c-440c-45d9-9a12-b154e9f3caa3">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[આવર્તક રકમ :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="100" height="20" uuid="eafb7e83-5ae6-4a2a-ac76-17b4614eff66"/>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Recurrent Amount :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="177" y="0" width="77" height="20" uuid="858bc512-d98c-4708-ac3d-7561e83c6c92">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[અનાવર્તક રકમ :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="175" y="20" width="120" height="20" uuid="443064ba-3d6a-4a0f-a41d-9765786c65b7">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Non Recurrent Amount :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="407" y="0" width="46" height="20" uuid="fcee7602-b064-4ba0-96ef-2eb0de995c03">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[સરવાળો :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="407" y="20" width="26" height="20" uuid="9b5a7eb6-f8ad-49b9-8e78-53179c376090"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="565" y="0" width="131" height="20" uuid="807618db-f66e-4b4a-bc50-366af9397532">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[આખરી વાર્ષિક આવર્તક રકમ :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="565" y="20" width="175" height="20" uuid="77203afc-7788-4906-ae70-0862bed912eb"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ultimate Annual Recurrent Amount :]]></text>
+				</staticText>
+				<textField pattern="#0.00#">
+					<reportElement x="100" y="20" width="75" height="20" uuid="bb434f31-98e5-45a9-b159-bf77b2cc78e8">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{REC_AMT}==null || $F{REC_AMT} == 00.00)?"Nil":$F{REC_AMT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="295" y="20" width="112" height="20" uuid="75b70bf8-fdd5-4737-a272-1f207f46d1ff">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{NON_REC_AMT}==null || $F{NON_REC_AMT} == 00.00)?"Nil":$F{NON_REC_AMT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="696" y="0" width="80" height="20" uuid="e96ecd3e-afb6-4a14-ac12-1e73531f901e"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{ULT_ANN_REC_AMT}==null || $F{ULT_ANN_REC_AMT} == 00.00)?"શુન્ય":$F{ULT_ANN_REC_AMT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="740" y="20" width="60" height="20" uuid="79af7cae-bb20-4f0f-b9b9-c7336094afd5"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{ULT_ANN_REC_AMT}==null || $F{ULT_ANN_REC_AMT} == 00.00)?"Nil":$F{ULT_ANN_REC_AMT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="70" y="0" width="98" height="20" uuid="5ca41ac8-a4b1-4c8d-b1eb-a529304f166b">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{REC_AMT}==null || $F{REC_AMT} == 00.00)?"શુન્ય":$F{REC_AMT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="254" y="0" width="140" height="20" uuid="d99e8752-530d-4067-a1cb-6969b05a48dc">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{NON_REC_AMT}==null || $F{NON_REC_AMT} == 00.00)?"શુન્ય":$F{NON_REC_AMT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="436" y="20" width="108" height="20" uuid="6dd9ef9b-f3fb-4c91-ab91-03f0128c2487">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($V{sumTotal}==null || $V{sumTotal} == 00.00)?"Nil":$V{sumTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#0.00#">
+					<reportElement x="453" y="0" width="83" height="20" uuid="2ab76b05-dec0-4aae-842e-2cb761f209a3">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($V{sumTotal}==null || $V{sumTotal} == 00.00)?"શુન્ય":$V{sumTotal}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<break>
+				<reportElement x="0" y="0" width="802" height="1" uuid="c44747b6-7ad3-41b2-bdb2-a2d1b8613871">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[1==0]]></printWhenExpression>
+				</reportElement>
+			</break>
+			<frame>
+				<reportElement x="0" y="88" width="801" height="15" uuid="7623045c-bd7c-4c3b-b14d-fc4341f6d1dd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="401" y="0" width="95" height="15" uuid="959f8c5e-919f-414f-a1df-1859f4239a80">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="10" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub Major Head:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="77" height="15" uuid="88c527ef-dc18-4fc2-ab49-e54667415253">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[પેટા મુખ્ય સદર :]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="77" y="0" width="295" height="15" uuid="e8e35ba5-2e03-4ebc-bcf1-b644ac40d3e2">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[TRIM(EQUALS($F{SUBMAJORHEAD_CODE},"00")?$F{SUBMAJORH_CODE_GUJ} : $F{SUBMAJORH_CODE_GUJ}+ " - " + $F{SUBMAJORH_NAME_GUJ})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="496" y="0" width="305" height="15" uuid="d53f3732-e432-419d-af92-957e2f4bc2ab">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[EQUALS($F{SUBMAJORHEAD_CODE},"00")?$F{SUBMAJORHEAD_CODE} : ($F{SUBMAJORHEAD_CODE} + " - " + $F{SUBMAJORHEAD_NAME})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="103" width="801" height="20" uuid="91542311-2252-4d13-aeb3-9d9ad7081e13"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="401" y="0" width="71" height="20" uuid="d339707e-5bce-43d9-bf93-dd51be13e55a">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="10" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Minor Head:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="56" height="20" uuid="0fd4e466-a189-4e17-bf4c-9bdbad2c2141">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ગૌણ સદર :]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="56" y="0" width="343" height="20" uuid="b5d3f55c-d002-4488-a043-14042a3de31d">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box topPadding="2" leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[TRIM($F{MINORHEAD_CODE_GUJ}+" - "+$F{MINORHEAD_NAME_GUJ})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="472" y="0" width="329" height="20" uuid="cd68d569-c795-4458-b4a6-c95b3ac16b48">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box topPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$F{MINORHEAD_CODE}+" - "+$F{MINORHEAD_NAME}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="123" width="801" height="20" uuid="5092db45-7964-40f4-a79e-bd8d5f7a2bbb"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="51" height="20" uuid="d89a052e-da06-41c0-a22d-f0f63a2adae9">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[પેટા સદર :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="401" y="0" width="64" height="20" uuid="364ea105-e5dc-4bf8-8609-368d76539ebb">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box leftPadding="10" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub Head:]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="51" y="0" width="342" height="20" uuid="30c58e6d-0b98-48f5-990a-8662031fc652">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[TRIM($F{SUBHEAD_CODE_GUJ}+" - "+$F{SUBHEAD_NAME_GUJ})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="465" y="0" width="336" height="20" uuid="7f052d2b-730b-4a85-8e66-d9d83ad5ec03">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box topPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$F{SUBHEAD_CODE}+" - "+$F{SUBHEAD_NAME}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="143" width="801" height="20" uuid="f8612d6d-39ec-4660-a222-410295d0efc1"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="401" y="0" width="58" height="20" uuid="b016069d-30d8-4958-b60b-f0285b345a84">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box leftPadding="10" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Item No.:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="65" height="20" uuid="117c09af-f7f5-4149-ab3c-5cab71d09e87">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Nirmala UI" isBold="true"/>
+					</textElement>
+					<text><![CDATA[બાબત નંબર :]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="65" y="0" width="332" height="20" uuid="1e9ce938-2e2c-4156-a608-9aa29a72ae35">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2" leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[TRIM("("+$F{NUMOFGRANT_GUJ}+")"+(EQUALS(TRIM($F{ITEM_NAME_GUJ}),null)?"--": $F{ITEM_NAME_GUJ}))]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement stretchType="RelativeToTallestObject" x="458" y="0" width="336" height="20" uuid="50447805-8b49-4c02-888d-a7034d4f88cc">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box topPadding="2">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA["("+$F{NUMOFGRANT_ENG}+")"+$F{ITEM_NAME}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="408" y="272" width="392" height="22" isRemoveLineWhenBlank="true" uuid="5599836c-ee7c-4b21-b8b9-60dac826441c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{WRITE_UP}!=""]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<paragraph lineSpacing="Fixed" lineSpacingSize="13.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[EQUALS(TRIM($F{WRITE_UP}),null)?"": $F{WRITE_UP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="408" y="252" width="392" height="20" uuid="071a614b-8e27-45f6-97fa-e557c1c7d39e"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remarks :-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="251" width="400" height="20" uuid="6a5c5ce3-84c3-4eee-8123-5951c79f0f69">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિશેષ નોંધ :-]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="0" y="271" width="400" height="22" isRemoveLineWhenBlank="true" uuid="147d252f-e912-4e63-b4b1-fa82b8371a84">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{WRITE_UP_GUJ}!=""]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<paragraph lineSpacing="Fixed" lineSpacingSize="13.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[EQUALS(TRIM($F{WRITE_UP_GUJ}),null)?"": $F{WRITE_UP_GUJ}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="28">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="6" width="401" height="17" uuid="332f8b38-a68a-4ab3-a9aa-1abda266c592">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<subreportParameter name="pubHdrId">
+					<subreportParameterExpression><![CDATA[$F{TBUD_PUB_HDR_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/Dynamic_1//BudgetBookRecpStmt1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false" runToBottom="false">
+				<reportElement positionType="Float" x="401" y="6" width="400" height="17" uuid="733d7da3-6710-467e-a147-2829f1f4729a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="pubHdrId">
+					<subreportParameterExpression><![CDATA[$F{TBUD_PUB_HDR_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/src/reports/Dynamic_1//BudgetBookRecpSt2.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="2" width="802" height="1" uuid="df371bd7-9298-4e22-a34d-b477cb02aece">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<break>
+				<reportElement x="0" y="5" width="801" height="1" uuid="40ff9ade-b2f7-4d3b-bdcd-13aac59d46ce"/>
+			</break>
+			<break>
+				<reportElement positionType="Float" x="0" y="24" width="800" height="1" uuid="ec1d0215-3dde-4512-b270-8e120bdc6809"/>
+			</break>
+		</band>
+	</detail>
+</jasperReport>

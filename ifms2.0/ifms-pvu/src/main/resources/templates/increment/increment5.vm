@@ -1,0 +1,76 @@
+<html !DOCTYPE>
+
+<body style="font-size: 12px;">
+    <table width="98%" text-align="center" style="padding: 1%; font-size: 12px;">
+        <tr>
+            <td colspan="2" align="center"><strong>Annexure-I</strong></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">(Annexure-I to Finance Department Circular
+                No._______________dated______________)</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">INCREMENT CERTIFICATE TO BE ATTACHED WITH $MonthYear PAY BILL</td>
+        </tr>
+    </table>
+    <div>
+        <table CELLSPACING=0 style="font-size: 5px; width: 98%; word-break: break-word; ">
+            <tr>
+				<th rowspan="2" style="border: 1px solid;  padding:1px;  ">Name of Incumbent</th>
+				<th rowspan="2" style="border: 1px solid; border-left-width: 0; padding:1px">Employee Number</th>
+				<th rowspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Whether substantive or officiating</th>
+				<th colspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Present Pay</th>
+				<th rowspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Date from which the present pay is drawn</th>
+				<th rowspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Amount of present increment (Rs.)</th>
+				<th rowspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Date of Present increment</th>
+				<th colspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Pay after Increment</th>
+				<th colspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Suspend for Misconduct</th>
+				<th colspan="2" style="border: 1px solid; border-left-width: 0; padding:1px;">Leave without pay</th>
+			</tr>
+			 <tr>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">Pay Scale (Rs.)</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">Basic Pay (Rs.)</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">Pay Scale (Rs.)</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">Basic Pay (Rs.)</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">From</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">To</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">From</th>
+                <th style="border: 1px solid; border-left-width: 0; border-top-width: 0; padding:1px">To</th>
+			</tr>
+			#foreach($increment in $INCREMENT)
+			<tr>
+				<td style="border: 1px solid; border-top-width: 0; padding:1px;">$increment['EMPLOYEE_NAME']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px">$increment['EMPLOYEE_NO']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['SUBSTANTIVE_OFFICIATING']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['CURRENT_PAY_SCALE']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['CURRENT_BASIC_PAY']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['CURRENT_PAY_DRAWN_DATE']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['CURRENT_AMOUNT']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['DATE_OF_INCREMENT']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['REVISE_PAY_SCALE']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['REVISE_BASIC_PAY']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['SUSPENTION_FROM_DATE']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['SUSPENTION_TO_DATE']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['EOL_FROM_DATE']</td>
+				<td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:1px;">$increment['EOL_TO_DATE']</td>
+			</tr>
+			 #end
+		</table>
+	</div>
+	<table  style="padding: 1%; font-size: 12px;">
+		<tr>
+			<td>Certified that all the Government servants for whom increments have been claimed in the bill have rendered the required period of approved service entitling them to the increased pay drawn in bill.</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_NAME</td>
+		</tr>
+		<tr>
+			<td align="right">$APPROVER_DESIGNATION</td>
+		</tr>
+	</table>
+</body>
+
+</html>

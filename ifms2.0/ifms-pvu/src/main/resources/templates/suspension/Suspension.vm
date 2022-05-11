@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: calibri; line-height: 13.5px;font-size:10px;">
+	<table width="100%" text-align="center" style="border: 1px solid #000; border-bottom:0;">
+        <tr>
+            <td colspan="2" align="center">$officeName</td>
+        </tr>
+        <tr>
+            <td colspan="2"  align="center">$officeAddress</td>
+        </tr>
+        <tr>
+            <td colspan="2"  align="center">Office order for $eventName</td>
+        </tr>
+    </table>
+<table style="border: 1px solid #000; " width="100%">
+        <tr>
+            <td>Reference No.: $trnNo</td>
+            <td align="right">Date: $trnDate</td>
+        </tr>
+    </table>
+    &nbsp;
+    <table width="100%" style="">
+        <tr>
+            <td>In Pursuance Of the rule 5 of Gujarat Civil Services (Discipline and Appeal) Rules, 1971 $employeeName, $designation, $employeeClass was suspended on account of $suspensionReason with effect from $suspensionEffectiveDate. 
+            #if($reinstateFlage)
+            After review, $heshe is now re-instated in service with effect from $suspensionEndDate and 
+            #else
+            #end
+            $hisher pay is fixed as below & other allowances will be paid as per the rules [Read: Rule 70 of "Gujarat Civil Services (Joining Time, Foreign Service, Deputation out of India, Payment during Suspension, Dismissal and Removal) Rules" 2002 and other orders issued from time to time in this behalf]:</td>
+        </tr>
+    </table>
+    &nbsp;
+   #if($fifthPay)
+    <table CELLSPACING=0 width="100%" style="padding: 1%;">
+        <tr><td><h3>5th Pay</h3></td></tr>
+        <tr>
+              <td style="border: 1px solid;padding: 10px;">Pay Scale</td>
+            <td style="border: 1px solid;padding: 10px;">Pay in Pay Scale</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid;padding: 10px;">$payScale</td>
+            <td style="border: 1px solid;padding: 10px;">$basicPay</td>
+        </tr>        
+    </table>
+    #else
+    #end
+    #if($sixthPay)
+     <table CELLSPACING=0 width="100%" style="padding: 1%;">
+        <tr><td><h3>6th Pay</h3></td></tr>
+        <tr>
+           <th style="border: 1px solid; padding:7px">Pay Band</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Pay in the Pay Band</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Grade Pay</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Basic</th>
+        </tr>
+        <tr>
+           <td style="border: 1px solid; border-top-width: 0; padding:7px">$payBand</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$payBandValue</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$gradePay</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$basicPay</td>
+        </tr>
+        
+    </table>
+    #else
+    #end
+    #if($seventhPay)
+    <table CELLSPACING=0 width="100%" style="padding: 1%;">
+        <tr><td><h3>7th Pay</h3></td></tr>
+        <tr>
+            <th style="border: 1px solid; padding:7px">Pay Level</th>
+            <th style="border: 1px solid; border-left-width: 0; padding:7px">Pay in Pay Level</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:7px">$payLevel</td>
+            <td style="border: 1px solid; border-top-width: 0; border-left-width: 0; padding:7px">$basicPay</td>
+        </tr>
+        
+    </table>
+    #else
+    #end
+    #if($fixPay)
+    <table CELLSPACING=0 width="100%" style="padding: 1%;">
+        <tr><td><h3>Fix Pay</h3></td></tr>
+        <tr>
+            <th style="border: 1px solid; padding:7px">Basic Pay</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid; border-top-width: 0; padding:7px">$basicPay</td>
+        </tr>
+        
+    </table>
+    #else
+    #end
+    &nbsp;
+    &nbsp;
+    &nbsp;
+           <table CELLSPACING=0 width="100%" style="padding: 1%;">
+        <tr>
+            <td align="right">$approverName</td>
+        </tr>
+        <tr>
+            <td align="right">$approverDesignation</td>
+        </tr>
+        <tr>
+            <td>Copy forwarded with compliments to: </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>(1) Bill Clerk (two copies)</td>
+        </tr>
+        <tr>
+            <td>(2) $employeeName, $designation, $employeeClass, $officeName.</td>
+        </tr>
+        <tr>
+            <td>(3) Service book/ service roll of person concerned with option.</td>
+        </tr>
+        <tr>
+            <td>(4) Office Order file.</td>
+        </tr>
+        <tr>
+            <td>(5) $watermark.</td>
+        </tr>
+    </table>
+</body>
+
+
+</html>
+
+
+
+

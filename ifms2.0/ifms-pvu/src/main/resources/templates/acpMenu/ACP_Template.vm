@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+    <div style="margin: 15px; width: auto;">
+        <div style="text-align: center;">
+            <h2><b><u>Assured Career Progression-I/II</u></b></h2>
+            <h3 style="line-height: .25px;"><b><u>Employee No.:$employeeNo</u></b></h3>
+        </div>
+        <div style="margin-top:25px;font-family:Roboto, Helvetica Neue, sans-serif; font-size:13px;">
+            <table width="100%">
+                <tr>
+                    <td>In accordance with the provision of LEGAL DEPARTMENT'S NOTIFICATION NO.:
+                        <span class="resonumber">GK/09/2009/PAY/102008/II-3435-D</span>dated
+                        <span class="resodate">26/06/2009 </span> and the following amendments made time to time,
+                        <span class="empname">$employeeName  $middleName   $surname   </span><span class="empdesi">$designation</span>
+                        <span class='empofficename'>$officeName</span>
+                        <span class="compyear">on completion of  </span>$acpYears years of service in the pay scale
+                        $payScaleVal  <span class="empGender">$heshe</span> is given benefit of the laid down $number Assured Career Progression
+                        <span class="eventname"> </span>of  $scaleVal  as on
+                        <span class="evntdate">$effectiveDate</span> $gender pay is fixed at
+                        <span class="scalevalue"> Rs. $basicPay & $gender next date of increment will be </span>
+                        <span class="nextincrmtdate">$nextIncDate</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="height: 15px;"></div>
+                    </td>
+                </tr>
+                #if($rePrintCounter >=2)
+                <tr>
+                    <td>
+                    	Print Date:
+                        <span class="print-date"> $endorsementPrintDate</span>
+                        <br></br>
+                        Reprint Date:
+                        <span class="repprint-date"> $endorsementReprintDate</span>
+                        <br></br>
+                        Reprint Count: <span class="Reprintcount">$rePrintCount</span>.<br />
+                        Reprint Remarks: <span class="Reprintcount">$rePrintRemarks</span>.
+                    </td>
+                </tr>
+                #else
+                    <tr>
+                        <td>Print Date: <span class="print-date"> $endorsementPrintDate</span><br /></td>
+	                 </tr>
+	            #end
+                <tr>
+                    <td>
+                        <div style="height: 20px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Place : Gandhinagar</td>
+                </tr>
+                
+                
+                    <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                
+                
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="width:30%;text-align:center;"></td>
+                                <td style="width:30%;text-align:center;">
+                                    $authorizerName<br></br>
+                                    Accounts Officer<br></br>
+                                    Pay Verification Unit(DAT)<br></br>
+                                    Finance Department
+                                </td>
+                                <td style="width:30%;text-align:center;">
+                                    Issued by,<br></br>
+                                    Accounts Officer<br></br>
+                                    Pay Verification Unit(DAT)<br></br>
+                                    Finance Department<br></br>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="height: 15px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Remarks:$remarks
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

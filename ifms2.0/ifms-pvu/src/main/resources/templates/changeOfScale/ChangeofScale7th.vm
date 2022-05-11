@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+   <body style="font-size:12px;">
+      <table style="margin: 15px; width: 100%;">
+      <tr>
+         <td align="center">
+            <h2><b><u>Change of Scale</u></b></h2>
+            <h3 style="line-height: .25px;"><b><u>Employee No.:$employeeNo</u></b></h3>
+         </td>
+      </tr>
+      <tr>
+         <td style="margin-top:25px;text-align: justify;">
+            <table width="100%">
+               <tr>
+                  <td>
+                     <table width="100%">
+                        <tr>
+                           <td>
+                              In Pursuance Of the rule 24 of the Gujarat Civil Services (Pay) Rules, 2002 and other orders issued from time to time in this behalf, as per the option
+                              <span class="resonumber">Not Availed</span> by
+                              <span class="empname">$employeeName </span>
+                              <span class="empdesi">$designation - $className ,</span>
+                              Employee No.:
+                              <span class="empno">$employeeNo </span>
+                              who is receiving pay in Pay level
+                              "<span class="newPayLevel">$clevelValue</span>".
+                              Basic Pay Rs.
+                              <span class="basicpay">$cBasicPay </span> and
+                              $gender next date of increment is
+                              <span class="nxtinrementDate">$cNextIncDate </span>.
+                              $gender pay is fixed in the pay level
+                              "<span class="newPayLevel">$levelValue</span>" basic pay Rs.
+                              <span class="basicpay">$basicPay </span> with effect from
+                              <span span="evntdate">$effectiveDate. </span>
+                              $gender next date of increment will be <span class="incrementDate">$nextIncDate </span>.
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="height: 15px;">
+                           </td>
+                        </tr>
+                        <tr>
+                              <td>
+                              	 <p style="margin: 0;">Print Date: <span class="printDate">$endorsementPrintDate</span></p>
+                               #if($rePrintCount >=2)
+                                 <p style="margin: 0;">Reprint Date: <span class="repprint-date">$endorsementReprintDate </span></p>
+                                 <p style="margin: 0;">Reprint Count: <span class="Reprintcount">$showRePrintCount</span>.</p>
+                                 <p style="margin: 0;">Reprint Remarks: <span class="Remarks">$remarks</span>.</p>
+                               #end
+                              </td>
+                           </tr>
+                        <tr>
+                           <td style="height: 20px;">
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Place : Gandhinagar</td>
+                        </tr>
+                        
+                        
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                        
+                        
+                        
+                        
+                        <tr>
+                           <td>
+                              <table cellpadding="0" cellspacing="0" width="100%">
+                                 <tr>
+                                    <td style="width:30%;text-align:center;"></td>
+                                    <td style="width:30%;text-align:center;">
+                                       <p style="margin: 0;">$authorizerName</p>
+                                       <p style="margin: 0;"> Accounts Officer</p>
+                                       <p style="margin: 0;">Pay Verification Unit</p>
+                                       <p style="margin: 0;">Finance Department</p>
+                                    </td>
+                                    <td style="width:30%;text-align:center;">
+                                       <p style="margin: 0;">Issued by,</p>
+                                       <p style="margin: 0;">Accounts Officer</p>
+                                       <p style="margin: 0;">Pay Verification Unit</p>
+                                       <p style="margin: 0;">Finance Department</p>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="height: 15px;">
+                           </td>
+                        </tr>
+                         <tr>
+                              <td>
+                                  <p style="margin: 0;">Remarks: <span class="authRemarks">$authorizerRemarks</span></p>
+                              </td>
+                           </tr>
+                     </table>
+                  </td>
+               </tr>
+            </table>
+           </td>
+         </tr>
+      </table>
+   </body>
+</html>

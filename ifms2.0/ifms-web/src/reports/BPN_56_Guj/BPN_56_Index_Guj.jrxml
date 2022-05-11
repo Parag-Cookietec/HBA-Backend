@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BPN_56_Index_Guj" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ROW_NUMBER() OVER (),'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS rowNo,
+tmh.DEPARTMENT_ID, md.DEPARTMENT_NAME_GUJ
+FROM
+BUDGET.TOCB_MOCB_HDR tmh
+INNER JOIN BUDGET.TOCB_MOCB_DM_DTL tmdd ON tmh.TOCB_MOCB_HDR_ID = tmdd.TOCB_MOCB_HDR_ID
+--LEFT JOIN BUDGET.TOCB_MOCB_DTL tmd  ON tmh.TOCB_MOCB_HDR_ID = tmd.TOCB_MOCB_HDR_ID
+INNER JOIN MASTER_V1.MS_DEPARTMENT md ON md.DEPARTMENT_ID = tmh.DEPARTMENT_ID
+WHERE
+tmh.FINANCIAL_YEAR_ID =  $P{fyId}
+GROUP BY tmh.DEPARTMENT_ID,md.DEPARTMENT_NAME_GUJ]]>
+	</queryString>
+	<field name="ROWNO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ROWNO"/>
+	</field>
+	<field name="DEPARTMENT_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_MOCB_HDR"/>
+	</field>
+	<field name="DEPARTMENT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<variable name="Variable_1" class="java.lang.Integer" calculation="Count">
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band height="10" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="10" width="802" height="40" uuid="c0066af4-1a01-42da-b1cc-5740b6264fb0"/>
+				<box>
+					<topPen lineWidth="2.5"/>
+					<bottomPen lineWidth="2.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અનુક્રમણિકા]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="3" width="802" height="1" forecolor="#FFFFFF" uuid="73428e56-bcb8-49db-8cf5-0c560d0ecc41"/>
+			</break>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44">
+			<staticText>
+				<reportElement x="0" y="14" width="100" height="30" uuid="4c336627-451d-49ce-bd5e-e642ea612031"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ક્રમ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="14" width="600" height="30" uuid="7e7c148b-659d-4fc2-88a6-b3940b003980"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિભાગનું નામ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="14" width="102" height="30" uuid="991775a3-65b1-4538-9591-138d4a083b89"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[પાના નં.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="02fea99a-312c-4dab-b58f-7cd55a6d2940"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ROWNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="600" height="30" uuid="82e65cf0-dec2-4243-bfd0-ca764880d064"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPARTMENT_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="102" height="30" uuid="6cb3d98c-6439-4e96-b892-d2b9f7bebf45"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Variable_1} == 0 ? " " : $V{Variable_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1"/>
+	</columnFooter>
+	<summary>
+		<band height="58">
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="22" width="802" height="35" uuid="a5a910a4-6f70-4232-b013-94d03b44241b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_56_Guj/BPN_56_Demand_Guj.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="11" width="802" height="1" forecolor="#FFFFFF" uuid="d7bdd2b1-30c6-4a28-b7d1-55dfed6f237a"/>
+			</break>
+		</band>
+	</summary>
+</jasperReport>

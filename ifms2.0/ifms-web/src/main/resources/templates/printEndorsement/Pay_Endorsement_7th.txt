@@ -1,0 +1,38 @@
+To,
+<Office Name>
+<Add 1>,
+<District><Taluka>
+<Pincode>
+
+
+
+Pay Verification Unit, <PVU Office Name>, <Department Name>, <PVU District>.
+Employee Number: <Employee Number>
+ROP 2009 Pay Scale <Last 6th pay,pay band> Basic <Last 6th pay, pay band value>
+Grade Pay <6th Pay, Grade pay>
+
+Initial pay fixation of  <Salutation + first name + middle + surname>,  <Designation>,  <Employee class>  <DDO office name> under the Gujarat Civil Services (Revision of Pay)  Rules, 2016.
+
+Initial Pay admitted as under:                                                                                        
+--------------------------------------------------------------------------------------------------------------------------------
+Event Name     Pay In the          Level Id       Cell Id        Vertical Range of            Date of Next    
+                           Level                                                       Pay Level                         Increment                                                    
+--------------------------------------------------------------------------------------------------------------------------------
+<Event Name>         <Revised 7th Pay Basic>                 <Level Value>             <Cell Value>             <Vertical Range>                <Date of next increment>         
+--------------------------------------------------------------------------------------------------------------------------------                                                                                   
+Remarks:<Remark>
+Print Date:  <Endorsement print date>
+
+
+
+
+                                                                                                                          Issued by,                              			       
+                                                   <Authorized by Name> 
+                                                   Accounts Officer                                		    	         Accounts Officer
+                                                   Pay Verification Unit                                  		     Pay Verification Unit
+                                                   <Department Name>                              		            <Department Name>        
+                                                                                            
+                                
+<Endorsement reprint date>
+<Number of count reprinted>
+<Reprint Remark>

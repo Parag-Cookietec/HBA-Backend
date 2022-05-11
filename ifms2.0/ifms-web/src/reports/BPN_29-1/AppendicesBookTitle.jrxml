@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AppendicesBookTitle" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4c70ea78-c43a-45a7-a669-35b8988a2fde">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT mfy.FY AS "fyEng",
+	mfy.FY_GUJ AS "fyGuj"
+	FROM MASTER_V1.MS_FINANCIAL_YEAR mfy
+	WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="478" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="44" width="111" height="21" uuid="d5bfe62f-82f7-4b1a-acba-0a7ecb0debbe"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="35" width="200" height="40" uuid="f14541ea-05a3-4fd0-b888-454c07d6ae49"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અંદાજપત્ર પ્રકાશન નં.
+Budget Publication No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="622" y="5" width="198" height="82" uuid="d5dd7484-668d-4bdb-ac1e-e79ecf0da3c5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="35" isBold="true"/>
+					<paragraph lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["} 29 (Part-1)"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="74" width="801" height="1" uuid="8182dde7-fdb7-4fc0-8c72-3dd2475658fa">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="77" width="801" height="1" uuid="13fdd11c-6749-4849-b5d5-89099b9bdcc7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="113" width="802" height="72" uuid="037a0fb4-1e28-487e-b988-704eab3f4ab5"/>
+				<imageExpression><![CDATA["/src/images/asokaemblem.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="199" width="801" height="40" uuid="0a84499f-5053-454e-8a53-9da1a77c79ca">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ગુજરાત સરકાર<BR/>"+
+"GOVERNMENT OF GUJARAT"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="284" width="799" height="52" uuid="4ec5009d-ed47-4667-8b43-fb317473da1e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGuj} +" ના વર્ષ માટેનું  અંદાજપત્ર<BR/>"+
+"પરિશિષ્ટો  (પુસ્તક ⁃ ૧)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="361" width="797" height="48" uuid="321ff29b-638a-4860-92e3-3221a480aae0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BUDGET ESTIMATES OF " +$F{fyEng} +"<BR/>"+
+" APPENDICES  (VOLUME-I)"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="428" width="801" height="1" uuid="e223a50a-517d-4e8d-8c4e-747282c38693">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="431" width="801" height="1" uuid="a00c7c3f-6535-470d-a4e2-47b52481a49f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="440" width="801" height="38" uuid="70b1cfb3-3c29-4110-b405-782305e19beb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[ ભારતના સંવિધાનની કલમ ૨૦૨(૧) અન્વયે વિધાનસભા સમક્ષ રજૂ ]
+[ Presented to the Legislative Assembly Under Article 202 (1) of the Constitution of India ]]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

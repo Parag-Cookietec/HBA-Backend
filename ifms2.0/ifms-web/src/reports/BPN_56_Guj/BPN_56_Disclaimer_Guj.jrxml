@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BPN_56_Disclaimer_Guj" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="Variable_1" class="java.lang.Integer" calculation="Count">
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band height="10" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="10" width="802" height="40" uuid="c0066af4-1a01-42da-b1cc-5740b6264fb0"/>
+				<box>
+					<topPen lineWidth="2.5"/>
+					<bottomPen lineWidth="2.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ડીસકલેમર]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="190">
+			<staticText>
+				<reportElement x="0" y="10" width="801" height="170" uuid="7e7c148b-659d-4fc2-88a6-b3940b003980"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[  જુદા જુદા વિભાગોની સાથે ચર્ચા વિચારણા બાદ આ દસ્તાવેજમાં સમાવિષ્ટ તેઓને સંબંધિત વિવિધ સદારોની માંગણીઓ અંતર્ગત વિગતવાર ચર્ચા બાદ યોજનાઓનો સમાવેશ કરવામાં આવેલ છે.
+    
+   આ પ્રકાશનમાં સમાવિષ્ટ માહિતીની ચોકસાઇ અંગે કાળજી લેવામાં આવેલ છે તેમ છતાં કોઈ વિસંવાદીતતાના કિસ્સામાં ગુજરાત સરકારના નાના વિભાગ દ્વારા જે તે વિભાગના પ્રકાશિત કરવામાં આવેલ અંદાજપત્ર આખરી ગણાશે.આ દસ્તાવેજમાં અંદાજપત્રીય જોગવાઈઓમાં દર્શાવેલ રકમ માટે નાણાં વિભાગનું અંદાજપત્ર પ્રકાશન આખરી ગણાશે.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="56">
+			<line>
+				<reportElement x="280" y="10" width="200" height="1" uuid="3c7eff3a-4c53-4ded-9a6a-3820c10ab074"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="280" y="20" width="200" height="30" uuid="95df9c7c-af75-4382-b420-d1be8640fb26"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[સરકારી મુદ્રણાલય,વડોદરા.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

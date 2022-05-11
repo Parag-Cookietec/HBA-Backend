@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookClimateChangeSchemeIndexSub1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d69263b8-3901-42b1-8305-3f1d9024656d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT main_table."seq_eng",
+	   REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table."seq_eng", '1', '૧'), '2', '૨'), '3', '૩'), '4', '૪'), '5', '૫'), '6', '૬'), '7', '૭'), '8', '૮'), '9', '૯'), '0', '૦') AS "seq_Guj",
+	   main_table."fyEngBE",
+	   main_table."fyGujBE",
+	   main_table."fyEngMBE",
+	   main_table."fyGujMBE",
+	   main_table."fyEngACC",
+	   main_table."fyGujACC",
+	   main_table."DEPARTMENT_NAME",
+	   main_table."DEPARTMENT_NAME_GUJ",
+	   main_table."PROPOSED_AMOUNT",
+	   REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(main_table."PROPOSED_AMOUNT", '1', '૧'), '2', '૨'), '3', '૩'), '4', '૪'), '5', '૫'), '6', '૬'), '7', '૭'), '8', '૮'), '9', '૯'), '0', '૦') AS "PROPOSED_AMOUNT_Guj"
+FROM 
+(
+SELECT 
+	ROW_NUMBER() OVER (ORDER BY xyz."DEPARTMENT_NAME") AS "seq_eng",
+    nextYear.FY AS "fyEngBE",
+	nextYear.FY_GUJ AS "fyGujBE",
+	currYear.FY AS "fyEngMBE",
+	currYear.FY_GUJ AS "fyGujMBE",
+	prevYear.FY AS "fyEngACC",
+	prevYear.FY_GUJ AS "fyGujACC",
+	xyz."DEPARTMENT_NAME",
+	xyz."DEPARTMENT_NAME_GUJ",
+	decimal(xyz."PROPOSED_AMOUNT",15,2) AS "PROPOSED_AMOUNT"
+FROM 
+(
+SELECT 
+xy.DEPARTMENT_ID AS "DEPARTMENT_ID",
+xy.DEPARTMENT_NAME AS "DEPARTMENT_NAME",
+xy.DEPARTMENT_NAME_GUJ AS "DEPARTMENT_NAME_GUJ",
+sum(xy.PROPOSED_AMOUNT) AS "PROPOSED_AMOUNT"
+FROM 
+(
+SELECT  msd.DEPARTMENT_ID,
+		msd.DEPARTMENT_NAME,
+		msd.DEPARTMENT_NAME_GUJ, 
+		round(tpgd.PROPOSED_AMOUNT) AS "PROPOSED_AMOUNT"
+FROM budget.TBUD_PUB_GB_DTL tpgd
+JOIN  BUDGET.TBUD_PUB_HDR tph ON (tph.TBUD_PUB_HDR_ID=tpgd.TBUD_PUB_HDR_ID)
+JOIN MASTER_V1.MS_DEPARTMENT msd ON (tph.DEPARTMENT_ID=msd.DEPARTMENT_ID)
+JOIN MASTER_V1.MS_MAJORHEAD mm ON (tph.MAJORHEAD_ID=mm.MAJORHEAD_ID)
+JOIN MASTER_V1.MS_DEMAND md ON (tph.DEMAND_ID =md.DEMAND_ID)
+JOIN MASTER_V1.MS_BPN mb ON (tph.BPN_ID =mb.BPN_ID )
+WHERE tph.FINANCIAL_YEAR_ID= $P{fyId}
+AND msd.DEPARTMENT_ID=9
+)xy
+GROUP BY xy.DEPARTMENT_ID,
+		 xy.DEPARTMENT_NAME,
+		 xy.DEPARTMENT_NAME_GUJ
+ORDER BY xy.DEPARTMENT_NAME,
+		 xy.DEPARTMENT_NAME_GUJ
+)xyz
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+)main_table]]>
+	</queryString>
+	<field name="seq_eng" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="seq_eng"/>
+	</field>
+	<field name="seq_Guj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="seq_Guj"/>
+	</field>
+	<field name="fyEngBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyEngMBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngMBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujMBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujMBE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyEngACC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEngACC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGujACC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyGujACC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="DEPARTMENT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<field name="DEPARTMENT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<field name="PROPOSED_AMOUNT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="PROPOSED_AMOUNT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_GB_DTL"/>
+	</field>
+	<field name="PROPOSED_AMOUNT_Guj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PROPOSED_AMOUNT_Guj"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="23" splitType="Immediate">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField pattern="####" isBlankWhenNull="true">
+				<reportElement x="5" y="0" width="39" height="23" uuid="08a8f0de-5562-4c5d-9f3d-8fd5c0368253">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="968ac568-591f-4761-b6ed-4e65354ccdfa"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="48" y="0" width="211" height="23" uuid="e6d9c170-5337-46e8-9025-38330a359c7f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c44280c-bf5c-416e-947a-de458c198fe1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ક્લાઈમેટ ચેન્જ વિભાગની ક્લાઈમેટ ચેન્જ યોજના"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="425" y="0" width="242" height="23" uuid="a2db4bb7-494c-4004-8c09-b7d1b3f2ee3f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cb8d2ee5-5e52-4b7e-b5bc-9dcecaa18117"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Climate Change Scheme of "+$F{DEPARTMENT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="####" isBlankWhenNull="true">
+				<reportElement x="756" y="0" width="50" height="23" uuid="a80d5e9d-293f-4296-844c-9dc8d20f6b62">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="afa63647-b726-4fe6-9207-9739b58484dc"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField pattern="#.00" isBlankWhenNull="true">
+				<reportElement x="664" y="0" width="70" height="23" uuid="d43a2d6b-8fcc-428e-b997-50242184342b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="afa63647-b726-4fe6-9207-9739b58484dc"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROPOSED_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="255" y="0" width="70" height="23" uuid="36004997-627d-4a10-b3d5-7b9f2f138544">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cb8d2ee5-5e52-4b7e-b5bc-9dcecaa18117"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROPOSED_AMOUNT_Guj}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="355" y="0" width="44" height="23" uuid="a1758cae-0672-400a-889a-11d416b92654">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cb8d2ee5-5e52-4b7e-b5bc-9dcecaa18117"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

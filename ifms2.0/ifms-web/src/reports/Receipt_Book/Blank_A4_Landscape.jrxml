@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookTitle" pageWidth="842" pageHeight="650" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dd05375-6b37-479e-9aaa-98571ed9cd0a">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+mbpn.BPN_NAME AS "bpnNameEng", 
+mbpn.BPN_NAME_GUJ AS "bpnNameGuj", 
+mbpn.BPN_SHORT_NAME AS "bpnShortName", 
+mfy.FY AS "fyEng",
+mfy.FY_GUJ AS "fyGuj",
+(SELECT tbudfy.IS_MODIFIED_BUDGET AS "modifiedCount"
+FROM 
+ MASTER_V1.MS_FINANCIAL_YEAR mfy LEFT JOIN BUDGET.TBUD_PUB_FY_BUDGET tbudfy ON tbudfy.FINANCIAL_YEAR_ID=mfy.FINANCIAL_YEAR_ID  WHERE 
+ mfy.FINANCIAL_YEAR_ID=$P{fyId}-1),
+CASE 
+WHEN mbpn.BPN_CODE='18' THEN '18 (Part-I)' 
+WHEN mbpn.BPN_CODE='22' THEN '22 (Part-I)' 
+WHEN mbpn.BPN_CODE='24a' THEN '24-I'
+WHEN mbpn.BPN_CODE='24b' THEN '24-II'
+WHEN mbpn.BPN_CODE='24c' THEN '24-III'
+WHEN mbpn.BPN_CODE='24d' THEN '24-IV'
+ELSE mbpn.BPN_CODE 
+END AS "bpnCode"
+FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}]]>
+	</queryString>
+	<field name="bpnNameEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BPN_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnNameGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BPN_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.label" value="bpnNameGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="bpnShortName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BPN_SHORT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="bpnShortName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_BPN"/>
+	</field>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FY"/>
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="fyGuj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FY_GUJ"/>
+		<property name="com.jaspersoft.studio.field.label" value="fyGuj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="modifiedCount" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="modifiedCount"/>
+		<property name="com.jaspersoft.studio.field.label" value="modifiedCount"/>
+	</field>
+	<field name="bpnCode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="bpnCode"/>
+		<property name="com.jaspersoft.studio.field.label" value="bpnCode"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="483" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout"/>
+			<staticText>
+				<reportElement x="501" y="-1" width="160" height="41" uuid="61aef1be-b30d-422b-8021-d3028c021e3d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અંદાજપત્ર પ્રકાશન નં.
+Budget Publication No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="47" width="801" height="1" uuid="042529ef-ae39-4374-b5af-f864e3802f48">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="152" width="802" height="40" uuid="bd63b6e7-505e-43df-9984-a90330f52d4b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ગુજરાત સરકાર
+GOVERNMENT OF GUJARAT]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="200" width="802" height="69" uuid="2cc99266-2b1d-4ef7-958d-695e33fa6fcc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyGuj} + "ના વર્ષ માટેનું અંદાજપત્ર<br>"+"BUDGET ESTIMATES<br>"+"FOR "+$F{fyEng}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="280" width="802" height="120" uuid="e5c7cd8f-9601-4d4b-a4bb-5685ab3dea10"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bpnNameGuj}+"<br>અને<br>"+
+"આકસ્મિકતા નિધિ તથા જાહેર હિસાબ હેઠળ લેવડદેવડ<br>"+$F{bpnNameEng}+" AND<br>"+"TRANSACTIONS UNDER CONTIGENCY FUND AND<br>"+"PUBLIC ACCOUNTS ETC."]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="440" width="802" height="1" uuid="5b33ae04-2c05-46c9-b6c2-78559b555b89"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="453" width="802" height="30" uuid="28aa3db3-c68a-45f3-ae81-bb4ee7a043e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[[ ભારતના સંવિધાનની કલમ ૨૦૨ (૧) અન્વયે વિધાનસભા સમક્ષ રજૂ ]
+[ Presented to the Legislative Assembly Under Article 202 (1) of the Constitution of India ]]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="661" y="-1" width="140" height="41" uuid="e4fe45fa-818b-4284-9e80-826ae813203e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="32" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["} "+$F{bpnCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="43" width="805" height="1" uuid="b9e4b68c-52b9-4f89-8cfe-80fadd551095">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="446" width="805" height="1" uuid="34857188-2f22-48bd-87f0-53677f823455">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="20"/>
+		<band height="20"/>
+		<band height="25"/>
+		<band height="25">
+			<subreport>
+				<reportElement x="0" y="0" width="30" height="25" uuid="b626befb-c8ca-4d56-9acd-b313179f190a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mod">
+					<subreportParameterExpression><![CDATA[$F{modifiedCount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Receipt_Book/subReport_Revnue_1601.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="24">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="24" uuid="49e4bc71-3ae7-42c5-a163-4dc9f624f82e"/>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mod">
+					<subreportParameterExpression><![CDATA[$F{modifiedCount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Receipt_Book/subReport_Capital.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="25">
+			<subreport>
+				<reportElement x="0" y="0" width="25" height="25" uuid="2fb049fc-9968-4098-a0cc-7ad54c08607d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mod">
+					<subreportParameterExpression><![CDATA[$F{modifiedCount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Receipt_Book/subReport_Capital3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="25">
+			<subreport>
+				<reportElement x="0" y="0" width="25" height="25" uuid="5f265978-da95-4d2c-894a-5d82046917b0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mod">
+					<subreportParameterExpression><![CDATA[$F{modifiedCount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Receipt_Book/subreport_Capital2 (2).jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="30">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="30" uuid="ff24d882-df07-4462-b0ce-a2c7be11ae43">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mod">
+					<subreportParameterExpression><![CDATA[$F{modifiedCount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Receipt_Book/subReport_PublicAccount.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="594">
+			<staticText>
+				<reportElement x="1" y="340" width="842" height="20" uuid="c9628e16-e212-42cb-b3eb-c6c019aa7ca4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PART-A]]></text>
+			</staticText>
+		</band>
+		<band height="22"/>
+		<band height="23"/>
+		<band height="30"/>
+		<band height="24"/>
+		<band height="22"/>
+		<band height="23"/>
+		<band height="594"/>
+		<band height="30"/>
+	</detail>
+</jasperReport>

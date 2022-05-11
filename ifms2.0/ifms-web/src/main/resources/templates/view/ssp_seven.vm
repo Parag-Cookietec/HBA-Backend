@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<body style="font-size:12px;">
+<table style="margin: 15px; width: 100%;">
+        <tr>
+            <td align="center">
+                <h2><b>Senior Scale - PVU</b></h2>
+                <h3 style="line-height: .25px;"><b><u>Employee No.: $!data.employeeNo</u></b></h3>
+            </td>
+        </tr>
+   <tr>
+    <td style="margin-top:25px; text-align: justify;">
+        <table width="100%">
+            <tr>
+                <td>In accordance with the provision of Finance Department Resolution No. <span
+                        class="resonumber">_______________ dated ________ </span> and the following 
+                        amendments made time to time,
+                         <span class="empname">$!data.employeeName</span>
+                         <span class="empdesi">$!data.designation</span>,
+                    	<span class='empofficename'>$!data.officeName</span> 
+                    	has pay level $!data.currentPayLevel. $!data.genderHeShePrefix is given 
+                    	benefit of the laid down 
+                    	<span class="eventname">$!data.eventType </span> of pay level $!data.payLevel 
+                    	as on 
+                    	<span span="evntdate">$!data.eventEffectiveDate.</span> $!data.genderHisHerPrefix 
+                    	pay is fixed at
+                        Rs.$!data.cellIdValue w.e.f $!data.eventEffectiveDate in level $!data.payLevel, 
+                        Cell $!data.cellId   
+                      	<!-- Rs.$!data.basicPay along with personal pay Rs.$!data.personalPay 
+                      	& $!data.genderHisHerPrefix -->  
+                    	& $!data.genderHisHerPrefix date of next increment will be $!data.dni.
+                </td>
+            </tr>
+        
+        
+            <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+            
+            <tr>
+                <td>Print Date: <span class="print-date">$!data.printDate</span><br></br>
+                    #if($!data.reprintCount > 0)
+                        Reprint Date: <span class="repprint-date">$!data.rePrintDate </span>
+                        <br></br>
+                        Reprint Count: <span class="Reprintcount">$!data.reprintCount</span>.
+                        <br></br>
+                        Reprint Remarks: <span class="repprint-remarks">$!data.rePrintRemark </span>
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="height: 20px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Place : Gandhinagar</td>
+            </tr>
+            
+            
+            		<tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <div style="height: 15px;"></div>
+                        </td>
+                    </tr>
+            
+            
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="width:30%;text-align:center;"></td>
+                            <td style="width:30%;text-align:center;">
+                              <p style="margin: 0;">$!data.authorizedBy</p>
+                                          <p style="margin: 0;"> Accounts Officer</p>
+                                          <p style="margin: 0;">Pay Verification Unit</p>
+                                          <p style="margin: 0;">Finance Department</p>
+                            </td>
+                            <td style="width:30%;text-align:center;">
+                                <p style="margin: 0;">Issued by,</p>
+                                          <p style="margin: 0;">Accounts Officer</p>
+                                          <p style="margin: 0;">Pay Verification Unit</p>
+                                          <p style="margin: 0;">Finance Department</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="height: 15px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Remarks:$!data.authorizerRemark
+                </td>
+            </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "status": 200,
+  "message": "record fetch successfully.",
+  "result": {
+    "createdBy": 1,
+    "createdDate": "2005-05-03T18:30:00.000+0000",
+    "createdByPost": 1,
+    "updatedByPost": 1,
+    "activeStatus": 1,
+    "updatedBy": 0,
+    "updatedDate": "2015-09-06T18:30:00.000+0000",
+    "postId": 1,
+    "postName": "B1 Section - Budget",
+    "postNameGuj": null,
+    "postDescription": "B1 Section - Budget",
+    "postDescriptionGuj": null,
+    "edpLuLookUpInfoEntity": 1,
+    "parentPostId": 0,
+    "postCode": "01",
+    "postCodeGuj": null,
+    "postCodeName": "01 : B1 Section - Budget",
+    "oauthTokenPostDTO": null,
+    "loginPost": false,
+    "primaryPost": false
+  }
+}

@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookIndex" pageWidth="780" pageHeight="750" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="740" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount1}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="modifiedCount2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{modifiedCount2}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+    mfy.FY AS "Next_Eng",
+    mfy.FY_GUJ AS "Next_GUJ",
+    (
+        SELECT cur_fin.FY
+        FROM MASTER_V1.MS_FINANCIAL_YEAR cur_fin
+        WHERE cur_fin.FINANCIAL_YEAR_ID = $P{fyId}-1
+    ) AS "Cur_Eng",
+    (
+        SELECT cur_fin.FY_GUJ
+        FROM MASTER_V1.MS_FINANCIAL_YEAR cur_fin
+        WHERE cur_fin.FINANCIAL_YEAR_ID = $P{fyId}-1
+    ) AS "Cur_GUJ",
+    (
+        SELECT pre_fin.FY
+        FROM MASTER_V1.MS_FINANCIAL_YEAR pre_fin
+        WHERE pre_fin.FINANCIAL_YEAR_ID = $P{fyId}-2
+    ) AS "previous_Eng",
+    (
+        SELECT pre_fin.FY_GUJ
+        FROM MASTER_V1.MS_FINANCIAL_YEAR pre_fin
+        WHERE pre_fin.FINANCIAL_YEAR_ID = $P{fyId}-2
+    ) AS "previous_GUJ"
+FROM
+    MASTER_V1.MS_FINANCIAL_YEAR mfy
+WHERE
+    mfy.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="Next_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Next_Eng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="Next_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Next_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<field name="Cur_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cur_Eng"/>
+	</field>
+	<field name="Cur_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cur_GUJ"/>
+	</field>
+	<field name="previous_Eng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="previous_Eng"/>
+	</field>
+	<field name="previous_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="previous_GUJ"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="710" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="29" width="365" height="25" uuid="6db817c0-75c8-44c2-a4a7-d9c10a7d9974">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[વિષયસૂચિ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="29" width="315" height="25" uuid="c0066af4-1a01-42da-b1cc-5740b6264fb0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTENTS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="26" width="742" height="1" uuid="5c10ad4a-106d-40d9-9370-9ecd37f375c7"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="705" y="26" width="35" height="29" uuid="991775a3-65b1-4538-9591-138d4a083b89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="57" width="742" height="1" uuid="7117e0ee-ce4d-4796-9f2e-ad5d72f37051"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="92" width="50" height="25" uuid="15388dac-f826-45c1-986c-f77ac77029d5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="92" width="315" height="25" uuid="db6249f7-26a1-423f-aa7d-6db565c16717">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" નાણાકીય સ્થિતિનો સારાંશ "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="119" width="50" height="25" uuid="7b0e67d3-ed88-4b4f-ae09-2f763be4d05c">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૨]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="146" width="50" height="25" uuid="a481bcd0-5396-47c8-9b0d-8fe7d3750865">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૩]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="146" width="315" height="25" uuid="f66b2270-a9af-41c4-9eed-bd190ef6e1f4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cur_GUJ}+" ના સુધારેલા અંદાજ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="92" width="315" height="25" uuid="ef503f7f-3d6f-4bec-ac8b-26b28ef9470c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Summary of Financial Position "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="146" width="315" height="25" uuid="12a1267e-b565-4db6-8b01-eeb153c788b3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Revised Estimates " +$F{Cur_Eng}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="173" width="50" height="25" uuid="b6bdd7ac-1f37-4f02-a103-a34056c5d19b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૪]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="173" width="315" height="25" uuid="ee7ae03a-2aed-41d5-8b68-ab9fe53de59d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{modifiedCount1} == null ? (
+"Budget Estimates" ) : (
+$P{modifiedCount1} == 1 ? (
+"Modified Budget Estimates") : (
+"Budget Estimates" ) ))+ " " +$F{Next_Eng}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="173" width="315" height="25" uuid="44d50726-7ed0-4ba2-b786-e6d388b8c144">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Next_GUJ}+" " +(
+	$P{modifiedCount1} == null ? (
+"અંદાજ" ) : (
+$P{modifiedCount1} == 1 ? (
+"ફેરફાર કરેલ અંદાજ") : (
+"અંદાજ" ) )
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="119" width="315" height="25" uuid="8c3252b0-ae60-4cc5-b502-d628958dd234">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Accounts  " +$F{previous_Eng}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="119" width="315" height="25" uuid="6d9270aa-0a59-4291-a8a8-8e52ec0c0ecd">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{previous_GUJ}+" ના હિસાબ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="201" width="50" height="30" uuid="24464afd-bec0-4e03-a560-a4a8817cdefb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૫]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="201" width="315" height="30" uuid="63439f12-9ca0-4a01-84d0-89d5d5f15b60"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["રાજ્યની "+$F{Next_GUJ}+" નુ વાર્ષિક અંદાજપત્ર દર્શાવતું પત્રક"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="233" width="50" height="50" uuid="187a79d4-f9e4-4f64-9cc1-6f9f79481894">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૬]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="284" width="50" height="35" uuid="acdcc4d6-6512-44e2-ac48-6e37d3b548f8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૭]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="284" width="315" height="35" uuid="e834fc80-5d1f-42ca-af6c-1681a5814570">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૧, ગુજરાતનો એકત્રિત નિધિ-મહેસૂલ હિસાબ-પ્રાપ્તિ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="283" width="315" height="35" uuid="9e3cf196-98e9-47d6-a604-7b5d42fe57d4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-I - Consolidated Fund of Gujarat-Revenue Account-Receipts"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="322" width="50" height="35" uuid="efea6bcd-6267-4f10-a064-70f38c88f3e3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૮]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="322" width="315" height="35" uuid="649a4216-54e2-4214-a7e6-92681195c421">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-II - Consolidated Fund of Gujarat-Revenue Account-Disbursements"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="322" width="315" height="35" uuid="adda7749-a9cc-4d04-995c-9d68916fdb4c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૨, ગુજરાતનો એકત્રિત નિધિ-મહેસૂલ હિસાબ-ચુકવણી"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="232" width="315" height="51" uuid="e68ae20c-1ebf-4fa2-9122-58b138133df2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statements showing Accounts of "+$F{previous_Eng}+", "+($P{modifiedCount2} == null ? (
+"Budget Estimates" ) : (
+$P{modifiedCount2} == 1 ? (
+"Modified Budget Estimates") : (
+"Budget Estimates" ) ))+" "+$F{Cur_Eng}+", Revised Estimates "+$F{Cur_Eng}+" and  "+
+
+($P{modifiedCount1} == null ? (
+"Budget Estimates" ) : (
+$P{modifiedCount1} == 1 ? (
+"Modified Budget Estimates") : (
+"Budget Estimates" ) ))
+
++" "+ $F{Next_Eng}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="233" width="315" height="50" uuid="66d434da-16f6-4f9e-8390-faaeae1fe659">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{previous_GUJ}+" ના હિસાબ , "+$F{Cur_GUJ}+" "+
+
+(
+	$P{modifiedCount2} == null ? (
+"અંદાજ" ) : (
+$P{modifiedCount2} == 1 ? (
+"ફેરફાર કરેલ અંદાજ") : (
+"અંદાજ" ) )
+)
+
++" , "+$F{Cur_GUJ}+" ના સુધારેલા અંદાજ તથા "+$F{Next_GUJ}+" ના "+
+
+(
+	$P{modifiedCount1} == null ? (
+"અંદાજ" ) : (
+$P{modifiedCount1} == 1 ? (
+"ફેરફાર કરેલ અંદાજ") : (
+"અંદાજ" ) )
+)
++" દર્શાવતા પત્રકો."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="360" width="50" height="30" uuid="8d5dcbf8-b468-4c60-8262-64aebdf06e9f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૬]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="360" width="315" height="30" uuid="0ea8d2f0-16f0-429e-af20-af49898a6ffb"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" પત્રક-૩, ગુજરાતનો એકત્રિત નિધિ-મૂડી હિસાબ-પ્રાપ્તિ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="392" width="50" height="30" uuid="0aa95213-ba54-4467-b965-463302dc3dce"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૦]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="424" width="50" height="30" uuid="fbd6d618-49c6-4ed1-9394-ee8710353eb5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૧]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="424" width="315" height="30" uuid="f00aae73-400d-4ca7-a327-b312efc63e61"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૫, ગુજરાતના એકત્રિત નિધિ માંથી કરેલ બિન-મતપાત્ર ચુકવણી"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="359" width="315" height="30" uuid="d934cbf5-c361-444b-a505-866d705ce763">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-III - Consolidated Fund of Gujarat-Capital Account-Receipts"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="424" width="315" height="30" uuid="173cfb4b-bfc2-4d78-b9a1-0a293561cc0b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-V - Disbursements “Charged” on the Consolidated Fund of Gujarat"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="457" width="50" height="25" uuid="cf5ca2ac-d39e-4515-946e-3e09be79bbea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૨]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="457" width="315" height="25" uuid="0938c3e4-d5be-406f-939e-62aa1ded4ddb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-VI - Contingency Fund of Gujarat"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="457" width="315" height="25" uuid="337a7e78-15a2-43c9-981f-30107229b385">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૬, ગુજરાતનો આકસ્મિકતા નિધિ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="392" width="315" height="30" uuid="5c511e43-1dd4-4ea5-8172-3c5d6529d149">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-IV - Consolidated Fund of Gujarat-Capital Account-Disbursements "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="392" width="315" height="30" uuid="f8be7eca-e34f-4895-a6d2-dcda9646cb9c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૪, ગુજરાતનો એકત્રિત નિધિ-મૂડી હિસાબ-ચુકવણી"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="485" width="50" height="25" uuid="b258ca22-e6c7-4065-b43c-9fc9e2c045d7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૩]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="485" width="315" height="25" uuid="2530263e-6c42-4ea9-89c2-bcee03a52998">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૭, ગુજરાતનો જાહેર હિસાબ- પ્રાપ્તિ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="513" width="50" height="25" uuid="064500ba-fbb0-492b-a0fe-23760a16565b">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૪]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="541" width="50" height="25" uuid="01a9e12f-8b8c-45de-a1e0-f0f087d4d5fb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૫]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="541" width="315" height="25" uuid="3eee00c2-df3f-406b-960e-a4fae5cb7803">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["રાજ્યપાલશ્રીની ભલામણ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="485" width="315" height="25" uuid="11c6ad82-2f20-488f-b4c5-ae1d947f8a85">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-VII - Public Account of Gujarat-Receipts "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="541" width="315" height="25" uuid="55559c10-4ddc-4bc8-8e29-5de036ee2cf6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Governor’s Recommendation"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="568" width="50" height="34" uuid="2eb7faed-c074-4d22-8236-67ae9152640e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૬]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="568" width="315" height="35" uuid="06dac8d0-ad34-4ffc-97d2-b6af6449de72">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A note on the procedure of presenting gross demands to the vote of the Legislative Assembly"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="568" width="315" height="35" uuid="922263fb-cf08-481c-8d4c-1818185be808">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["વિધાનસભા ની મંજૂરી માટે એકંદર માગણીઓ રજૂ કરવા અંગેની કાર્યપદ્ધતિ વિષે નોંધ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="632" width="315" height="28" uuid="110caff0-5e20-440c-b727-38fbd7e653bf">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Recommendations of Estimate Committee and their implementation"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="513" width="315" height="25" uuid="352e90f0-04fc-46fc-b30b-ff46ae220a9f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["પત્રક-૮, ગુજરાતનો જાહેર હિસાબ- ચુકવણી"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="605" width="50" height="25" uuid="1f4b96c4-92f8-4026-8cc5-2fcf64cd1747">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૭]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="605" width="315" height="25" uuid="b1cf9247-c13d-491c-8fbd-b8681c0ae5dc"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["માગણીઓ રજૂ કરવા અંગે નોંધ"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="632" width="50" height="28" uuid="eb711165-828c-4d96-8e58-7b27edfa425d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૮]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="661" width="50" height="35" uuid="92798bf9-efe2-4fa8-934d-5d04bd60c87b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[૧૯]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="661" width="315" height="35" uuid="122fc92f-bdd3-451b-9434-34d532b80188">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Next_GUJ}+ "  ના વર્ષ માટેની માગણીઓ અને વિનિયોગોની અનુસૂચિ."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="605" width="315" height="25" uuid="8e8cbbfa-b6e1-4c65-b9da-c21a0d93f846">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A note on the presentation of demands "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="660" width="315" height="35" uuid="83233ae6-06a1-4065-b757-30ab6a3457a0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Schedule of Demands and Appropriations for the year "+$F{Next_Eng}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="513" width="315" height="25" uuid="3d2b7d07-79e6-4147-8e4c-81ae98586984">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement-VIII - Public Account of Gujarat-Disbursements"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="632" width="315" height="28" uuid="24c6b29c-60ac-4f6a-adbc-bd171d6b9a76"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="styled">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["અંદાજ સમિતિની ભલામણો અને તેનો અમલ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="201" width="315" height="30" uuid="86d9a451-dae3-4648-a11a-dc1da1e1c798">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Statement showing the State’s Annual Budget for the Year "+ $F{Next_Eng}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="table" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eea6ab5b-48a4-4eb3-85ec-04a782c43594">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2 Adapter"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="17253bb2-a8e2-4201-b01e-87517e52037f">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2 Adapter"/>
+		<parameter name="fyId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="bpnId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT  
+                main_table.SUBMAJORHEAD_CODE AS "SUB_MAJOR_HEAD_CODE",
+                main_table.SUBMAJORHEAD_NAME AS "SUB_MAJOR_HEAD_NAME_ENG",
+                main_table.SUBMAJORH_NAME_GUJ AS "SUB_MAJOR_HEAD_NAME_GUJ",
+                main_table.MINORHEAD_CODE AS "MINOR_HEAD_CODE",
+                main_table.MINORHEAD_NAME AS "MINOR_HEAD_NAME_ENG",
+                main_table.MINORHEAD_NAME_GUJ AS "MINOR_HEAD_NAME_GUJ",
+                main_table.ACC_BUD_EST AS "ACCOUNTS",
+                main_table.MOD_BUD_EST AS "MODIFIED_BUDGET_ESTIMATE",
+                 main_table.RE_BUD_EST AS "REVISED_ESTIMATE",
+                main_table.BUD_EST AS "BUDGET_ESTIMATE",
+                nextYear.FY AS BUD_EST_YEAR_ENG,
+                nextYear.FY_GUJ AS BUD_EST_YEAR_GUJ,
+                currYear.FY AS MOD_REV_YEAR_ENG,
+                currYear.FY_GUJ AS MOD_REV_YEAR_GUJ,
+                prevYear.FY AS ACC_YEAR_ENG,
+                prevYear.FY_GUJ AS ACC_YEAR_GUJ,
+                main_table.MAJORHEAD_NAME,
+                main_table.MAJORHEAD_NAME_GUJ,
+                main_table.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                COALESCE(NFY.SUBMAJORHEAD_CODE, CFY1.SUBMAJORHEAD_CODE, CFY2.SUBMAJORHEAD_CODE, PFY.SUBMAJORHEAD_CODE) AS SUBMAJORHEAD_CODE,
+                COALESCE(NFY.SUBMAJORHEAD_NAME, CFY1.SUBMAJORHEAD_NAME, CFY2.SUBMAJORHEAD_NAME, PFY.SUBMAJORHEAD_NAME) AS SUBMAJORHEAD_NAME,
+                COALESCE(NFY.SUBMAJORH_NAME_GUJ, CFY1.SUBMAJORH_NAME_GUJ, CFY2.SUBMAJORH_NAME_GUJ, PFY.SUBMAJORH_NAME_GUJ) AS SUBMAJORH_NAME_GUJ,
+                COALESCE(NFY.MINORHEAD_CODE, CFY1.MINORHEAD_CODE, CFY2.MINORHEAD_CODE, PFY.MINORHEAD_CODE) AS MINORHEAD_CODE,
+                COALESCE(NFY.MINORHEAD_NAME, CFY1.MINORHEAD_NAME, CFY2.MINORHEAD_NAME, PFY.MINORHEAD_NAME) AS MINORHEAD_NAME,
+                COALESCE(NFY.MINORHEAD_NAME_GUJ, CFY1.MINORHEAD_NAME_GUJ, CFY2.MINORHEAD_NAME_GUJ, PFY.MINORHEAD_NAME_GUJ) AS MINORHEAD_NAME_GUJ,
+                NFY.BUD_EST,
+                CFY1.MOD_BUD_EST,
+                CFY2.RE_BUD_EST,
+                PFY.ACC_BUD_EST,
+                COALESCE(NFY.MAJORHEAD_NAME, CFY1.MAJORHEAD_NAME, CFY2.MAJORHEAD_NAME, PFY.MAJORHEAD_NAME) AS MAJORHEAD_NAME,
+                COALESCE(NFY.MAJORHEAD_NAME_GUJ, CFY1.MAJORHEAD_NAME_GUJ, CFY2.MAJORHEAD_NAME_GUJ, PFY.MAJORHEAD_NAME_GUJ) AS MAJORHEAD_NAME_GUJ,
+                COALESCE(NFY.MAJORHEAD_CODE, CFY1.MAJORHEAD_CODE, CFY2.MAJORHEAD_CODE, PFY.MAJORHEAD_CODE) AS MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.BE),2) AS BUD_EST,
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE,
+                tprd.RECEIPT_AMOUNT AS BE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                tph.MAJORHEAD_ID, 
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2 
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID 
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND mm2.MAJORHEAD_TYPE_ID =3
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+              abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+
+                ) NFY
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.MBE),2) AS MOD_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS MBE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+                
+FROM 
+                BUDGET.TBUD_PUB_RE_HDR tph, 
+                BUDGET.TBUD_PUB_RE_DTL tprd,
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2 
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND ms.MAJORHEAD_ID =mm2.majorhead_id
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =472
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) CFY1 ON CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                  
+FULL OUTER JOIN 
+(
+SELECT
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.RE),2) AS RE_BUD_EST,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                mm.MINORHEAD_CODE, 
+                tprd.RECEIPT_AMOUNT AS RE,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.MAJORHEAD_ID, 
+                 ms.SUBMAJORHEAD_ID ,
+                mm.MINORHEAD_ID ,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+                
+FROM 
+ MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                MASTER_V1.MS_MAJORHEAD mm2, 
+                BUDGET.TBUD_PUB_RE_HDR tph LEFT JOIN  
+                BUDGET.TBUD_PUB_RE_DTL tprd ON tph.TBUD_PUB_RE_HDR_ID =tprd.TBUD_PUB_RE_HDR_ID 
+               
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND mm.MINORHEAD_ID =tprd.MINORHEAD_ID 
+                AND ms.SUBMAJORHEAD_ID =tprd.SUBMAJORHEAD_ID 
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1 
+                AND tph.BPN_ID= $P{bpnId} 
+                AND tph.APP_TYPE_ID =473
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_ID, 
+                 abc.SUBMAJORHEAD_ID,
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) CFY2 ON CFY2.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND CFY2.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY2.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                  
+FULL OUTER JOIN 
+(
+ SELECT 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                ROUND(sum(abc.ACC),2) AS ACC_BUD_EST,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+FROM
+(
+SELECT 
+                  mm2.MAJORHEAD_CODE,
+                ms.SUBMAJORHEAD_CODE, 
+                  mm.MINORHEAD_CODE, 
+                  tph.RECEIPT_AMOUNT AS ACC,
+                ms.SUBMAJORHEAD_NAME,
+                ms.SUBMAJORH_NAME_GUJ,
+                mm.MINORHEAD_NAME, 
+                mm.MINORHEAD_NAME_GUJ, 
+                tph.DEMAND_ID, 
+                tph.MAJORHEAD_ID, 
+                tph.SUBMAJORHEAD_ID, 
+                tph.MINORHEAD_ID,
+                mm2.MAJORHEAD_NAME,
+                mm2.MAJORHEAD_NAME_GUJ
+              
+FROM 
+                BUDGET.TBUD_PUB_RE_AC tph, 
+                MASTER_V1.MS_SUBMAJORHEAD ms, 
+                MASTER_V1.MS_MINORHEAD mm, 
+                MASTER_V1.MS_DEMAND md,
+                MASTER_V1.MS_BPN mb,
+                master_v1.MS_MAJORHEAD mm2
+WHERE 
+                md.BPN_ID = mb.BPN_ID 
+                AND md.DEMAND_ID = mm.DEMAND_ID 
+                AND tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID 
+                AND tph.MINORHEAD_ID = mm.MINORHEAD_ID
+                AND tph.MAJORHEAD_ID  = mm2.MAJORHEAD_ID
+                AND tph.APP_TYPE_ID IN (472,473)
+                AND tph.IS_REVENUE_CAPITAL IN (5,6)
+                AND tph.FINANCIAL_YEAR_ID = $P{fyId}-2 
+                AND tph.BPN_ID= $P{bpnId} 
+                ORDER BY mm2.MAJORHEAD_CODE,ms.SUBMAJORHEAD_CODE, mm.MINORHEAD_CODE) abc
+GROUP BY 
+                abc.SUBMAJORHEAD_CODE, 
+                abc.SUBMAJORHEAD_NAME,
+                abc.SUBMAJORH_NAME_GUJ,
+                abc.MINORHEAD_CODE, 
+                abc.MINORHEAD_NAME, 
+                abc.MINORHEAD_NAME_GUJ,
+                abc.DEMAND_ID, 
+                abc.MAJORHEAD_ID, 
+                abc.SUBMAJORHEAD_ID, 
+                abc.MINORHEAD_ID,
+                abc.MAJORHEAD_NAME,
+                abc.MAJORHEAD_NAME_GUJ,
+                abc.MAJORHEAD_CODE
+) PFY ON  PFY.MAJORHEAD_ID=NFY.MAJORHEAD_ID AND PFY.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND PFY.MINORHEAD_ID=NFY.MINORHEAD_ID
+                                
+ORDER BY SUBMAJORHEAD_CODE, MINORHEAD_CODE
+) main_table
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}) nextYear ON nextYear.FINANCIAL_YEAR_ID=$P{fyId}
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-1) currYear ON currYear.FINANCIAL_YEAR_ID=$P{fyId}-1
+JOIN (SELECT mfy.FY, mfy.FY_GUJ, mfy.FINANCIAL_YEAR_ID FROM MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mfy.FINANCIAL_YEAR_ID = $P{fyId}-2) prevYear ON prevYear.FINANCIAL_YEAR_ID=$P{fyId}-2
+ORDER BY main_table.majorhead_code]]>
+		</queryString>
+		<field name="SUB_MAJOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_CODE"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="SUB_MAJOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SUB_MAJOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="MINOR_HEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_CODE"/>
+		</field>
+		<field name="MINOR_HEAD_NAME_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_NAME_ENG"/>
+		</field>
+		<field name="MINOR_HEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MINOR_HEAD_NAME_GUJ"/>
+		</field>
+		<field name="ACCOUNTS" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="ACCOUNTS"/>
+		</field>
+		<field name="MODIFIED_BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="MODIFIED_BUDGET_ESTIMATE"/>
+		</field>
+		<field name="REVISED_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="REVISED_ESTIMATE"/>
+		</field>
+		<field name="BUDGET_ESTIMATE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="BUDGET_ESTIMATE"/>
+		</field>
+		<field name="BUD_EST_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="BUD_EST_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BUD_EST_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MOD_REV_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MOD_REV_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_ENG" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_ENG"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="ACC_YEAR_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ACC_YEAR_GUJ"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+		</field>
+		<field name="MAJORHEAD_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME"/>
+		</field>
+		<field name="MAJORHEAD_NAME_GUJ" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_NAME_GUJ"/>
+		</field>
+		<field name="MAJORHEAD_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MAJORHEAD_CODE"/>
+		</field>
+	</subDataset>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="233" splitType="Stretch">
+			<componentElement>
+				<reportElement x="371" y="33" width="200" height="147" uuid="a2b939fb-9ca8-4f08-a32f-a0457646deb2">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="23b5b578-34a3-4555-bb52-65d9dd8b2999">
+						<datasetParameter name="bpnId">
+							<datasetParameterExpression><![CDATA[]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fyId">
+							<datasetParameterExpression><![CDATA[]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="40" uuid="0a405182-4843-4fb3-a6b8-4e016ebe49bc">
+						<jr:tableHeader style="Table_TH" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="30" uuid="f480683d-6b6b-4740-9178-95dee18050e9"/>
+								<textFieldExpression><![CDATA[$F{MINOR_HEAD_NAME_ENG}]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

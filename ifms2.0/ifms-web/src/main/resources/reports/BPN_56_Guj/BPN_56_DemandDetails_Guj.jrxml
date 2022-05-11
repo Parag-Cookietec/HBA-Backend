@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BPN_56_DemandDetails_Guj" pageWidth="570" pageHeight="595" orientation="Landscape" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4c03abd2-bba7-42bb-b616-77327325d694">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Style1" vImageAlign="Top"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="deptId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT tmh.DEPARTMENT_ID AS DEPTID,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(tmh.DEPARTMENT_ID,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS deptIdGuj,
+md.DEPARTMENT_NAME_GUJ,tmdd.DEMAND_ID,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(tmdd.DEMAND_ID,'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS DEMAND_ID_Guj,
+md2.DEMAND_NAME_GUJ ,
+ROUND(tmdd.PROPOSED_AMOUNT,2) AS Provision,
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(RIGHT ('0'+CAST(CAST(tmdd.PROPOSED_AMOUNT AS decimal(15,2)) AS varchar(15)),13),'1','૧'), '2', '૨'),'3','૩'),
+'4','૪'),'5','૫'),'6','૬'),'7','૭'),'8','૮'),'9','૯'),'0','૦') AS Provision_Guj
+FROM
+BUDGET.TOCB_MOCB_HDR tmh
+INNER JOIN BUDGET.TOCB_MOCB_DM_DTL tmdd ON tmh.TOCB_MOCB_HDR_ID = tmdd.TOCB_MOCB_HDR_ID
+INNER JOIN BUDGET.TOCB_MOCB_DTL tmd ON tmh.TOCB_MOCB_HDR_ID = tmd.TOCB_MOCB_HDR_ID
+INNER JOIN MASTER_V1.MS_DEPARTMENT md ON md.DEPARTMENT_ID = tmh.DEPARTMENT_ID
+INNER JOIN MASTER_V1.MS_DEMAND md2 ON md2.DEMAND_ID = tmdd.DEMAND_ID
+WHERE
+tmh.FINANCIAL_YEAR_ID = $P{fyId} AND
+tmh.DEPARTMENT_ID = $P{deptId} AND tmh.ACTIVE_STATUS = 1
+AND tmdd.DEMAND_ID NOT IN(SELECT DEMAND_ID FROM MASTER_V1.MS_DEMAND WHERE BPN_ID=2)
+GROUP BY tmh.DEPARTMENT_ID,md.DEPARTMENT_NAME_GUJ,tmdd.DEMAND_ID,md2.DEMAND_NAME_GUJ ,tmdd.PROPOSED_AMOUNT
+ORDER BY tmdd.DEMAND_ID]]>
+	</queryString>
+	<field name="DEPTID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEPTID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_MOCB_HDR"/>
+	</field>
+	<field name="DEPTIDGUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPTIDGUJ"/>
+	</field>
+	<field name="DEPARTMENT_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTMENT_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEPARTMENT"/>
+	</field>
+	<field name="DEMAND_ID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_MOCB_DM_DTL"/>
+	</field>
+	<field name="DEMAND_ID_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_ID_GUJ"/>
+	</field>
+	<field name="DEMAND_NAME_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEMAND_NAME_GUJ"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_DEMAND"/>
+	</field>
+	<field name="PROVISION" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PROVISION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TOCB_MOCB_DM_DTL"/>
+	</field>
+	<field name="PROVISION_GUJ" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PROVISION_GUJ"/>
+	</field>
+	<variable name="Total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{PROVISION}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="32">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="120" height="32" uuid="50ecb1d7-fc86-4f59-a752-ef346fdfb7ed"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DEMAND_ID_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="280" height="32" uuid="70484814-ad29-44fe-b00e-e998e0109fa4"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DEMAND_NAME_GUJ}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,#0.00#;(#,#00.00#-)">
+				<reportElement x="400" y="0" width="170" height="32" uuid="90f8ca49-3469-4bdc-8627-9ae74d2fa268"/>
+				<box>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[TRIM($F{PROVISION_GUJ})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

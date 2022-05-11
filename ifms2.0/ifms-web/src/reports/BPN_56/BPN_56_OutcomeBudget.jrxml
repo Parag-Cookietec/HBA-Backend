@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BPN_56_OutcomeBudget" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83f6f97e-0bd2-4c5e-a974-3eac3f43afeb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="fyId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{fyId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bpnId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{bpnId}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+mfy.FY AS "fyEng"
+FROM MASTER_V1.MS_BPN mbpn, MASTER_V1.MS_FINANCIAL_YEAR mfy WHERE mbpn.BPN_ID =$P{bpnId} AND mfy.FINANCIAL_YEAR_ID =$P{fyId}]]>
+	</queryString>
+	<field name="fyEng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fyEng"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_FINANCIAL_YEAR"/>
+	</field>
+	<variable name="Variable_1" class="java.lang.Integer" calculation="Count">
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="51" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="10" width="440" height="40" uuid="c0066af4-1a01-42da-b1cc-5740b6264fb0"/>
+				<box>
+					<topPen lineWidth="2.5"/>
+					<bottomPen lineWidth="2.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OUTCOME BUDGET ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="10" width="360" height="40" uuid="ffb97b21-21ba-4958-8338-b45c324a0f0f"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0">
+					<topPen lineWidth="2.5"/>
+					<bottomPen lineWidth="2.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fyEng}]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="1" width="802" height="1" forecolor="#FFFFFF" uuid="aa918ae8-c7bd-4472-8bc2-03201ceadd4e"/>
+			</break>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<detail>
+		<band height="480">
+			<textField>
+				<reportElement x="0" y="12" width="802" height="88" uuid="178f1c12-d7e6-4947-b470-c1c14663e017"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["The Outcome Budget "+$F{fyEng}+ "  is thefourth of its kind since the Government of Gujarat initiated an Outcome Budget in the year 2017-18.The Outcome Budget also aims at changing the perspective of the Departments by shifting the focus from ‘outlays’ to measurable ‘outcomes’ and can be viewed as a tangible expression of a Government’s priorities,performances, decisions and intentions. The budget publication no. 56 is attributed to Outcome Budget. The Outcome Budget establishes linkage between budgetary provision and socially viable development outcome across schemes and programmes. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="266" width="802" height="36" uuid="3b8b9c9d-6f61-4b9a-8ae6-5f47e275eb17"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Planning Division, General Administration Department of the State has carried out extensive consultations with Departments to rationalize targets and priorities for Outcome Budget " +$F{fyEng}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="103" width="802" height="160" uuid="19d4b8ff-ef47-4fe5-8d6e-bc27c71d799c"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[In the context of UN 2030 Agenda of Sustainable Development Goals (SDGs), the State Government has prepared “Gujarat Sustainable Vision 2030”which comprises of State Indicator Framework (SIF). The schemes and programmes of Outcome Budget have been linked with State Indicator Framework. The State Dashboard is prepared to monitor the progress and schemes of Outcome Budget. 
+  
+  Generally, schemes having large outlays, schemes related to physical output such as construction and procurement, schemes intended to improve developmental indicators and schemes designed to extend subsidies or benefits to individuals, have been included. Thereafter indicators have been rationalized by the respective Department for each of these schemes and physical targets have been indicated for the next 3 years. These targets are projections and are subject to modifications based on actual requirements and budgetary provisions of the relevant year.A special attempt has been made to indicate Macro Outcomes for each Department. 
+ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="320" width="802" height="160" uuid="7e9e812b-27a3-459d-9d5b-59461fce349e"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Another exercise that has been taken in tandem with the Outcome Budget is the revision of the Annual Development Programme to include the developmental objectives and strategies for each Department and the sector that they are dealing with. The schematic details such as the components and activities undertaken under the scheme, intended beneficiaries, the scale of assistance, if applicable, implementing agency, the funding pattern and the intended outcomes have also been articulated for these selected schemes and included in Part-II of the Budget Publication no. 35: Development Programme.It is expected that Outcome Budget would help the policy makers and decision makers to arrive at a better understanding of the efficiency and effectiveness of Government spending and to facilitate the utilization of Government funds in the interest of the public so that citizens may be benefitted to the maximum and unnecessary and less useful expenditure can be avoided. 
+
+The Department would welcome suggestions and feedback for improvement of Outcome Budget. ]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="150">
+			<staticText>
+				<reportElement x="490" y="30" width="280" height="75" uuid="95df9c7c-af75-4382-b420-d1be8640fb26"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Planning Division 
+General Administration Department 
+Government of Gujarat ]]></text>
+			</staticText>
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="110" width="802" height="40" uuid="f2936e01-b11a-473d-954c-7ebb63d263ea">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/BPN_56/BPN_56_Index.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

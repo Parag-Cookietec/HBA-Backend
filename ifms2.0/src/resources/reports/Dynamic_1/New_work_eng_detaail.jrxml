@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="New_work_eng_detaail" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81079dbb-c720-46a4-8f0a-34f5082204dc">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="majId" class="java.lang.Long"/>
+	<parameter name="subMajId" class="java.lang.Long"/>
+	<parameter name="minId" class="java.lang.Long"/>
+	<parameter name="subHeadId" class="java.lang.Long"/>
+	<parameter name="objectId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+	ROW_NUMBER() OVER() AS rowNum,
+	ml.LOCALITY_NAME,
+	med.EXECUTIVE_DIVI_NAME,
+	tpnl.WORK_NAME,
+	tpnl.ESTIMATED_COST AS ESTIMATED_COST_ENG,
+	tpnl.PROVISION_NEXT_FY AS PROVISION_NEXT_FY_ENG,
+	tpnl.WRITE_UP
+FROM 
+	BUDGET.TBUD_PUB_NW_LST tpnl,
+	BUDGET.TBUD_PUB_HDR tph,
+	BUDGET.TBUD_PUB_NC_HDR tpnh,
+	MASTER_V1.MS_LOCALITY ml,
+	MASTER_V1.MS_EXECUTIVE_DIVI med
+WHERE
+	tph.TBUD_PUB_HDR_ID = tpnh.TBUD_PUB_HDR_ID 
+	AND tph.TBUD_PUB_HDR_ID = tpnl.TBUD_PUB_HDR_ID 
+	AND tpnl.LOCALITY_ID = ml.LOCALITY_TYPE_ID 
+	AND tpnl.EXECUTIVE_DIVISION = med.EXEC_DIVI_TYPE_ID
+	AND tph.MAJORHEAD_ID = $P{majId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajId}
+	AND tph.MINORHEAD_ID = $P{minId}
+	AND tph.SUBHEAD_ID = $P{subHeadId}
+	AND tpnh.OBJECT_ID = $P{objectId}
+	AND tph.APP_TYPE_ID = 428
+	AND tph.BPN_ID=$P{bpnId}
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId}]]>
+	</queryString>
+	<field name="ROWNUM" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="ROWNUM"/>
+	</field>
+	<field name="LOCALITY_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="LOCALITY_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_LOCALITY"/>
+	</field>
+	<field name="EXECUTIVE_DIVI_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="EXECUTIVE_DIVI_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="MS_EXECUTIVE_DIVI"/>
+	</field>
+	<field name="WORK_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WORK_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NW_LST"/>
+	</field>
+	<field name="ESTIMATED_COST_ENG" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ESTIMATED_COST_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NW_LST"/>
+	</field>
+	<field name="PROVISION_NEXT_FY_ENG" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PROVISION_NEXT_FY_ENG"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NW_LST"/>
+	</field>
+	<field name="WRITE_UP" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WRITE_UP"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="TBUD_PUB_NW_LST"/>
+	</field>
+	<variable name="pro_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{PROVISION_NEXT_FY_ENG}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="16" splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="29" height="50" isRemoveLineWhenBlank="true" uuid="18b90443-2d8a-4c3f-8c4c-674ab250d5bf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ROWNUM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="30" y="0" width="141" height="50" isRemoveLineWhenBlank="true" uuid="320700e3-cd9f-4b40-881d-2936256e42f7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LOCALITY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="172" y="0" width="150" height="50" isRemoveLineWhenBlank="true" uuid="edc0c625-1e2e-4f64-8715-002ae7a24ebb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EXECUTIVE_DIVI_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="321" y="0" width="149" height="50" isRemoveLineWhenBlank="true" uuid="5aeb8451-f9f2-461d-bcf2-bb68c117af50">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WORK_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="470" y="0" width="80" height="50" isRemoveLineWhenBlank="true" uuid="f3533c4b-fede-4139-8ff2-48d0ad13dab1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ESTIMATED_COST_ENG}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="550" y="0" width="79" height="50" isRemoveLineWhenBlank="true" uuid="2156d62e-950f-46a0-b372-c5c80c246454">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROVISION_NEXT_FY_ENG}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#0.00#">
+				<reportElement isPrintRepeatedValues="false" x="630" y="0" width="171" height="50" isRemoveLineWhenBlank="true" uuid="b0f8bc23-05bb-4e47-9364-9e24ee55e51b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe64e72f-609b-40fb-b7cb-8dac56e431cd"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WRITE_UP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

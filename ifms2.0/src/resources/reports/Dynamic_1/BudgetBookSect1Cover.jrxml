@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetBookSect1Cover" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="046af703-f4e4-4a50-94fe-d2c09437ca03">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IFMS_V1D"/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="333" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="221" width="802" height="25" uuid="a34ac0b3-0c2e-4eb8-b574-76356a029a5d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[અનુભાગ - ૧ નવી બાબતો]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="271" width="802" height="25" uuid="60c36674-8d03-44c6-8efc-09c4ec4d97d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECTION - 1 NEW ITEMS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="185" width="802" height="1" uuid="a647eba8-9924-45bf-9ef0-cb997c818948">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="332" width="802" height="1" uuid="286be14c-a838-4559-b9cf-a3dea4339beb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="185" width="802" height="1" uuid="61fa0cb5-89e2-4b81-9fcb-e92e87089622">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="332" width="802" height="1" uuid="b9798a4f-e853-4d19-a2da-1f54bbd3ead0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="50">
+			<break>
+				<reportElement x="0" y="20" width="802" height="1" uuid="7e30cff8-1135-4e31-8857-8bff0d4e00f8"/>
+			</break>
+		</band>
+	</detail>
+	<summary>
+		<band height="21" splitType="Immediate">
+			<subreport overflowType="Stretch">
+				<reportElement x="0" y="1" width="802" height="20" uuid="c93185e9-0095-42f7-b677-a170ec458a71">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="fyId">
+					<subreportParameterExpression><![CDATA[$P{fyId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bpnId">
+					<subreportParameterExpression><![CDATA[$P{bpnId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/reports/Dynamic_1/BudgetBookSect1NewItemDetail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

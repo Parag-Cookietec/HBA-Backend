@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BudgetEstimatesSum" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2e937452-2f92-4705-bb16-e14a205bbc74">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="fyId" class="java.lang.String"/>
+	<parameter name="bpnId" class="java.lang.String"/>
+	<parameter name="demandId" class="java.lang.Long"/>
+	<parameter name="majHeadId" class="java.lang.Long"/>
+	<parameter name="subMajHeadId" class="java.lang.Long"/>
+	<parameter name="majHeadCode" class="java.lang.String"/>
+	<parameter name="objHeadId" class="java.lang.Long"/>
+	<parameter name="detailHeadId" class="java.lang.String"/>
+	<parameter name="minorHeadId" class="java.lang.Long"/>
+	<parameter name="subHeadId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+ROUND(sum("1a"),2) AS "Total1a",
+ROUND(sum("1b"),2) AS "Total1b",
+ROUND(sum(BUDGET_ESTIMATE),2) AS "TOTAL_BUDGET_ESTIMATE",
+ROUND(sum(MODIFIED_BUDGET_ESTIMATE),2) AS "TOTAL_MODIFIED_BUDGET_ESTIMATE"
+
+FROM 
+ (SELECT DISTINCT	
+	main_table.SUBMAJORHEAD_ID AS "SUB_MAJOR_HEAD_ID",
+	main_table.MINORHEAD_ID AS "MINOR_HEAD_ID",
+	main_table.SUBHEAD_ID AS "SUBHEAD_ID",
+	main_table.DETAILHEAD_ID AS "DETAILHEAD_ID",
+	main_table.OBJECT_CODE AS "OBJECT_CODE",
+	main_table.OBJECT_ID AS "OBJECT_ID",
+	DENSE_RANK() over (order by main_table.DISTRICT_NAME) as DIST_SEQUENCE,
+	main_table.DISTRICT_NAME,
+	main_table.DISTRICT_NAME_GUJ,
+	main_table.WORK_NO,
+	main_table.WORK_NAME,
+	main_table.WORK_NAME_GUJ,
+	main_table.WORK_STATUS,
+	main_table."1a",
+	main_table.EXECUTIVE_DIVI_NAME,
+	main_table.EXECUTIVE_DIVI_NAME_GUJ,
+	main_table."1b",	
+	main_table.BUD_EST AS "BUDGET_ESTIMATE",
+	main_table.MOD_BUD_EST AS "MODIFIED_BUDGET_ESTIMATE"
+FROM
+(
+SELECT 
+	
+	COALESCE(NFY.SUBMAJORHEAD_ID, CFY1.SUBMAJORHEAD_ID) AS SUBMAJORHEAD_ID,
+	COALESCE(NFY.MINORHEAD_ID, CFY1.MINORHEAD_ID) AS MINORHEAD_ID,
+	COALESCE(NFY.SUBHEAD_ID, CFY1.SUBHEAD_ID) AS SUBHEAD_ID,
+	COALESCE(NFY.DETAILHEAD_ID, CFY1.DETAILHEAD_ID) AS DETAILHEAD_ID,
+	COALESCE(NFY.OBJECT_CODE, CFY1.OBJECT_CODE) AS OBJECT_CODE,
+	COALESCE(NFY.OBJECT_ID, CFY1.OBJECT_ID) AS OBJECT_ID,
+	NFY.DISTRICT_NAME,
+	NFY.DISTRICT_NAME_GUJ,
+	NFY.WORK_NO,
+	NFY.WORK_NAME,
+	NFY.WORK_NAME_GUJ,
+	NFY.WORK_STATUS,
+	NFY."1a",
+	NFY.EXECUTIVE_DIVI_NAME,
+	NFY.EXECUTIVE_DIVI_NAME_GUJ,
+	NFY."1b",
+	NFY.BUD_EST,
+	CFY1.MOD_BUD_EST
+	
+FROM
+(
+SELECT 
+	final_query.DEMAND_ID, 
+	final_query.MAJORHEAD_ID, 
+	final_query.SUBMAJORHEAD_ID, 
+	final_query.MINORHEAD_ID,
+	final_query.SUBHEAD_ID,
+	final_query.DETAILHEAD_ID,
+	final_query.OBJECT_CODE,
+	final_query.OBJECT_ID,	
+	final_query.DISTRICT_NAME,
+	final_query.DISTRICT_NAME_GUJ,
+	final_query.WORK_NO,
+	final_query.WORK_NAME,
+	final_query.WORK_NAME_GUJ,
+	final_query.WORK_STATUS,
+	final_query."1a",
+	final_query.EXECUTIVE_DIVI_NAME,
+	final_query.EXECUTIVE_DIVI_NAME_GUJ,
+	final_query."1b",
+	final_query.PROPOSED_AMOUNT AS BUD_EST
+FROM 
+(
+SELECT 
+	main_query.DEMAND_ID, 
+	main_query.MAJORHEAD_ID, 
+	main_query.SUBMAJORHEAD_ID, 
+	main_query.MINORHEAD_ID,
+	main_query.SUBHEAD_ID,
+	main_query.DETAILHEAD_ID,
+	main_query.OBJECT_CODE,
+	main_query.OBJECT_ID,	
+	main_query.DISTRICT_NAME,
+	main_query.DISTRICT_NAME_GUJ,
+	main_query.WORK_NO,
+	main_query.WORK_NAME,
+	main_query.WORK_NAME_GUJ,
+	main_query.WORK_STATUS,
+	main_query."1a",
+	main_query.EXECUTIVE_DIVI_NAME,
+	main_query.EXECUTIVE_DIVI_NAME_GUJ,
+	main_query."1b",
+	main_query.PROPOSED_AMOUNT
+FROM 
+(
+SELECT 
+	workOlder.DEMAND_ID, 
+	workOlder.MAJORHEAD_ID, 
+	workOlder.SUBMAJORHEAD_ID, 
+	workOlder.MINORHEAD_ID,
+	workOlder.SUBHEAD_ID,
+	workOlder.DETAILHEAD_ID,
+	workOlder.OBJECT_CODE,
+	workOlder.OBJECT_ID,	
+	workOlder.DISTRICT_NAME,
+	workOlder.DISTRICT_NAME_GUJ,
+	workOlder.WORK_NO,
+	workOlder.WORK_NAME,
+	workOlder.WORK_NAME_GUJ,
+	'WIP' AS WORK_STATUS,
+	workOlder."1a",
+	workOlder.EXECUTIVE_DIVI_NAME,
+	workOlder.EXECUTIVE_DIVI_NAME_GUJ,
+	wip."1b",
+	wip.PROPOSED_AMOUNT
+FROM 
+(
+SELECT 	 
+	tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+	tph.SUBMAJORHEAD_ID, 
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tph.DETAILHEAD_ID,
+	mo.OBJECT_CODE,
+	tpnh.OBJECT_ID,
+	md1.DISTRICT_NAME ,
+	md1.DISTRICT_NAME_GUJ,
+	tpnl.WORK_NO,
+	tpnl.WORK_NAME,
+	tpnl.WORK_NAME_GUJ,
+	tpnl.ESTIMATED_COST AS "1a",
+	med.EXECUTIVE_DIVI_NAME,
+	med.EXECUTIVE_DIVI_NAME_GUJ,
+	tpnl.TBUD_PUB_NW_LST_ID 
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN MASTER_V1.MS_BPN mb ON tph.BPN_ID = mb.BPN_ID 
+	INNER JOIN MASTER_V1.MS_DEMAND md ON tph.DEMAND_ID = md.DEMAND_ID AND md.BPN_ID = mb.BPN_ID
+	INNER JOIN MASTER_V1.MS_MINORHEAD mm ON md.DEMAND_ID = mm.DEMAND_ID AND tph.MINORHEAD_ID = mm.MINORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID
+	INNER JOIN MASTER_V1.MS_SUBHEAD msh ON tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	INNER JOIN MASTER_V1.MS_DETAILHEAD mdh ON tph.DETAILHEAD_ID = mdh.DETAILHEAD_ID 
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	LEFT JOIN MASTER_V1.MS_EXECUTIVE_DIVI med ON med.EXEC_DIVI_TYPE_ID = tpnl.EXECUTIVE_DIVISION 
+	LEFT  JOIN MASTER_V1.MS_DISTRICT md1 ON md1.DISTRICT_ID = tpnl.DISTRICT_ID
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.FINANCIAL_YEAR_ID < $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId} 
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tpnh.OBJECT_ID  = $P{objHeadId} 
+	ORDER BY WORK_NO) workOlder	
+LEFT JOIN 	
+(
+	SELECT tpwl.TOT_PRO_EXP_CUR_FY AS "1b",
+	   tpwl.PROPOSED_AMOUNT,
+	   tpwl.TBUD_PUB_NW_LST_ID
+	FROM BUDGET.TBUD_PUB_WIP_LST tpwl
+		INNER JOIN BUDGET.TBUD_PUB_HDR tph ON tpwl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+		INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	WHERE 
+		tph.APP_TYPE_ID = 429 
+		AND tph.BPN_ID = $P{bpnId}
+		AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+		AND tph.IS_REVENUE_CAPITAL IN (5,6) 
+		AND tph.DEMAND_ID = $P{demandId} 
+		AND tph.MAJORHEAD_ID = $P{majHeadId}
+		AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+		AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+		AND tph.SUBHEAD_ID  = $P{subHeadId} 
+		AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+		AND tpnh.OBJECT_ID  = $P{objHeadId} 
+) wip ON wip.TBUD_PUB_NW_LST_ID = workOlder.TBUD_PUB_NW_LST_ID 
+
+UNION ALL
+
+SELECT 
+	
+	tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+	tph.SUBMAJORHEAD_ID, 
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tph.DETAILHEAD_ID,
+	mo.OBJECT_CODE,
+	tpnh.OBJECT_ID,
+	md1.DISTRICT_NAME ,
+	md1.DISTRICT_NAME_GUJ,
+	tpnl.WORK_NO,
+	tpnl.WORK_NAME,
+	tpnl.WORK_NAME_GUJ,
+	'NewWork' AS WORK_STATUS,
+	tpnl.ESTIMATED_COST AS "1a",
+	med.EXECUTIVE_DIVI_NAME,
+	med.EXECUTIVE_DIVI_NAME_GUJ,
+	NULL AS "1b",
+	(COALESCE(tpnl.ACTUAL_ESTABLISHMENT,0) + COALESCE(tpnl.ACTUAL_MACHINERY,0) + COALESCE(tpnl.PROVISION_NEXT_FY,0)) AS PROPOSED_AMOUNT
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN MASTER_V1.MS_BPN mb ON tph.BPN_ID = mb.BPN_ID 
+	INNER JOIN MASTER_V1.MS_DEMAND md ON tph.DEMAND_ID = md.DEMAND_ID AND md.BPN_ID = mb.BPN_ID
+	INNER JOIN MASTER_V1.MS_MINORHEAD mm ON md.DEMAND_ID = mm.DEMAND_ID AND tph.MINORHEAD_ID = mm.MINORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID
+	INNER JOIN MASTER_V1.MS_SUBHEAD msh ON tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	INNER JOIN MASTER_V1.MS_DETAILHEAD mdh ON tph.DETAILHEAD_ID = mdh.DETAILHEAD_ID 
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	INNER JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	LEFT JOIN MASTER_V1.MS_EXECUTIVE_DIVI med ON med.EXEC_DIVI_TYPE_ID = tpnl.EXECUTIVE_DIVISION 
+	LEFT  JOIN MASTER_V1.MS_DISTRICT md1 ON md1.DISTRICT_ID = tpnl.DISTRICT_ID
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	 AND mo.OBJECT_CODE IN ('3131','3132','3561')
+	AND tph.FINANCIAL_YEAR_ID = $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tpnh.OBJECT_ID  = $P{objHeadId} ) main_query
+ORDER BY main_query.SUBMAJORHEAD_ID, main_query.MINORHEAD_ID, 
+main_query.SUBHEAD_ID, main_query.DETAILHEAD_ID, main_query.OBJECT_ID, main_query.WORK_NO) final_query
+) NFY
+
+FULL OUTER JOIN
+(
+SELECT 
+	
+	main_query.DEMAND_ID, 
+	main_query.MAJORHEAD_ID, 
+	main_query.SUBMAJORHEAD_ID, 
+	main_query.MINORHEAD_ID,
+	main_query.SUBHEAD_ID,
+	main_query.DETAILHEAD_ID,
+	main_query.OBJECT_CODE,
+	main_query.OBJECT_ID,
+	main_query.DISTRICT_NAME,
+	main_query.DISTRICT_NAME_GUJ,
+	main_query.WORK_NO,
+	main_query.WORK_NAME,
+	main_query.WORK_NAME_GUJ,
+	main_query."1a",
+	main_query.EXECUTIVE_DIVI_NAME,
+	main_query.EXECUTIVE_DIVI_NAME_GUJ,
+	main_query."1b",
+	main_query.MOD_BUD_EST
+FROM
+(
+SELECT 
+	workOlder.DEMAND_ID, 
+	workOlder.MAJORHEAD_ID, 
+	workOlder.SUBMAJORHEAD_ID, 
+	workOlder.MINORHEAD_ID,
+	workOlder.SUBHEAD_ID,
+	workOlder.DETAILHEAD_ID,
+	workOlder.OBJECT_CODE,
+	workOlder.OBJECT_ID,
+	workOlder.DISTRICT_NAME,
+	workOlder.DISTRICT_NAME_GUJ,
+	workOlder.WORK_NO,
+	NULL AS WORK_NAME,
+	NULL AS WORK_NAME_GUJ,
+	NULL AS "1a",
+	NULL AS EXECUTIVE_DIVI_NAME,
+	NULL AS EXECUTIVE_DIVI_NAME_GUJ,
+	NULL AS "1b",
+	wip.PROPOSED_AMOUNT AS MOD_BUD_EST
+FROM 
+(
+SELECT 	
+	tph.DEMAND_ID, 
+	tph.MAJORHEAD_ID, 
+	tph.SUBMAJORHEAD_ID, 
+	tph.MINORHEAD_ID,
+	tph.SUBHEAD_ID,
+	tph.DETAILHEAD_ID,
+	mo.OBJECT_CODE,
+	tpnh.OBJECT_ID,
+	md1.DISTRICT_NAME ,
+	md1.DISTRICT_NAME_GUJ,
+	tpnl.WORK_NO,
+	tpnl.WORK_NAME,
+	tpnl.WORK_NAME_GUJ,
+	tpnl.ESTIMATED_COST AS "1a",
+	med.EXECUTIVE_DIVI_NAME,
+	med.EXECUTIVE_DIVI_NAME_GUJ,
+	tpnl.TBUD_PUB_NW_LST_ID 
+FROM 
+	BUDGET.TBUD_PUB_HDR tph
+	INNER JOIN MASTER_V1.MS_BPN mb ON tph.BPN_ID = mb.BPN_ID 
+	INNER JOIN MASTER_V1.MS_DEMAND md ON tph.DEMAND_ID = md.DEMAND_ID AND md.BPN_ID = mb.BPN_ID
+	INNER JOIN MASTER_V1.MS_MINORHEAD mm ON md.DEMAND_ID = mm.DEMAND_ID AND tph.MINORHEAD_ID = mm.MINORHEAD_ID 
+	INNER JOIN MASTER_V1.MS_SUBMAJORHEAD ms ON tph.SUBMAJORHEAD_ID = ms.SUBMAJORHEAD_ID
+	INNER JOIN MASTER_V1.MS_SUBHEAD msh ON tph.SUBHEAD_ID = msh.SUBHEAD_ID
+	INNER JOIN MASTER_V1.MS_DETAILHEAD mdh ON tph.DETAILHEAD_ID = mdh.DETAILHEAD_ID 
+	INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	LEFT JOIN MASTER_V1.MS_OBJECTHEAD mo ON tpnh.OBJECT_ID = mo.OBJECT_ID
+	INNER JOIN BUDGET.TBUD_PUB_NW_LST tpnl ON tpnl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+	LEFT JOIN MASTER_V1.MS_EXECUTIVE_DIVI med ON med.EXEC_DIVI_TYPE_ID = tpnl.EXECUTIVE_DIVISION 
+	LEFT  JOIN MASTER_V1.MS_DISTRICT md1 ON md1.DISTRICT_ID = tpnl.DISTRICT_ID
+WHERE 
+	tph.APP_TYPE_ID IN (428)
+	AND tph.IS_REVENUE_CAPITAL IN (5,6)
+	AND tph.FINANCIAL_YEAR_ID < $P{fyId} 
+	AND tph.BPN_ID= $P{bpnId} 
+	AND tph.DEMAND_ID = $P{demandId} 
+	AND tph.MAJORHEAD_ID = $P{majHeadId}
+	AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId} 
+	AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+	AND tph.SUBHEAD_ID  = $P{subHeadId} 
+	AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+	AND tpnh.OBJECT_ID  = $P{objHeadId} 
+	ORDER BY WORK_NO) workOlder	
+LEFT JOIN 	
+(
+	SELECT tpwl.TOT_PRO_EXP_CUR_FY AS "1b",
+	   tpwl.PROPOSED_AMOUNT,
+	   tpwl.TBUD_PUB_NW_LST_ID
+	FROM BUDGET.TBUD_PUB_WIP_LST tpwl
+		INNER JOIN BUDGET.TBUD_PUB_HDR tph ON tpwl.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID 
+		INNER JOIN BUDGET.TBUD_PUB_NC_HDR tpnh ON tpnh.TBUD_PUB_HDR_ID = tph.TBUD_PUB_HDR_ID
+	WHERE 
+		tph.APP_TYPE_ID = 429 
+		AND tph.BPN_ID = $P{bpnId}
+		AND tph.FINANCIAL_YEAR_ID = $P{fyId}-1  
+		AND tph.IS_REVENUE_CAPITAL IN (5,6) 
+		AND tph.DEMAND_ID = $P{demandId} 
+		AND tph.MAJORHEAD_ID = $P{majHeadId}
+		AND tph.SUBMAJORHEAD_ID = $P{subMajHeadId}
+		AND tph.MINORHEAD_ID  = $P{minorHeadId} 
+		AND tph.SUBHEAD_ID  = $P{subHeadId} 
+		AND tph.DETAILHEAD_ID  = $P{detailHeadId} 
+		AND tpnh.OBJECT_ID  = $P{objHeadId} 
+		AND tph.IS_REVISED <> 1
+) wip ON wip.TBUD_PUB_NW_LST_ID = workOlder.TBUD_PUB_NW_LST_ID ) main_query
+ORDER BY main_query.SUBMAJORHEAD_ID, main_query.MINORHEAD_ID, 
+main_query.SUBHEAD_ID, main_query.DETAILHEAD_ID, main_query.OBJECT_ID , main_query.WORK_NO
+) CFY1 ON CFY1.DEMAND_ID=NFY.DEMAND_ID AND CFY1.MAJORHEAD_ID=NFY.MAJORHEAD_ID
+		  AND CFY1.SUBMAJORHEAD_ID=NFY.SUBMAJORHEAD_ID AND CFY1.MINORHEAD_ID=NFY.MINORHEAD_ID
+		  AND CFY1.SUBHEAD_ID = NFY.SUBHEAD_ID AND CFY1.DETAILHEAD_ID = NFY.DETAILHEAD_ID
+		  AND CFY1.OBJECT_ID = NFY.OBJECT_ID 
+		   AND CFY1.WORK_NO = NFY.WORK_NO
+		  
+ORDER BY 
+	SUBMAJORHEAD_ID, 
+	MINORHEAD_ID, 
+	SUBHEAD_ID,
+	DETAILHEAD_ID,
+	OBJECT_ID,
+	DISTRICT_NAME,
+	WORK_NO
+) main_table 
+ORDER BY 
+	SUBMAJORHEAD_ID, 
+	MINORHEAD_ID, 
+	SUBHEAD_ID,
+	DETAILHEAD_ID,
+	OBJECT_ID,
+	DISTRICT_NAME,
+	WORK_NO) TOTAL]]>
+	</queryString>
+	<field name="Total1a" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Total1a"/>
+	</field>
+	<field name="Total1b" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Total1b"/>
+	</field>
+	<field name="TOTAL_BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL_BUDGET_ESTIMATE"/>
+	</field>
+	<field name="TOTAL_MODIFIED_BUDGET_ESTIMATE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL_MODIFIED_BUDGET_ESTIMATE"/>
+	</field>
+	<variable name="tot_bud_est_subReport" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{TOTAL_BUDGET_ESTIMATE}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="tot_One_A_subreport" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{Total1a}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="tot_One_B_subreport" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{Total1b}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="tot_MBE__subreport" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{TOTAL_MODIFIED_BUDGET_ESTIMATE}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>
